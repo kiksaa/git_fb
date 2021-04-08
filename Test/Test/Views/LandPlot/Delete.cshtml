@@ -1,0 +1,162 @@
+﻿@model Test.Models.landplot
+
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบทะเบียนแปลง</title>
+</head>
+<body>
+    <br />
+    <div class="container">
+        <div class="row justify-content-md-center"> 
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "LandPlot")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        @*<li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.farmerName) :
+                            @Html.DisplayFor(model => model.farmerName)
+                         </li>*@
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.plotName) :
+                            @Html.DisplayFor(model => model.plotName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.areaCode) :
+                            @Html.DisplayFor(model => model.areaCode)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.typeOwnership) :
+                            @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือก", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.license) :
+                            @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "เลือก", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.titleDeed) :
+                            @Html.DisplayFor(model => model.titleDeed)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.landSlip) :
+                            @Html.DisplayFor(model => model.landSlip)
+                        </li>
+                    
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.landNumber) :
+                            @Html.DisplayFor(model => model.landNumber)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.license_img) :
+                            @Html.DisplayFor(model => model.license_img)
+                        </li>
+                         <li class="list-group-item">
+                             @Html.DisplayNameFor(model => model.coordinatesStar) :
+                             @Html.DisplayFor(model => model.coordinatesStar)
+                         </li>
+                         <li class="list-group-item">
+                             @Html.DisplayNameFor(model => model.coordinatesEnd) :
+                             @Html.DisplayFor(model => model.coordinatesEnd)
+                         </li>
+                         <li class="list-group-item">
+                             @Html.DisplayNameFor(model => model.areaPlot) :
+                             @Html.DisplayFor(model => model.areaPlot)
+                         </li>
+                         <li class="list-group-item">
+                             @Html.DisplayNameFor(model => model.projectName) :
+                             @Html.DropDownListFor(model => model.projectName, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control" })
+                         </li>
+                         <li class="list-group-item">
+                             @Html.DisplayNameFor(model => model.plotStatus) :
+                             @Html.DropDownListFor(model => model.plotStatus, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
+                         </li>
+                   
+                    </ul>
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+
+@*    <hr />
+    <dl class="dl-horizontal">
+            
+        <dt>
+            @Html.DisplayNameFor(model => model.district)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.district)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ampher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ampher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.province)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.province)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.plotDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plotDetails)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+    </dl>*@
+
+ @*   @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }*@
+
+</body>
+</html>

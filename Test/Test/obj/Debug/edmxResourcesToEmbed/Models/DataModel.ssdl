@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="farmdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ampher">
+    <Key>
+      <PropertyRef Name="ampherID" />
+    </Key>
+    <Property Name="ampherID" Type="int" Nullable="false" />
+    <Property Name="ampherName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="proID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bankType" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bankuser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bankID" Type="int" Nullable="false" />
+    <Property Name="bankName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="bankNo" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="district">
+    <Key>
+      <PropertyRef Name="districtID" />
+    </Key>
+    <Property Name="districtID" Type="int" Nullable="false" />
+    <Property Name="districtName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="proID" Type="int" Nullable="false" />
+    <Property Name="amID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="energy">
+    <Key>
+      <PropertyRef Name="energyID" />
+    </Key>
+    <Property Name="energyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="energyName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipment">
+    <Key>
+      <PropertyRef Name="equipmentID" />
+    </Key>
+    <Property Name="vehicleType" Type="int" Nullable="false" />
+    <Property Name="vehicleID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="vehicleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" Nullable="false" />
+    <Property Name="workTime" Type="int" Nullable="false" />
+    <Property Name="fuel" Type="int" Nullable="false" />
+    <Property Name="energy" Type="int" Nullable="false" />
+    <Property Name="vehicleImg" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="equipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="family">
+    <Key>
+      <PropertyRef Name="familyID" />
+    </Key>
+    <Property Name="familyID" Type="int" Nullable="false" />
+    <Property Name="familyName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gender">
+    <Key>
+      <PropertyRef Name="genderID" />
+    </Key>
+    <Property Name="genderID" Type="int" Nullable="false" />
+    <Property Name="genderName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="landplot">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="plotName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="areaCode" Type="varchar" MaxLength="30" />
+    <Property Name="typeOwnership" Type="int" Nullable="false" />
+    <Property Name="license" Type="int" Nullable="false" />
+    <Property Name="titleDeed" Type="varchar" MaxLength="20" />
+    <Property Name="landSlip" Type="varchar" MaxLength="20" />
+    <Property Name="landNumber" Type="int" />
+    <Property Name="license_img" Type="varchar" MaxLength="255" />
+    <Property Name="district" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="province" Type="int" />
+    <Property Name="coordinatesStar" Type="varchar" MaxLength="30" />
+    <Property Name="coordinatesEnd" Type="varchar" MaxLength="30" />
+    <Property Name="areaPlot" Type="float" />
+    <Property Name="areaPlotS" Type="varchar" MaxLength="100" />
+    <Property Name="plotDetails" Type="varchar" MaxLength="255" />
+    <Property Name="farmerName" Type="int" />
+    <Property Name="projectName" Type="int" />
+    <Property Name="note" Type="varchar" MaxLength="255" />
+    <Property Name="plotStatus" Type="int" />
+  </EntityType>
+  <EntityType Name="license">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="licenseName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="profile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cradID" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="gender" Type="int" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="tel" Type="varchar" MaxLength="10" />
+    <Property Name="no" Type="int" />
+    <Property Name="moo" Type="int" />
+    <Property Name="province" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="district" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="registerType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="projectName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="province">
+    <Key>
+      <PropertyRef Name="provinceID" />
+    </Key>
+    <Property Name="provinceID" Type="int" Nullable="false" />
+    <Property Name="provinceName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="register">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="registerID" Type="varchar" MaxLength="20" />
+    <Property Name="cardID" Type="varchar" MaxLength="13" />
+    <Property Name="gender" Type="int" />
+    <Property Name="birthday" Type="date" />
+    <Property Name="tel" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="family" Type="int" />
+    <Property Name="no" Type="int" />
+    <Property Name="moo" Type="int" />
+    <Property Name="road" Type="varchar" MaxLength="100" />
+    <Property Name="province" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="district" Type="int" />
+    <Property Name="comment" Type="varchar" MaxLength="255" />
+    <Property Name="farmer_img" Type="varchar" MaxLength="100" />
+    <Property Name="card_img" Type="varchar" MaxLength="100" />
+    <Property Name="bank" Type="int" />
+    <Property Name="status" Type="int" />
+    <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="registertype">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="int" Nullable="false" />
+    <Property Name="typeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="int" Nullable="false" />
+    <Property Name="statusName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="typeownership">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ownership" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+    </Key>
+    <Property Name="unitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unitName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="vehicleID" />
+    </Key>
+    <Property Name="vehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vehicleType" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="ampher_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="1" />
+    <End Role="ampher" Type="Self.ampher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="ampher">
+        <PropertyRef Name="proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bankuser_ibfk_1">
+    <End Role="bank" Type="Self.bank" Multiplicity="1" />
+    <End Role="bankuser" Type="Self.bankuser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="bankuser">
+        <PropertyRef Name="bankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="district_ibfk_1">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="1" />
+    <End Role="district" Type="Self.district" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="district">
+        <PropertyRef Name="amID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="district_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="1" />
+    <End Role="district" Type="Self.district" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="district">
+        <PropertyRef Name="proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_1">
+    <End Role="energy" Type="Self.energy" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_4">
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicle">
+        <PropertyRef Name="vehicleID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="vehicleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_1">
+    <End Role="license" Type="Self.license" Multiplicity="1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="license">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="license" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_2">
+    <End Role="typeownership" Type="Self.typeownership" Multiplicity="1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeownership">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="typeOwnership" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_3">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_5">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_6">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_7">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="projectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_8">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="plotStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_9">
+    <End Role="register" Type="Self.register" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="register">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="farmerName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_1">
+    <End Role="registertype" Type="Self.registertype" Multiplicity="1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registertype">
+        <PropertyRef Name="typeID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="registerType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_3">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_4">
+    <End Role="gender" Type="Self.gender" Multiplicity="1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gender">
+        <PropertyRef Name="genderID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_5">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_1">
+    <End Role="family" Type="Self.family" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="family">
+        <PropertyRef Name="familyID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="family" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_10">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_5">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_7">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_8">
+    <End Role="bankuser" Type="Self.bankuser" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bankuser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="bank" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_9">
+    <End Role="gender" Type="Self.gender" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gender">
+        <PropertyRef Name="genderID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="farmdbModelStoreContainer">
+    <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="bankuser" EntityType="Self.bankuser" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="district" EntityType="Self.district" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="energy" EntityType="Self.energy" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="equipment" EntityType="Self.equipment" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="family" EntityType="Self.family" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="gender" EntityType="Self.gender" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="landplot" EntityType="Self.landplot" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="license" EntityType="Self.license" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="login" EntityType="Self.login" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="profile" EntityType="Self.profile" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="project" EntityType="Self.project" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="province" EntityType="Self.province" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="register" EntityType="Self.register" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="registertype" EntityType="Self.registertype" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="status" EntityType="Self.status" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="typeownership" EntityType="Self.typeownership" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="unit" EntityType="Self.unit" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="farmdb" store:Type="Tables" />
+    <AssociationSet Name="ampher_ibfk_2" Association="Self.ampher_ibfk_2">
+      <End Role="province" EntitySet="province" />
+      <End Role="ampher" EntitySet="ampher" />
+    </AssociationSet>
+    <AssociationSet Name="bankuser_ibfk_1" Association="Self.bankuser_ibfk_1">
+      <End Role="bank" EntitySet="bank" />
+      <End Role="bankuser" EntitySet="bankuser" />
+    </AssociationSet>
+    <AssociationSet Name="district_ibfk_1" Association="Self.district_ibfk_1">
+      <End Role="ampher" EntitySet="ampher" />
+      <End Role="district" EntitySet="district" />
+    </AssociationSet>
+    <AssociationSet Name="district_ibfk_2" Association="Self.district_ibfk_2">
+      <End Role="province" EntitySet="province" />
+      <End Role="district" EntitySet="district" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_1" Association="Self.equipment_ibfk_1">
+      <End Role="energy" EntitySet="energy" />
+      <End Role="equipment" EntitySet="equipment" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_2" Association="Self.equipment_ibfk_2">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="equipment" EntitySet="equipment" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_3" Association="Self.equipment_ibfk_3">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="equipment" EntitySet="equipment" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_4" Association="Self.equipment_ibfk_4">
+      <End Role="vehicle" EntitySet="vehicle" />
+      <End Role="equipment" EntitySet="equipment" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_1" Association="Self.landplot_ibfk_1">
+      <End Role="license" EntitySet="license" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
+      <End Role="typeownership" EntitySet="typeownership" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_3" Association="Self.landplot_ibfk_3">
+      <End Role="province" EntitySet="province" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_5" Association="Self.landplot_ibfk_5">
+      <End Role="ampher" EntitySet="ampher" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_6" Association="Self.landplot_ibfk_6">
+      <End Role="district" EntitySet="district" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_7" Association="Self.landplot_ibfk_7">
+      <End Role="project" EntitySet="project" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_8" Association="Self.landplot_ibfk_8">
+      <End Role="status" EntitySet="status" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_9" Association="Self.landplot_ibfk_9">
+      <End Role="register" EntitySet="register" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_1" Association="Self.profile_ibfk_1">
+      <End Role="registertype" EntitySet="registertype" />
+      <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_2" Association="Self.profile_ibfk_2">
+      <End Role="province" EntitySet="province" />
+      <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_3" Association="Self.profile_ibfk_3">
+      <End Role="district" EntitySet="district" />
+      <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_4" Association="Self.profile_ibfk_4">
+      <End Role="gender" EntitySet="gender" />
+      <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_5" Association="Self.profile_ibfk_5">
+      <End Role="ampher" EntitySet="ampher" />
+      <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_1" Association="Self.register_ibfk_1">
+      <End Role="family" EntitySet="family" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_10" Association="Self.register_ibfk_10">
+      <End Role="status" EntitySet="status" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_2" Association="Self.register_ibfk_2">
+      <End Role="province" EntitySet="province" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_5" Association="Self.register_ibfk_5">
+      <End Role="district" EntitySet="district" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_7" Association="Self.register_ibfk_7">
+      <End Role="ampher" EntitySet="ampher" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_8" Association="Self.register_ibfk_8">
+      <End Role="bankuser" EntitySet="bankuser" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_9" Association="Self.register_ibfk_9">
+      <End Role="gender" EntitySet="gender" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

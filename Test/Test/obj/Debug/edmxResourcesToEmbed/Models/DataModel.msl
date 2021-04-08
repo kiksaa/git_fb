@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="farmdbModelStoreContainer" CdmEntityContainer="farmdb">
+    <EntitySetMapping Name="amphers">
+      <EntityTypeMapping TypeName="farmdbModel.ampher">
+        <MappingFragment StoreEntitySet="ampher">
+          <ScalarProperty Name="ampherID" ColumnName="ampherID" />
+          <ScalarProperty Name="ampherName" ColumnName="ampherName" />
+          <ScalarProperty Name="proID" ColumnName="proID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="banks">
+      <EntityTypeMapping TypeName="farmdbModel.bank">
+        <MappingFragment StoreEntitySet="bank">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="bankType" ColumnName="bankType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bankusers">
+      <EntityTypeMapping TypeName="farmdbModel.bankuser">
+        <MappingFragment StoreEntitySet="bankuser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="bankID" ColumnName="bankID" />
+          <ScalarProperty Name="bankName" ColumnName="bankName" />
+          <ScalarProperty Name="bankNo" ColumnName="bankNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="districts">
+      <EntityTypeMapping TypeName="farmdbModel.district">
+        <MappingFragment StoreEntitySet="district">
+          <ScalarProperty Name="districtID" ColumnName="districtID" />
+          <ScalarProperty Name="districtName" ColumnName="districtName" />
+          <ScalarProperty Name="proID" ColumnName="proID" />
+          <ScalarProperty Name="amID" ColumnName="amID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="families">
+      <EntityTypeMapping TypeName="farmdbModel.family">
+        <MappingFragment StoreEntitySet="family">
+          <ScalarProperty Name="familyID" ColumnName="familyID" />
+          <ScalarProperty Name="familyName" ColumnName="familyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="genders">
+      <EntityTypeMapping TypeName="farmdbModel.gender">
+        <MappingFragment StoreEntitySet="gender">
+          <ScalarProperty Name="genderID" ColumnName="genderID" />
+          <ScalarProperty Name="genderName" ColumnName="genderName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="landplots">
+      <EntityTypeMapping TypeName="farmdbModel.landplot">
+        <MappingFragment StoreEntitySet="landplot">
+          <ScalarProperty Name="areaPlotS" ColumnName="areaPlotS" />
+          <ScalarProperty Name="farmerName" ColumnName="farmerName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="plotName" ColumnName="plotName" />
+          <ScalarProperty Name="areaCode" ColumnName="areaCode" />
+          <ScalarProperty Name="typeOwnership" ColumnName="typeOwnership" />
+          <ScalarProperty Name="license" ColumnName="license" />
+          <ScalarProperty Name="titleDeed" ColumnName="titleDeed" />
+          <ScalarProperty Name="landSlip" ColumnName="landSlip" />
+          <ScalarProperty Name="landNumber" ColumnName="landNumber" />
+          <ScalarProperty Name="license_img" ColumnName="license_img" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="ampher" ColumnName="ampher" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="coordinatesStar" ColumnName="coordinatesStar" />
+          <ScalarProperty Name="coordinatesEnd" ColumnName="coordinatesEnd" />
+          <ScalarProperty Name="areaPlot" ColumnName="areaPlot" />
+          <ScalarProperty Name="plotDetails" ColumnName="plotDetails" />
+          <ScalarProperty Name="plotStatus" ColumnName="plotStatus" />
+          <ScalarProperty Name="projectName" ColumnName="projectName" />
+          <ScalarProperty Name="note" ColumnName="note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="licenses">
+      <EntityTypeMapping TypeName="farmdbModel.license">
+        <MappingFragment StoreEntitySet="license">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="licenseName" ColumnName="licenseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logins">
+      <EntityTypeMapping TypeName="farmdbModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="profiles">
+      <EntityTypeMapping TypeName="farmdbModel.profile">
+        <MappingFragment StoreEntitySet="profile">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="cradID" ColumnName="cradID" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="no" ColumnName="no" />
+          <ScalarProperty Name="moo" ColumnName="moo" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="ampher" ColumnName="ampher" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="registerType" ColumnName="registerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projects">
+      <EntityTypeMapping TypeName="farmdbModel.project">
+        <MappingFragment StoreEntitySet="project">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="projectName" ColumnName="projectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="provinces">
+      <EntityTypeMapping TypeName="farmdbModel.province">
+        <MappingFragment StoreEntitySet="province">
+          <ScalarProperty Name="provinceID" ColumnName="provinceID" />
+          <ScalarProperty Name="provinceName" ColumnName="provinceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registers">
+      <EntityTypeMapping TypeName="farmdbModel.register">
+        <MappingFragment StoreEntitySet="register">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="registerID" ColumnName="registerID" />
+          <ScalarProperty Name="cardID" ColumnName="cardID" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="family" ColumnName="family" />
+          <ScalarProperty Name="no" ColumnName="no" />
+          <ScalarProperty Name="moo" ColumnName="moo" />
+          <ScalarProperty Name="road" ColumnName="road" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="ampher" ColumnName="ampher" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="farmer_img" ColumnName="farmer_img" />
+          <ScalarProperty Name="card_img" ColumnName="card_img" />
+          <ScalarProperty Name="bank" ColumnName="bank" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registertypes">
+      <EntityTypeMapping TypeName="farmdbModel.registertype">
+        <MappingFragment StoreEntitySet="registertype">
+          <ScalarProperty Name="typeID" ColumnName="typeID" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="status">
+      <EntityTypeMapping TypeName="farmdbModel.status">
+        <MappingFragment StoreEntitySet="status">
+          <ScalarProperty Name="statusID" ColumnName="statusID" />
+          <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeownerships">
+      <EntityTypeMapping TypeName="farmdbModel.typeownership">
+        <MappingFragment StoreEntitySet="typeownership">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ownership" ColumnName="ownership" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="energies">
+      <EntityTypeMapping TypeName="farmdbModel.energy">
+        <MappingFragment StoreEntitySet="energy">
+          <ScalarProperty Name="energyName" ColumnName="energyName" />
+          <ScalarProperty Name="energyID" ColumnName="energyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipments">
+      <EntityTypeMapping TypeName="farmdbModel.equipment">
+        <MappingFragment StoreEntitySet="equipment">
+          <ScalarProperty Name="equipmentID" ColumnName="equipmentID" />
+          <ScalarProperty Name="vehicleImg" ColumnName="vehicleImg" />
+          <ScalarProperty Name="energy" ColumnName="energy" />
+          <ScalarProperty Name="fuel" ColumnName="fuel" />
+          <ScalarProperty Name="workTime" ColumnName="workTime" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="vehicleName" ColumnName="vehicleName" />
+          <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
+          <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="units">
+      <EntityTypeMapping TypeName="farmdbModel.unit">
+        <MappingFragment StoreEntitySet="unit">
+          <ScalarProperty Name="unitName" ColumnName="unitName" />
+          <ScalarProperty Name="unitID" ColumnName="unitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicles">
+      <EntityTypeMapping TypeName="farmdbModel.vehicle">
+        <MappingFragment StoreEntitySet="vehicle">
+          <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
+          <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Test.Models.ViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+
+    <title>FARMBOOK - ทะเบียนเกษตรกร</title>
+
+</head>
+<body>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="col-10">
+                <h3 class="text-muted">ทะเบียนเกษตรกร </h3>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
+                <span>
+                    กลับหน้าแรก
+                </span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Register")">
+                <span>
+                    + สร้างใหม่
+                </span>
+            </a>
+        </div>
+        <br />
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-success">@ViewBag.TotalRegister ราย </h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.registerID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.cardID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.areaNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.areaPlot)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.address)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.statusName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.dateUpdate)
+                                </th>
+                                @* <th>
+                                    @Html.DisplayNameFor(model => model.farmer_img)
+                                </th>*@
+                                <th>
+                                    ลบ/ แก้ไข
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.registerID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cardID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.areaNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.areaPlot)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.statusName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.dateUpdate)
+                                    </td>
+                                    @* <td>
+                                        <img src="~/Content/img/upload/farmer/@item.farmer_img" height="80px" width="80px" />
+                                    </td>*@
+
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                                        @*|
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

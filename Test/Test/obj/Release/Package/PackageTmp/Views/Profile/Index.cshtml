@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Test.Models.profile>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cradID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.moo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.province)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ampher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.district)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.registerType)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cradID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.birthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ampher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.district)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.registerType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+    }
+    
+    </table>
+</body>
+</html>
