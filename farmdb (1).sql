@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2021 at 12:11 PM
+-- Generation Time: May 07, 2021 at 12:36 PM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -1040,12 +1040,33 @@ INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
 (109, 18, 'qq', '56465'),
 (116, 9, 'dt', '16465132'),
 (117, 13, 'date', '0310025'),
-(120, 10, 'วาวา คีรีวรรณ', '1231516140'),
-(131, 13, 'wee', '161435114'),
-(132, 13, 'wee', '161435114'),
-(133, 13, 'wee', '161435114'),
 (134, 7, 'iu', '1452321212'),
-(176, 10, 'วาวา คีรีวรรณ', '1231516140');
+(181, 4, 'testt', '1111222223'),
+(182, 10, 'วาวา คีรีวรรณ', '1231516140'),
+(186, 13, 'wee', '161435114'),
+(193, 2, 'yp', '123'),
+(198, 10, 'วาวา คีรีวรรณ', '1231516140');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buymethod`
+--
+
+CREATE TABLE `buymethod` (
+  `ID` int NOT NULL,
+  `nameBuy` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `buymethod`
+--
+
+INSERT INTO `buymethod` (`ID`, `nameBuy`) VALUES
+(10, 'รับซื้อผลผลิต'),
+(20, 'จ่ายล่วงหน้า'),
+(30, 'ราคาตลาด'),
+(40, 'ประกันราคา');
 
 -- --------------------------------------------------------
 
@@ -8532,9 +8553,9 @@ INSERT INTO `energy` (`energyID`, `energyName`) VALUES
 --
 
 CREATE TABLE `equipment` (
-  `vehicleType` int NOT NULL,
-  `vehicleID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `vehicleName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `equipmentType` int NOT NULL,
+  `equipmentID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `equipmentName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` int DEFAULT NULL,
   `unitBuy` int NOT NULL,
@@ -8543,17 +8564,29 @@ CREATE TABLE `equipment` (
   `workTime` int DEFAULT NULL,
   `fuel` int DEFAULT NULL,
   `energy` int DEFAULT NULL,
-  `vehicleImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `equipmentID` int NOT NULL
+  `equipmentImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDequip` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipmenttype`
+--
+
+CREATE TABLE `equipmenttype` (
+  `equipmentID` int NOT NULL,
+  `equipmentT` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `equipment`
+-- Dumping data for table `equipmenttype`
 --
 
-INSERT INTO `equipment` (`vehicleType`, `vehicleID`, `vehicleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `workTime`, `fuel`, `energy`, `vehicleImg`, `equipmentID`) VALUES
-(600, 'G-10', 'รถไถ', 'ใช้งานในไร่', 600000, 300, 300, '2021-03-11', 10, 20, 200, 'bg5.jpg', 1),
-(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2021-03-11', 10, 20, 200, 'System.Web.HttpPostedFileWrapper', 2);
+INSERT INTO `equipmenttype` (`equipmentID`, `equipmentT`) VALUES
+(100, 'จอบ'),
+(200, 'ท่อ'),
+(300, 'หัวสปริงเกอร์');
 
 -- --------------------------------------------------------
 
@@ -8577,6 +8610,43 @@ INSERT INTO `family` (`familyID`, `familyName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fuel`
+--
+
+CREATE TABLE `fuel` (
+  `fuelType` int NOT NULL,
+  `fuelName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `unitBuy` int NOT NULL,
+  `unitUse` int NOT NULL,
+  `fuleImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDfule` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fueltype`
+--
+
+CREATE TABLE `fueltype` (
+  `fuelID` int NOT NULL,
+  `fuelType` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `fueltype`
+--
+
+INSERT INTO `fueltype` (`fuelID`, `fuelType`) VALUES
+(100, 'ก๊าซ'),
+(200, 'น้ำมัน'),
+(300, 'ไฟ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gender`
 --
 
@@ -8596,6 +8666,42 @@ INSERT INTO `gender` (`genderID`, `genderName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `labor`
+--
+
+CREATE TABLE `labor` (
+  `laborType` int NOT NULL,
+  `position` int NOT NULL,
+  `laborID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `laborName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `salary` int DEFAULT NULL,
+  `workDate` date DEFAULT NULL,
+  `laborImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDlab` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `labortype`
+--
+
+CREATE TABLE `labortype` (
+  `laborID` int NOT NULL,
+  `laborT` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `labortype`
+--
+
+INSERT INTO `labortype` (`laborID`, `laborT`) VALUES
+(100, 'ประจำ'),
+(200, 'รายวัน');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `landplot`
 --
 
@@ -8609,6 +8715,7 @@ CREATE TABLE `landplot` (
   `landSlip` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `landNumber` int DEFAULT NULL,
   `license_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lease_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `district` int DEFAULT NULL,
   `ampher` int DEFAULT NULL,
   `province` int DEFAULT NULL,
@@ -8620,21 +8727,23 @@ CREATE TABLE `landplot` (
   `farmerName` int DEFAULT NULL,
   `projectName` int DEFAULT NULL,
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `plotStatus` int DEFAULT NULL
+  `buyMethod` int DEFAULT NULL,
+  `plotStatus` int DEFAULT NULL,
+  `administrator` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `landplot`
 --
 
-INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `plotStatus`) VALUES
-(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, 1, 20, NULL, 400),
-(3, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, '', NULL, 1, 10, NULL, 400),
-(5, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.3, '', NULL, 2, NULL, NULL, NULL),
-(6, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, '', NULL, 2, NULL, NULL, NULL),
-(19, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4.18, '', NULL, 163, NULL, NULL, NULL),
-(20, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 106.24, '', NULL, 163, NULL, NULL, NULL),
-(21, 'iuu', '2535', 100, 18, NULL, NULL, NULL, NULL, NULL, NULL, 21, '14.94563334199181', '102.1411921839053', 14.15, '14 ไร่ 0 งาน 59 ตารางวา', NULL, 164, 10, NULL, 400);
+INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`) VALUES
+(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, 1, 20, NULL, NULL, 400, NULL),
+(3, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, '', NULL, 1, 10, NULL, NULL, 400, NULL),
+(5, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.3, '', NULL, 2, NULL, NULL, NULL, NULL, NULL),
+(6, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, '', NULL, 2, NULL, NULL, NULL, NULL, NULL),
+(19, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4.18, '', NULL, 163, NULL, NULL, NULL, NULL, NULL),
+(20, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 106.24, '', NULL, 163, NULL, NULL, NULL, NULL, NULL),
+(21, 'iuu', '2535', 100, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, '14.94563334199181', '102.1411921839053', 14.15, '14 ไร่ 0 งาน 59 ตารางวา', NULL, 164, 10, NULL, NULL, 400, NULL);
 
 -- --------------------------------------------------------
 
@@ -8691,7 +8800,80 @@ INSERT INTO `login` (`ID`, `email`, `password`) VALUES
 (5, 'kukkiksaatcha@gmail.com', '123456'),
 (6, 'Sakik_255_za@hotmail.com', 'asaa'),
 (7, 'Yada25@gmail.com', '2512'),
-(8, 'test@gmail.com', '252538');
+(8, 'test@gmail.com', '252538'),
+(15, 'wv@hotmail.com', '123456'),
+(16, 'wv@hotmail.com', '123456'),
+(17, 'rt@gmail.com', '5523'),
+(18, 'rt@gmail.com', '5523'),
+(19, 'rt@gmail.com', '5523'),
+(20, 'rt@gmail.com', '5523'),
+(21, 'ad@gmial.com', 'ad123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `machine`
+--
+
+CREATE TABLE `machine` (
+  `machineType` int NOT NULL,
+  `machineID` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `machineName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `unitBuy` int NOT NULL,
+  `unitUse` int NOT NULL,
+  `dateBuy` date DEFAULT NULL,
+  `workTime` int DEFAULT NULL,
+  `fuel` int DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `machineImg` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDmac` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `machinetype`
+--
+
+CREATE TABLE `machinetype` (
+  `machineID` int NOT NULL,
+  `machineT` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `machinetype`
+--
+
+INSERT INTO `machinetype` (`machineID`, `machineT`) VALUES
+(100, 'รถเกี่ยวข้าว'),
+(200, 'รถไถ'),
+(300, 'เครื่องตัดหญ้า'),
+(400, 'เครื่องสูบน้ำ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `position`
+--
+
+CREATE TABLE `position` (
+  `positionID` int NOT NULL,
+  `positionName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `position`
+--
+
+INSERT INTO `position` (`positionID`, `positionName`) VALUES
+(100, 'นักส่งเสริม'),
+(200, 'บัญชี'),
+(300, 'ผู้ดูแลระบบ'),
+(400, 'ผู้บริหาร'),
+(500, 'พนักงาน'),
+(600, 'เกษตกร');
 
 -- --------------------------------------------------------
 
@@ -8727,7 +8909,10 @@ INSERT INTO `profile` (`ID`, `name`, `cradID`, `gender`, `birthday`, `tel`, `no`
 (6, 'หดหกดกด', '1523020231110', 100, '1989-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'kukkiksaatcha@gmail.com', '123456', 100),
 (7, 'ddd', '1523020231110', 200, '1992-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'Sakik_255_za@hotmail.com', 'asaa', 100),
 (8, 'ญาดา กิจศิริ', '1520312652102', 200, '1993-12-25', NULL, NULL, NULL, NULL, NULL, NULL, 'Yada25@gmail.com', '2512', 100),
-(9, 'ญาฎา กฤตศิริ', '1325615259410', 200, '1995-05-02', '0623020101', 15, 2, 1, 1, 3, 'test@gmail.com', '252538', 100);
+(9, 'ญาฎา กฤตศิริ', '1325615259410', 200, '1995-05-02', '0623020101', 15, 2, 1, 1, 3, 'test@gmail.com', '252538', 100),
+(11, 'wv', '1234567890123', 100, '1448-10-15', NULL, NULL, NULL, NULL, NULL, NULL, 'wv@hotmail.com', '123456', 100),
+(12, 'rt', '1234567891023', 100, '2008-12-12', NULL, NULL, NULL, NULL, NULL, NULL, 'rt@gmail.com', '5523', 100),
+(13, 'ad', '1523020231110', 100, '1475-01-31', NULL, NULL, NULL, NULL, NULL, NULL, 'ad@gmial.com', 'ad123', 100);
 
 -- --------------------------------------------------------
 
@@ -8745,8 +8930,37 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`ID`, `projectName`) VALUES
-(10, 'เกษตรกรนำล่อง'),
-(20, 'เศรษฐกิจพอเพียง');
+(10, 'ไม่ขึ้นกับโครงการใด'),
+(20, 'GPA'),
+(30, 'SWI Organic'),
+(40, 'Waxy Crop 5/2 แนวตั้ง'),
+(50, 'Waxy Crop 5/2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projectand`
+--
+
+CREATE TABLE `projectand` (
+  `ID` int NOT NULL,
+  `dataNow` datetime NOT NULL,
+  `proName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `buyMethod` int NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `manuStandards` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `projectand`
+--
+
+INSERT INTO `projectand` (`ID`, `dataNow`, `proName`, `buyMethod`, `detail`, `manuStandards`) VALUES
+(1, '2021-04-26 11:19:21', 'op', 10, 'บาบร่าบลา', 10),
+(2, '2021-04-26 11:20:55', 'pipi', 10, 'ดาด่าด้า', 10),
+(3, '2021-04-26 11:22:32', 'yy', 10, 'ไถนา', 10),
+(4, '2021-04-26 11:33:06', 'rr', 30, 'ดาด่าด้า', 30),
+(6, '2021-04-26 14:35:48', 'tt', 10, 'ไถนา', 20);
 
 -- --------------------------------------------------------
 
@@ -8877,7 +9091,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`) VALUES
-(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1994-05-02', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', 1, 1, 3, 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDD', NULL, NULL, 176, 300, '2021-04-06 08:34:28'),
+(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1994-05-02', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', 1, 1, 3, 'YYY', NULL, NULL, 198, 100, '2021-05-05 08:49:22'),
 (2, 'ธงชาติ ธรรมรงค์', '6666666', '1523012695412', 100, NULL, 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', 1, 1, 2, 'LOL', NULL, NULL, 2, 200, '2021-01-27 11:27:21'),
 (16, 'sava gee', '223366', '1423625120103', NULL, '1477-12-30', 635948123, NULL, NULL, 36, 6, 'เจริญ', 1, 1, 3, NULL, NULL, NULL, 9, 100, '2021-01-20 09:14:38'),
 (17, 'เอก นามเอก', '171816', NULL, 100, NULL, 652195423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, '2021-01-20 15:38:32'),
@@ -8886,7 +9100,7 @@ INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthda
 (27, 'ฟารีน่า ดาหร่า', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, 300, '2021-01-27 09:19:13'),
 (31, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 87, NULL, '2021-01-29 15:22:39'),
 (129, 'pai', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-152x152.png', NULL, 71, NULL, '2021-01-29 13:36:14'),
-(131, 'wee', NULL, NULL, NULL, '1995-05-02', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 133, NULL, '2021-03-11 11:44:08'),
+(131, 'wee', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 186, NULL, '2021-05-04 10:33:49'),
 (132, 'vue', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-60x60.png', NULL, 72, NULL, '2021-01-29 13:40:52'),
 (133, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 74, NULL, '2021-01-29 14:03:24'),
 (135, 'testup2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime3.png', 'favicon-16x16.png', 77, NULL, '2021-01-29 14:49:21'),
@@ -8897,7 +9111,9 @@ INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthda
 (159, 'qq', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 109, NULL, '2021-02-05 13:58:11'),
 (162, 'date', NULL, NULL, NULL, '1470-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'bg5.jpg', 117, NULL, '2021-02-06 11:12:44'),
 (163, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 116, NULL, '2021-02-06 11:04:01'),
-(164, 'iu', NULL, NULL, NULL, NULL, 956231202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 134, NULL, '2021-03-29 10:14:11');
+(164, 'iu', NULL, NULL, NULL, NULL, 956231202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 134, NULL, '2021-03-29 10:14:11'),
+(165, 'test', NULL, NULL, NULL, NULL, 652312369, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 181, NULL, '2021-05-04 08:53:59'),
+(166, 'yp', NULL, NULL, NULL, '1995-01-10', 921352610, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 193, NULL, '2021-05-04 10:37:47');
 
 -- --------------------------------------------------------
 
@@ -8918,6 +9134,129 @@ INSERT INTO `registertype` (`typeID`, `typeName`) VALUES
 (100, 'เกษตรกร/ผู้ใช้งานทั่วไป'),
 (200, 'สหกรณ์/วิสาหกิจ'),
 (300, 'บริษัท/โรงงาน');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `software`
+--
+
+CREATE TABLE `software` (
+  `softwareType` int NOT NULL,
+  `softwareID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `softwareName` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `unitBuy` int NOT NULL,
+  `unitUse` int NOT NULL,
+  `dateBuy` int DEFAULT NULL,
+  `softwareImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDsoft` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `softwaretype`
+--
+
+CREATE TABLE `softwaretype` (
+  `IDsoft` int NOT NULL,
+  `softType` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `standard`
+--
+
+CREATE TABLE `standard` (
+  `ID` int NOT NULL,
+  `standardName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `standard`
+--
+
+INSERT INTO `standard` (`ID`, `standardName`) VALUES
+(10, 'Organic Thailand'),
+(20, 'USDA'),
+(30, 'GAP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `standardlist`
+--
+
+CREATE TABLE `standardlist` (
+  `ID` int NOT NULL,
+  `list` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fillin` tinyint(1) DEFAULT NULL,
+  `img` tinyint(1) DEFAULT NULL,
+  `IDpro` int NOT NULL,
+  `IDlist` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `standardlist`
+--
+
+INSERT INTO `standardlist` (`ID`, `list`, `fillin`, `img`, `IDpro`, `IDlist`) VALUES
+(2, 'ลงดิน', 1, 1, 1, 1),
+(5, 'พรวนดิน', 0, 1, 4, 1),
+(6, 'เก็บผล', 1, 0, 1, 2),
+(7, 'กำจัดแมลง', 1, 1, 3, 1),
+(8, 'เตรียมปุ๋ย', 1, 0, 3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staple`
+--
+
+CREATE TABLE `staple` (
+  `stapleType` int NOT NULL,
+  `stapleID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `stapleName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `unitBuy` int NOT NULL,
+  `unitUse` int NOT NULL,
+  `dateBuy` date DEFAULT NULL,
+  `stapleImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDstap` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `staple`
+--
+
+INSERT INTO `staple` (`stapleType`, `stapleID`, `stapleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `stapleImg`, `IDstap`) VALUES
+(200, '01', 'paraquat', 'ใช้งานในไร่', 540, 200, 200, '2019-09-01', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stapletype`
+--
+
+CREATE TABLE `stapletype` (
+  `stapleID` int NOT NULL,
+  `stapleT` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `stapletype`
+--
+
+INSERT INTO `stapletype` (`stapleID`, `stapleT`) VALUES
+(100, 'ปุ๋ย'),
+(200, 'ย่าฆ่าหญ้า'),
+(300, 'ยาฆ่าแมลง'),
+(400, 'เมล็ดพันธุ์');
 
 -- --------------------------------------------------------
 
@@ -8982,7 +9321,9 @@ INSERT INTO `unit` (`unitID`, `unitName`) VALUES
 (200, 'ขวด'),
 (300, 'คัน'),
 (400, 'ถุง'),
-(500, 'ลัง');
+(500, 'ลัง'),
+(600, 'ชิ้น'),
+(700, 'อัน');
 
 -- --------------------------------------------------------
 
@@ -8991,15 +9332,45 @@ INSERT INTO `unit` (`unitID`, `unitName`) VALUES
 --
 
 CREATE TABLE `vehicle` (
-  `vehicleID` int NOT NULL,
-  `vehicleType` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `vehicleType` int NOT NULL,
+  `vehicleID` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `vehicleName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int DEFAULT NULL,
+  `unitBuy` int NOT NULL,
+  `unitUse` int NOT NULL,
+  `dateBuy` date DEFAULT NULL,
+  `workTime` int DEFAULT NULL,
+  `fuel` int DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `vehicleImg` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IDve` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `vehicle`
 --
 
-INSERT INTO `vehicle` (`vehicleID`, `vehicleType`) VALUES
+INSERT INTO `vehicle` (`vehicleType`, `vehicleID`, `vehicleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `workTime`, `fuel`, `energy`, `vehicleImg`, `IDve`) VALUES
+(600, 'G-10', 'รถไถ', 'ใช้งานในไร่', 600000, 300, 300, '2021-03-11', 10, 20, 200, 'bg5.jpg', 1),
+(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2003-01-11', 10, 20, 200, 'favicon.png', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicletype`
+--
+
+CREATE TABLE `vehicletype` (
+  `vehicleID` int NOT NULL,
+  `vehicleT` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `vehicletype`
+--
+
+INSERT INTO `vehicletype` (`vehicleID`, `vehicleT`) VALUES
 (100, 'รถกระบะ'),
 (200, 'รถบรรทุก'),
 (300, 'รถพ่วง'),
@@ -9032,6 +9403,12 @@ ALTER TABLE `bankuser`
   ADD KEY `bankID` (`bankID`);
 
 --
+-- Indexes for table `buymethod`
+--
+ALTER TABLE `buymethod`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `district`
 --
 ALTER TABLE `district`
@@ -9049,11 +9426,17 @@ ALTER TABLE `energy`
 -- Indexes for table `equipment`
 --
 ALTER TABLE `equipment`
-  ADD PRIMARY KEY (`equipmentID`),
-  ADD KEY `vehicleType` (`vehicleType`),
+  ADD PRIMARY KEY (`IDequip`) USING BTREE,
+  ADD KEY `equipmentType` (`equipmentType`),
   ADD KEY `unitBuy` (`unitBuy`),
   ADD KEY `unitUse` (`unitUse`),
   ADD KEY `energy` (`energy`);
+
+--
+-- Indexes for table `equipmenttype`
+--
+ALTER TABLE `equipmenttype`
+  ADD PRIMARY KEY (`equipmentID`);
 
 --
 -- Indexes for table `family`
@@ -9062,10 +9445,39 @@ ALTER TABLE `family`
   ADD PRIMARY KEY (`familyID`);
 
 --
+-- Indexes for table `fuel`
+--
+ALTER TABLE `fuel`
+  ADD PRIMARY KEY (`IDfule`),
+  ADD KEY `fuelType` (`fuelType`),
+  ADD KEY `unitBuy` (`unitBuy`),
+  ADD KEY `unitUse` (`unitUse`);
+
+--
+-- Indexes for table `fueltype`
+--
+ALTER TABLE `fueltype`
+  ADD PRIMARY KEY (`fuelID`);
+
+--
 -- Indexes for table `gender`
 --
 ALTER TABLE `gender`
   ADD PRIMARY KEY (`genderID`);
+
+--
+-- Indexes for table `labor`
+--
+ALTER TABLE `labor`
+  ADD PRIMARY KEY (`IDlab`),
+  ADD KEY `laborType` (`laborType`),
+  ADD KEY `position` (`position`);
+
+--
+-- Indexes for table `labortype`
+--
+ALTER TABLE `labortype`
+  ADD PRIMARY KEY (`laborID`);
 
 --
 -- Indexes for table `landplot`
@@ -9079,7 +9491,8 @@ ALTER TABLE `landplot`
   ADD KEY `license` (`license`),
   ADD KEY `projectName` (`projectName`),
   ADD KEY `farmerName` (`farmerName`),
-  ADD KEY `plotStatus` (`plotStatus`) USING BTREE;
+  ADD KEY `plotStatus` (`plotStatus`) USING BTREE,
+  ADD KEY `buyMethod` (`buyMethod`);
 
 --
 -- Indexes for table `license`
@@ -9092,6 +9505,28 @@ ALTER TABLE `license`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `machine`
+--
+ALTER TABLE `machine`
+  ADD PRIMARY KEY (`IDmac`) USING BTREE,
+  ADD KEY `machineType` (`machineType`),
+  ADD KEY `unitBuy` (`unitBuy`),
+  ADD KEY `unitUse` (`unitUse`),
+  ADD KEY `energy` (`energy`);
+
+--
+-- Indexes for table `machinetype`
+--
+ALTER TABLE `machinetype`
+  ADD PRIMARY KEY (`machineID`);
+
+--
+-- Indexes for table `position`
+--
+ALTER TABLE `position`
+  ADD PRIMARY KEY (`positionID`);
 
 --
 -- Indexes for table `profile`
@@ -9109,6 +9544,14 @@ ALTER TABLE `profile`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `projectand`
+--
+ALTER TABLE `projectand`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `buyMethod` (`buyMethod`),
+  ADD KEY `manuStandards` (`manuStandards`);
 
 --
 -- Indexes for table `province`
@@ -9136,6 +9579,49 @@ ALTER TABLE `registertype`
   ADD PRIMARY KEY (`typeID`);
 
 --
+-- Indexes for table `software`
+--
+ALTER TABLE `software`
+  ADD PRIMARY KEY (`IDsoft`),
+  ADD KEY `softwareType` (`softwareType`),
+  ADD KEY `unitBuy` (`unitBuy`),
+  ADD KEY `unitUse` (`unitUse`);
+
+--
+-- Indexes for table `softwaretype`
+--
+ALTER TABLE `softwaretype`
+  ADD PRIMARY KEY (`IDsoft`);
+
+--
+-- Indexes for table `standard`
+--
+ALTER TABLE `standard`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `standardlist`
+--
+ALTER TABLE `standardlist`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDpro` (`IDpro`);
+
+--
+-- Indexes for table `staple`
+--
+ALTER TABLE `staple`
+  ADD PRIMARY KEY (`IDstap`),
+  ADD KEY `stapleType` (`stapleType`),
+  ADD KEY `unitBuy` (`unitBuy`),
+  ADD KEY `unitUse` (`unitUse`);
+
+--
+-- Indexes for table `stapletype`
+--
+ALTER TABLE `stapletype`
+  ADD PRIMARY KEY (`stapleID`);
+
+--
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
@@ -9157,6 +9643,16 @@ ALTER TABLE `unit`
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
+  ADD PRIMARY KEY (`IDve`),
+  ADD KEY `vehicleType` (`vehicleType`),
+  ADD KEY `unitBuy` (`unitBuy`),
+  ADD KEY `unitUse` (`unitUse`),
+  ADD KEY `energy` (`energy`);
+
+--
+-- Indexes for table `vehicletype`
+--
+ALTER TABLE `vehicletype`
   ADD PRIMARY KEY (`vehicleID`);
 
 --
@@ -9173,7 +9669,13 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+
+--
+-- AUTO_INCREMENT for table `buymethod`
+--
+ALTER TABLE `buymethod`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `energy`
@@ -9185,7 +9687,19 @@ ALTER TABLE `energy`
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
-  MODIFY `equipmentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDequip` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `fuel`
+--
+ALTER TABLE `fuel`
+  MODIFY `IDfule` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `labor`
+--
+ALTER TABLE `labor`
+  MODIFY `IDlab` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `landplot`
@@ -9203,25 +9717,61 @@ ALTER TABLE `license`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `machine`
+--
+ALTER TABLE `machine`
+  MODIFY `IDmac` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `machinetype`
+--
+ALTER TABLE `machinetype`
+  MODIFY `machineID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
 
 --
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `projectand`
+--
+ALTER TABLE `projectand`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+
+--
+-- AUTO_INCREMENT for table `software`
+--
+ALTER TABLE `software`
+  MODIFY `IDsoft` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `standardlist`
+--
+ALTER TABLE `standardlist`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `staple`
+--
+ALTER TABLE `staple`
+  MODIFY `IDstap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `typeownership`
@@ -9233,12 +9783,18 @@ ALTER TABLE `typeownership`
 -- AUTO_INCREMENT for table `unit`
 --
 ALTER TABLE `unit`
-  MODIFY `unitID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
+  MODIFY `unitID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=701;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
+  MODIFY `IDve` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `vehicletype`
+--
+ALTER TABLE `vehicletype`
   MODIFY `vehicleID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=601;
 
 --
@@ -9268,16 +9824,32 @@ ALTER TABLE `district`
 -- Constraints for table `equipment`
 --
 ALTER TABLE `equipment`
-  ADD CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`energy`) REFERENCES `energy` (`energyID`),
-  ADD CONSTRAINT `equipment_ibfk_2` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
-  ADD CONSTRAINT `equipment_ibfk_3` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`),
-  ADD CONSTRAINT `equipment_ibfk_4` FOREIGN KEY (`vehicleType`) REFERENCES `vehicle` (`vehicleID`);
+  ADD CONSTRAINT `equipment_ibfk_1` FOREIGN KEY (`equipmentType`) REFERENCES `equipmenttype` (`equipmentID`),
+  ADD CONSTRAINT `equipment_ibfk_2` FOREIGN KEY (`energy`) REFERENCES `energy` (`energyID`),
+  ADD CONSTRAINT `equipment_ibfk_3` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `equipment_ibfk_4` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`);
+
+--
+-- Constraints for table `fuel`
+--
+ALTER TABLE `fuel`
+  ADD CONSTRAINT `fuel_ibfk_1` FOREIGN KEY (`fuelType`) REFERENCES `fueltype` (`fuelID`),
+  ADD CONSTRAINT `fuel_ibfk_2` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `fuel_ibfk_3` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`);
+
+--
+-- Constraints for table `labor`
+--
+ALTER TABLE `labor`
+  ADD CONSTRAINT `labor_ibfk_1` FOREIGN KEY (`laborType`) REFERENCES `labortype` (`laborID`),
+  ADD CONSTRAINT `labor_ibfk_2` FOREIGN KEY (`position`) REFERENCES `position` (`positionID`);
 
 --
 -- Constraints for table `landplot`
 --
 ALTER TABLE `landplot`
   ADD CONSTRAINT `landplot_ibfk_1` FOREIGN KEY (`license`) REFERENCES `license` (`ID`),
+  ADD CONSTRAINT `landplot_ibfk_10` FOREIGN KEY (`buyMethod`) REFERENCES `buymethod` (`ID`),
   ADD CONSTRAINT `landplot_ibfk_2` FOREIGN KEY (`typeOwnership`) REFERENCES `typeownership` (`ID`),
   ADD CONSTRAINT `landplot_ibfk_3` FOREIGN KEY (`province`) REFERENCES `province` (`provinceID`),
   ADD CONSTRAINT `landplot_ibfk_5` FOREIGN KEY (`ampher`) REFERENCES `ampher` (`ampherID`),
@@ -9285,6 +9857,15 @@ ALTER TABLE `landplot`
   ADD CONSTRAINT `landplot_ibfk_7` FOREIGN KEY (`projectName`) REFERENCES `project` (`ID`),
   ADD CONSTRAINT `landplot_ibfk_8` FOREIGN KEY (`plotStatus`) REFERENCES `status` (`statusID`),
   ADD CONSTRAINT `landplot_ibfk_9` FOREIGN KEY (`farmerName`) REFERENCES `register` (`ID`);
+
+--
+-- Constraints for table `machine`
+--
+ALTER TABLE `machine`
+  ADD CONSTRAINT `machine_ibfk_1` FOREIGN KEY (`machineType`) REFERENCES `machinetype` (`machineID`),
+  ADD CONSTRAINT `machine_ibfk_2` FOREIGN KEY (`energy`) REFERENCES `energy` (`energyID`),
+  ADD CONSTRAINT `machine_ibfk_3` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `machine_ibfk_4` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`);
 
 --
 -- Constraints for table `profile`
@@ -9297,6 +9878,13 @@ ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_5` FOREIGN KEY (`ampher`) REFERENCES `ampher` (`ampherID`);
 
 --
+-- Constraints for table `projectand`
+--
+ALTER TABLE `projectand`
+  ADD CONSTRAINT `projectand_ibfk_1` FOREIGN KEY (`manuStandards`) REFERENCES `standard` (`ID`),
+  ADD CONSTRAINT `projectand_ibfk_2` FOREIGN KEY (`buyMethod`) REFERENCES `buymethod` (`ID`);
+
+--
 -- Constraints for table `register`
 --
 ALTER TABLE `register`
@@ -9307,6 +9895,37 @@ ALTER TABLE `register`
   ADD CONSTRAINT `register_ibfk_7` FOREIGN KEY (`ampher`) REFERENCES `ampher` (`ampherID`),
   ADD CONSTRAINT `register_ibfk_8` FOREIGN KEY (`bank`) REFERENCES `bankuser` (`ID`),
   ADD CONSTRAINT `register_ibfk_9` FOREIGN KEY (`gender`) REFERENCES `gender` (`genderID`);
+
+--
+-- Constraints for table `software`
+--
+ALTER TABLE `software`
+  ADD CONSTRAINT `software_ibfk_1` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `software_ibfk_2` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `software_ibfk_3` FOREIGN KEY (`softwareType`) REFERENCES `softwaretype` (`IDsoft`);
+
+--
+-- Constraints for table `standardlist`
+--
+ALTER TABLE `standardlist`
+  ADD CONSTRAINT `standardlist_ibfk_1` FOREIGN KEY (`IDpro`) REFERENCES `projectand` (`ID`);
+
+--
+-- Constraints for table `staple`
+--
+ALTER TABLE `staple`
+  ADD CONSTRAINT `staple_ibfk_1` FOREIGN KEY (`stapleType`) REFERENCES `stapletype` (`stapleID`),
+  ADD CONSTRAINT `staple_ibfk_2` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `staple_ibfk_3` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`);
+
+--
+-- Constraints for table `vehicle`
+--
+ALTER TABLE `vehicle`
+  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`energy`) REFERENCES `energy` (`energyID`),
+  ADD CONSTRAINT `vehicle_ibfk_2` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `vehicle_ibfk_3` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`),
+  ADD CONSTRAINT `vehicle_ibfk_4` FOREIGN KEY (`vehicleType`) REFERENCES `vehicletype` (`vehicleID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
