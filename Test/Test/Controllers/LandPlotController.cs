@@ -165,6 +165,15 @@ namespace Test.Controllers
                                                            };
                 ViewBag.registers = selregisters;
 
+                List<buymethod> buymethods = farmdb.buymethods.ToList();
+                IEnumerable<SelectListItem> selbuymethods = from b in buymethods
+                                                            select new SelectListItem
+                                                           {
+                                                               Text = b.nameBuy,
+                                                               Value = b.ID.ToString()
+                                                           };
+                ViewBag.buymethods = selbuymethods;
+
             }
             return View(new landplot());
         }
@@ -280,6 +289,15 @@ namespace Test.Controllers
                                                                Value = r.ID.ToString()
                                                            };
                 ViewBag.registers = selregisters;
+
+                List<buymethod> buymethods = farmdb.buymethods.ToList();
+                IEnumerable<SelectListItem> selbuymethods = from b in buymethods
+                                                            select new SelectListItem
+                                                            {
+                                                                Text = b.nameBuy,
+                                                                Value = b.ID.ToString()
+                                                            };
+                ViewBag.buymethods = selbuymethods;
             }
             return View(plotModel);
         }

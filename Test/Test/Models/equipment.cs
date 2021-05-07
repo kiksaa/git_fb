@@ -16,16 +16,16 @@ namespace Test.Models
 
     public partial class equipment
     {
-        [DisplayName("ประเภทยานพาหนะ")]
-        public int vehicleType { get; set; }
-        [DisplayName("รหัสยานพาหนะ")]
-        public string vehicleID { get; set; }
-        [DisplayName("ชื่อยานพาหนะ")]
-        public string vehicleName { get; set; }
+        [DisplayName("ประเภทอุปกรณ์")]
+        public int equipmentType { get; set; }
+        [DisplayName("รหัสอุปกรณ์")]
+        public string equipmentID { get; set; }
+        [DisplayName("ชื่ออุปกรณ์")]
+        public string equipmentName { get; set; }
         [DisplayName("รายละเอียด")]
         public string detail { get; set; }
         [DisplayName("ราคาซื้อ")]
-        public int price { get; set; }
+        public Nullable<int> price { get; set; }
         [DisplayName("หน่วยที่ซื้อ")]
         public int unitBuy { get; set; }
         [DisplayName("หน่วยที่ใช้")]
@@ -35,19 +35,19 @@ namespace Test.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> dateBuy { get; set; }
         [DisplayName("เวลางาน(ชม./ไร่)")]
-        public int workTime { get; set; }
+        public Nullable<int> workTime { get; set; }
         [DisplayName("ค่าพลังงานและเชื้อเพลิง/ชม.")]
-        public int fuel { get; set; }
+        public Nullable<int> fuel { get; set; }
         [DisplayName("ประเภทพลังงาน")]
-        public int energy { get; set; }
-        [DisplayName("รูปภาพยานพาหนะ")]
-        public string vehicleImg { get; set; }
+        public Nullable<int> energy { get; set; }
+        [DisplayName("รูปภาพอุปกรณ์")]
+        public string equipmentImg { get; set; }
         [DisplayName("ลำดับที่")]
-        public int equipmentID { get; set; }
-    
+        public int IDequip { get; set; }
+
         public virtual energy energy1 { get; set; }
+        public virtual equipmenttype equipmenttype1 { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
-        public virtual vehicle vehicle { get; set; }
     }
 }

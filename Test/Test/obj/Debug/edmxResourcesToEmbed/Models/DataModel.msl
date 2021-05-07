@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="farmdbModelStoreContainer" CdmEntityContainer="farmdb">
+  <EntityContainerMapping StorageEntityContainer="farmdbModelStoreContainer" CdmEntityContainer="farmdbEntities">
     <EntitySetMapping Name="amphers">
       <EntityTypeMapping TypeName="farmdbModel.ampher">
         <MappingFragment StoreEntitySet="ampher">
@@ -38,11 +38,68 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="energies">
+      <EntityTypeMapping TypeName="farmdbModel.energy">
+        <MappingFragment StoreEntitySet="energy">
+          <ScalarProperty Name="energyID" ColumnName="energyID" />
+          <ScalarProperty Name="energyName" ColumnName="energyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipments">
+      <EntityTypeMapping TypeName="farmdbModel.equipment">
+        <MappingFragment StoreEntitySet="equipment">
+          <ScalarProperty Name="equipmentType" ColumnName="equipmentType" />
+          <ScalarProperty Name="equipmentID" ColumnName="equipmentID" />
+          <ScalarProperty Name="equipmentName" ColumnName="equipmentName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="workTime" ColumnName="workTime" />
+          <ScalarProperty Name="fuel" ColumnName="fuel" />
+          <ScalarProperty Name="energy" ColumnName="energy" />
+          <ScalarProperty Name="equipmentImg" ColumnName="equipmentImg" />
+          <ScalarProperty Name="IDequip" ColumnName="IDequip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipmenttypes">
+      <EntityTypeMapping TypeName="farmdbModel.equipmenttype">
+        <MappingFragment StoreEntitySet="equipmenttype">
+          <ScalarProperty Name="equipmentID" ColumnName="equipmentID" />
+          <ScalarProperty Name="equipmentT" ColumnName="equipmentT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="families">
       <EntityTypeMapping TypeName="farmdbModel.family">
         <MappingFragment StoreEntitySet="family">
           <ScalarProperty Name="familyID" ColumnName="familyID" />
           <ScalarProperty Name="familyName" ColumnName="familyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fuels">
+      <EntityTypeMapping TypeName="farmdbModel.fuel">
+        <MappingFragment StoreEntitySet="fuel">
+          <ScalarProperty Name="fuelType" ColumnName="fuelType" />
+          <ScalarProperty Name="fuelName" ColumnName="fuelName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="fuleImg" ColumnName="fuleImg" />
+          <ScalarProperty Name="IDfule" ColumnName="IDfule" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fueltypes">
+      <EntityTypeMapping TypeName="farmdbModel.fueltype">
+        <MappingFragment StoreEntitySet="fueltype">
+          <ScalarProperty Name="fuelID" ColumnName="fuelID" />
+          <ScalarProperty Name="fuelType1" ColumnName="fuelType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -54,11 +111,34 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="labors">
+      <EntityTypeMapping TypeName="farmdbModel.labor">
+        <MappingFragment StoreEntitySet="labor">
+          <ScalarProperty Name="laborType" ColumnName="laborType" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="laborID" ColumnName="laborID" />
+          <ScalarProperty Name="laborName" ColumnName="laborName" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="workDate" ColumnName="workDate" />
+          <ScalarProperty Name="laborImg" ColumnName="laborImg" />
+          <ScalarProperty Name="IDlab" ColumnName="IDlab" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="labortypes">
+      <EntityTypeMapping TypeName="farmdbModel.labortype">
+        <MappingFragment StoreEntitySet="labortype">
+          <ScalarProperty Name="laborID" ColumnName="laborID" />
+          <ScalarProperty Name="laborT" ColumnName="laborT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="landplots">
       <EntityTypeMapping TypeName="farmdbModel.landplot">
         <MappingFragment StoreEntitySet="landplot">
-          <ScalarProperty Name="areaPlotS" ColumnName="areaPlotS" />
-          <ScalarProperty Name="farmerName" ColumnName="farmerName" />
+          <ScalarProperty Name="administrator" ColumnName="administrator" />
+          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
+          <ScalarProperty Name="lease_img" ColumnName="lease_img" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="plotName" ColumnName="plotName" />
           <ScalarProperty Name="areaCode" ColumnName="areaCode" />
@@ -74,10 +154,12 @@
           <ScalarProperty Name="coordinatesStar" ColumnName="coordinatesStar" />
           <ScalarProperty Name="coordinatesEnd" ColumnName="coordinatesEnd" />
           <ScalarProperty Name="areaPlot" ColumnName="areaPlot" />
+          <ScalarProperty Name="areaPlotS" ColumnName="areaPlotS" />
           <ScalarProperty Name="plotDetails" ColumnName="plotDetails" />
-          <ScalarProperty Name="plotStatus" ColumnName="plotStatus" />
+          <ScalarProperty Name="farmerName" ColumnName="farmerName" />
           <ScalarProperty Name="projectName" ColumnName="projectName" />
           <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="plotStatus" ColumnName="plotStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,6 +177,41 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="machines">
+      <EntityTypeMapping TypeName="farmdbModel.machine">
+        <MappingFragment StoreEntitySet="machine">
+          <ScalarProperty Name="machineType" ColumnName="machineType" />
+          <ScalarProperty Name="machineID" ColumnName="machineID" />
+          <ScalarProperty Name="machineName" ColumnName="machineName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="workTime" ColumnName="workTime" />
+          <ScalarProperty Name="fuel" ColumnName="fuel" />
+          <ScalarProperty Name="energy" ColumnName="energy" />
+          <ScalarProperty Name="machineImg" ColumnName="machineImg" />
+          <ScalarProperty Name="IDmac" ColumnName="IDmac" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="machinetypes">
+      <EntityTypeMapping TypeName="farmdbModel.machinetype">
+        <MappingFragment StoreEntitySet="machinetype">
+          <ScalarProperty Name="machineID" ColumnName="machineID" />
+          <ScalarProperty Name="machineT" ColumnName="machineT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="positions">
+      <EntityTypeMapping TypeName="farmdbModel.position">
+        <MappingFragment StoreEntitySet="position">
+          <ScalarProperty Name="positionID" ColumnName="positionID" />
+          <ScalarProperty Name="positionName" ColumnName="positionName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -169,6 +286,54 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="softwares">
+      <EntityTypeMapping TypeName="farmdbModel.software">
+        <MappingFragment StoreEntitySet="software">
+          <ScalarProperty Name="softwareType" ColumnName="softwareType" />
+          <ScalarProperty Name="softwareID" ColumnName="softwareID" />
+          <ScalarProperty Name="softwareName" ColumnName="softwareName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="softwareImg" ColumnName="softwareImg" />
+          <ScalarProperty Name="IDsoft" ColumnName="IDsoft" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="softwaretypes">
+      <EntityTypeMapping TypeName="farmdbModel.softwaretype">
+        <MappingFragment StoreEntitySet="softwaretype">
+          <ScalarProperty Name="IDsoft" ColumnName="IDsoft" />
+          <ScalarProperty Name="softType" ColumnName="softType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="staples">
+      <EntityTypeMapping TypeName="farmdbModel.staple">
+        <MappingFragment StoreEntitySet="staple">
+          <ScalarProperty Name="stapleType" ColumnName="stapleType" />
+          <ScalarProperty Name="stapleID" ColumnName="stapleID" />
+          <ScalarProperty Name="stapleName" ColumnName="stapleName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="stapleImg" ColumnName="stapleImg" />
+          <ScalarProperty Name="IDstap" ColumnName="IDstap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stapletypes">
+      <EntityTypeMapping TypeName="farmdbModel.stapletype">
+        <MappingFragment StoreEntitySet="stapletype">
+          <ScalarProperty Name="stapleID" ColumnName="stapleID" />
+          <ScalarProperty Name="stapleT" ColumnName="stapleT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="status">
       <EntityTypeMapping TypeName="farmdbModel.status">
         <MappingFragment StoreEntitySet="status">
@@ -185,38 +350,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="energies">
-      <EntityTypeMapping TypeName="farmdbModel.energy">
-        <MappingFragment StoreEntitySet="energy">
-          <ScalarProperty Name="energyName" ColumnName="energyName" />
-          <ScalarProperty Name="energyID" ColumnName="energyID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="equipments">
-      <EntityTypeMapping TypeName="farmdbModel.equipment">
-        <MappingFragment StoreEntitySet="equipment">
-          <ScalarProperty Name="equipmentID" ColumnName="equipmentID" />
-          <ScalarProperty Name="vehicleImg" ColumnName="vehicleImg" />
-          <ScalarProperty Name="energy" ColumnName="energy" />
-          <ScalarProperty Name="fuel" ColumnName="fuel" />
-          <ScalarProperty Name="workTime" ColumnName="workTime" />
-          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
-          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
-          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="detail" ColumnName="detail" />
-          <ScalarProperty Name="vehicleName" ColumnName="vehicleName" />
-          <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
-          <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="units">
       <EntityTypeMapping TypeName="farmdbModel.unit">
         <MappingFragment StoreEntitySet="unit">
-          <ScalarProperty Name="unitName" ColumnName="unitName" />
           <ScalarProperty Name="unitID" ColumnName="unitID" />
+          <ScalarProperty Name="unitName" ColumnName="unitName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +363,65 @@
         <MappingFragment StoreEntitySet="vehicle">
           <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
           <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
+          <ScalarProperty Name="vehicleName" ColumnName="vehicleName" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="unitBuy" ColumnName="unitBuy" />
+          <ScalarProperty Name="unitUse" ColumnName="unitUse" />
+          <ScalarProperty Name="dateBuy" ColumnName="dateBuy" />
+          <ScalarProperty Name="workTime" ColumnName="workTime" />
+          <ScalarProperty Name="fuel" ColumnName="fuel" />
+          <ScalarProperty Name="energy" ColumnName="energy" />
+          <ScalarProperty Name="vehicleImg" ColumnName="vehicleImg" />
+          <ScalarProperty Name="IDve" ColumnName="IDve" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicletypes">
+      <EntityTypeMapping TypeName="farmdbModel.vehicletype">
+        <MappingFragment StoreEntitySet="vehicletype">
+          <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
+          <ScalarProperty Name="vehicleT" ColumnName="vehicleT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="buymethods">
+      <EntityTypeMapping TypeName="farmdbModel.buymethod">
+        <MappingFragment StoreEntitySet="buymethod">
+          <ScalarProperty Name="nameBuy" ColumnName="nameBuy" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projectands">
+      <EntityTypeMapping TypeName="farmdbModel.projectand">
+        <MappingFragment StoreEntitySet="projectand">
+          <ScalarProperty Name="manuStandards" ColumnName="manuStandards" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
+          <ScalarProperty Name="proName" ColumnName="proName" />
+          <ScalarProperty Name="dataNow" ColumnName="dataNow" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="standards">
+      <EntityTypeMapping TypeName="farmdbModel.standard">
+        <MappingFragment StoreEntitySet="standard">
+          <ScalarProperty Name="standardName" ColumnName="standardName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="standardlists">
+      <EntityTypeMapping TypeName="farmdbModel.standardlist">
+        <MappingFragment StoreEntitySet="standardlist">
+          <ScalarProperty Name="IDlist" ColumnName="IDlist" />
+          <ScalarProperty Name="IDpro" ColumnName="IDpro" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="fillin" ColumnName="fillin" />
+          <ScalarProperty Name="list" ColumnName="list" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

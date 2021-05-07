@@ -71,9 +71,9 @@ namespace Test.Models
         public virtual district district1 { get; set; }
         public virtual family family1 { get; set; }
         public virtual gender gender1 { get; set; }
-        public virtual province province1 { get; set; }
-        public virtual status status1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<landplot> landplots { get; set; }
+        public virtual province province1 { get; set; }
+        public virtual status status1 { get; set; }
     }
 }

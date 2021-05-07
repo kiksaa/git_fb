@@ -8,6 +8,8 @@ using System.Data.Entity;
 using System.Data;
 using System.Web.Security;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Test.Controllers
 {
@@ -19,7 +21,17 @@ namespace Test.Controllers
             // count register
             List<register> registerList = new List<register>();
             List<landplot> landplotrList = new List<landplot>();
+
+            List<vehicle> vehicleList = new List<vehicle>();
+            List<machine> MachineList = new List<machine>();
             List<equipment> EquipmentList = new List<equipment>();
+            List<software> SoftwareList = new List<software>();
+            List<staple> StapleList = new List<staple>();
+            List<labor> LaborList = new List<labor>();
+            List<fuel> FuelList = new List<fuel>();
+            
+            List<projectand> ProjectandList = new List<projectand>();
+            
             using (farmdb farmdb = new farmdb())
             {
                 registerList = farmdb.registers.ToList<register>();
@@ -28,8 +40,31 @@ namespace Test.Controllers
                 landplotrList = farmdb.landplots.ToList<landplot>();
                 ViewBag.TotalLandPlot = landplotrList.Count();
 
+                vehicleList = farmdb.vehicles.ToList<vehicle>();
+                ViewBag.TotalVehicle = vehicleList.Count();
+
+                MachineList = farmdb.machines.ToList<machine>();
+                ViewBag.TotalMachine = MachineList.Count();
+                
                 EquipmentList = farmdb.equipments.ToList<equipment>();
                 ViewBag.TotalEquipment = EquipmentList.Count();
+
+                SoftwareList = farmdb.softwares.ToList<software>();
+                ViewBag.TotalSoftware = SoftwareList.Count();
+
+                StapleList = farmdb.staples.ToList<staple>();
+                ViewBag.TotalStaple = StapleList.Count();
+
+                LaborList = farmdb.labors.ToList<labor>();
+                ViewBag.TotalLabor = LaborList.Count();
+
+                FuelList = farmdb.fuels.ToList<fuel>();
+                ViewBag.TotalFuel = FuelList.Count();
+
+                ViewBag.Total = vehicleList.Count() + MachineList.Count() + EquipmentList.Count() + SoftwareList.Count() + StapleList.Count() + LaborList.Count() + FuelList.Count();
+
+                ProjectandList = farmdb.projectands.ToList<projectand>();
+                ViewBag.TotalProjectand = ProjectandList.Count();
             }
             return View(registerList);
         }
@@ -113,6 +148,21 @@ namespace Test.Controllers
                 return View(ViewModeltList);
             }
         }
+        //create a string MD5
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
+        }
 
         [HttpPost]
         public ActionResult SaveRegisterDetails(profile registerDetails)
@@ -141,8 +191,23 @@ namespace Test.Controllers
                     farmdb.SaveChanges();
 
                     ViewBag.Count = farmdb.profiles.SqlQuery(" SELECT * FROM profile ").Count();
+
+                    var check = farmdb.profiles.FirstOrDefault(s => s.email == registerDetails.email);
+                    if (check == null)
+                    {
+                        registerDetails.password = GetMD5(registerDetails.password);
+                        farmdb.Configuration.ValidateOnSaveEnabled = false;
+                        farmdb.profiles.Add(registerDetails);
+                        farmdb.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.error = "Email already exists";
+                        return View();
+                    }
                 }
-                var _emailService = 
+                /*var _emailService = */
                 ViewBag.Message = "บันทึกเสร็จสิ้น!!";
                 return View("Register");
             }
@@ -151,31 +216,74 @@ namespace Test.Controllers
                 return View("Register", registerDetails);
             }
         }
-        /*[HttpPost]
-        public ViewResult Email(Models.profile _objModelMail)
+        public static void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
         {
-            if (ModelState.IsValid)
+            string from, to, bcc, cc, subject, body;
+            from = "YourEmail@gmail.com";
+            to = sendTo.Trim();
+            bcc = "";
+            cc = "";
+            subject = subjectText;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(bodyText);
+            body = sb.ToString();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(from);
+            mail.To.Add(new MailAddress(to));
+            if (!string.IsNullOrEmpty(bcc))
             {
-                profile mail = new profile();
-                mail.email.Add(_objModelMail.email);
-                mail.From = new MailAddress("samatcha@gmail.com");
-                mail.Subject = _objModelMail.Subject;
-                string Body = _objModelMail.Body;
-                mail.Body = Body;
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("username", "password"); // Enter seders User name and password       
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
-                return View("Index", _objModelMail);
+                mail.Bcc.Add(new MailAddress(bcc));
             }
-            else
+            if (!string.IsNullOrEmpty(cc))
             {
-                return View();
+                mail.CC.Add(new MailAddress(cc));
             }
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true;
+            SendEmail(mail);
+        }
+        public static void SendEmail(MailMessage mail)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Host = "smtp.gmail.com";
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new System.Net.NetworkCredential("YourEmail@gmail.com", "Password");
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public JsonResult CheckValidUser(login model)
+        {
+            var farmdb = new farmdb();
+            string result = "Fail";
+            var DataItem = farmdb.logins.Where(x => x.email == model.email && x.password == model.password).SingleOrDefault();
+            if (DataItem != null)
+            {
+                Session["UserID"] = DataItem.ID.ToString();
+                Session["UserName"] = DataItem.email.ToString();
+                result = "Success";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        // GET: /Account/ConfirmEmail
+        /*[AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }*/
         public ActionResult Login()
         {
@@ -234,6 +342,7 @@ namespace Test.Controllers
                 //If user is not present false is returned.
                 else
                     return user;
+
             }
         }
 

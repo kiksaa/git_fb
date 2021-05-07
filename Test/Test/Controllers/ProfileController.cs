@@ -114,8 +114,9 @@ namespace Test.Controllers
         {
             using (farmdb farmdb = new farmdb())
             {
-                farmdb.Entry(profileModel).State = EntityState.Modified;
-                farmdb.Entry(loginModel).State = EntityState.Added;
+                farmdb.Entry(profileModel).State = System.Data.Entity.EntityState.Modified;
+                /*farmdb.Entry(profileModel).State = EntityState.Modified;*/
+                /*farmdb.Entry(loginModel).State = EntityState.Added;*/
                 farmdb.SaveChanges();
             }
             return RedirectToAction("Index","Account");

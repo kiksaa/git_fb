@@ -105,7 +105,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <a type="button" href="@Url.Action("Index", "LandPlot")">
@@ -126,10 +125,10 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a type="button" href="@Url.Action("Index", "Equipment")">
+                                <a type="button" href="@Url.Action("IndexSum", "Equipment")">
                                     <div class="btn btn-outline-success mb-4 shadow-sm">
                                         <div class="card-body">
-                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalEquipment <small class="text-muted">/ ทะเบียนอุปกรณ์</small></h2>
+                                            <h2 class="card-title pricing-card-title">@ViewBag.Total <small class="text-muted">/ ทะเบียนอุปกรณ์</small></h2>
                                             <ul class="list-unstyled mt-3 mb-4">
                                                 <li>
                                                     <svg width="17em" height="6em" viewBox="0 0 16 16" class="bi bi-minecart-loaded" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -144,20 +143,22 @@
                             </div>
 
                             <div class="col">
-                                <div class="btn btn-outline-info mb-4 shadow-sm" href="#">
-                                    <div class="card-body">
-                                        <h2 class="card-title pricing-card-title">32<small class="text-muted">/ โครงการ</small></h2>
-                                        <ul class="list-unstyled mt-3 mb-4">
-                                            <li>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
-                                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
-                                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
-                                                    <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
-                                                </svg>
-                                            </li>
-                                        </ul>
+                                <a type="button" href="@Url.Action("Index", "Project")">
+                                    <div class="btn btn-outline-info mb-4 shadow-sm">
+                                        <div class="card-body">
+                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalProjectand<small class="text-muted">/ โครงการ</small></h2>
+                                            <ul class="list-unstyled mt-3 mb-4">
+                                                <li>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
+                                                        <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                                        <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                                                        <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z" />
+                                                    </svg>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>    
                             </div>
                         </div>
 

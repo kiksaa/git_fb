@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Devart.Data.MySql;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -23,7 +25,7 @@ namespace Test.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 registerList = farmdb.registers.ToList<register>();
-                ViewBag.TotalRegister= registerList.Count();
+                ViewBag.TotalRegister = registerList.Count();
 
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from r in farmdb.registers
@@ -41,8 +43,18 @@ namespace Test.Controllers
                            from l in llist.DefaultIfEmpty()
                            select new
                            {
-                               r.ID, r.name,r.registerID, r.cardID, r.no, r.moo, r.road,
-                               p.provinceName, a.ampherName, d.districtName, s.statusName, r.dateUpdate,
+                               r.ID,
+                               r.name,
+                               r.registerID,
+                               r.cardID,
+                               r.no,
+                               r.moo,
+                               r.road,
+                               p.provinceName,
+                               a.ampherName,
+                               d.districtName,
+                               s.statusName,
+                               r.dateUpdate,
                                TotalLandplot = llist.Count(),
                                Totalarea = llist.Sum(ll => ll.areaPlot)
                            };
@@ -127,42 +139,63 @@ namespace Test.Controllers
             }
             return View(registerModel);
         }
-        // GET: Register/Create
-        public ActionResult Create() 
+        public ActionResult Indexx()
         {
-            /*province pro = new province();*/
             using (farmdb farmdb = new farmdb())
             {
-                var dd = "SELECT provinceID AS pid, provinceName AS pname, ampherID AS aid, ampherName AS aname, districtID AS tid, districtName AS tname" +
-                         "FROM province INNER JOIN ampher ON province.provinceID = ampher.proID INNER JOIN district ON amphur.ampherID = district.amID";
+                ViewBag.Country = new SelectList(farmdb.provinces, "provinceID", "provinceName");
+                ViewBag.City = farmdb.amphers.ToList();
+                return View();
+            }
+            
+        }
+        [HttpGet]
+        public ActionResult GetCityList(int? provinceID)
+        {
+            using (farmdb farmdb = new farmdb())
+            {
+                if (provinceID == null) 
+                {
+                    List<ampher> CityList =  farmdb.amphers.ToList();
+                    return PartialView("_CityListPartial", CityList);
+                }
+                List<ampher> Cities = farmdb.amphers.Where(c => c.province.provinceID == provinceID).ToList();
+                return PartialView("_CityListPartial", Cities);
+            }
+        }
+
+        // GET: Register/Create
+        public ActionResult Create()
+        {
+            using (farmdb farmdb = new farmdb())
+            {
+               
                 List<province> provinces = farmdb.provinces.ToList();
                 IEnumerable<SelectListItem> selprovinces = from p in provinces
                                                            select new SelectListItem
                                                            {
                                                                Text = p.provinceName,
-                                                               Value = p.provinceID.ToString()
+                                                               Value = p.provinceID.ToString(),
+
                                                            };
+                var selectList = new SelectList(selprovinces, "provinceID", "provinceName");
                 ViewBag.provinces = selprovinces;
-                /*foreach (var item in selprovinces) {
-                    
-                }*/
-                List<ampher> amphers = farmdb.amphers.ToList();
-                IEnumerable<SelectListItem> selamphers = from a in amphers
-                                                         join p in selprovinces on a.proID equals p.Value.Length
-                                                         select new SelectListItem
-                                                         {
-                                                             Text = a.ampherName,
-                                                             Value = a.ampherID.ToString(),
-                                                             /*Selected = (a.proID == ViewBag.pro)*/
-                                                         };
-                ViewBag.amphers = selamphers;
+
+                /*if (selectList.SelectedValue != null)
+                {*/
+                    List<ampher> amphers = farmdb.amphers.ToList();
+                    IEnumerable<SelectListItem> selamphers = from a in amphers
+                                                            /* where a.proID == (int)selectList.SelectedValue*/
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = a.ampherName,
+                                                                 Value = a.ampherID.ToString()
+                                                             };
+                    ViewBag.amphers = selamphers;
+                /*}*/
 
                 List<district> districts = farmdb.districts.ToList();
                 IEnumerable<SelectListItem> seldistricts = from d in districts
-                                                           /*join p in farmdb.provinces on d.proID equals p.provinceID into plist
-                                                           from p in plist.DefaultIfEmpty()
-                                                           join a in farmdb.amphers on d.proID equals a.ampherID into alist
-                                                           from a in alist.DefaultIfEmpty()*/
                                                            select new SelectListItem
                                                            {
                                                                Text = d.districtName,
@@ -276,7 +309,7 @@ namespace Test.Controllers
                 registerModel.dateUpdate = DateTime.Now;
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Create","Plot", new { farmerName = registerModel.ID });
+            return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
         }
 
         // GET: Register/Edit/5
@@ -284,7 +317,7 @@ namespace Test.Controllers
         {
             register registerModel = new register();
             bankuser bankuserModel = new bankuser();
-            
+
             using (farmdb farmdb = new farmdb())
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
@@ -446,7 +479,7 @@ namespace Test.Controllers
                 registerModel.bankuser = bankuserModel;
                 farmdb.registers.Remove(registerModel);
                 farmdb.bankusers.Remove(bankuserModel);
-                if (landplotModel != null) 
+                if (landplotModel != null)
                 {
                     farmdb.landplots.Remove(landplotModel);
                 }
@@ -455,5 +488,8 @@ namespace Test.Controllers
             }
             return RedirectToAction("Index");
         }
+
     }
+
+  
 }

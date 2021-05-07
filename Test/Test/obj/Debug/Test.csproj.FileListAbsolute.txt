@@ -1,3 +1,5 @@
+C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.csprojAssemblyReference.cache
+C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
 C:\Users\samatcha\Desktop\Test\Test\bin\Test.dll.config
 C:\Users\samatcha\Desktop\Test\Test\bin\Test.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Test.pdb
@@ -53,6 +55,7 @@ C:\Users\samatcha\Desktop\Test\Test\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\samatcha\Desktop\Test\Test\bin\Antlr3.Runtime.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Devart.Data.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Devart.Data.MySql.dll
+C:\Users\samatcha\Desktop\Test\Test\bin\Elasticsearch.Net.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\EntityFramework.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\EntityFramework.SqlServer.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Google.Protobuf.dll
@@ -89,6 +92,7 @@ C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.Entity.EF6.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.EntityFramework.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Web.dll
+C:\Users\samatcha\Desktop\Test\Test\bin\Nest.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Newtonsoft.Json.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Renci.SshNet.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Stripe.net.dll
@@ -107,6 +111,7 @@ C:\Users\samatcha\Desktop\Test\Test\bin\System.Threading.Tasks.Extensions.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Helpers.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Mvc.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Optimization.dll
+C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Providers.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Razor.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.WebPages.Deployment.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.WebPages.dll
@@ -116,6 +121,8 @@ C:\Users\samatcha\Desktop\Test\Test\bin\WebGrease.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\WebMatrix.Data.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\WebMatrix.WebData.dll
 C:\Users\samatcha\Desktop\Test\Test\bin\Zstandard.Net.dll
+C:\Users\samatcha\Desktop\Test\Test\bin\Elasticsearch.Net.pdb
+C:\Users\samatcha\Desktop\Test\Test\bin\Elasticsearch.Net.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\EntityFramework.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\EntityFramework.SqlServer.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\Google.Protobuf.pdb
@@ -150,6 +157,8 @@ C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.Entity.EF6.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Data.EntityFramework.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\MySql.Web.xml
+C:\Users\samatcha\Desktop\Test\Test\bin\Nest.pdb
+C:\Users\samatcha\Desktop\Test\Test\bin\Nest.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\Renci.SshNet.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\Stripe.net.pdb
 C:\Users\samatcha\Desktop\Test\Test\bin\Stripe.net.xml
@@ -161,6 +170,7 @@ C:\Users\samatcha\Desktop\Test\Test\bin\System.Numerics.Vectors.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Text.Encodings.Web.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Providers.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Helpers.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Mvc.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Optimization.xml
@@ -173,10 +183,6 @@ C:\Users\samatcha\Desktop\Test\Test\bin\Antlr3.Runtime.pdb
 C:\Users\samatcha\Desktop\Test\Test\bin\WebMatrix.Data.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\WebMatrix.WebData.xml
 C:\Users\samatcha\Desktop\Test\Test\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.csprojAssemblyReference.cache
-C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
 C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.dll
 C:\Users\samatcha\Desktop\Test\Test\obj\Debug\Test.pdb
-C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Providers.dll
-C:\Users\samatcha\Desktop\Test\Test\bin\System.Web.Providers.xml

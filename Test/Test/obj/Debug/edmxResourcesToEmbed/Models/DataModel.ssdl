@@ -24,6 +24,13 @@
     <Property Name="bankName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="bankNo" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
+  <EntityType Name="buymethod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameBuy" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityType Name="district">
     <Key>
       <PropertyRef Name="districtID" />
@@ -42,21 +49,28 @@
   </EntityType>
   <EntityType Name="equipment">
     <Key>
-      <PropertyRef Name="equipmentID" />
+      <PropertyRef Name="IDequip" />
     </Key>
-    <Property Name="vehicleType" Type="int" Nullable="false" />
-    <Property Name="vehicleID" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="vehicleName" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="detail" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="equipmentType" Type="int" Nullable="false" />
+    <Property Name="equipmentID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="equipmentName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
     <Property Name="unitBuy" Type="int" Nullable="false" />
     <Property Name="unitUse" Type="int" Nullable="false" />
-    <Property Name="dateBuy" Type="date" Nullable="false" />
-    <Property Name="workTime" Type="int" Nullable="false" />
-    <Property Name="fuel" Type="int" Nullable="false" />
-    <Property Name="energy" Type="int" Nullable="false" />
-    <Property Name="vehicleImg" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="equipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="equipmentImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDequip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipmenttype">
+    <Key>
+      <PropertyRef Name="equipmentID" />
+    </Key>
+    <Property Name="equipmentID" Type="int" Nullable="false" />
+    <Property Name="equipmentT" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="family">
     <Key>
@@ -65,12 +79,52 @@
     <Property Name="familyID" Type="int" Nullable="false" />
     <Property Name="familyName" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="fuel">
+    <Key>
+      <PropertyRef Name="IDfule" />
+    </Key>
+    <Property Name="fuelType" Type="int" Nullable="false" />
+    <Property Name="fuelName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="fuleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDfule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fueltype">
+    <Key>
+      <PropertyRef Name="fuelID" />
+    </Key>
+    <Property Name="fuelID" Type="int" Nullable="false" />
+    <Property Name="fuelType" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityType Name="gender">
     <Key>
       <PropertyRef Name="genderID" />
     </Key>
     <Property Name="genderID" Type="int" Nullable="false" />
     <Property Name="genderName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="labor">
+    <Key>
+      <PropertyRef Name="IDlab" />
+    </Key>
+    <Property Name="laborType" Type="int" Nullable="false" />
+    <Property Name="position" Type="int" Nullable="false" />
+    <Property Name="laborID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="laborName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="salary" Type="int" />
+    <Property Name="workDate" Type="date" />
+    <Property Name="laborImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDlab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="labortype">
+    <Key>
+      <PropertyRef Name="laborID" />
+    </Key>
+    <Property Name="laborID" Type="int" Nullable="false" />
+    <Property Name="laborT" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="landplot">
     <Key>
@@ -85,6 +139,7 @@
     <Property Name="landSlip" Type="varchar" MaxLength="20" />
     <Property Name="landNumber" Type="int" />
     <Property Name="license_img" Type="varchar" MaxLength="255" />
+    <Property Name="lease_img" Type="varchar" MaxLength="255" />
     <Property Name="district" Type="int" />
     <Property Name="ampher" Type="int" />
     <Property Name="province" Type="int" />
@@ -96,7 +151,9 @@
     <Property Name="farmerName" Type="int" />
     <Property Name="projectName" Type="int" />
     <Property Name="note" Type="varchar" MaxLength="255" />
+    <Property Name="buyMethod" Type="int" />
     <Property Name="plotStatus" Type="int" />
+    <Property Name="administrator" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="license">
     <Key>
@@ -112,6 +169,38 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="machine">
+    <Key>
+      <PropertyRef Name="IDmac" />
+    </Key>
+    <Property Name="machineType" Type="int" Nullable="false" />
+    <Property Name="machineID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="machineName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="machineImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDmac" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="machinetype">
+    <Key>
+      <PropertyRef Name="machineID" />
+    </Key>
+    <Property Name="machineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="machineT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="positionID" />
+    </Key>
+    <Property Name="positionID" Type="int" Nullable="false" />
+    <Property Name="positionName" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="profile">
     <Key>
@@ -138,6 +227,17 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="projectName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="projectand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dataNow" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="proName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="buyMethod" Type="int" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="manuStandards" Type="int" />
   </EntityType>
   <EntityType Name="province">
     <Key>
@@ -179,6 +279,68 @@
     <Property Name="typeID" Type="int" Nullable="false" />
     <Property Name="typeName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="software">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="softwareType" Type="int" Nullable="false" />
+    <Property Name="softwareID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="softwareName" Type="text" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="int" />
+    <Property Name="softwareImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDsoft" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="softwaretype">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="IDsoft" Type="int" Nullable="false" />
+    <Property Name="softType" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="standard">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="standardName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="standardlist">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="list" Type="varchar" MaxLength="255" />
+    <Property Name="fillin" Type="bool" />
+    <Property Name="img" Type="bool" />
+    <Property Name="IDpro" Type="int" Nullable="false" />
+    <Property Name="IDlist" Type="int" />
+  </EntityType>
+  <EntityType Name="staple">
+    <Key>
+      <PropertyRef Name="IDstap" />
+    </Key>
+    <Property Name="stapleType" Type="int" Nullable="false" />
+    <Property Name="stapleID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="stapleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="stapleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDstap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stapletype">
+    <Key>
+      <PropertyRef Name="stapleID" />
+    </Key>
+    <Property Name="stapleID" Type="int" Nullable="false" />
+    <Property Name="stapleT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityType Name="status">
     <Key>
       <PropertyRef Name="statusID" />
@@ -202,10 +364,28 @@
   </EntityType>
   <EntityType Name="vehicle">
     <Key>
+      <PropertyRef Name="IDve" />
+    </Key>
+    <Property Name="vehicleType" Type="int" Nullable="false" />
+    <Property Name="vehicleID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="vehicleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="vehicleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDve" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vehicletype">
+    <Key>
       <PropertyRef Name="vehicleID" />
     </Key>
     <Property Name="vehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="vehicleType" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="vehicleT" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <Association Name="ampher_ibfk_2">
     <End Role="province" Type="Self.province" Multiplicity="1" />
@@ -256,7 +436,19 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="equipment_ibfk_1">
-    <End Role="energy" Type="Self.energy" Multiplicity="1" />
+    <End Role="equipmenttype" Type="Self.equipmenttype" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipmenttype">
+        <PropertyRef Name="equipmentID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="equipmentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_2">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
     <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="energy">
@@ -264,18 +456,6 @@
       </Principal>
       <Dependent Role="equipment">
         <PropertyRef Name="energy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="equipment_ibfk_2">
-    <End Role="unit" Type="Self.unit" Multiplicity="1" />
-    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="unit">
-        <PropertyRef Name="unitID" />
-      </Principal>
-      <Dependent Role="equipment">
-        <PropertyRef Name="unitBuy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -287,19 +467,79 @@
         <PropertyRef Name="unitID" />
       </Principal>
       <Dependent Role="equipment">
-        <PropertyRef Name="unitUse" />
+        <PropertyRef Name="unitBuy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="equipment_ibfk_4">
-    <End Role="vehicle" Type="Self.vehicle" Multiplicity="1" />
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
     <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="vehicle">
-        <PropertyRef Name="vehicleID" />
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
       </Principal>
       <Dependent Role="equipment">
-        <PropertyRef Name="vehicleType" />
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_1">
+    <End Role="fueltype" Type="Self.fueltype" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fueltype">
+        <PropertyRef Name="fuelID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="fuelType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="labor_ibfk_1">
+    <End Role="labortype" Type="Self.labortype" Multiplicity="1" />
+    <End Role="labor" Type="Self.labor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="labortype">
+        <PropertyRef Name="laborID" />
+      </Principal>
+      <Dependent Role="labor">
+        <PropertyRef Name="laborType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="labor_ibfk_2">
+    <End Role="position" Type="Self.position" Multiplicity="1" />
+    <End Role="labor" Type="Self.labor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="position">
+        <PropertyRef Name="positionID" />
+      </Principal>
+      <Dependent Role="labor">
+        <PropertyRef Name="position" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -312,6 +552,18 @@
       </Principal>
       <Dependent Role="landplot">
         <PropertyRef Name="license" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_10">
+    <End Role="buymethod" Type="Self.buymethod" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="buymethod">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="buyMethod" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -399,6 +651,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="machine_ibfk_1">
+    <End Role="machinetype" Type="Self.machinetype" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="machinetype">
+        <PropertyRef Name="machineID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="machineType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_2">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_4">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="profile_ibfk_1">
     <End Role="registertype" Type="Self.registertype" Multiplicity="1" />
     <End Role="profile" Type="Self.profile" Multiplicity="*" />
@@ -456,6 +756,30 @@
       </Principal>
       <Dependent Role="profile">
         <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectand_ibfk_1">
+    <End Role="standard" Type="Self.standard" Multiplicity="0..1" />
+    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="standard">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projectand">
+        <PropertyRef Name="manuStandards" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectand_ibfk_2">
+    <End Role="buymethod" Type="Self.buymethod" Multiplicity="1" />
+    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="buymethod">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projectand">
+        <PropertyRef Name="buyMethod" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -543,27 +867,176 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="software_ibfk_1">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="software_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="software_ibfk_3">
+    <End Role="softwaretype" Type="Self.softwaretype" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="softwaretype">
+        <PropertyRef Name="IDsoft" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="softwareType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="standardlist_ibfk_1">
+    <End Role="projectand" Type="Self.projectand" Multiplicity="1" />
+    <End Role="standardlist" Type="Self.standardlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projectand">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="standardlist">
+        <PropertyRef Name="IDpro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_1">
+    <End Role="stapletype" Type="Self.stapletype" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stapletype">
+        <PropertyRef Name="stapleID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="stapleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_1">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_4">
+    <End Role="vehicletype" Type="Self.vehicletype" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicletype">
+        <PropertyRef Name="vehicleID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="vehicleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="farmdbModelStoreContainer">
     <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="bankuser" EntityType="Self.bankuser" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="buymethod" EntityType="Self.buymethod" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="district" EntityType="Self.district" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="energy" EntityType="Self.energy" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="equipment" EntityType="Self.equipment" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="equipmenttype" EntityType="Self.equipmenttype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="family" EntityType="Self.family" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="fuel" EntityType="Self.fuel" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="fueltype" EntityType="Self.fueltype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="gender" EntityType="Self.gender" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="labor" EntityType="Self.labor" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="labortype" EntityType="Self.labortype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="landplot" EntityType="Self.landplot" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="license" EntityType="Self.license" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="machine" EntityType="Self.machine" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="machinetype" EntityType="Self.machinetype" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="position" EntityType="Self.position" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="profile" EntityType="Self.profile" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="project" EntityType="Self.project" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="projectand" EntityType="Self.projectand" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="province" EntityType="Self.province" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="register" EntityType="Self.register" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="registertype" EntityType="Self.registertype" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="software" EntityType="Self.software" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="softwaretype" EntityType="Self.softwaretype" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="standard" EntityType="Self.standard" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="standardlist" EntityType="Self.standardlist" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="staple" EntityType="Self.staple" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="stapletype" EntityType="Self.stapletype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="status" EntityType="Self.status" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="typeownership" EntityType="Self.typeownership" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="unit" EntityType="Self.unit" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="vehicletype" EntityType="Self.vehicletype" Schema="farmdb" store:Type="Tables" />
     <AssociationSet Name="ampher_ibfk_2" Association="Self.ampher_ibfk_2">
       <End Role="province" EntitySet="province" />
       <End Role="ampher" EntitySet="ampher" />
@@ -581,11 +1054,11 @@
       <End Role="district" EntitySet="district" />
     </AssociationSet>
     <AssociationSet Name="equipment_ibfk_1" Association="Self.equipment_ibfk_1">
-      <End Role="energy" EntitySet="energy" />
+      <End Role="equipmenttype" EntitySet="equipmenttype" />
       <End Role="equipment" EntitySet="equipment" />
     </AssociationSet>
     <AssociationSet Name="equipment_ibfk_2" Association="Self.equipment_ibfk_2">
-      <End Role="unit" EntitySet="unit" />
+      <End Role="energy" EntitySet="energy" />
       <End Role="equipment" EntitySet="equipment" />
     </AssociationSet>
     <AssociationSet Name="equipment_ibfk_3" Association="Self.equipment_ibfk_3">
@@ -593,11 +1066,35 @@
       <End Role="equipment" EntitySet="equipment" />
     </AssociationSet>
     <AssociationSet Name="equipment_ibfk_4" Association="Self.equipment_ibfk_4">
-      <End Role="vehicle" EntitySet="vehicle" />
+      <End Role="unit" EntitySet="unit" />
       <End Role="equipment" EntitySet="equipment" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_1" Association="Self.fuel_ibfk_1">
+      <End Role="fueltype" EntitySet="fueltype" />
+      <End Role="fuel" EntitySet="fuel" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_2" Association="Self.fuel_ibfk_2">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="fuel" EntitySet="fuel" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_3" Association="Self.fuel_ibfk_3">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="fuel" EntitySet="fuel" />
+    </AssociationSet>
+    <AssociationSet Name="labor_ibfk_1" Association="Self.labor_ibfk_1">
+      <End Role="labortype" EntitySet="labortype" />
+      <End Role="labor" EntitySet="labor" />
+    </AssociationSet>
+    <AssociationSet Name="labor_ibfk_2" Association="Self.labor_ibfk_2">
+      <End Role="position" EntitySet="position" />
+      <End Role="labor" EntitySet="labor" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_1" Association="Self.landplot_ibfk_1">
       <End Role="license" EntitySet="license" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_10" Association="Self.landplot_ibfk_10">
+      <End Role="buymethod" EntitySet="buymethod" />
       <End Role="landplot" EntitySet="landplot" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
@@ -628,6 +1125,22 @@
       <End Role="register" EntitySet="register" />
       <End Role="landplot" EntitySet="landplot" />
     </AssociationSet>
+    <AssociationSet Name="machine_ibfk_1" Association="Self.machine_ibfk_1">
+      <End Role="machinetype" EntitySet="machinetype" />
+      <End Role="machine" EntitySet="machine" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_2" Association="Self.machine_ibfk_2">
+      <End Role="energy" EntitySet="energy" />
+      <End Role="machine" EntitySet="machine" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_3" Association="Self.machine_ibfk_3">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="machine" EntitySet="machine" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_4" Association="Self.machine_ibfk_4">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="machine" EntitySet="machine" />
+    </AssociationSet>
     <AssociationSet Name="profile_ibfk_1" Association="Self.profile_ibfk_1">
       <End Role="registertype" EntitySet="registertype" />
       <End Role="profile" EntitySet="profile" />
@@ -647,6 +1160,14 @@
     <AssociationSet Name="profile_ibfk_5" Association="Self.profile_ibfk_5">
       <End Role="ampher" EntitySet="ampher" />
       <End Role="profile" EntitySet="profile" />
+    </AssociationSet>
+    <AssociationSet Name="projectand_ibfk_1" Association="Self.projectand_ibfk_1">
+      <End Role="standard" EntitySet="standard" />
+      <End Role="projectand" EntitySet="projectand" />
+    </AssociationSet>
+    <AssociationSet Name="projectand_ibfk_2" Association="Self.projectand_ibfk_2">
+      <End Role="buymethod" EntitySet="buymethod" />
+      <End Role="projectand" EntitySet="projectand" />
     </AssociationSet>
     <AssociationSet Name="register_ibfk_1" Association="Self.register_ibfk_1">
       <End Role="family" EntitySet="family" />
@@ -675,6 +1196,50 @@
     <AssociationSet Name="register_ibfk_9" Association="Self.register_ibfk_9">
       <End Role="gender" EntitySet="gender" />
       <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_1" Association="Self.software_ibfk_1">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="software" EntitySet="software" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_2" Association="Self.software_ibfk_2">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="software" EntitySet="software" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_3" Association="Self.software_ibfk_3">
+      <End Role="softwaretype" EntitySet="softwaretype" />
+      <End Role="software" EntitySet="software" />
+    </AssociationSet>
+    <AssociationSet Name="standardlist_ibfk_1" Association="Self.standardlist_ibfk_1">
+      <End Role="projectand" EntitySet="projectand" />
+      <End Role="standardlist" EntitySet="standardlist" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_1" Association="Self.staple_ibfk_1">
+      <End Role="stapletype" EntitySet="stapletype" />
+      <End Role="staple" EntitySet="staple" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_2" Association="Self.staple_ibfk_2">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="staple" EntitySet="staple" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_3" Association="Self.staple_ibfk_3">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="staple" EntitySet="staple" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_1" Association="Self.vehicle_ibfk_1">
+      <End Role="energy" EntitySet="energy" />
+      <End Role="vehicle" EntitySet="vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_2" Association="Self.vehicle_ibfk_2">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="vehicle" EntitySet="vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_3" Association="Self.vehicle_ibfk_3">
+      <End Role="unit" EntitySet="unit" />
+      <End Role="vehicle" EntitySet="vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_4" Association="Self.vehicle_ibfk_4">
+      <End Role="vehicletype" EntitySet="vehicletype" />
+      <End Role="vehicle" EntitySet="vehicle" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -90,6 +90,9 @@ namespace Test.Models
         public string password { get; set; }
 
 
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDve { get; set; }
+        
         [DisplayName("ประเภทพาหนะ")]
         public string vehicleType { get; set; }
         [DisplayName("ชื่อพาหนะ")]
@@ -104,6 +107,96 @@ namespace Test.Models
         public string unitName { get; set; }
         [DisplayName("ประเภทพลังงาน")]
         public string energyName { get; set; }
+
+
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDequip { get; set; }
+        [DisplayName("ประเภทอุปกรณ์")]
+        public string equipmentType { get; set; }
+        [DisplayName("ชื่ออุปกรณ์")]
+        public string equipmentName { get; set; }
+        [DisplayName("รหัสอุปกรณ์")]
+        public string equipmentID { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detailV { get; set; }
+        [DisplayName("ราคาทุน")]
+        public Nullable<int> priceV { get; set; }
+
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDmac { get; set; }
+        [DisplayName("ประเภทเครื่องจักร")]
+        public string machineType { get; set; }
+        [DisplayName("ชื่อเครื่องจักร")]
+        public string machineName { get; set; }
+        [DisplayName("รหัสเครื่องจักร")]
+        public string machineID { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detailM { get; set; }
+        [DisplayName("ราคาทุน")]
+        public Nullable<int> priceM { get; set; }
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDsoft { get; set; }
+        [DisplayName("ประเภทซอฟต์แวร์")]
+        public string softwareType { get; set; }
+        [DisplayName("ชื่อซอฟต์แวร์")]
+        public string softwareName { get; set; }
+        [DisplayName("รหัสซอฟต์แวร์")]
+        public string softwareID { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detailS { get; set; }
+        [DisplayName("ราคาทุน")]
+        public Nullable<int> priceS { get; set; }
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDstap { get; set; }
+        [DisplayName("ประเภทวัตถุดิบ")]
+        public string stapleType { get; set; }
+        [DisplayName("ชื่อวัตถุดิบ")]
+        public string stapleName { get; set; }
+        [DisplayName("รหัสวัตถุดิบ")]
+        public string stapleID { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detailSt { get; set; }
+        [DisplayName("ราคาทุน")]
+        public Nullable<int> priceSt { get; set; }
+
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDlab { get; set; }
+        [DisplayName("ประเภทพนักงาน")]
+        public string laborType { get; set; }
+        [DisplayName("ตำแหน่งงาน")]
+        public string positionName { get; set; }
+        [DisplayName("รหัสพนักงาน")]
+        public string laborID { get; set; }
+        [DisplayName("ชื่อพนักงาน")]
+        public string laborName { get; set; }
+        [DisplayName("ค่าแรง")]
+        public Nullable<int> salary { get; set; }
+        [DisplayName("ลำดับที่")]
+        public Nullable<int> IDfule { get; set; }
+        [DisplayName("ประเภทพลังงานและเชื้อเพลิง")]
+        public string fuelName { get; set; }
+        [DisplayName("ชื่อพลังงานและเชื้อเพลิง")]
+        public string fuelType { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detailF { get; set; }
+        [DisplayName("ราคาทุน")]
+        public Nullable<int> priceF { get; set; }
+        [DisplayName("วิธีการรับซื้อ")]
+        public string nameBuy { get; set; }
+        [DisplayName("มาตรฐานการผลิต")]
+        public string standardName { get; set; }
+        [DisplayName("รายการ")]
+        public string list { get; set; }
+        [DisplayName("กรอกข้อมูล")]
+        public bool fillin { get; set; }
+        [DisplayName("รูปภาพ")]
+        public bool img { get; set; }
+        [DisplayName("ลำดับที่")]
+        public int IDpro { get; set; }
+        [DisplayName("รายการที่")]
+        public Nullable<int> IDlist { get; set; }
+
+        
 
     }
 }

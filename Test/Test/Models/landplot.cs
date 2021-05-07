@@ -12,7 +12,6 @@ namespace Test.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-
     public partial class landplot
     {
         [DisplayName("ลำดับที่")]
@@ -45,25 +44,32 @@ namespace Test.Models
         public string coordinatesEnd { get; set; }
         [DisplayName("เนื้อที่")]
         public Nullable<float> areaPlot { get; set; }
+        public string areaPlotS { get; set; }
         [DisplayName("รายละเอียดแปลง")]
         public string plotDetails { get; set; }
-        [DisplayName("สถานะแปลง")]
-        public Nullable<int> plotStatus { get; set; }
+        [DisplayName("ชื่อเกษตรกร")]
+        public Nullable<int> farmerName { get; set; }
         [DisplayName("โครงการ")]
         public Nullable<int> projectName { get; set; }
         [DisplayName("หมายเหตุ")]
         public string note { get; set; }
-        [DisplayName("ชื่อเกษตรกร")]
-        public Nullable<int> farmerName { get; set; }
-        public string areaPlotS { get; set; }
-
+        [DisplayName("สถานะแปลง")]
+        public Nullable<int> plotStatus { get; set; }
+        [DisplayName("เอกสาร (สัญญาเช่า)")]
+        public string lease_img { get; set; }
+        [DisplayName("วิธีการรับซื้อ")]
+        public Nullable<int> buyMethod { get; set; }
+        [DisplayName("ผู้รับผิดชอบ")]
+        public string administrator { get; set; }
+    
         public virtual ampher ampher1 { get; set; }
         public virtual district district1 { get; set; }
         public virtual license license1 { get; set; }
         public virtual typeownership typeownership1 { get; set; }
         public virtual province province1 { get; set; }
-        public virtual status status { get; set; }
         public virtual project project { get; set; }
+        public virtual status status { get; set; }
         public virtual register register { get; set; }
+        public virtual buymethod buymethod1 { get; set; }
     }
 }

@@ -22,7 +22,7 @@
                 @Html.AntiForgeryToken()
                 <div class="container">
                     <div class="form-actions no-color">
-                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Equipment")">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("IndexSum", "Equipment")">
                             <span>
                                 ยกเลิก
                             </span>
@@ -40,25 +40,25 @@
                 <div class="card" style="width: 50rem;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.vehicleType) :
-                            @Html.DropDownListFor(model => model.vehicleType, (IEnumerable<SelectListItem>)ViewBag.vehicles, "เลือกประเภทยานพาหนะ", htmlAttributes: new { @class = "form-control" })
+                            @Html.DisplayNameFor(model => model.equipmentType) :
+                            @Html.DropDownListFor(model => model.equipmentType, (IEnumerable<SelectListItem>)ViewBag.equipmenttypes, "เลือกประเภทอุปกรณ์", htmlAttributes: new { @class = "form-control" })
                         </li>
                         <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.vehicleID) :
-                            @Html.DisplayFor(model => model.vehicleID)
+                            @Html.DisplayNameFor(model => model.equipmentID) :
+                            @Html.DisplayFor(model => model.equipmentID)
                         </li>
                         <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.vehicleName) :
-                            @Html.DisplayFor(model => model.vehicleName)
+                            @Html.DisplayNameFor(model => model.equipmentName) :
+                            @Html.DisplayFor(model => model.equipmentName)
                         </li>
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.dateBuy) :
                             @Html.DisplayFor(model => model.dateBuy)
                         </li>
                         <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.vehicleImg) :
-                            @Html.DisplayFor(model => model.vehicleImg)
-                            <img src="~/Content/img/upload/vehicle/@Model.vehicleImg" height="250" width="240">
+                            @Html.DisplayNameFor(model => model.equipmentImg) :
+                            @Html.DisplayFor(model => model.equipmentImg)
+                            <img src="~/Content/img/upload/vehicle/@Model.equipmentImg" height="250" width="240">
                         </li>
 
                     </ul>

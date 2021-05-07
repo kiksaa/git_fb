@@ -18,6 +18,8 @@ namespace Test.Models
         public energy()
         {
             this.equipments = new HashSet<equipment>();
+            this.machines = new HashSet<machine>();
+            this.vehicles = new HashSet<vehicle>();
         }
     
         public int energyID { get; set; }
@@ -25,5 +27,9 @@ namespace Test.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<equipment> equipments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<machine> machines { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vehicle> vehicles { get; set; }
     }
 }

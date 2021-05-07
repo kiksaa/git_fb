@@ -77,8 +77,12 @@
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "true" } })
                                 @Html.ValidationMessageFor(model => model.farmer_img, "", new { @class = "text-danger" })
-                                <br />
-                                <img src="~/Content/img/upload/farmer/@Model.farmer_img" height="160" width="155">
+                                @{ if (@Model.farmer_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/farmer/@Model.farmer_img" height="160" width="155">
+                                    } }
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -86,8 +90,12 @@
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "true" } })
                                 @Html.ValidationMessageFor(model => model.card_img, "", new { @class = "text-danger" })
-                                <br />
-                                <img src="~/Content/img/upload/idcard/@Model.card_img" height="160" width="155">
+                                @{ if (@Model.card_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/idcard/@Model.card_img" height="160" width="155">
+                                    } }
+
                             </div>
                         </div>
                     </div>

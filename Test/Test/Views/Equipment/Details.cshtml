@@ -17,27 +17,27 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.vehicleType)
+                @Html.DisplayNameFor(model => model.equipmentType)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.vehicleType)
+                @Html.DisplayFor(model => model.equipmentType)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.vehicleID)
+                @Html.DisplayNameFor(model => model.equipmentID)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.vehicleID)
+                @Html.DisplayFor(model => model.equipmentID)
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.vehicleName)
+                @Html.DisplayNameFor(model => model.equipmentName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.vehicleName)
+                @Html.DisplayFor(model => model.equipmentName)
             </dd>
     
             <dt>
@@ -105,18 +105,18 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.vehicleImg)
+                @Html.DisplayNameFor(model => model.equipmentImg)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.vehicleImg)
+                @Html.DisplayFor(model => model.equipmentImg)
             </dd>
     
         </dl>
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.equipmentID }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "IndexSum")
     </p>
 </body>
 </html>

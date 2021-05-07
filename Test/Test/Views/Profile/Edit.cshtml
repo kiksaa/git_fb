@@ -44,8 +44,14 @@
 
                     <div class="form-group row">
                         @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="col-md-2">
+                            @Html.RadioButtonFor(model => model.gender, "100")
+                            @Html.Label("ชาย")
+                            @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.RadioButtonFor(model => model.gender, "200")
+                            @Html.Label("หญิง")
                             @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -53,7 +59,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", Type = "DateTime", placeholder = "31/12/2500" } })
+                            @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", Type = "DateTime" } })
                             @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
                         </div>
                     </div>

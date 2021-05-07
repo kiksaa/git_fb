@@ -9,12 +9,15 @@
 
 namespace Test.Models
 {
+    using Devart.Data.MySql;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class farmdb : DbContext
     {
+        internal MySqlConnection connection;
+
         public farmdb()
             : base("name=farmdb")
         {
@@ -29,21 +32,38 @@ namespace Test.Models
         public virtual DbSet<bank> banks { get; set; }
         public virtual DbSet<bankuser> bankusers { get; set; }
         public virtual DbSet<district> districts { get; set; }
+        public virtual DbSet<energy> energies { get; set; }
+        public virtual DbSet<equipment> equipments { get; set; }
+        public virtual DbSet<equipmenttype> equipmenttypes { get; set; }
         public virtual DbSet<family> families { get; set; }
+        public virtual DbSet<fuel> fuels { get; set; }
+        public virtual DbSet<fueltype> fueltypes { get; set; }
         public virtual DbSet<gender> genders { get; set; }
+        public virtual DbSet<labor> labors { get; set; }
+        public virtual DbSet<labortype> labortypes { get; set; }
         public virtual DbSet<landplot> landplots { get; set; }
         public virtual DbSet<license> licenses { get; set; }
         public virtual DbSet<login> logins { get; set; }
+        public virtual DbSet<machine> machines { get; set; }
+        public virtual DbSet<machinetype> machinetypes { get; set; }
+        public virtual DbSet<position> positions { get; set; }
         public virtual DbSet<profile> profiles { get; set; }
         public virtual DbSet<project> projects { get; set; }
         public virtual DbSet<province> provinces { get; set; }
         public virtual DbSet<register> registers { get; set; }
         public virtual DbSet<registertype> registertypes { get; set; }
+        public virtual DbSet<software> softwares { get; set; }
+        public virtual DbSet<softwaretype> softwaretypes { get; set; }
+        public virtual DbSet<staple> staples { get; set; }
+        public virtual DbSet<stapletype> stapletypes { get; set; }
         public virtual DbSet<status> status { get; set; }
         public virtual DbSet<typeownership> typeownerships { get; set; }
-        public virtual DbSet<energy> energies { get; set; }
-        public virtual DbSet<equipment> equipments { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<vehicle> vehicles { get; set; }
+        public virtual DbSet<vehicletype> vehicletypes { get; set; }
+        public virtual DbSet<buymethod> buymethods { get; set; }
+        public virtual DbSet<projectand> projectands { get; set; }
+        public virtual DbSet<standard> standards { get; set; }
+        public virtual DbSet<standardlist> standardlists { get; set; }
     }
 }

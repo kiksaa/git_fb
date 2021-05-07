@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<Test.Models.ViewModel>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -13,104 +12,83 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <div class="col-10">
-                <h3 class="text-muted">ทะเบียนอุปกรณ์ </h3>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
-                <span>
-                    กลับหน้าแรก
-                </span>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Equipment")">
-                <span>
-                    + สร้างใหม่
-                </span>
-            </a>
-        </div>
-        @*<div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                เลือกกลุ่ม
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" data-toggle="collapse" href="#vehicle" role="button" aria-expanded="false" aria-controls="vehicle">ยานพาหนะ</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#machine" role="button" aria-expanded="false" aria-controls="machine">เครื่องจักร</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#equipment" role="button" aria-expanded="false" aria-controls="equipment">อุปกรณ์</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#software" role="button" aria-expanded="false" aria-controls="software">ซอฟต์แวร์</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#staple" role="button" aria-expanded="false" aria-controls="staple">วัตถุดิบ</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#labor" role="button" aria-expanded="false" aria-controls="labor">แรงงาน</a>
-                <a class="dropdown-item" data-toggle="collapse" href="#energy" role="button" aria-expanded="false" aria-controls="energy">พลังงานและเชื้อเพลิง</a>
-            </div>
-        </div>*@
         <br />
         <div class="card shadow mb-4">
-            @*<div class="collapse" id="vehicle" aria-labelledby="vehicle">*@
-                <div class="card-header py-3">
-                    <div class="row  justify-content-between">
-                        <div class="col-2">
-                            <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalEquipment รายการ</h4>
-                        </div>
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    <div class="col-2">
+                        <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalEquipment รายการ</h4>
                     </div>
+                    <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Equipment")">
+                        <span>
+                            + สร้างใหม่
+                        </span>
+                    </a>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDequip)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.detail)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.price)
+                                </th>
+                                <th>ลบ / แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.vehicleType)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.vehicleID)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.vehicleName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.detail)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.price)
-                                    </th>
-                                    <th>ลบ / แก้ไข</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.vehicleType)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.vehicleID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.vehicleName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.detail)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.price)
-                                        </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IDequip)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.detail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.price)
+                                    </td>
 
-                                        <td>
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
-                                            @*@Html.ActionLink("Details", "Details", new { id = item.equipmentID }) |*@
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.IDequip }) |
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.equipmentID }) |*@
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.IDequip })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-           @*</div>*@
+            </div>
         </div>
 
     </div>
+
 </body>
 </html>

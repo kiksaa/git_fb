@@ -11,19 +11,43 @@ namespace Test.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class vehicle
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public vehicle()
-        {
-            this.equipments = new HashSet<equipment>();
-        }
-    
-        public int vehicleID { get; set; }
-        public string vehicleType { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<equipment> equipments { get; set; }
+        [DisplayName("ประเภทยานพาหนะ")]
+        public int vehicleType { get; set; }
+        [DisplayName("รหัสยานพาหนะ")]
+        public string vehicleID { get; set; }
+        [DisplayName("ชื่อยานพาหนะ")]
+        public string vehicleName { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string detail { get; set; }
+        [DisplayName("ราคาซื้อ")]
+        public Nullable<int> price { get; set; }
+        [DisplayName("หน่วยที่ซื้อ")]
+        public int unitBuy { get; set; }
+        [DisplayName("หน่วยที่ใช้")]
+        public int unitUse { get; set; }
+        [DisplayName("วันที่ซื้อ")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> dateBuy { get; set; }
+        [DisplayName("เวลางาน(ชม./ไร่)")]
+        public Nullable<int> workTime { get; set; }
+        [DisplayName("ค่าพลังงานและเชื้อเพลิง/ชม.")]
+        public Nullable<int> fuel { get; set; }
+        [DisplayName("ประเภทพลังงาน")]
+        public Nullable<int> energy { get; set; }
+        [DisplayName("รูปภาพยานพาหนะ")]
+        public string vehicleImg { get; set; }
+        [DisplayName("ลำดับที่")]
+        public int IDve { get; set; }
+
+        public virtual energy energy1 { get; set; }
+        public virtual unit unit { get; set; }
+        public virtual unit unit1 { get; set; }
+        public virtual vehicletype vehicletype1 { get; set; }
     }
 }

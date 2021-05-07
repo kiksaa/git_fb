@@ -52,11 +52,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    @Html.Label("ผู้รับผิดชอบแปลง", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @*@Html.LabelFor(model => model.plotName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    @Html.LabelFor(model => model.administrator, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">
-                                        @Html.EditorFor(model => model.plotName, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.plotName, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.administrator, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.administrator, "", new { @class = "text-danger" })
                                     </div>
                                     @Html.LabelFor(model => model.areaPlot, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">
@@ -90,16 +89,26 @@
                                 </div>
                                 <div class="form-group row">
                                     @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
-                                    @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">
-                                        @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                                        @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.lease_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                        @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
+                                        @{ if (@Model.license_img != null)
+                                            {
+                                                <br />
+                                                <img src="~/Content/img/upload/@Model.license_img" height="250" width="240">
+                                            } }
                                     </div>
                                     @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-4">
-                                        @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                                        @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
-                                    </div>
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
+                                    @{ if (@Model.license_img != null)
+                                        {
+                                            <br />
+                                            <img src="~/Content/img/upload/@Model.license_img" height="250" width="240">
+                                        } }
+                                </div>
                                 </div>
                                 <br />
                                 <h5>ข้อมูลโครงการ</h5>
@@ -117,11 +126,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    @*@Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                    @Html.Label("วิธีการรับซื้อ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.buyMethod, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">
-                                        @Html.EditorFor(model => model.plotDetails, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.plotDetails, "", new { @class = "text-danger" })
+                                        @Html.DropDownListFor(model => model.buyMethod, (IEnumerable<SelectListItem>)ViewBag.buymethods, "เลือกวิธีการรับซื้อ", htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.buyMethod, "", new { @class = "text-danger" })
                                     </div>
                                     @Html.LabelFor(model => model.plotStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">

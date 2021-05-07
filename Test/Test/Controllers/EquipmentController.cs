@@ -21,40 +21,48 @@ namespace Test.Controllers
 
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from e in farmdb.equipments
-                           join v in farmdb.vehicles on e.vehicleType equals v.vehicleID into vlist
-                           from v in vlist.DefaultIfEmpty()
+                           join t in farmdb.equipmenttypes on e.equipmentType equals t.equipmentID into tlist
+                           from t in tlist.DefaultIfEmpty()
                            select new
                            {
-                               v.vehicleType,
-                               e.vehicleName,
-                               e.vehicleID,
+                               t.equipmentT,
+                               e.equipmentID,
+                               e.equipmentName,
                                e.detail,
                                e.price,
-                               e.equipmentID
+                               e.IDequip
                            };
                 foreach (var item in data)
                 {
                     ViewModel objcvm = new ViewModel();
-                    objcvm.vehicleType = item.vehicleType;
-                    objcvm.vehicleName = item.vehicleName;
-                    objcvm.vehicleID = item.vehicleID;
+                    objcvm.equipmentType = item.equipmentT;
+                    objcvm.equipmentName = item.equipmentName;
+                    objcvm.equipmentID = item.equipmentID;
                     objcvm.detail = item.detail;
                     objcvm.price = item.price;
-                    objcvm.ID = item.equipmentID;
+                    objcvm.IDequip = item.IDequip;
                     ViewModeltList.Add(objcvm);
                 }
-
                 return View(ViewModeltList);
             }
         }
 
+        public ActionResult IndexSum()
+        {
+            List<equipment> EquipmentList = new List<equipment>();
+            using (farmdb farmdb = new farmdb())
+            {
+                EquipmentList = farmdb.equipments.ToList<equipment>();
+            }
+            return View(EquipmentList);
+        }
         // GET: Equipment/Details/5
         public ActionResult Details(int id)
         {
             equipment equipmentModel = new equipment();
             using (farmdb farmdb = new farmdb())
             {
-                equipmentModel = farmdb.equipments.Where(x => x.equipmentID == id).FirstOrDefault();
+                equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
             }
             return View(equipmentModel);
         }
@@ -64,14 +72,14 @@ namespace Test.Controllers
         {
             using (farmdb farmdb = new farmdb())
             {
-                List<vehicle> vehicles = farmdb.vehicles.ToList();
-                IEnumerable<SelectListItem> selvehicles = from v in vehicles
-                                                          select new SelectListItem
+                List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
+                IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
+                                                                select new SelectListItem
                                                           {
-                                                              Text = v.vehicleType,
-                                                              Value = v.vehicleID.ToString()
+                                                              Text = e.equipmentT,
+                                                              Value = e.equipmentID.ToString()
                                                           };
-                ViewBag.vehicles = selvehicles;
+                ViewBag.equipmenttypes = selequipmenttypes;
 
                 List<unit> units = farmdb.units.ToList();
                 IEnumerable<SelectListItem> selunits = from u in units
@@ -96,29 +104,29 @@ namespace Test.Controllers
 
         // POST: Equipment/Create
         [HttpPost]
-        public ActionResult Create(equipment equipmentModel, HttpPostedFileBase vehicleImg)
+        public ActionResult Create(equipment equipmentModel, HttpPostedFileBase equipmentImg)
         {
             string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
-            if (vehicleImg != null && vehicleImg.ContentLength > 0)
+            if (equipmentImg != null && equipmentImg.ContentLength > 0)
             {
-                if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
+                if (equipmentImg.ContentType == "image/jpeg" || equipmentImg.ContentType == "image/jpg" || equipmentImg.ContentType == "image/png")
                 {
-                    var fileName = Path.GetFileName(vehicleImg.FileName);
+                    var fileName = Path.GetFileName(equipmentImg.FileName);
                     var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + vehicleImg.FileName;
+                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + equipmentImg.FileName;
                     if (System.IO.File.Exists(fullPath))
                     {
                         ViewBag.ActionMessage = "Same File already Exists";
                     }
                     else
                     {
-                        vehicleImg.SaveAs(userfolderpath);
+                        equipmentImg.SaveAs(userfolderpath);
                         ViewBag.ActionMessage = "File has been uploaded successfully";
-                        equipmentModel.vehicleImg = vehicleImg.FileName;
+                        equipmentModel.equipmentImg = equipmentImg.FileName;
                     }
                 }
                 else
@@ -131,7 +139,7 @@ namespace Test.Controllers
                 farmdb.equipments.Add(equipmentModel);
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexSum");
         }
 
         // GET: Equipment/Edit/5
@@ -140,15 +148,15 @@ namespace Test.Controllers
             equipment equipmentModel = new equipment();
             using (farmdb farmdb = new farmdb())
             {
-                equipmentModel = farmdb.equipments.Where(x => x.equipmentID == id).FirstOrDefault();
-                List<vehicle> vehicles = farmdb.vehicles.ToList();
-                IEnumerable<SelectListItem> selvehicles = from v in vehicles
-                                                          select new SelectListItem
-                                                          {
-                                                              Text = v.vehicleType,
-                                                              Value = v.vehicleID.ToString()
-                                                          };
-                ViewBag.vehicles = selvehicles;
+                equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+                List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
+                IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
+                                                                select new SelectListItem
+                                                                {
+                                                                    Text = e.equipmentT,
+                                                                    Value = e.equipmentID.ToString()
+                                                                };
+                ViewBag.equipmenttypes = selequipmenttypes;
 
                 List<unit> units = farmdb.units.ToList();
                 IEnumerable<SelectListItem> selunits = from u in units
@@ -180,7 +188,7 @@ namespace Test.Controllers
                 farmdb.Entry(equipmentModel).State = System.Data.Entity.EntityState.Modified;
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexSum");
         }
 
         // GET: Equipment/Delete/5
@@ -189,15 +197,15 @@ namespace Test.Controllers
             equipment equipmentModel = new equipment();
             using (farmdb farmdb = new farmdb())
             {
-                equipmentModel = farmdb.equipments.Where(x => x.equipmentID == id).FirstOrDefault();
-                List<vehicle> vehicles = farmdb.vehicles.ToList();
-                IEnumerable<SelectListItem> selvehicles = from v in vehicles
-                                                          select new SelectListItem
-                                                          {
-                                                              Text = v.vehicleType,
-                                                              Value = v.vehicleID.ToString()
-                                                          };
-                ViewBag.vehicles = selvehicles;
+                equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+                List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
+                IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
+                                                                select new SelectListItem
+                                                                {
+                                                                    Text = e.equipmentT,
+                                                                    Value = e.equipmentID.ToString()
+                                                                };
+                ViewBag.equipmenttypes = selequipmenttypes;
 
                 List<unit> units = farmdb.units.ToList();
                 IEnumerable<SelectListItem> selunits = from u in units
@@ -226,11 +234,11 @@ namespace Test.Controllers
         {
             using (farmdb farmdb = new farmdb())
             {
-                equipment equipmentModel = farmdb.equipments.Where(x => x.equipmentID == id).FirstOrDefault();
+                equipment equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
                 farmdb.equipments.Remove(equipmentModel);
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexSum");
         }
     }
 }

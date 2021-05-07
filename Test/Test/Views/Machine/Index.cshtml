@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Test.Models.ViewModel>
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนเครื่องจักร</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <br />
+        <div class="card shadow mb-4">
+            @*<div class="collapse" id="vehicle" aria-labelledby="vehicle">*@
+
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    <div class="col-2">
+                        <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalMachine รายการ</h4>
+                    </div>
+                    <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Machine")">
+                        <span>
+                            + สร้างใหม่
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDmac)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.machineType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.machineID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.machineName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.detailM)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.priceM)
+                                </th>
+                                <th>ลบ / แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IDmac)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.machineType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.machineID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.machineName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.detailM)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.priceM)
+                                    </td>
+
+                                    <td>
+                                        <a class="btn-sm btn-danger" href="@Url.Action("Delete", "Machine", new { id = item.IDmac })">
+                                            <span>ลบ</span>
+                                        </a> |
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.equipmentID }) |*@
+                                        <a class="btn-sm btn-warning" href="@Url.Action("Edit", "Machine", new { id = item.IDmac })">
+                                            <span>แก้ไข</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+
+    </div>
+
+</body>
+</html>

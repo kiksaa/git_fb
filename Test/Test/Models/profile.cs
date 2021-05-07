@@ -40,8 +40,12 @@ namespace Test.Models
         [DisplayName("ตำบล/แขวง")]
         public Nullable<int> district { get; set; }
         [DisplayName("อีเมล์")]
+        [Required]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string email { get; set; }
         [DisplayName("รหัสผ่าน")]
+        [Required]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string password { get; set; }
         [DisplayName("ประเภทเกษตรกร")]
         public int registerType { get; set; }
