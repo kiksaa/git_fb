@@ -1,0 +1,141 @@
+﻿@model Farmbook.Models.AddressModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Address", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.DropDownListFor(m => m.provinceID, Model.provinces, "Please select", htmlAttributes: new { @class = "control-label col-md-2", id = "provinces"@*, onchange = "Create"*@ })
+        <br />
+        <br />
+        @Html.DropDownListFor(m => m.ampherID, Model.amphers, "Please select", htmlAttributes: new { @class = "control-label col-md-2", id = "amphers"@*, onchange = "Create"*@ })
+        <br />
+        <br />
+        @Html.DropDownListFor(m => m.districtID, Model.districts, "Please select", htmlAttributes: new { @class = "control-label col-md-2", id = "districts"@*, onchange = "Create"*@ })
+        <br />
+        <br />
+        <input type="submit" value="Submit" />
+    }
+    @*<script src="~/Scripts/jquery-1.10.2.min.js></script>*@
+    <script type="text/javascript">
+        $(function () {
+            $("select").each(function () {
+                if ($(this).find("option").length <= 1) {
+                    $(this).attr("disabled", "disabled");
+                }
+            });
+
+            $("select").change(function () {
+                var value = 0;
+                if ($(this).val() != "") {
+                    value = $(this).val();
+                }
+                var id = $(this).attr("id");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AjaxMethod", "Address")',
+                    data: { type:  id , value:  value },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var dropDownId;
+                        var list;
+                        switch (id) {
+                            case "provinceID":
+                                dropDownId = "#provinceID";
+                                list = response.amphers;
+                                DisableDropDown("#ampherID");
+                                DisableDropDown("#districtID");
+                                PopulateDropDown("#ampherID", list);
+                                break;
+                            case "ampherID":
+                                dropDownId = "#districtID";
+                                list = response.districts;
+                                DisableDropDown("#districtID");
+                                PopulateDropDown("#districtID", list);
+                                break;
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+
+                });
+            });
+        });
+
+        function DisableDropDown(dropDownId) {
+            $(dropDownId).attr("disabled", "disabled");
+            $(dropDownId).empty().append('<option selected="selected" value="0">Please select</option>');
+        }
+
+        function PopulateDropDown(dropDownId, list) {
+            if (list != null && list.length > 0) {
+                $(dropDownId).removeAttr("disabled");
+                $.each(list, function () {
+                    $(dropDownId).append($("<option></option>").val(this['Value']).html(this['Text']));
+                });
+            }
+        }
+
+        $(function () {
+            if ($("#provinceID").val() != "" && $("#ampherID").val() != "" && $("#districtID").val() != "") {
+                var message = "Province: " + $("#provinceID option:selected").text();
+                message += "\nAmpher: " + $("#ampherID option:selected").text();
+                message += "\nDistrict: " + $("#districtID option:selected").text();
+                alert(message);
+            }
+        });
+    </script>
+    @*<div class="form-group">
+        @Html.LabelFor(x => Model.provinceId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(x => Model.provinceId, new SelectList(Model.province, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Province" })
+            @Html.ValidationMessageFor(x => x.provinceId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => Model.ampherId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(x => Model.ampherId, new SelectList(Model.ampher, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "Ampher" })
+            @Html.ValidationMessageFor(x => x.ampherId, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+</body>
+</html>
+    <script type="text/javascript">
+        $('#Province').change(function () {
+            var selectedProvince = $("#Province").val();
+            var amphersSelect = $('#Ampher');
+            amphersSelect.empty();
+            if (selectedProvince != null && selectedProvince != '') {
+                $.getJSON('@Url.Action("GetAmphers")', { ampherId: selectedProvince }, function (ampher) {
+                    if (ampher != null && !jQuery.isEmptyObject(ampher))
+                        {
+                            amphersSelect.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                        $.each(ampher, function (index, ampher) {
+                                amphersSelect.append($('<option/>', {
+                                    value: ampher.Value,
+                                    text: ampher.Text
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+    </script>

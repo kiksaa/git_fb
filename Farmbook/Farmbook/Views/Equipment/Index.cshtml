@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Farmbook.Models.ViewModel>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนอุปกรณ์</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <br />
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    <div class="col-2">
+                        <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalEquipment รายการ</h4>
+                    </div>
+                    <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Equipment")">
+                        <span>
+                            + สร้างใหม่
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDequip)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.equipmentName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.detail)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.price)
+                                </th>
+                                <th>ลบ / แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IDequip)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.equipmentName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.detail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.price)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.IDequip }) |
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.equipmentID }) |*@
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.IDequip })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

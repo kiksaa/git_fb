@@ -1,0 +1,122 @@
+﻿@model Farmbook.Models.equipment
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>equipment</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.equipmentType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.equipmentType)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.equipmentID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.equipmentID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.equipmentName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.equipmentName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.detail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.detail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.unitBuy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.unitBuy)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.unitUse)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.unitUse)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.dateBuy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dateBuy)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.workTime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.workTime)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fuel)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fuel)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.energy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.energy)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.equipmentImg)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.equipmentImg)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.equipmentID }) |
+        @Html.ActionLink("Back to List", "IndexSum")
+    </p>
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿@model Test.Models.landplot
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>landplot</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.plotName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.plotName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.areaCode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.areaCode)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.typeOwnership)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.typeOwnership)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.license)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.license)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.titleDeed)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.titleDeed)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.landSlip)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.landSlip)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.landNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.landNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.license_img)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.license_img)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.district)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.district)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ampher)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ampher)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.province)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.province)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.coordinatesStar)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.coordinatesStar)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.coordinatesEnd)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.coordinatesEnd)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.areaPlot)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.areaPlot)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.plotDetails)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.plotDetails)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.plotStatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.plotStatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.projectName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.projectName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.note)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.note)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

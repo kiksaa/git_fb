@@ -1,0 +1,70 @@
+﻿@model Farmbook.Models.landplot
+
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <br />
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a class="btn btn-danger" href="@Url.Action("Index", "Register")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.farmerName) :
+                            @Html.DisplayFor(model => model.farmerName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.plotName) :
+                            @Html.DisplayFor(model => model.plotName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.areaCode) :
+                            @Html.DisplayFor(model => model.areaCode)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.typeOwnership) :
+                            @Html.DisplayFor(model => model.typeOwnership)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.license) :
+                            @Html.DisplayFor(model => model.license)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+</body>
+</html>

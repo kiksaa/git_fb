@@ -1,0 +1,109 @@
+﻿
+@model Test.Models.profile
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body class="bg-gradient-info">
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <img class="col-lg-5 d-none d-lg-block" src="~/Content/img/13.jpg">
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">สร้างบัญชีผู้ใช้ใหม่</h1>
+                            </div>
+                            @using (Html.BeginForm("SaveRegisterDetails", "Account"))
+                            {
+                                <div style="color:red;">@Html.ValidationSummary()</div>
+                                <div class="row">
+                                    <!--Show details are saved successfully message-->
+                                    <div class="col-lg-12">@ViewBag.Message</div>
+                                </div><br />
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        @Html.LabelFor(a => a.name)
+                                        @Html.TextBoxFor(a => a.name, new { @class = "form-control", placeholder = "ชื่อ-นามสกุล" })
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @Html.LabelFor(a => a.cradID)
+                                        @Html.TextBoxFor(a => a.cradID, new { @class = "form-control", placeholder = "เลขบัตรประชาชน" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(a => a.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @*<div class="col-lg-10">@Html.TextBoxFor(a => a.gender, new { @class = "form-control" })</div>*@
+                                    <div class="col-lg-4">
+                                        @Html.RadioButtonFor(a => a.gender, "100")
+                                        @Html.Label("ชาย")
+                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
+
+                                        @Html.RadioButtonFor(a => a.gender, "200")
+                                        @Html.Label("หญิง")
+                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @Html.LabelFor(a => a.birthday)
+                                        @Html.TextBoxFor(a => a.birthday, new { @class = "form-control", placeholder = "วัน/เดือน/ปี(พ.ศ) เกิด" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        @Html.LabelFor(a => a.email)
+                                        @Html.TextBoxFor(a => a.email, new { @class = "form-control", placeholder = "อีเมล์" })
+                                    </div>
+                                    <div class="col-lg-6">
+                                        @Html.LabelFor(a => a.password)
+                                        @Html.TextBoxFor(a => a.password, new { @class = "form-control", type = "Password", placeholder = "รหัสผ่าน" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    @Html.LabelFor(a => a.registerType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @*<div class="col-lg-10">@Html.TextBoxFor(a => a.gender, new { @class = "form-control" })</div>*@
+                                    <div class="col-lg-5">
+                                        @Html.RadioButtonFor(a => a.registerType, "100")
+                                        @Html.Label("เกษตรกร/ผู้ใช้งานทั่วไป")
+                                        @Html.ValidationMessageFor(a => a.registerType, "", new { @class = "text-danger" })
+                                        <br />
+                                        @Html.RadioButtonFor(a => a.registerType, "200")
+                                        @Html.Label("สหกรณ์/วิสาหกิจ")
+                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
+                                        <br />
+                                        @Html.RadioButtonFor(a => a.registerType, "300")
+                                        @Html.Label("บริษัท/โรงงาน")
+                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <br />
+                                <input type="submit" value="Register" class="btn btn-success btn-user btn-block" />
+                                <hr>
+                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+
+                            }
+                            <div class="text-center">
+                                @Html.ActionLink("ลงชื่อเข้าใช้", "Login")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div></body>
+</html>

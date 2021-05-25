@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Farmbook.Models.ViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนยานพาหนะ</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <br />
+        <div class="card shadow mb-4">
+            @*<div class="collapse" id="vehicle" aria-labelledby="vehicle">*@
+
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    <div class="col-2">
+                        <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalVehicle รายการ</h4>
+                    </div>
+                    <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Vehicle")">
+                        <span>
+                            + สร้างใหม่
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDve)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.vehicleType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.vehicleID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.vehicleName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.detailV)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.priceV)
+                                </th>
+                                <th>ลบ / แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IDve)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vehicleType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vehicleID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vehicleName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.detailV)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.priceV)
+                                    </td>
+
+                                    <td>
+                                        <a class="btn-sm btn-danger" href="@Url.Action("Delete", "Vehicle", new { id = item.IDve })">
+                                            <span>ลบ</span>
+                                        </a> |
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.equipmentID }) |*@
+                                        <a class="btn-sm btn-warning" href="@Url.Action("Edit", "Vehicle", new { id = item.IDve })">
+                                            <span>แก้ไข</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+
+    </div>
+
+</body>
+</html>

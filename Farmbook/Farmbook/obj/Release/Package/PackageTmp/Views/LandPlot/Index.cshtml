@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Test.Models.ViewLandPlot>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="col-10">
+                <h3 class="text-muted">ทะเบียนแปลง </h3>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
+                <span>
+                    กลับหน้าแรก
+                </span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "LandPlot")">
+                <span>
+                    + สร้างใหม่
+                </span>
+            </a>
+        </div>
+        <br />
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    <div class="col-2">
+                        <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalLandPlot แปลง </h4>
+                    </div>
+                    <div class="col-2">
+                        <h2 class="m-0 font-weight-bold text-primary"> รวม @ViewBag.TotalPlot ไร่ </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.plotStatus)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.plotName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.projectName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.areaPlot)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.addressplot)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ownership)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.licenseName)
+                                </th>
+
+                                <th> ลบ / แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.plotStatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.plotName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.projectName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.areaPlot)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.addressplot)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ownership)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.licenseName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+﻿@model IEnumerable<Farmbook.Models.equipment>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนอุปกรณ์</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            <div class="col-10">
+                <h3 class="text-muted">ครุภัณฑ์</h3>
+            </div>
+            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
+                <span>
+                    กลับหน้าแรก
+                </span>
+            </a>
+        </div>
+        <br />
+
+        <div id="accordion">
+            <div class="card-header alert-success" id="headingOne">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        พาหนะ
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-success alert-success">
+                        @Html.Action("Index", "Vehicle")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-info" id="headingTwo">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        เครื่องจักร
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-info alert-info">
+                        @Html.Action("Index", "Machine")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-primary" id="headingThree">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        อุปกรณ์
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-primary alert-primary">
+                        @Html.Action("Index", "Equipment")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-success" id="headingFour">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        ซอฟต์แวร์
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-success alert-success">
+                        @Html.Action("Index", "Software")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-info" id="headingFive">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        วัตถุดิบ
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-info alert-info">
+                        @Html.Action("Index", "Staple")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-primary" id="headingSix">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        แรงงาน
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-primary alert-primary">
+                        @Html.Action("Index", "Labor")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header alert-success" id="headingSeven">
+                <h5 class="mb-0">
+                    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        พลังงานและเชื้อเพลิง
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                <div class="card shadow mb-4">
+                    <div class="card-body border-bottom-success alert-success">
+                        @Html.Action("Index", "Fuel")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

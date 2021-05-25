@@ -1,0 +1,107 @@
+﻿@model Farmbook.Models.profile
+
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบประวัติส่วนตัว</title>
+</head>
+<body>
+    <br />
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Account")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.name) :
+                            @Html.DisplayFor(model => model.name)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.cradID) :
+                            @Html.DisplayFor(model => model.cradID)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.cradID) :
+                            @Html.DisplayFor(model => model.cradID)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.gender) :
+                            @Html.RadioButtonFor(model => model.gender, "100")
+                            @Html.Label("ชาย")
+                            @Html.RadioButtonFor(model => model.gender, "200")
+                            @Html.Label("หญิง")
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.birthday) :
+                            @Html.DisplayFor(model => model.birthday)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.tel) :
+                            @Html.DisplayFor(model => model.tel)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.no) :
+                            @Html.DisplayFor(model => model.no)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.moo) :
+                            @Html.DisplayFor(model => model.moo)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.province) :
+                            @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.ampher) :
+                            @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ / เขต", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.district) :
+                            @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล / แขวง", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.email) :
+                            @Html.DisplayFor(model => model.email)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.password) :
+                            @Html.DisplayFor(model => model.password)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.registerType) :
+                            @Html.DropDownListFor(model => model.registerType, (IEnumerable<SelectListItem>)ViewBag.registertypes, "เลือกประเภทเกษตรกร", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
