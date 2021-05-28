@@ -7,6 +7,19 @@
     <Property Name="accessID" Type="int" Nullable="false" />
     <Property Name="accessName" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="activity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stepNum" Type="int" />
+    <Property Name="stepName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="time" Type="int" Nullable="false" />
+    <Property Name="activity" Type="varchar" MaxLength="255" />
+    <Property Name="notice" Type="varchar" MaxLength="255" />
+    <Property Name="plan" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ampher">
     <Key>
       <PropertyRef Name="ampherID" />
@@ -284,6 +297,7 @@
     <Property Name="bank" Type="int" />
     <Property Name="status" Type="int" />
     <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="provinceStr" Type="varchar" MaxLength="100" />
     <Property Name="ampherStr" Type="varchar" MaxLength="100" />
     <Property Name="districtStr" Type="varchar" MaxLength="100" />
@@ -427,6 +441,18 @@
     <Property Name="vehicleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="vehicleT" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <Association Name="activity_ibfk_1">
+    <End Role="theory" Type="Self.theory" Multiplicity="1" />
+    <End Role="activity" Type="Self.activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="activity">
+        <PropertyRef Name="plan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="ampher_ibfk_2">
     <End Role="province" Type="Self.province" Multiplicity="1" />
     <End Role="ampher" Type="Self.ampher" Multiplicity="*" />
@@ -1077,6 +1103,7 @@
   </Association>
   <EntityContainer Name="farmdbModelStoreContainer">
     <EntitySet Name="access" EntityType="Self.access" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="activity" EntityType="Self.activity" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="bankuser" EntityType="Self.bankuser" Schema="farmdb" store:Type="Tables" />
@@ -1116,6 +1143,10 @@
     <EntitySet Name="unit" EntityType="Self.unit" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="vehicletype" EntityType="Self.vehicletype" Schema="farmdb" store:Type="Tables" />
+    <AssociationSet Name="activity_ibfk_1" Association="Self.activity_ibfk_1">
+      <End Role="theory" EntitySet="theory" />
+      <End Role="activity" EntitySet="activity" />
+    </AssociationSet>
     <AssociationSet Name="ampher_ibfk_2" Association="Self.ampher_ibfk_2">
       <End Role="province" EntitySet="province" />
       <End Role="ampher" EntitySet="ampher" />

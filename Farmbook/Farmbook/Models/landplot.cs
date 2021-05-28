@@ -70,6 +70,7 @@ namespace Farmbook.Models
         public string districtStr { get; set; }
 
         public virtual ampher ampher1 { get; set; }
+        public virtual buymethod buymethod1 { get; set; }
         public virtual district district1 { get; set; }
         public virtual license license1 { get; set; }
         public virtual typeownership typeownership1 { get; set; }
@@ -77,6 +78,5 @@ namespace Farmbook.Models
         public virtual project project { get; set; }
         public virtual status status { get; set; }
         public virtual register register { get; set; }
-        public virtual buymethod buymethod1 { get; set; }
     }
 }

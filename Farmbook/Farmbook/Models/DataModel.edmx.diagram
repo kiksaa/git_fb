@@ -4,40 +4,50 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="618d8b04819441b4940bcf3ab0fec5bf" Name="Diagram1">
-        <EntityTypeShape EntityType="farmdbModel.ampher" Width="1.5" PointX="11" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.bank" Width="1.5" PointX="17" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.bankuser" Width="1.5" PointX="19.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.district" Width="1.5" PointX="13.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.energy" Width="1.5" PointX="3.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.equipment" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.equipmenttype" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.family" Width="1.5" PointX="19.25" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.fuel" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.fueltype" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.gender" Width="1.5" PointX="19.25" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.labor" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.labortype" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.landplot" Width="1.5" PointX="15.5" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.license" Width="1.5" PointX="13.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.machine" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.machinetype" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.position" Width="1.5" PointX="5.75" PointY="29.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.profile" Width="1.5" PointX="18.5" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.project" Width="1.5" PointX="13.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.province" Width="1.5" PointX="8.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.register" Width="1.5" PointX="21.5" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.registertype" Width="1.5" PointX="17.25" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.software" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.softwaretype" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.staple" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.stapletype" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.status" Width="1.5" PointX="13.25" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.typeownership" Width="1.5" PointX="13.25" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.unit" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.vehicle" Width="1.5" PointX="6" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="farmdbModel.vehicletype" Width="1.5" PointX="3.75" PointY="26.75" IsExpanded="true" />
+      <Diagram DiagramId="16d9fdaa655c480186d19ca396065561" Name="Diagram1">
+        <EntityTypeShape EntityType="farmdbModel.access" Width="1.5" PointX="19.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.activity" Width="1.5" PointX="23.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.ampher" Width="1.5" PointX="11" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.bank" Width="1.5" PointX="17" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.bankuser" Width="1.5" PointX="19.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.buymethod" Width="1.5" PointX="13.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.district" Width="1.5" PointX="13.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.energy" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.equipment" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.equipmenttype" Width="1.5" PointX="0.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.family" Width="1.5" PointX="19.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.fuel" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.fueltype" Width="1.5" PointX="3.75" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.gender" Width="1.5" PointX="19.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.labor" Width="1.5" PointX="8" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.labortype" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.landplot" Width="1.5" PointX="15.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.license" Width="1.5" PointX="13.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.login" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.machine" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.machinetype" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.position" Width="1.5" PointX="5.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.profile" Width="1.5" PointX="18.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.project" Width="1.5" PointX="13.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.projectand" Width="1.5" PointX="15.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.province" Width="1.5" PointX="8.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.register" Width="1.5" PointX="21.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.registertype" Width="1.5" PointX="16.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.software" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.softwaretype" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.standard" Width="1.5" PointX="13.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.standardlist" Width="1.5" PointX="17.75" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.staple" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.stapletype" Width="1.5" PointX="0.75" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.status" Width="1.5" PointX="13.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.theory" Width="1.5" PointX="21.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.theorytype" Width="1.5" PointX="19.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.typeownership" Width="1.5" PointX="13.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.unit" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.vehicle" Width="1.5" PointX="6" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel.vehicletype" Width="1.5" PointX="3.75" PointY="27.125" IsExpanded="true" />
+        <AssociationConnector Association="farmdbModel.theory_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.activity_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.ampher_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.district_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.landplot_ibfk_5" ManuallyRouted="false" />
@@ -45,6 +55,8 @@
         <AssociationConnector Association="farmdbModel.register_ibfk_7" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.bankuser_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.register_ibfk_8" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.landplot_ibfk_10" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.projectand_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.district_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.landplot_ibfk_6" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.profile_ibfk_3" ManuallyRouted="false" />
@@ -74,6 +86,9 @@
         <AssociationConnector Association="farmdbModel.machine_ibfk_4" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.profile_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.profile_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.theory_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.projectand_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.standardlist_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.register_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.register_ibfk_10" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.software_ibfk_1" ManuallyRouted="false" />
@@ -82,23 +97,10 @@
         <AssociationConnector Association="farmdbModel.staple_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.staple_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.staple_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel.theory_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_3" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_4" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="farmdbModel.buymethod" Width="1.5" PointX="8.375" PointY="16.875" />
-        <EntityTypeShape EntityType="farmdbModel.projectand" Width="1.5" PointX="10.625" PointY="19" />
-        <EntityTypeShape EntityType="farmdbModel.standard" Width="1.5" PointX="8.375" PointY="19.875" />
-        <AssociationConnector Association="farmdbModel.projectand_ibfk_2" />
-        <AssociationConnector Association="farmdbModel.projectand_ibfk_1" />
-        <EntityTypeShape EntityType="farmdbModel.standardlist" Width="1.5" PointX="12.875" PointY="19.625" />
-        <AssociationConnector Association="farmdbModel.standardlist_ibfk_1" />
-        <AssociationConnector Association="farmdbModel.landplot_ibfk_10" />
-        <EntityTypeShape EntityType="farmdbModel.access" Width="1.5" PointX="13.25" PointY="23.25" />
-        <EntityTypeShape EntityType="farmdbModel.theory" Width="1.5" PointX="15.5" PointY="0.75" />
-        <EntityTypeShape EntityType="farmdbModel.theorytype" Width="1.5" PointX="13.25" PointY="1" />
-        <AssociationConnector Association="farmdbModel.theory_ibfk_3" />
-        <AssociationConnector Association="farmdbModel.theory_ibfk_1" />
-        <AssociationConnector Association="farmdbModel.theory_ibfk_2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

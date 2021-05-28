@@ -23,6 +23,11 @@ namespace Farmbook.Controllers
         {
             register model = new register();
             List<register> registerList = new List<register>();
+            
+            /*for(int i = 1; i <= registerList.Count(); i++)
+            {
+
+            }*/
             using (farmdb farmdb = new farmdb())
             {
                 registerList = farmdb.registers.ToList<register>();
@@ -44,18 +49,9 @@ namespace Farmbook.Controllers
                            from l in llist.DefaultIfEmpty()
                            select new
                            {
-                               r.ID,
-                               r.name,
-                               r.registerID,
-                               r.cardID,
-                               r.no,
-                               r.moo,
-                               r.road,
-                               p.provinceName,
-                               a.ampherName,
-                               d.districtName,
-                               s.statusName,
-                               r.dateUpdate,
+                               r.ID,r.name,r.registerID,r.cardID,r.no,r.moo,r.road,
+                               /*p.provinceName,a.ampherName,d.districtName,*/
+                               r.provinceStr,r.ampherStr,r.districtStr,s.statusName,r.dateUpdate,r.adminBy,
                                TotalLandplot = llist.Count(),
                                Totalarea = llist.Sum(ll => ll.areaPlot)
                            };
@@ -70,13 +66,14 @@ namespace Farmbook.Controllers
                     objcvm.no = item.no;
                     objcvm.moo = item.moo;
                     objcvm.road = item.road;
-                    objcvm.provinceName = item.provinceName;
-                    objcvm.ampherName = item.ampherName;
-                    objcvm.districtName = item.districtName;
+                    objcvm.provinceName = item.provinceStr;
+                    objcvm.ampherName = item.ampherStr;
+                    objcvm.districtName = item.districtStr;
                     objcvm.statusName = item.statusName;
                     objcvm.dateUpdate = item.dateUpdate;
                     objcvm.areaNumber = item.TotalLandplot;
                     objcvm.areaPlot = item.Totalarea;
+                    objcvm.adminBy = item.adminBy;
                     ViewModeltList.Add(objcvm);
                 }
 
@@ -107,9 +104,12 @@ namespace Farmbook.Controllers
                            select new
                            {
                                l.ID,
-                               p.provinceName,
+                               /*p.provinceName,
                                a.ampherName,
-                               d.districtName,
+                               d.districtName,*/
+                               l.provinceStr,
+                               l.ampherStr,
+                               l.districtStr,
                                l.plotName,
                                pro.projectName,
                            };
@@ -118,9 +118,9 @@ namespace Farmbook.Controllers
                 {
                     ViewModel objcvm = new ViewModel();
                     objcvm.ID = item.ID;
-                    objcvm.provinceName = item.provinceName;
-                    objcvm.ampherName = item.ampherName;
-                    objcvm.districtName = item.districtName;
+                    objcvm.provinceName = item.provinceStr;
+                    objcvm.ampherName = item.ampherStr;
+                    objcvm.districtName = item.districtStr;
                     objcvm.plotName = item.plotName;
                     objcvm.projectName = item.projectName;
                     ViewModeltList.Add(objcvm);

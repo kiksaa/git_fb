@@ -12,11 +12,15 @@ namespace Farmbook.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
 
     public partial class theory
     {
-       /* [Required]*/
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public theory()
+        {
+            this.activities = new HashSet<activity>();
+        }
+        /* [Required]*/
         [DisplayName("ขั้นตอนการทำงาน")]
         public int workProcedure { get; set; }
         [DisplayName("ประเภทกสิกรรม")]
@@ -43,6 +47,8 @@ namespace Farmbook.Models
         public System.DateTime dateUpdate { get; set; }
 
         public virtual access access1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<activity> activities { get; set; }
         public virtual project project1 { get; set; }
         public virtual theorytype theorytype { get; set; }
     }

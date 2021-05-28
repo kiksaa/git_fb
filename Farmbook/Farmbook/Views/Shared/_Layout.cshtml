@@ -25,7 +25,7 @@
 <body id="page-top">
 
     <!-- Sidebar -->
-    <div id="wrapper">
+    <disabled id="wrapper">
         <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -55,7 +55,7 @@
                 <a class="nav-link" href="@Url.Action("Index", "Theory")">
                     <i class="fas fa-edit"></i>
                     <span>
-                        ทฤษฎี
+                        ขั้นตอนการทำงาน
                     </span>
                     @*<span>ทะเบียนเกษตรกร</span>*@
                 </a>
@@ -88,7 +88,7 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link disabled" href="#">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>
                         แผนที่
@@ -96,6 +96,7 @@
                     @*<span>ทะเบียนเกษตรกร</span>*@
                 </a>
             </li>
+
 
             <!-- Divider -->
             <li><hr class="sidebar-divider"></li>
@@ -113,8 +114,8 @@
                         <a class="collapse-item" href="@Url.Action("Profile", "Account")" data-toggle="modal" data-target="#profileModal">ข้อมูลผู้ใช้</a>
                         <a class="collapse-item" href="@Url.Action("Logout", "Account")" data-toggle="modal" data-target="#logoutModal">ออกจากระบบ</a>
                         @*@if (@Html.Encode(User.Identity.Name) == "admin")
-                        {*@
-                            <a class="collapse-item" href="@Url.Action("Index", "Profile")">บัญชีรายชื่อ</a>
+                    {*@
+                        <a class="collapse-item" href="@Url.Action("Index", "Profile")">บัญชีรายชื่อ</a>
                         @*}*@
 
                     </div>

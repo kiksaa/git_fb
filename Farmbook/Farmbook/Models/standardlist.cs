@@ -20,14 +20,13 @@ namespace Farmbook.Models
         [DisplayName("รายการ")]
         public string list { get; set; }
         [DisplayName("กรอกข้อมูล")]
-        public bool fillin { get; set; }
+        public Nullable<bool> fillin { get; set; }
         [DisplayName("รูปภาพ")]
-        public bool img { get; set; }
+        public Nullable<bool> img { get; set; }
         [DisplayName("ชื่อโครงการ")]
         public int IDpro { get; set; }
         [DisplayName("ลำดับ")]
         public Nullable<int> IDlist { get; set; }
-
         public virtual projectand projectand { get; set; }
     }
 }

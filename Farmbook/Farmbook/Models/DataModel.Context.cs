@@ -25,9 +25,12 @@ namespace Farmbook.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<access> accesses { get; set; }
+        public virtual DbSet<activity> activities { get; set; }
         public virtual DbSet<ampher> amphers { get; set; }
         public virtual DbSet<bank> banks { get; set; }
         public virtual DbSet<bankuser> bankusers { get; set; }
+        public virtual DbSet<buymethod> buymethods { get; set; }
         public virtual DbSet<district> districts { get; set; }
         public virtual DbSet<energy> energies { get; set; }
         public virtual DbSet<equipment> equipments { get; set; }
@@ -46,24 +49,22 @@ namespace Farmbook.Models
         public virtual DbSet<position> positions { get; set; }
         public virtual DbSet<profile> profiles { get; set; }
         public virtual DbSet<project> projects { get; set; }
+        public virtual DbSet<projectand> projectands { get; set; }
         public virtual DbSet<province> provinces { get; set; }
         public virtual DbSet<register> registers { get; set; }
         public virtual DbSet<registertype> registertypes { get; set; }
         public virtual DbSet<software> softwares { get; set; }
         public virtual DbSet<softwaretype> softwaretypes { get; set; }
+        public virtual DbSet<standard> standards { get; set; }
+        public virtual DbSet<standardlist> standardlists { get; set; }
         public virtual DbSet<staple> staples { get; set; }
         public virtual DbSet<stapletype> stapletypes { get; set; }
         public virtual DbSet<status> status { get; set; }
+        public virtual DbSet<theory> theories { get; set; }
+        public virtual DbSet<theorytype> theorytypes { get; set; }
         public virtual DbSet<typeownership> typeownerships { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<vehicle> vehicles { get; set; }
         public virtual DbSet<vehicletype> vehicletypes { get; set; }
-        public virtual DbSet<buymethod> buymethods { get; set; }
-        public virtual DbSet<projectand> projectands { get; set; }
-        public virtual DbSet<standard> standards { get; set; }
-        public virtual DbSet<standardlist> standardlists { get; set; }
-        public virtual DbSet<access> accesses { get; set; }
-        public virtual DbSet<theory> theories { get; set; }
-        public virtual DbSet<theorytype> theorytypes { get; set; }
     }
 }

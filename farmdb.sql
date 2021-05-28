@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2021 at 12:36 PM
+-- Generation Time: May 28, 2021 at 12:09 PM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -20,6 +20,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `farmdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `access`
+--
+
+CREATE TABLE `access` (
+  `accessID` int NOT NULL,
+  `accessName` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `access`
+--
+
+INSERT INTO `access` (`accessID`, `accessName`) VALUES
+(101, 'ส่วนตัว'),
+(102, 'เฉพาะกลุ่ม'),
+(103, 'สาธารณะ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity`
+--
+
+CREATE TABLE `activity` (
+  `ID` int NOT NULL,
+  `stepNum` int DEFAULT NULL,
+  `stepName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `age` int NOT NULL,
+  `time` int NOT NULL,
+  `activity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `notice` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `plan` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`ID`, `stepNum`, `stepName`, `age`, `time`, `activity`, `notice`, `plan`) VALUES
+(1, 1, 'การปลูก', 2, 3, '1.ไถดินปรับพื้นที่เตรียมปลูก', '1. พบเพลี้ยไฟ/ไรแดง/เพลี้ยแป้ง\r\n2. พบโรคใบด่างมันสำปะหลัง', 2),
+(2, 2, 'กำจัดวัชพืช ครั้งที่1', 30, 3, '1. กำจัดวัชพืช', '1. พบเพลี้ยไฟ/ไรแดง/เพลี้ยแป้ง\r\n2. พบโรคใบด่างมันสำปะหลัง', 2),
+(3, 1, 'เตรียมดิน', 0, 3, '1. ไถดินปรับพื้นที่เตรียมปลูก', '1. พบเพลี้ยไฟ/ไรแดง/เพลี้ยแป้ง\r\n2. พบโรคใบด่างมันสำปะหลัง', 3);
 
 -- --------------------------------------------------------
 
@@ -1023,29 +1069,29 @@ CREATE TABLE `bankuser` (
 --
 
 INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
-(2, 2, 'ธงชาติ ธรรมรงค์', '3210202103'),
-(9, 3, 'ญาดา กฤตศิริ', '3210215213'),
-(12, 14, 'วาวา คีรีวรรณ', '1231516140'),
-(18, 3, 'ฟารีน่า ดาหร่า', '136532313'),
-(71, 9, 'pai', '131403141'),
-(72, 9, 'vue', '26164011'),
-(74, 6, 'favi', '1654121'),
-(76, 4, 'vue2', 'vue2'),
-(77, 8, 'testup2', '1234654'),
-(81, 1, 'vue4', '41546845'),
-(83, 7, 'news', '4651461'),
-(84, 7, 'finally', '1235645'),
-(87, 10, 'ภาคิณ สุขฤรินท์', '0203015130'),
-(94, 3, 'ศิวกร', '326253526'),
-(109, 18, 'qq', '56465'),
-(116, 9, 'dt', '16465132'),
-(117, 13, 'date', '0310025'),
-(134, 7, 'iu', '1452321212'),
-(181, 4, 'testt', '1111222223'),
-(182, 10, 'วาวา คีรีวรรณ', '1231516140'),
-(186, 13, 'wee', '161435114'),
-(193, 2, 'yp', '123'),
-(198, 10, 'วาวา คีรีวรรณ', '1231516140');
+(1, 3, 'ญาดา กฤตศิริ', '3210215213'),
+(2, 14, 'วาวา คีรีวรรณ', '1231516140'),
+(3, 3, 'ฟารีน่า ดาหร่า', '136532313'),
+(4, 9, 'pai', '131403141'),
+(5, 9, 'vue', '26164011'),
+(6, 6, 'favi', '1654121'),
+(7, 4, 'vue2', 'vue2'),
+(8, 8, 'testup2', '1234654'),
+(9, 1, 'vue4', '41546845'),
+(10, 7, 'news', '4651461'),
+(11, 7, 'finally', '1235645'),
+(12, 10, 'ภาคิณ สุขฤรินท์', '0203015130'),
+(13, 18, 'qq', '56465'),
+(14, 9, 'dt', '16465132'),
+(15, 13, 'date', '0310025'),
+(16, 7, 'iu', '1452321212'),
+(17, 4, 'testt', '1111222223'),
+(18, 13, 'wee', '161435114'),
+(19, 2, 'yp', '123'),
+(20, 3, 'ศิวกร', '326253526'),
+(21, 2, 'papo', '123456789'),
+(22, 10, 'วาวา คีรีวรรณ', '1231516140'),
+(23, 2, 'ธงชาติ ธรรมรงค์', '3210202103');
 
 -- --------------------------------------------------------
 
@@ -8729,21 +8775,25 @@ CREATE TABLE `landplot` (
   `note` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `buyMethod` int DEFAULT NULL,
   `plotStatus` int DEFAULT NULL,
-  `administrator` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `administrator` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `provinceStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ampherStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `districtStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `landplot`
 --
 
-INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`) VALUES
-(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, 1, 20, NULL, NULL, 400, NULL),
-(3, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, '', NULL, 1, 10, NULL, NULL, 400, NULL),
-(5, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.3, '', NULL, 2, NULL, NULL, NULL, NULL, NULL),
-(6, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, '', NULL, 2, NULL, NULL, NULL, NULL, NULL),
-(19, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4.18, '', NULL, 163, NULL, NULL, NULL, NULL, NULL),
-(20, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 106.24, '', NULL, 163, NULL, NULL, NULL, NULL, NULL),
-(21, 'iuu', '2535', 100, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, '14.94563334199181', '102.1411921839053', 14.15, '14 ไร่ 0 งาน 59 ตารางวา', NULL, 164, 10, NULL, NULL, 400, NULL);
+INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
+(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL),
+(2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, NULL, NULL, NULL),
+(3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.3, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(4, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, NULL, NULL),
+(5, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4.18, NULL, NULL, 20, NULL, NULL, NULL, 300, NULL, NULL, NULL, NULL),
+(6, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 106.24, NULL, NULL, 20, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
+(7, 'iuu', NULL, 100, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14.15, NULL, NULL, 21, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
+(8, 'popo', NULL, 100, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.44, NULL, NULL, 24, 10, NULL, NULL, 200, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8796,18 +8846,16 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`ID`, `email`, `password`) VALUES
 (1, 'test', '1234'),
 (2, 'admin', '1122'),
-(4, 'Sakik_255_za@hotmail.com', 'fsfs'),
-(5, 'kukkiksaatcha@gmail.com', '123456'),
-(6, 'Sakik_255_za@hotmail.com', 'asaa'),
-(7, 'Yada25@gmail.com', '2512'),
-(8, 'test@gmail.com', '252538'),
-(15, 'wv@hotmail.com', '123456'),
-(16, 'wv@hotmail.com', '123456'),
-(17, 'rt@gmail.com', '5523'),
-(18, 'rt@gmail.com', '5523'),
-(19, 'rt@gmail.com', '5523'),
-(20, 'rt@gmail.com', '5523'),
-(21, 'ad@gmial.com', 'ad123');
+(3, 'kukkiksaatcha@gmail.com', '123456'),
+(4, 'test@gmail.com', '252538'),
+(5, 'Sakik_255_za@hotmail.com', 'asaa'),
+(6, 'Yada25@gmail.com', 'Yada2512'),
+(7, 'wv@hotmail.com', '123456'),
+(8, 'rt@gmail.com', '5523'),
+(9, 'ad@gmial.com', 'ad123'),
+(10, 'UI@gmail.com', 'Ui190936'),
+(11, 'Ja@gmail.com', 'Ja260337'),
+(12, 'Dada@gmail.com', 'Da123456');
 
 -- --------------------------------------------------------
 
@@ -8895,24 +8943,27 @@ CREATE TABLE `profile` (
   `district` int DEFAULT NULL,
   `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `registerType` int NOT NULL
+  `registerType` int NOT NULL,
+  `provinceStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ampherStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `districtStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`ID`, `name`, `cradID`, `gender`, `birthday`, `tel`, `no`, `moo`, `province`, `ampher`, `district`, `email`, `password`, `registerType`) VALUES
-(1, 'จีนา มาลัยสาน', '3325625141001', 200, '1990-06-15', '0956123487', 2, 2, 1, 1, 2, 'Gena12@gmail.com', 'geeeee15', 100),
-(3, 'sssssss', '1523020231110', 100, '1989-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'kukkiksaatcha@gmail.com', '123456', 100),
-(4, 'วาวา ปาร์ค', '1523020231110', 100, '1989-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'kukkiksaatcha@gmail.com', '123456', 100),
-(6, 'หดหกดกด', '1523020231110', 100, '1989-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'kukkiksaatcha@gmail.com', '123456', 100),
-(7, 'ddd', '1523020231110', 200, '1992-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'Sakik_255_za@hotmail.com', 'asaa', 100),
-(8, 'ญาดา กิจศิริ', '1520312652102', 200, '1993-12-25', NULL, NULL, NULL, NULL, NULL, NULL, 'Yada25@gmail.com', '2512', 100),
-(9, 'ญาฎา กฤตศิริ', '1325615259410', 200, '1995-05-02', '0623020101', 15, 2, 1, 1, 3, 'test@gmail.com', '252538', 100),
-(11, 'wv', '1234567890123', 100, '1448-10-15', NULL, NULL, NULL, NULL, NULL, NULL, 'wv@hotmail.com', '123456', 100),
-(12, 'rt', '1234567891023', 100, '2008-12-12', NULL, NULL, NULL, NULL, NULL, NULL, 'rt@gmail.com', '5523', 100),
-(13, 'ad', '1523020231110', 100, '1475-01-31', NULL, NULL, NULL, NULL, NULL, NULL, 'ad@gmial.com', 'ad123', 100);
+INSERT INTO `profile` (`ID`, `name`, `cradID`, `gender`, `birthday`, `tel`, `no`, `moo`, `province`, `ampher`, `district`, `email`, `password`, `registerType`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
+(1, 'จีนา มาลัยสาน', '3325625141001', 200, '1990-06-15', '0956123487', 2, 2, 1, 1, 2, 'Gena12@gmail.com', 'geeeee15', 100, NULL, NULL, NULL),
+(2, 'วาวา ปาร์ค', '1523020231110', 100, '1989-01-01', NULL, NULL, NULL, NULL, NULL, NULL, 'kukkiksaatcha@gmail.com', '123456', 100, NULL, NULL, NULL),
+(3, 'ญาดา กิจศิริ', '1520312652102', 200, '1450-12-25', '0685129430', 2, 4, NULL, NULL, NULL, 'Yada25@gmail.com', 'Yada2512', 100, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(4, 'ญาฎา กฤตศิริ', '1325615259410', 200, '1995-02-05', '0623020101', 15, 2, NULL, NULL, NULL, 'test@gmail.com', '252538', 100, NULL, NULL, NULL),
+(5, 'wv', '1234567890123', 100, '1448-10-15', NULL, NULL, NULL, NULL, NULL, NULL, 'wv@hotmail.com', '123456', 100, NULL, NULL, NULL),
+(6, 'rt', '1234567891023', 100, '2008-12-12', NULL, NULL, NULL, NULL, NULL, NULL, 'rt@gmail.com', '5523', 100, NULL, NULL, NULL),
+(7, 'ad', '1523020231110', 100, '1475-01-31', NULL, NULL, NULL, NULL, NULL, NULL, 'ad@gmial.com', 'ad123', 100, NULL, NULL, NULL),
+(8, 'UI', '3120012654312', 200, '1993-09-19', NULL, NULL, NULL, NULL, NULL, NULL, 'UI@gmail.com', 'Ui190936', 200, NULL, NULL, NULL),
+(9, 'JA', '7213541569586', 100, '1994-03-26', NULL, NULL, NULL, NULL, NULL, NULL, 'Ja@gmail.com', 'Ja260337', 100, NULL, NULL, NULL),
+(10, 'ดาด้า ใจดี', '5213658451234', 200, '2010-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 'Dada@gmail.com', 'Da123456', 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8934,7 +8985,10 @@ INSERT INTO `project` (`ID`, `projectName`) VALUES
 (20, 'GPA'),
 (30, 'SWI Organic'),
 (40, 'Waxy Crop 5/2 แนวตั้ง'),
-(50, 'Waxy Crop 5/2');
+(50, 'Waxy Crop 5/2'),
+(60, 'การปลูกมัน Waxy Crop 5/2 แนวตั้ง'),
+(70, 'การปลูกมัน Waxy Crop 5/2 แนวนอน'),
+(80, 'โครงการมันอินทรีย์');
 
 -- --------------------------------------------------------
 
@@ -9083,37 +9137,42 @@ CREATE TABLE `register` (
   `card_img` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `bank` int DEFAULT NULL,
   `status` int DEFAULT NULL,
-  `dateUpdate` datetime NOT NULL
+  `dateUpdate` datetime NOT NULL,
+  `adminBy` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `provinceStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ampherStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `districtStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`) VALUES
-(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1994-05-02', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', 1, 1, 3, 'YYY', NULL, NULL, 198, 100, '2021-05-05 08:49:22'),
-(2, 'ธงชาติ ธรรมรงค์', '6666666', '1523012695412', 100, NULL, 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', 1, 1, 2, 'LOL', NULL, NULL, 2, 200, '2021-01-27 11:27:21'),
-(16, 'sava gee', '223366', '1423625120103', NULL, '1477-12-30', 635948123, NULL, NULL, 36, 6, 'เจริญ', 1, 1, 3, NULL, NULL, NULL, 9, 100, '2021-01-20 09:14:38'),
-(17, 'เอก นามเอก', '171816', NULL, 100, NULL, 652195423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, '2021-01-20 15:38:32'),
-(23, 'ศิวกร', NULL, NULL, NULL, NULL, 695320123, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default-avatar.png', 'mike.jpg', 94, NULL, '2021-01-29 15:53:16'),
-(26, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 9, NULL, '2021-01-25 15:00:53'),
-(27, 'ฟารีน่า ดาหร่า', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, 300, '2021-01-27 09:19:13'),
-(31, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 87, NULL, '2021-01-29 15:22:39'),
-(129, 'pai', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-152x152.png', NULL, 71, NULL, '2021-01-29 13:36:14'),
-(131, 'wee', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 186, NULL, '2021-05-04 10:33:49'),
-(132, 'vue', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-60x60.png', NULL, 72, NULL, '2021-01-29 13:40:52'),
-(133, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 74, NULL, '2021-01-29 14:03:24'),
-(135, 'testup2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime3.png', 'favicon-16x16.png', 77, NULL, '2021-01-29 14:49:21'),
-(136, 'vue2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 76, NULL, '2021-01-29 14:19:54'),
-(140, 'vue4', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'System.Web.HttpPostedFileWrapper', 'apple-touch-icon-60x60.png', 81, NULL, '2021-01-29 15:03:36'),
-(141, 'news', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'safari-pinned-tab.svg', 'msapplication-icon-144x144.png', 83, NULL, '2021-01-29 15:14:28'),
-(142, 'finally', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mstile-150x150.png', 'favicon.png', 84, NULL, '2021-01-29 15:20:36'),
-(159, 'qq', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 109, NULL, '2021-02-05 13:58:11'),
-(162, 'date', NULL, NULL, NULL, '1470-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'bg5.jpg', 117, NULL, '2021-02-06 11:12:44'),
-(163, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 116, NULL, '2021-02-06 11:04:01'),
-(164, 'iu', NULL, NULL, NULL, NULL, 956231202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 134, NULL, '2021-03-29 10:14:11'),
-(165, 'test', NULL, NULL, NULL, NULL, 652312369, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 181, NULL, '2021-05-04 08:53:59'),
-(166, 'yp', NULL, NULL, NULL, '1995-01-10', 921352610, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 193, NULL, '2021-05-04 10:37:47');
+INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
+(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1994-05-02', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, '2021-05-25 17:32:12', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 23, NULL, '2021-05-25 17:38:11', 'admin', NULL, NULL, NULL),
+(3, 'sava gee', '223366', '1423625120103', NULL, '1477-12-30', 635948123, NULL, NULL, 36, 6, 'เจริญ', 1, 1, 3, NULL, NULL, NULL, 1, 100, '2021-01-20 09:14:38', '', NULL, NULL, NULL),
+(4, 'เอก นามเอก', '171816', NULL, 100, NULL, 652195423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-01-20 15:38:32', '', NULL, NULL, NULL),
+(5, 'ศิวกร', '1112', '1234854614822', 100, NULL, 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, 'TTT', 'default-avatar.png', 'mike.jpg', 20, NULL, '2021-05-20 09:55:58', '', NULL, NULL, NULL),
+(6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
+(7, 'ฟารีน่า ดาหร่า', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 300, '2021-01-27 09:19:13', '', NULL, NULL, NULL),
+(8, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 12, NULL, '2021-01-29 15:22:39', '', NULL, NULL, NULL),
+(9, 'pai', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-152x152.png', NULL, 4, NULL, '2021-01-29 13:36:14', '', NULL, NULL, NULL),
+(10, 'wee', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, NULL, '2021-05-04 10:33:49', '', NULL, NULL, NULL),
+(11, 'vue', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-60x60.png', NULL, 5, NULL, '2021-01-29 13:40:52', '', NULL, NULL, NULL),
+(12, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 6, NULL, '2021-01-29 14:03:24', '', NULL, NULL, NULL),
+(13, 'testup2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime3.png', 'favicon-16x16.png', 8, NULL, '2021-01-29 14:49:21', '', NULL, NULL, NULL),
+(14, 'vue2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 7, NULL, '2021-01-29 14:19:54', '', NULL, NULL, NULL),
+(15, 'vue4', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'System.Web.HttpPostedFileWrapper', 'apple-touch-icon-60x60.png', 9, NULL, '2021-01-29 15:03:36', '', NULL, NULL, NULL),
+(16, 'news', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'safari-pinned-tab.svg', 'msapplication-icon-144x144.png', 10, NULL, '2021-01-29 15:14:28', '', NULL, NULL, NULL),
+(17, 'finally', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mstile-150x150.png', 'favicon.png', 11, NULL, '2021-01-29 15:20:36', '', NULL, NULL, NULL),
+(18, 'qq', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, NULL, '2021-02-05 13:58:11', '', NULL, NULL, NULL),
+(19, 'date', NULL, NULL, NULL, '1470-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'bg5.jpg', 15, NULL, '2021-02-06 11:12:44', '', NULL, NULL, NULL),
+(20, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL, '2021-02-06 11:04:01', '', NULL, NULL, NULL),
+(21, 'iu', NULL, NULL, NULL, NULL, 956231202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 16, NULL, '2021-03-29 10:14:11', '', NULL, NULL, NULL),
+(22, 'test', NULL, NULL, NULL, NULL, 652312369, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, '2021-05-04 08:53:59', '', NULL, NULL, NULL),
+(23, 'yp', NULL, NULL, NULL, '1995-01-10', 921352610, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, '2021-05-04 10:37:47', '', NULL, NULL, NULL),
+(24, 'papo', '1112', '1234854614822', 200, '1478-05-08', 0, 'Ja@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, '2021-05-25 11:09:27', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9205,11 +9264,11 @@ CREATE TABLE `standardlist` (
 --
 
 INSERT INTO `standardlist` (`ID`, `list`, `fillin`, `img`, `IDpro`, `IDlist`) VALUES
-(2, 'ลงดิน', 1, 1, 1, 1),
-(5, 'พรวนดิน', 0, 1, 4, 1),
-(6, 'เก็บผล', 1, 0, 1, 2),
-(7, 'กำจัดแมลง', 1, 1, 3, 1),
-(8, 'เตรียมปุ๋ย', 1, 0, 3, 2);
+(1, 'ลงดิน', 1, 1, 1, 1),
+(2, 'พรวนดิน', 0, 1, 4, 1),
+(3, 'เก็บผล', 1, 0, 1, 2),
+(4, 'กำจัดแมลง', 1, 1, 3, 1),
+(5, 'เตรียมปุ๋ย', 1, 0, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -9235,7 +9294,7 @@ CREATE TABLE `staple` (
 --
 
 INSERT INTO `staple` (`stapleType`, `stapleID`, `stapleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `stapleImg`, `IDstap`) VALUES
-(200, '01', 'paraquat', 'ใช้งานในไร่', 540, 200, 200, '2019-09-01', NULL, 1);
+(200, '01', 'paraquat', NULL, 540, 200, 200, '2019-09-01', 'bg5.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -9276,11 +9335,57 @@ CREATE TABLE `status` (
 INSERT INTO `status` (`statusID`, `statusName`) VALUES
 (100, 'รออนุมัติ'),
 (200, 'ผ่านอนุมัติ'),
-(300, 'ปรับปรุง/แก้ไข'),
-(400, 'ขอเข้าร่วมโครงการ'),
-(500, 'ไม่ผ่านการตรวจสอบ'),
-(600, 'ไม่มีโครงการ'),
-(700, 'ยกเลิก');
+(300, 'ไม่ผ่านอนุมัติ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `theory`
+--
+
+CREATE TABLE `theory` (
+  `workProcedure` int NOT NULL,
+  `farmingType` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sepecies` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `product` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `project` int DEFAULT NULL,
+  `workName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `access` int NOT NULL,
+  `reference` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateUpdate` datetime NOT NULL,
+  `ID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `theory`
+--
+
+INSERT INTO `theory` (`workProcedure`, `farmingType`, `type`, `sepecies`, `product`, `project`, `workName`, `access`, `reference`, `detail`, `dateUpdate`, `ID`) VALUES
+(102, 'พืช', 'มัน', 'มันสำปะหลัง', 'มันอินทรีย์', 80, 'การปลูกจนถึงเก็บเกี่ยวผลผลิต', 102, 'Organic Thailand', 'เครือข่ายมันอินทรีย์', '2021-05-14 17:43:58', 1),
+(101, 'พืช', 'มัน', 'มันสำปะหลัง', 'มันอินทรีย์', 80, 'การปลูกจนถึงเก็บเกี่ยวผลผลิต', 102, 'Organic Thailand', 'เครือข่ายมันอินทรีย์', '2021-05-14 17:41:30', 2),
+(103, 'พืช', 'มัน', 'มันสำปะหลัง(อินทรีย์)', 'โครงการมันอินทรีย์', 10, 'การปลูกมันสำประหลังอินทรีย์', 101, 'Organic Thailand', 'ติดตามเครือข่ายมันอินทรีย์ ภายในจังหวัดนครราชสีมา', '2021-05-28 10:28:35', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `theorytype`
+--
+
+CREATE TABLE `theorytype` (
+  `theoryID` int NOT NULL,
+  `theoryName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `theorytype`
+--
+
+INSERT INTO `theorytype` (`theoryID`, `theoryName`) VALUES
+(101, 'Crop'),
+(102, 'Non Crop'),
+(103, 'ดูแลและเก็บเกี่ยว');
 
 -- --------------------------------------------------------
 
@@ -9352,8 +9457,8 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicleType`, `vehicleID`, `vehicleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `workTime`, `fuel`, `energy`, `vehicleImg`, `IDve`) VALUES
-(600, 'G-10', 'รถไถ', 'ใช้งานในไร่', 600000, 300, 300, '2021-03-11', 10, 20, 200, 'bg5.jpg', 1),
-(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2003-01-11', 10, 20, 200, 'favicon.png', 4);
+(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2003-01-11', 10, 20, 200, 'favicon.png', 1),
+(600, 'G-10', 'รถไถ', 'ใช้งานในไร่', 600000, 300, 300, '2019-09-02', 10, 20, 200, 'img_3115.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -9381,6 +9486,19 @@ INSERT INTO `vehicletype` (`vehicleID`, `vehicleT`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `access`
+--
+ALTER TABLE `access`
+  ADD PRIMARY KEY (`accessID`);
+
+--
+-- Indexes for table `activity`
+--
+ALTER TABLE `activity`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `plan` (`plan`);
 
 --
 -- Indexes for table `ampher`
@@ -9628,6 +9746,21 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`statusID`);
 
 --
+-- Indexes for table `theory`
+--
+ALTER TABLE `theory`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `workProcedure` (`workProcedure`),
+  ADD KEY `project` (`project`),
+  ADD KEY `access` (`access`);
+
+--
+-- Indexes for table `theorytype`
+--
+ALTER TABLE `theorytype`
+  ADD PRIMARY KEY (`theoryID`);
+
+--
 -- Indexes for table `typeownership`
 --
 ALTER TABLE `typeownership`
@@ -9660,6 +9793,12 @@ ALTER TABLE `vehicletype`
 --
 
 --
+-- AUTO_INCREMENT for table `activity`
+--
+ALTER TABLE `activity`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
@@ -9669,7 +9808,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `buymethod`
@@ -9705,7 +9844,7 @@ ALTER TABLE `labor`
 -- AUTO_INCREMENT for table `landplot`
 --
 ALTER TABLE `landplot`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `license`
@@ -9717,7 +9856,7 @@ ALTER TABLE `license`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `machine`
@@ -9735,13 +9874,13 @@ ALTER TABLE `machinetype`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `projectand`
@@ -9753,7 +9892,7 @@ ALTER TABLE `projectand`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `software`
@@ -9765,13 +9904,19 @@ ALTER TABLE `software`
 -- AUTO_INCREMENT for table `standardlist`
 --
 ALTER TABLE `standardlist`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `staple`
 --
 ALTER TABLE `staple`
-  MODIFY `IDstap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDstap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `theory`
+--
+ALTER TABLE `theory`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `typeownership`
@@ -9789,7 +9934,7 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `IDve` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IDve` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vehicletype`
@@ -9800,6 +9945,12 @@ ALTER TABLE `vehicletype`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `activity`
+--
+ALTER TABLE `activity`
+  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`plan`) REFERENCES `theory` (`ID`);
 
 --
 -- Constraints for table `ampher`
@@ -9917,6 +10068,14 @@ ALTER TABLE `staple`
   ADD CONSTRAINT `staple_ibfk_1` FOREIGN KEY (`stapleType`) REFERENCES `stapletype` (`stapleID`),
   ADD CONSTRAINT `staple_ibfk_2` FOREIGN KEY (`unitBuy`) REFERENCES `unit` (`unitID`),
   ADD CONSTRAINT `staple_ibfk_3` FOREIGN KEY (`unitUse`) REFERENCES `unit` (`unitID`);
+
+--
+-- Constraints for table `theory`
+--
+ALTER TABLE `theory`
+  ADD CONSTRAINT `theory_ibfk_1` FOREIGN KEY (`project`) REFERENCES `project` (`ID`),
+  ADD CONSTRAINT `theory_ibfk_2` FOREIGN KEY (`workProcedure`) REFERENCES `theorytype` (`theoryID`),
+  ADD CONSTRAINT `theory_ibfk_3` FOREIGN KEY (`access`) REFERENCES `access` (`accessID`);
 
 --
 -- Constraints for table `vehicle`

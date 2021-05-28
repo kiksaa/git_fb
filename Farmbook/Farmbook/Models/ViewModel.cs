@@ -214,5 +214,17 @@ namespace Farmbook.Models
 
         [DisplayName("แก้ไขโดย")]
         public string adminBy { get; set; }
+        [DisplayName("ขั้นตอนที่")]
+        public Nullable<int> stepNum { get; set; }
+        [DisplayName("ชื่อตอนที่")]
+        public string stepName { get; set; }
+        [DisplayName("อายุ(วัน)")]
+        public Nullable<int> age { get; set; }
+        [DisplayName("ระยะเวลา(วัน)")]
+        public Nullable<int> time { get; set; }
+        [DisplayName("กิจกรรม")]
+        public string activity1 { get; set; }
+        [DisplayName("ข้อสังเกต")]
+        public string notice { get; set; }
     }
 }

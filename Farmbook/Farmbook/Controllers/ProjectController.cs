@@ -71,8 +71,8 @@ namespace Farmbook.Controllers
                     objcvm.ID = item.ID;
                     objcvm.IDlist = item.IDlist;
                     objcvm.list = item.list;
-                    objcvm.fillin = item.fillin;
-                    objcvm.img = item.img;
+                    objcvm.fillin = (bool)item.fillin;
+                    objcvm.img = (bool)item.img;
                     objcvm.IDpro = item.IDpro;
                     ViewModeltList.Add(objcvm);
                 }

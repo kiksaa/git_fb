@@ -330,6 +330,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
@@ -353,6 +354,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\access.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\activity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressModel.cs" />
@@ -524,6 +528,31 @@
     <Content Include="Content\img\undraw_profile_2.svg" />
     <Content Include="Content\img\undraw_profile_3.svg" />
     <Content Include="Content\img\undraw_rocket.svg" />
+    <Content Include="Content\img\upload\farmer\android-chrome-192x192.png" />
+    <Content Include="Content\img\upload\farmer\anime3.png" />
+    <Content Include="Content\img\upload\farmer\anime6.png" />
+    <Content Include="Content\img\upload\farmer\apple-touch-icon-180x180.png" />
+    <Content Include="Content\img\upload\farmer\bg5.jpg" />
+    <Content Include="Content\img\upload\farmer\default-avatar.png" />
+    <Content Include="Content\img\upload\farmer\emilyz.jpg" />
+    <Content Include="Content\img\upload\farmer\favicon-16x16.png" />
+    <Content Include="Content\img\upload\farmer\favicon.png" />
+    <Content Include="Content\img\upload\farmer\james.jpg" />
+    <Content Include="Content\img\upload\farmer\mike.jpg" />
+    <Content Include="Content\img\upload\farmer\msapplication-icon-144x144.png" />
+    <Content Include="Content\img\upload\farmer\mstile-150x150.png" />
+    <Content Include="Content\img\upload\idcard\android-chrome-512x512.png" />
+    <Content Include="Content\img\upload\idcard\apple-touch-icon-60x60.png" />
+    <Content Include="Content\img\upload\idcard\apple-touch-icon.png" />
+    <Content Include="Content\img\upload\idcard\default-avatar.png" />
+    <Content Include="Content\img\upload\idcard\emilyz.jpg" />
+    <Content Include="Content\img\upload\idcard\favicon.png" />
+    <Content Include="Content\img\upload\idcard\mike.jpg" />
+    <Content Include="Content\img\upload\idcard\mstile-150x150.png" />
+    <Content Include="Content\img\upload\vehicle\bg5.jpg" />
+    <Content Include="Content\img\upload\vehicle\default-avatar.png" />
+    <Content Include="Content\img\upload\vehicle\favicon.png" />
+    <Content Include="Content\img\upload\vehicle\img_3115.jpg" />
     <Content Include="Content\js\demo\chart-area-demo.js" />
     <Content Include="Content\js\demo\chart-bar-demo.js" />
     <Content Include="Content\js\demo\chart-pie-demo.js" />
@@ -2636,12 +2665,14 @@
     <Content Include="Views\Theory\Edit.cshtml" />
     <Content Include="Views\Theory\Delete.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Theory\IndexActivity.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Activity\Create.cshtml" />
+    <Content Include="Views\Activity\Edit.cshtml" />
+    <Content Include="Views\Activity\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\upload\farmer\" />
-    <Folder Include="Content\img\upload\idcard\" />
-    <Folder Include="Content\img\upload\vehicle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

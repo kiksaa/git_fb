@@ -186,8 +186,6 @@ C:\Users\samatcha\Downloads\Farmbook\Farmbook\obj\Debug\Farmbook.csproj.CopyComp
 C:\Users\samatcha\Downloads\Farmbook\Farmbook\obj\Debug\Farmbook.dll
 C:\Users\samatcha\Downloads\Farmbook\Farmbook\obj\Debug\Farmbook.pdb
 C:\Users\samatcha\Downloads\Farmbook\Farmbook\obj\Debug\Farmbook.csprojAssemblyReference.cache
-C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csprojAssemblyReference.cache
-C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csproj.CoreCompileInputs.cache
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Farmbook.dll.config
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Farmbook.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Farmbook.pdb
@@ -247,6 +245,7 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Elasticsearch.Net.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\EntityFramework.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\EntityFramework.SqlServer.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Google.Protobuf.dll
+C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\IdentityModel.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Compression.LZ4.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Compression.LZ4.Streams.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Hash.xxHash.dll
@@ -298,6 +297,7 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Runtime.CompilerServices.
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Security.AccessControl.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Security.Principal.Windows.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Text.Encodings.Web.dll
+C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Text.Json.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Threading.Tasks.Extensions.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.ValueTuple.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Web.Helpers.dll
@@ -319,6 +319,8 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\EntityFramework.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\EntityFramework.SqlServer.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Google.Protobuf.pdb
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Google.Protobuf.xml
+C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\IdentityModel.pdb
+C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\IdentityModel.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Compression.LZ4.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Compression.LZ4.Streams.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\K4os.Hash.xxHash.xml
@@ -364,6 +366,7 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Memory.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Numerics.Vectors.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Text.Encodings.Web.xml
+C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Text.Json.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.ValueTuple.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\System.Web.Providers.xml
@@ -379,6 +382,8 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Antlr3.Runtime.pdb
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\WebMatrix.Data.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\WebMatrix.WebData.xml
 C:\Users\samatcha\Desktop\farmbook\Farmbook\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csproj.CoreCompileInputs.cache
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csproj.CopyComplete
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.pdb
+C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csprojAssemblyReference.cache

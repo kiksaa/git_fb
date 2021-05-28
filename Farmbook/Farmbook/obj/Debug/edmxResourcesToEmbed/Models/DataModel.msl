@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="farmdbModelStoreContainer" CdmEntityContainer="farmdbEntities">
+  <EntityContainerMapping StorageEntityContainer="farmdbModelStoreContainer" CdmEntityContainer="farmdb">
+    <EntitySetMapping Name="accesses">
+      <EntityTypeMapping TypeName="farmdbModel.access">
+        <MappingFragment StoreEntitySet="access">
+          <ScalarProperty Name="accessID" ColumnName="accessID" />
+          <ScalarProperty Name="accessName" ColumnName="accessName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="activities">
+      <EntityTypeMapping TypeName="farmdbModel.activity">
+        <MappingFragment StoreEntitySet="activity">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="stepNum" ColumnName="stepNum" />
+          <ScalarProperty Name="stepName" ColumnName="stepName" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="activity1" ColumnName="activity" />
+          <ScalarProperty Name="notice" ColumnName="notice" />
+          <ScalarProperty Name="plan" ColumnName="plan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="amphers">
       <EntityTypeMapping TypeName="farmdbModel.ampher">
         <MappingFragment StoreEntitySet="ampher">
@@ -25,6 +47,14 @@
           <ScalarProperty Name="bankID" ColumnName="bankID" />
           <ScalarProperty Name="bankName" ColumnName="bankName" />
           <ScalarProperty Name="bankNo" ColumnName="bankNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="buymethods">
+      <EntityTypeMapping TypeName="farmdbModel.buymethod">
+        <MappingFragment StoreEntitySet="buymethod">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="nameBuy" ColumnName="nameBuy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -136,12 +166,6 @@
     <EntitySetMapping Name="landplots">
       <EntityTypeMapping TypeName="farmdbModel.landplot">
         <MappingFragment StoreEntitySet="landplot">
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-          <ScalarProperty Name="administrator" ColumnName="administrator" />
-          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
-          <ScalarProperty Name="lease_img" ColumnName="lease_img" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="plotName" ColumnName="plotName" />
           <ScalarProperty Name="areaCode" ColumnName="areaCode" />
@@ -151,6 +175,7 @@
           <ScalarProperty Name="landSlip" ColumnName="landSlip" />
           <ScalarProperty Name="landNumber" ColumnName="landNumber" />
           <ScalarProperty Name="license_img" ColumnName="license_img" />
+          <ScalarProperty Name="lease_img" ColumnName="lease_img" />
           <ScalarProperty Name="district" ColumnName="district" />
           <ScalarProperty Name="ampher" ColumnName="ampher" />
           <ScalarProperty Name="province" ColumnName="province" />
@@ -162,7 +187,12 @@
           <ScalarProperty Name="farmerName" ColumnName="farmerName" />
           <ScalarProperty Name="projectName" ColumnName="projectName" />
           <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
           <ScalarProperty Name="plotStatus" ColumnName="plotStatus" />
+          <ScalarProperty Name="administrator" ColumnName="administrator" />
+          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
+          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
+          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -221,9 +251,6 @@
     <EntitySetMapping Name="profiles">
       <EntityTypeMapping TypeName="farmdbModel.profile">
         <MappingFragment StoreEntitySet="profile">
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="cradID" ColumnName="cradID" />
@@ -238,6 +265,9 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="registerType" ColumnName="registerType" />
+          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
+          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
+          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -246,6 +276,18 @@
         <MappingFragment StoreEntitySet="project">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="projectName" ColumnName="projectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projectands">
+      <EntityTypeMapping TypeName="farmdbModel.projectand">
+        <MappingFragment StoreEntitySet="projectand">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="dataNow" ColumnName="dataNow" />
+          <ScalarProperty Name="proName" ColumnName="proName" />
+          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="manuStandards" ColumnName="manuStandards" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -260,9 +302,6 @@
     <EntitySetMapping Name="registers">
       <EntityTypeMapping TypeName="farmdbModel.register">
         <MappingFragment StoreEntitySet="register">
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="registerID" ColumnName="registerID" />
@@ -284,6 +323,10 @@
           <ScalarProperty Name="bank" ColumnName="bank" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+          <ScalarProperty Name="adminBy" ColumnName="adminBy" />
+          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
+          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
+          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -319,6 +362,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="standards">
+      <EntityTypeMapping TypeName="farmdbModel.standard">
+        <MappingFragment StoreEntitySet="standard">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="standardName" ColumnName="standardName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="standardlists">
+      <EntityTypeMapping TypeName="farmdbModel.standardlist">
+        <MappingFragment StoreEntitySet="standardlist">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="list" ColumnName="list" />
+          <ScalarProperty Name="fillin" ColumnName="fillin" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="IDpro" ColumnName="IDpro" />
+          <ScalarProperty Name="IDlist" ColumnName="IDlist" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="staples">
       <EntityTypeMapping TypeName="farmdbModel.staple">
         <MappingFragment StoreEntitySet="staple">
@@ -348,6 +411,32 @@
         <MappingFragment StoreEntitySet="status">
           <ScalarProperty Name="statusID" ColumnName="statusID" />
           <ScalarProperty Name="statusName" ColumnName="statusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="theories">
+      <EntityTypeMapping TypeName="farmdbModel.theory">
+        <MappingFragment StoreEntitySet="theory">
+          <ScalarProperty Name="workProcedure" ColumnName="workProcedure" />
+          <ScalarProperty Name="farmingType" ColumnName="farmingType" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="sepecies" ColumnName="sepecies" />
+          <ScalarProperty Name="product" ColumnName="product" />
+          <ScalarProperty Name="project" ColumnName="project" />
+          <ScalarProperty Name="workName" ColumnName="workName" />
+          <ScalarProperty Name="access" ColumnName="access" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="theorytypes">
+      <EntityTypeMapping TypeName="farmdbModel.theorytype">
+        <MappingFragment StoreEntitySet="theorytype">
+          <ScalarProperty Name="theoryID" ColumnName="theoryID" />
+          <ScalarProperty Name="theoryName" ColumnName="theoryName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -391,80 +480,6 @@
         <MappingFragment StoreEntitySet="vehicletype">
           <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
           <ScalarProperty Name="vehicleT" ColumnName="vehicleT" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="buymethods">
-      <EntityTypeMapping TypeName="farmdbModel.buymethod">
-        <MappingFragment StoreEntitySet="buymethod">
-          <ScalarProperty Name="nameBuy" ColumnName="nameBuy" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="projectands">
-      <EntityTypeMapping TypeName="farmdbModel.projectand">
-        <MappingFragment StoreEntitySet="projectand">
-          <ScalarProperty Name="manuStandards" ColumnName="manuStandards" />
-          <ScalarProperty Name="detail" ColumnName="detail" />
-          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
-          <ScalarProperty Name="proName" ColumnName="proName" />
-          <ScalarProperty Name="dataNow" ColumnName="dataNow" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="standards">
-      <EntityTypeMapping TypeName="farmdbModel.standard">
-        <MappingFragment StoreEntitySet="standard">
-          <ScalarProperty Name="standardName" ColumnName="standardName" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="standardlists">
-      <EntityTypeMapping TypeName="farmdbModel.standardlist">
-        <MappingFragment StoreEntitySet="standardlist">
-          <ScalarProperty Name="IDlist" ColumnName="IDlist" />
-          <ScalarProperty Name="IDpro" ColumnName="IDpro" />
-          <ScalarProperty Name="img" ColumnName="img" />
-          <ScalarProperty Name="fillin" ColumnName="fillin" />
-          <ScalarProperty Name="list" ColumnName="list" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="accesses">
-      <EntityTypeMapping TypeName="farmdbModel.access">
-        <MappingFragment StoreEntitySet="access">
-          <ScalarProperty Name="accessName" ColumnName="accessName" />
-          <ScalarProperty Name="accessID" ColumnName="accessID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="theories">
-      <EntityTypeMapping TypeName="farmdbModel.theory">
-        <MappingFragment StoreEntitySet="theory">
-          <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="detail" ColumnName="detail" />
-          <ScalarProperty Name="reference" ColumnName="reference" />
-          <ScalarProperty Name="access" ColumnName="access" />
-          <ScalarProperty Name="workName" ColumnName="workName" />
-          <ScalarProperty Name="project" ColumnName="project" />
-          <ScalarProperty Name="product" ColumnName="product" />
-          <ScalarProperty Name="sepecies" ColumnName="sepecies" />
-          <ScalarProperty Name="type" ColumnName="type" />
-          <ScalarProperty Name="farmingType" ColumnName="farmingType" />
-          <ScalarProperty Name="workProcedure" ColumnName="workProcedure" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="theorytypes">
-      <EntityTypeMapping TypeName="farmdbModel.theorytype">
-        <MappingFragment StoreEntitySet="theorytype">
-          <ScalarProperty Name="theoryName" ColumnName="theoryName" />
-          <ScalarProperty Name="theoryID" ColumnName="theoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

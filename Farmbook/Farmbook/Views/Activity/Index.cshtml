@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Farmbook.Models.activity>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.stepNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stepName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.activity1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.notice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.plan)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.stepNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stepName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.activity1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.notice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.plan)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

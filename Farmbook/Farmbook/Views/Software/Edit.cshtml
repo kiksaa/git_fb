@@ -1,8 +1,6 @@
 ﻿@model Farmbook.Models.software
-
-
 @{
-    Layout = "~/Views/Shared/_Layaccount.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -16,11 +14,11 @@
     <meta name="author" content="">
     <title>FARMBOOK - แก้ไขทะเบียนซอฟต์แวร์</title>
 </head>
-<body>
+<body style="color:black;background-color:whitesmoke;">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm("Create", "Machine", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Software", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <br />
@@ -122,7 +120,7 @@
                                             </a>
                                         </div>
                                         <div class="col-6">
-                                            <input type="submit" value="Save" class="btn btn-success" />
+                                            <input type="submit" value="บันทึก" class="btn btn-success" />
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +131,9 @@
             </div>
         </div>
     }
-
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

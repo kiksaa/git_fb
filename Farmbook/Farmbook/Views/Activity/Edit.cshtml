@@ -1,0 +1,114 @@
+﻿@model Farmbook.Models.activity
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FARMBOOK - แก้ไขข้อมูล</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col">
+            <h4>ขั้นตอนการทำงาน</h4>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-success mb-3" style="width: 100rem;">
+                    <h4>แก้ไขขั้นตอนการทำงาน</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.plan, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.plan, (IEnumerable<SelectListItem>)ViewBag.theories, "ชื่อขั้นตอนการทำงาน", htmlAttributes: new { @class = "form-control", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.plan, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.stepNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.stepNum, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.stepNum, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.stepName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.stepName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.stepName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.age, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.time, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.time, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.activity1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.activity1, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.notice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextAreaFor(model => model.notice, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+                                        <div class="form-group row">
+                                            <div class="col-6">
+                                                <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Theory")">
+                                                    <span>
+                                                        กลับ
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="submit" value="บันทึก" class="btn btn-success" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </body>
+</html>

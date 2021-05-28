@@ -1,7 +1,7 @@
 ﻿@model Farmbook.Models.fuel
 
 @{
-    Layout = "~/Views/Shared/_Layaccount.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -11,8 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>FARMBOOK - ลบทะเบียนพลังงานและเชื้อเพลิง</title>
 </head>
-<body>
-    <br />
+<body style="color:black;background-color:whitesmoke;">
     <div class="container">
         <div class="row justify-content-md-center">
             <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
@@ -65,7 +64,9 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

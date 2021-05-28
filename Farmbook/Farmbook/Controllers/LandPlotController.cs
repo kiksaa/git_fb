@@ -39,7 +39,8 @@ namespace Farmbook.Controllers
                            from s in slist.DefaultIfEmpty()
                            select new
                            {
-                               l.ID, l.plotName, p.provinceName, a.ampherName, d.districtName, r.name,
+                               l.ID, l.plotName, /*p.provinceName, a.ampherName, d.districtName,*/
+                               l.provinceStr,l.ampherStr,l.districtStr,r.name,
                                t.ownership, li.licenseName, pro.projectName, s.statusName, l.areaPlot,
                            };
                 foreach (var item in data)
@@ -47,9 +48,9 @@ namespace Farmbook.Controllers
                     ViewLandPlot objcvm = new ViewLandPlot();
                     objcvm.ID = item.ID;
                     objcvm.plotName = item.plotName;
-                    objcvm.provinceName = item.provinceName;
-                    objcvm.ampherName = item.ampherName;
-                    objcvm.districtName = item.districtName;
+                    objcvm.provinceName = item.provinceStr;
+                    objcvm.ampherName = item.ampherStr;
+                    objcvm.districtName = item.districtStr;
                     objcvm.name = item.name;
                     objcvm.ownership = item.ownership;
                     objcvm.licenseName = item.licenseName;

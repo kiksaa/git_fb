@@ -70,8 +70,8 @@ namespace Farmbook.Models
         [DisplayName("Õ”‡¿Õ/‡¢µ")]
         public string ampherStr { get; set; }
         [DisplayName("µ”∫≈/·¢«ß")]
-        public string districtStr { get; set; } 
-        
+        public string districtStr { get; set; }
+
         [DisplayName("·°È‰¢‚¥¬")]
         public string adminBy { get; set; }
 

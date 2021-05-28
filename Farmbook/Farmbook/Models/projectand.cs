@@ -33,7 +33,6 @@ namespace Farmbook.Models
         public string detail { get; set; }
         [DisplayName("มาตรฐานการผลิต")]
         public Nullable<int> manuStandards { get; set; }
-
         public virtual buymethod buymethod1 { get; set; }
         public virtual standard standard { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

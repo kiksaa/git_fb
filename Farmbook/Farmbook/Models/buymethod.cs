@@ -17,16 +17,16 @@ namespace Farmbook.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public buymethod()
         {
-            this.projectands = new HashSet<projectand>();
             this.landplots = new HashSet<landplot>();
+            this.projectands = new HashSet<projectand>();
         }
     
         public int ID { get; set; }
         public string nameBuy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<projectand> projectands { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<landplot> landplots { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<projectand> projectands { get; set; }
     }
 }
