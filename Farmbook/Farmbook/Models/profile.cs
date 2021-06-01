@@ -20,6 +20,7 @@ namespace Farmbook.Models
         [DisplayName("ชื่อ นามสกุล")]
         public string name { get; set; }
         [DisplayName("หมายเลขบัตรประชาชน")]
+        [StringLength(13, MinimumLength = 13, ErrorMessage = "กรุณาตรวจหมายเลขบัตรประชาชนอีครั้ง")]
         public string cradID { get; set; }
         [DisplayName("เพศ")]
         public int gender { get; set; }
@@ -40,11 +41,11 @@ namespace Farmbook.Models
         [DisplayName("ตำบล/แขวง")]
         public Nullable<int> district { get; set; }
         [DisplayName("อีเมล์")]
-        [Required]
+        [Required(ErrorMessage = "อีเมล์ของคุณควรประกอบไปด้วย")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string email { get; set; }
         [DisplayName("รหัสผ่าน")]
-        [Required]
+        [Required(ErrorMessage = "รหัสผ่านของคุณควรประกอบไปด้วย")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string password { get; set; }
         [DisplayName("ประเภทเกษตรกร")]

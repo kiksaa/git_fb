@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2021 at 12:09 PM
+-- Generation Time: Jun 01, 2021 at 04:12 AM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -1091,7 +1091,8 @@ INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
 (20, 3, 'ศิวกร', '326253526'),
 (21, 2, 'papo', '123456789'),
 (22, 10, 'วาวา คีรีวรรณ', '1231516140'),
-(23, 2, 'ธงชาติ ธรรมรงค์', '3210202103');
+(23, 2, 'ธงชาติ ธรรมรงค์', '3210202103'),
+(24, 10, 'วาวา คีรีวรรณ', '1231516140');
 
 -- --------------------------------------------------------
 
@@ -8855,7 +8856,8 @@ INSERT INTO `login` (`ID`, `email`, `password`) VALUES
 (9, 'ad@gmial.com', 'ad123'),
 (10, 'UI@gmail.com', 'Ui190936'),
 (11, 'Ja@gmail.com', 'Ja260337'),
-(12, 'Dada@gmail.com', 'Da123456');
+(12, 'Dada@gmail.com', 'Da123456'),
+(13, 'samatcha.kukkik@hotmail.com', 'YIhoik145160');
 
 -- --------------------------------------------------------
 
@@ -8963,7 +8965,8 @@ INSERT INTO `profile` (`ID`, `name`, `cradID`, `gender`, `birthday`, `tel`, `no`
 (7, 'ad', '1523020231110', 100, '1475-01-31', NULL, NULL, NULL, NULL, NULL, NULL, 'ad@gmial.com', 'ad123', 100, NULL, NULL, NULL),
 (8, 'UI', '3120012654312', 200, '1993-09-19', NULL, NULL, NULL, NULL, NULL, NULL, 'UI@gmail.com', 'Ui190936', 200, NULL, NULL, NULL),
 (9, 'JA', '7213541569586', 100, '1994-03-26', NULL, NULL, NULL, NULL, NULL, NULL, 'Ja@gmail.com', 'Ja260337', 100, NULL, NULL, NULL),
-(10, 'ดาด้า ใจดี', '5213658451234', 200, '2010-02-19', NULL, NULL, NULL, NULL, NULL, NULL, 'Dada@gmail.com', 'Da123456', 100, NULL, NULL, NULL);
+(10, 'ดาด้า ใจดี', '5213658451234', 200, '1993-02-19', '0821302569', NULL, NULL, NULL, NULL, NULL, 'Dada@gmail.com', 'Da123456', 100, NULL, NULL, NULL),
+(11, 'fang', '5613135461203', 200, '1995-01-25', NULL, NULL, NULL, NULL, NULL, NULL, 'samatcha.kukkik@hotmail.com', 'YIhoik145160', 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9149,7 +9152,7 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
-(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1994-05-02', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, '2021-05-25 17:32:12', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1478-04-26', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, NULL, NULL, 24, NULL, '2021-05-31 15:52:40', '', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 23, NULL, '2021-05-25 17:38:11', 'admin', NULL, NULL, NULL),
 (3, 'sava gee', '223366', '1423625120103', NULL, '1477-12-30', 635948123, NULL, NULL, 36, 6, 'เจริญ', 1, 1, 3, NULL, NULL, NULL, 1, 100, '2021-01-20 09:14:38', '', NULL, NULL, NULL),
 (4, 'เอก นามเอก', '171816', NULL, 100, NULL, 652195423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-01-20 15:38:32', '', NULL, NULL, NULL),
@@ -9157,7 +9160,7 @@ INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthda
 (6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
 (7, 'ฟารีน่า ดาหร่า', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 300, '2021-01-27 09:19:13', '', NULL, NULL, NULL),
 (8, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 12, NULL, '2021-01-29 15:22:39', '', NULL, NULL, NULL),
-(9, 'pai', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-152x152.png', NULL, 4, NULL, '2021-01-29 13:36:14', '', NULL, NULL, NULL),
+(9, 'pai', '461796', '1234854614822', 100, '1989-04-27', 0, 'pai@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, '2021-05-31 15:20:34', 'admin', NULL, NULL, NULL),
 (10, 'wee', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, NULL, '2021-05-04 10:33:49', '', NULL, NULL, NULL),
 (11, 'vue', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-60x60.png', NULL, 5, NULL, '2021-01-29 13:40:52', '', NULL, NULL, NULL),
 (12, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 6, NULL, '2021-01-29 14:03:24', '', NULL, NULL, NULL),
@@ -9808,7 +9811,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `buymethod`
@@ -9856,7 +9859,7 @@ ALTER TABLE `license`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `machine`
@@ -9874,7 +9877,7 @@ ALTER TABLE `machinetype`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `project`

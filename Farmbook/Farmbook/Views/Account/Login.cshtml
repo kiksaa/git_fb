@@ -42,7 +42,9 @@
                                             <div style="color:red;">@Html.ValidationSummary()</div>
                                             <div class="row">
                                                 <!--Show details are saved successfully message-->
-                                                <div class="col-lg-12">@ViewBag.Message</div>
+                                                <div class="col-lg-12" style="color:forestgreen;">@ViewBag.Message</div>
+                                                @*<div class="col-lg-12" style="color:forestgreen;">@ViewBag.Message1</div>*@
+                                                <div class="col-lg-12" style="color:forestgreen;">@ViewBag.Message2</div>
                                             </div>
                                             <br />
                                             <div class="row">
@@ -58,9 +60,9 @@
                                             <input type="submit" value="เข้าสู่ระบบ" class="btn btn-success btn-user btn-block" />
 
                                             <hr>
-                                             <a href="About" class="btn btn-google btn-user btn-block">
-                                                    <i class="fab fa-google fa-fw"></i> เข้าสู่ระบบด้วย Google
-                                                </a>
+                                            <a href="index.html" class="btn btn-google btn-user btn-block">
+                                                <i class="fab fa-google fa-fw"></i> เข้าสู่ระบบด้วย Google
+                                            </a>
                                             <div class="text-center">
                                                 @Html.ActionLink("ลืมรหัสผ่าน?", "ForgotPassword", "Account")
                                             </div>

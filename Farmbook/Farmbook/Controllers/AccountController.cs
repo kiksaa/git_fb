@@ -177,115 +177,77 @@ namespace Farmbook.Controllers
                     log.email = registerDetails.email;
                     log.password = registerDetails.password;
 
-                    farmdb.profiles.Add(reglog);
-                    farmdb.logins.Add(log);
-                    farmdb.SaveChanges();
-
-                    ViewBag.Count = farmdb.profiles.SqlQuery(" SELECT * FROM profile ").Count();
+                    string password = registerDetails.password;
+                    string email = registerDetails.email;
+                    string Check = CheckValidUser(email);
+                    if(Check == "Success")
+                    {
+                        string status = sendEmail(password, email);
+                        farmdb.profiles.Add(reglog);
+                        farmdb.logins.Add(log);
+                        farmdb.SaveChanges();
+                        ViewBag.Count = farmdb.profiles.SqlQuery(" SELECT * FROM profile ").Count();
+                    }
+                    
                 }
-                /*var _emailService = */
-                string password = registerDetails.password;
-                string email = registerDetails.email;
-                string status = sendEmail(password, email);
-                ViewBag.Message = "บันทึกเสร็จสิ้น!!";
-                return View("Login");
+                if(ViewBag.Count > 0)
+                {
+                    return View("Login");
+                }
+                return View("Register");
             }
             else
             {
                 return View("Register", registerDetails);
             }
         }
+        public string CheckValidUser(string email)
+        {
+            /*login model = new login();*/
+            var farmdb = new farmdb();
+            List<login> loginModel = farmdb.logins.Where(l => l.email == email).ToList();
+            if (loginModel.Count() > 0)
+            {
+                return ViewBag.Message1 = "อีเมล์นี้เคยลงทะเบียนใช้แล้ว";
+            }
+            return ViewBag.Message1 = "Success";
+        }
         public string sendEmail(string password, string email)
         {
             try
             {
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                SmtpClient SMTPServer = new SmtpClient("127.0.0.1");
-                var mail = new MailMessage();
-                mail.From = new MailAddress("adswi0112@gmail.com");
+                SmtpClient SmtpServer = new SmtpClient();
+                MailMessage mail = new MailMessage();
                 mail.To.Add(email);
-                mail.Subject = "Please activate your account.";
+                mail.From = new MailAddress("adswi0112@gmail.com");
+                mail.Subject = "ยืนยันตัวตนของคุณ " + email;
                 mail.IsBodyHtml = true;
                 string htmlBody;
-                htmlBody = "Dear " + email + "<br /><br />";
-                htmlBody += "Thank you for registering an account.  Please activate your account by visiting the URL below:<br /><br />";
-                htmlBody += "<br/><b>Passsword: </b>" + password;
-                /*htmlBody += "http://localhost:44357/signin.aspx?activate=" + password + "<br /><br />";*/
-                htmlBody += "Thank you.";
+                htmlBody = "คุณ " + email + "<br /><br />";
+                htmlBody += "ขอบคุณสำหรับการลงทะเบียนฟาร์มบุ๊ค Farmbook ของเรา. และยินดีต้อนรับเข้าสู่ระบบ Farmbook ครับ/ค่ะ <br />";
+                htmlBody += "<br/><b>ชื่อบัญชีของคุณคือ : </b>" + email + "<br />";
+                htmlBody += "<b>รหัสผ่านของคุณคือ : </b>" + password + "<br />";
+                htmlBody += "เข้าสู่ระบบได้ที่ลิงค์นี้ " + "http://192.168.5.80:81/Account/Account/Login" + "<br /><br />";
+                htmlBody += "ขอบคุณรับ/ค่ะ.";
                 mail.Body = htmlBody;
-                SmtpServer.Port = 587;
+
                 SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.UseDefaultCredentials = true;
+                SmtpServer.UseDefaultCredentials = false;
+                SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("adswi0112@gmail.com", "adminswi0112");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
                 /*MessageBox.Show("mail Send");*/
-                return "Please check your email for account login detail.";
+                ViewBag.Message = "บันทึกเสร็จสิ้น!!";
+                return ViewBag.Message2 = "โปรดตรวจสอบอีเมล์คุณ";
                 /*Console.WriteLine(Mail.SendEMail(mailArgs, lstAttachments, true, dictHeaders).Item2);*/
             }
             catch
             {
-                return "Error............";
+                return ViewBag.Message2 = "อีเมล์คุณไม่ถูกต้อง";
             }
         }
-        public static void BuildEmailTemplate(string subjectText, string bodyText, string sendTo)
-        {
-            string from, to, bcc, cc, subject, body;
-            from = "YourEmail@gmail.com";
-            to = sendTo.Trim();
-            bcc = "";
-            cc = "";
-            subject = subjectText;
-            StringBuilder sb = new StringBuilder();
-            sb.Append(bodyText);
-            body = sb.ToString();
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(from);
-            mail.To.Add(new MailAddress(to));
-            if (!string.IsNullOrEmpty(bcc))
-            {
-                mail.Bcc.Add(new MailAddress(bcc));
-            }
-            if (!string.IsNullOrEmpty(cc))
-            {
-                mail.CC.Add(new MailAddress(cc));
-            }
-            mail.Subject = subject;
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-            SendEmail(mail);
-        }
-        public static void SendEmail(MailMessage mail)
-        {
-            SmtpClient client = new SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new System.Net.NetworkCredential("YourEmail@gmail.com", "Password");
-            try
-            {
-                client.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public JsonResult CheckValidUser(login model)
-        {
-            var farmdb = new farmdb();
-            string result = "Fail";
-            var DataItem = farmdb.logins.Where(x => x.email == model.email && x.password == model.password).SingleOrDefault();
-            if (DataItem != null)
-            {
-                Session["UserID"] = DataItem.ID.ToString();
-                Session["UserName"] = DataItem.email.ToString();
-                result = "Success";
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        
         public ActionResult Login()
         {
             return View();
@@ -362,36 +324,7 @@ namespace Farmbook.Controllers
         {
             return View();
         }
-        /*[HttpPost]
-        public ActionResult ForgotPassword(string UserName)
-        {
-            if (ModelState.IsValid)
-            {
-                if (WebSecurity.UserExists(UserName))
-                {
-                    string To = UserName, UserID, Password, SMTPPort, Host;
-                    string token = WebSecurity.GeneratePasswordResetToken(UserName);
-                    if (token == null)
-                    {
-                        // If user does not exist or is not confirmed.
-                        return View("Index");
-                    }
-                    else
-                    {
-                        //Create URL with above token
-                        var lnkHref = "<a href='" + Url.Action("ResetPassword", "Account", new { email = UserName, code = token }, "http") + "'>Reset Password</a>";
-                        //HTML Template for Send email
-                        string subject = "Your changed password";
-                        string body = "<b>Please find the Password Reset Link. </b><br/>" + lnkHref;
-                        //Get and set the AppSettings using configuration manager.
-                        EmailManager.AppSettings(out UserID, out Password, out SMTPPort, out Host);
-                        //Call send email methods.
-                        EmailManager.SendEmail(UserID, subject, body, To, UserID, Password, SMTPPort, Host);
-                    }
-                }
-            }
-            return View();
-        }*/
+        
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
@@ -400,18 +333,16 @@ namespace Farmbook.Controllers
             login log = new login();
             /*Getting data from database for email validation*/
             List<login> loginModel = farmdb.logins.Where(l => l.email == email).ToList();
-            string password = loginModel.Select(p => p.password).First();
-            /*var data = (from login in farmdb.logins
-                        where login.email == email
-                        select login.email);*/
+
             if (loginModel.Count() > 0)
             {
+                string password = loginModel.Select(p => p.password).First();
                 string status = SendPassword(password, email);
-                ViewBag.Message = 1;
+                ViewBag.Message = "บัญชีถูกต้อง" ;
             }
             else
             {
-                ViewBag.Message = 0;
+                ViewBag.Message1 = "บัญชีนี้ไม่มีอยู่ในระบบ";
             }
             return View();
         }
@@ -422,12 +353,12 @@ namespace Farmbook.Controllers
                 MailMessage mail = new MailMessage();
                 mail.To.Add(email);
                 mail.From = new MailAddress("adswi0112@gmail.com");
-                mail.Subject = "Your password for account " + email;
+                mail.Subject = "รหัสผ่านอีเมล์คุณ " + email;
                 string userMessage = "";
-                userMessage = userMessage + "<br/><b>Login Id:</b> " + email;
-                userMessage = userMessage + "<br/><b>Passsword: </b>" + password;
+                userMessage = userMessage + "<br/><b>อีเมล์ผู้ใช้คือ : </b> " + email;
+                userMessage = userMessage + "<br/><b>รหัสผ่านของคุณคือ : </b>" + password;
 
-                string Body = "Dear " + email + ", <br/><br/>Login detail for your account is a follows:<br/></br> " + userMessage + "<br/><br/>Thanks";
+                string Body = "คุณ " + email + ", <br/><br/>ข้อมูลบัญชีของคุณคือ : <br/></br> " + userMessage + "<br/><br/>Thanks";
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
 
@@ -437,38 +368,14 @@ namespace Farmbook.Controllers
                 smtp.Port = 587;
                 smtp.Credentials = new System.Net.NetworkCredential("adswi0112@gmail.com", "adminswi0112");
                 /*smtp.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;*/
-                // Smtp Email ID and Password For authentication
+                //Smtp Email ID and Password For authentication
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
-                return "Please check your email for account login detail.";
+                return ViewBag.Message2 = "โปรดตรวจสอบอีเมล์เพื่อดูข้อมูลของคุณ";
             }
             catch
             {
-                return "Error............";
-            }
-        }
-        public class EmailManager
-        {
-            public static void AppSettings(out string UserID, out string Password, out string SMTPPort, out string Host)
-            {
-                UserID = ConfigurationManager.AppSettings.Get("UserID");
-                Password = ConfigurationManager.AppSettings.Get("Password");
-                SMTPPort = ConfigurationManager.AppSettings.Get("SMTPPort");
-                Host = ConfigurationManager.AppSettings.Get("Host");
-            }
-            public static void SendEmail(string From, string Subject, string Body, string To, string UserID, string Password, string SMTPPort, string Host)
-            {
-                System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
-                mail.To.Add(To);
-                mail.From = new MailAddress(From);
-                mail.Subject = Subject;
-                mail.Body = Body;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = Host;
-                smtp.Port = Convert.ToInt16(SMTPPort);
-                smtp.Credentials = new NetworkCredential(UserID, Password);
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
+                return ViewBag.Message2 = "บัญชีไม่ถูกต้อง";
             }
         }
         public ActionResult ResetPassword(string code, string email)
@@ -494,6 +401,5 @@ namespace Farmbook.Controllers
             }
             return View(model);
         }
-
     }
 }

@@ -12,6 +12,7 @@ namespace Farmbook.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class theory
     {
@@ -20,23 +21,30 @@ namespace Farmbook.Models
         {
             this.activities = new HashSet<activity>();
         }
-        /* [Required]*/
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ขั้นตอนการทำงาน")]
         public int workProcedure { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ประเภทกสิกรรม")]
         public string farmingType { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ชนิด")]
         public string type { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("สายพันธุ์")]
         public string sepecies { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ผลิตภัณฑ์ที่ได้")]
         public string product { get; set; }
         [DisplayName("โครงการ")]
         public Nullable<int> project { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ชื่อขั้นตอนการทำงาน")]
         public string workName { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("การเช้าถึง")]
         public int access { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("แหล่งอ้างอิง")]
         public string reference { get; set; }
         [DisplayName("รายละเอียด")]

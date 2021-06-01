@@ -57,8 +57,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "true" } })
-                                @Html.ValidationMessageFor(model => model.farmer_img, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file", disabled = "disabled", @readonly = "readonly" } })
+                                @*@Html.ValidationMessageFor(model => model.farmer_img, "", new { @class = "text-danger" })*@
                                 @{ if (@Model.farmer_img != null)
                                     {
                                         <br />
@@ -70,8 +70,8 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "true" } })
-                                @Html.ValidationMessageFor(model => model.card_img, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", disabled = "disabled", @readonly = "readonly" } })
+                                @*@Html.ValidationMessageFor(model => model.card_img, "", new { @class = "text-danger" })*@
                                 @{ if (@Model.card_img != null)
                                     {
                                         <br />

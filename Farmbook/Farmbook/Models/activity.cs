@@ -12,13 +12,16 @@ namespace Farmbook.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class activity
     {
         [DisplayName("ลำดับที่")]
         public int ID { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ขั้นตอนที่")]
         public Nullable<int> stepNum { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ชื่อขั้นตอน")]
         public string stepName { get; set; }
         [DisplayName("อายุ(วัน)")]
@@ -29,6 +32,7 @@ namespace Farmbook.Models
         public string activity1 { get; set; }
         [DisplayName("ข้อสังเกต")]
         public string notice { get; set; }
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ชื่อขั้นตอนการทำงาน")]
         public int plan { get; set; }
     

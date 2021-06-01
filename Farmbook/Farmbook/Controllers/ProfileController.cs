@@ -209,7 +209,7 @@ namespace Farmbook.Controllers
                 /*farmdb.Entry(loginModel).State = EntityState.Added;*/
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Index","Account");
+            return RedirectToAction("Index","Profile");
         }
 
         // GET: Profile/Delete/5

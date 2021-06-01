@@ -1,7 +1,7 @@
 ﻿@model Farmbook.Models.profile
 
 @{
-    Layout = "~/Views/Shared/_Layaccount.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 </head>
-<body>
+<body style="color:black;background-color:whitesmoke;">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -183,6 +183,9 @@
             </div>
         </div>
     }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
