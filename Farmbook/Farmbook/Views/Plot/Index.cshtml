@@ -61,14 +61,16 @@
                                 <th> ลบ / แก้ไข </th>
                             </tr>
                         </thead>
+                        @{ var i = 0;}
                         <tbody>
                             @foreach (var item in Model)
                             {
-                               @* if (item.name == item.plotName)
-                                {*@
+                                @* if (item.name == item.plotName)
+                {*@
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ID)
+                                        @{i++;}
+                                        @i
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.plotName)
@@ -84,10 +86,10 @@
                                 </tr>
                                 @*}*@
                                 @*<a class="btn btn-success" href="@Url.Action("Create", "Plot", new { id = item.name)">
-                                    <span>
-                                        เพิ่มข้อมูลแปลง
-                                    </span>
-                                </a>*@
+                    <span>
+                        เพิ่มข้อมูลแปลง
+                    </span>
+                </a>*@
                             }
                         </tbody>
                     </table>

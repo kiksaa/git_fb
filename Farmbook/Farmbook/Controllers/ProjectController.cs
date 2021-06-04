@@ -64,7 +64,6 @@ namespace Farmbook.Controllers
                                s.img,
                                s.IDpro
                            };
-
                 foreach (var item in data)
                 {
                     ViewModel objcvm = new ViewModel();
@@ -95,28 +94,37 @@ namespace Farmbook.Controllers
         // GET: Project/Create
         public ActionResult Create()
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                List<buymethod> buymethods = farmdb.buymethods.ToList();
-                IEnumerable<SelectListItem> selbuymethods = from b in buymethods
+                using (farmdb farmdb = new farmdb())
+                {
+                    List<buymethod> buymethods = farmdb.buymethods.ToList();
+                    IEnumerable<SelectListItem> selbuymethods = from b in buymethods
                                                                 select new SelectListItem
                                                                 {
                                                                     Text = b.nameBuy,
                                                                     Value = b.ID.ToString()
                                                                 };
-                ViewBag.buymethods = selbuymethods;
+                    ViewBag.buymethods = selbuymethods;
 
-                List<standard> standards = farmdb.standards.ToList();
-                IEnumerable<SelectListItem> selstandards = from s in standards
-                                                       select new SelectListItem
-                                                       {
-                                                           Text = s.standardName,
-                                                           Value = s.ID.ToString()
-                                                       };
-                ViewBag.standards = selstandards;
+                    List<standard> standards = farmdb.standards.ToList();
+                    IEnumerable<SelectListItem> selstandards = from s in standards
+                                                               select new SelectListItem
+                                                               {
+                                                                   Text = s.standardName,
+                                                                   Value = s.ID.ToString()
+                                                               };
+                    ViewBag.standards = selstandards;
 
+                }
+                return View(new projectand());
             }
-            return View(new projectand());
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
         
         // POST: Project/Create
@@ -164,13 +172,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(projectand projectandModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(projectandModel).State = System.Data.Entity.EntityState.Modified;
-                projectandModel.dataNow = DateTime.Now;
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(projectandModel).State = System.Data.Entity.EntityState.Modified;
+                    projectandModel.dataNow = DateTime.Now;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Edit", "Project");
             }
-            return RedirectToAction("Edit", "Project");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
         // GET: Project/Delete/5
         public ActionResult Delete(int id)
@@ -204,18 +221,27 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                projectand projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
-                standardlist StandardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectandModel.ID).FirstOrDefault();
-                farmdb.projectands.Remove(projectandModel);
-                if (StandardlistModel != null)
+                using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.standardlists.Remove(StandardlistModel);
+                    projectand projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
+                    standardlist StandardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectandModel.ID).FirstOrDefault();
+                    farmdb.projectands.Remove(projectandModel);
+                    if (StandardlistModel != null)
+                    {
+                        farmdb.standardlists.Remove(StandardlistModel);
+                    }
+                    farmdb.SaveChanges();
                 }
-                farmdb.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

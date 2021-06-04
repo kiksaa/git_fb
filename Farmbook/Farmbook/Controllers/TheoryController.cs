@@ -45,6 +45,7 @@ namespace Farmbook.Controllers
                     objcvm.ID = item.ID;
                     ViewModeltList.Add(objcvm);
                 }
+               
                 return View(ViewModeltList);
             }
         }
@@ -137,13 +138,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(theory theoryModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.theories.Add(theoryModel);
-                theoryModel.dateUpdate = DateTime.Now;
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.theories.Add(theoryModel);
+                    theoryModel.dateUpdate = DateTime.Now;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Create", "Activity", new { plan = theoryModel.ID });
             }
-            return RedirectToAction("Create", "Activity", new { plan = theoryModel.ID });
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Theory/Edit/5
@@ -187,13 +197,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(theory theoryModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(theoryModel).State = System.Data.Entity.EntityState.Modified;
-                theoryModel.dateUpdate = DateTime.Now;
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(theoryModel).State = System.Data.Entity.EntityState.Modified;
+                    theoryModel.dateUpdate = DateTime.Now;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Theory/Delete/5
@@ -237,18 +256,27 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                theory theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
-                activity activityModel = farmdb.activities.Where(a => a.plan == theoryModel.ID).FirstOrDefault();
-                farmdb.theories.Remove(theoryModel);
-                if (activityModel != null)
+                using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.activities.Remove(activityModel);
+                    theory theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
+                    activity activityModel = farmdb.activities.Where(a => a.plan == theoryModel.ID).FirstOrDefault();
+                    farmdb.theories.Remove(theoryModel);
+                    if (activityModel != null)
+                    {
+                        farmdb.activities.Remove(activityModel);
+                    }
+                    farmdb.SaveChanges();
                 }
-                farmdb.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

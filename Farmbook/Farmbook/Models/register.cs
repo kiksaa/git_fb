@@ -28,6 +28,7 @@ namespace Farmbook.Models
         [DisplayName("ทะเบียนเกษตรกร")]
         public string registerID { get; set; }
         [DisplayName("เลขบัตรประชาชน")]
+        [StringLength(13, MinimumLength = 13, ErrorMessage = "กรุณาตรวจหมายเลขบัตรประชาชนอีกครั้ง")]
         public string cardID { get; set; }
         [DisplayName("เพศ")]
         public Nullable<int> gender { get; set; }

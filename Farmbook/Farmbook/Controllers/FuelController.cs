@@ -94,40 +94,48 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(fuel fuelModel, HttpPostedFileBase fuleImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-            if (!Directory.Exists(folderPath))
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (fuleImg != null && fuleImg.ContentLength > 0)
-            {
-                if (fuleImg.ContentType == "image/jpeg" || fuleImg.ContentType == "image/jpg" || fuleImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/fuel/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(fuleImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + fuleImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (fuleImg != null && fuleImg.ContentLength > 0)
+                {
+                    if (fuleImg.ContentType == "image/jpeg" || fuleImg.ContentType == "image/jpg" || fuleImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(fuleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/fuel/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/fuel/") + fuleImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            fuleImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            fuelModel.fuleImg = fuleImg.FileName;
+                        }
                     }
                     else
                     {
-                        fuleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        fuelModel.fuleImg = fuleImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.fuels.Add(fuelModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
+            catch (Exception ex)
             {
-                farmdb.fuels.Add(fuelModel);
-                farmdb.SaveChanges();
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("IndexSum", "Equipment");
         }
 
         // GET: Fuel/Edit/5
@@ -169,14 +177,42 @@ namespace Farmbook.Controllers
 
         // POST: Fuel/Edit/5
         [HttpPost]
-        public ActionResult Edit(fuel fuelModel)
+        public ActionResult Edit(fuel fuelModel, HttpPostedFileBase fuleImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(fuelModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/fuel/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (fuleImg != null && fuleImg.ContentLength > 0)
+                {
+                    if (fuleImg.ContentType == "image/jpeg" || fuleImg.ContentType == "image/jpg" || fuleImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(fuleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/fuel/"), fileName);
+                        fuleImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        fuelModel.fuleImg = fuleImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(fuelModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Fuel/Delete/5
@@ -220,13 +256,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                fuel fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
-                farmdb.fuels.Remove(fuelModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    fuel fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
+                    farmdb.fuels.Remove(fuelModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

@@ -93,40 +93,49 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(software softwareModel, HttpPostedFileBase softwareImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-            if (!Directory.Exists(folderPath))
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (softwareImg != null && softwareImg.ContentLength > 0)
-            {
-                if (softwareImg.ContentType == "image/jpeg" || softwareImg.ContentType == "image/jpg" || softwareImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/software/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(softwareImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + softwareImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (softwareImg != null && softwareImg.ContentLength > 0)
+                {
+                    if (softwareImg.ContentType == "image/jpeg" || softwareImg.ContentType == "image/jpg" || softwareImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(softwareImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/software/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/software/") + softwareImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            softwareImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            softwareModel.softwareImg = softwareImg.FileName;
+                        }
                     }
                     else
                     {
-                        softwareImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        softwareModel.softwareImg = softwareImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.softwares.Add(softwareModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
+            catch (Exception ex)
             {
-                farmdb.softwares.Add(softwareModel);
-                farmdb.SaveChanges();
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            
         }
 
         // GET: Software/Edit/5
@@ -169,14 +178,43 @@ namespace Farmbook.Controllers
 
         // POST: Software/Edit/5
         [HttpPost]
-        public ActionResult Edit(software softwareModel)
+        public ActionResult Edit(software softwareModel, HttpPostedFileBase softwareImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(softwareModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/software/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (softwareImg != null && softwareImg.ContentLength > 0)
+                {
+                    if (softwareImg.ContentType == "image/jpeg" || softwareImg.ContentType == "image/jpg" || softwareImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(softwareImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/software/"), fileName);
+                        softwareImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        softwareModel.softwareImg = softwareImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(softwareModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Software/Delete/5
@@ -221,13 +259,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                software softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
-                farmdb.softwares.Remove(softwareModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    software softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
+                    farmdb.softwares.Remove(softwareModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <!DOCTYPE html>
 
 <html lang="th">
@@ -42,7 +41,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="col">
@@ -57,21 +56,18 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file", disabled = "disabled", @readonly = "readonly" } })
-                                @*@Html.ValidationMessageFor(model => model.farmer_img, "", new { @class = "text-danger" })*@
+                                @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new{ @class = "form-control",type = "file", @*disabled = "disabled",@readonly = "readonly"*@ } })
                                 @{ if (@Model.farmer_img != null)
                                     {
                                         <br />
                                         <img src="~/Content/img/upload/farmer/@Model.farmer_img" height="160" width="155">
                                     } }
-
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", disabled = "disabled", @readonly = "readonly" } })
-                                @*@Html.ValidationMessageFor(model => model.card_img, "", new { @class = "text-danger" })*@
+                                @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", @*disabled = "disabled", @readonly = "readonly"*@ } })
                                 @{ if (@Model.card_img != null)
                                     {
                                         <br />
@@ -82,7 +78,6 @@
                         </div>
                     </div>
                 }
-
                 <div class="col-sm-6">
 
                     <div class="form-group row">

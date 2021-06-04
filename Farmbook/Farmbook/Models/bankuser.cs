@@ -16,7 +16,7 @@ namespace Farmbook.Models
     public partial class bankuser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public bankuser()
+         public bankuser()
         {
             this.registers = new HashSet<register>();
         }

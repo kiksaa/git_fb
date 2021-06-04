@@ -97,40 +97,49 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(staple stapleModel, HttpPostedFileBase stapleImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-            if (!Directory.Exists(folderPath))
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (stapleImg != null && stapleImg.ContentLength > 0)
-            {
-                if (stapleImg.ContentType == "image/jpeg" || stapleImg.ContentType == "image/jpg" || stapleImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/staple/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(stapleImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + stapleImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (stapleImg != null && stapleImg.ContentLength > 0)
+                {
+                    if (stapleImg.ContentType == "image/jpeg" || stapleImg.ContentType == "image/jpg" || stapleImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(stapleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/staple/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/staple/") + stapleImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            stapleImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            stapleModel.stapleImg = stapleImg.FileName;
+                        }
                     }
                     else
                     {
-                        stapleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        stapleModel.stapleImg = stapleImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.staples.Add(stapleModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
+            catch (Exception ex)
             {
-                farmdb.staples.Add(stapleModel);
-                farmdb.SaveChanges();
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            
         }
 
         // GET: Staple/Edit/5
@@ -172,14 +181,43 @@ namespace Farmbook.Controllers
 
         // POST: Staple/Edit/5
         [HttpPost]
-        public ActionResult Edit(staple stapleModel)
+        public ActionResult Edit(staple stapleModel, HttpPostedFileBase stapleImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(stapleModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/staple/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (stapleImg != null && stapleImg.ContentLength > 0)
+                {
+                    if (stapleImg.ContentType == "image/jpeg" || stapleImg.ContentType == "image/jpg" || stapleImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(stapleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/staple/"), fileName);
+                        stapleImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        stapleModel.stapleImg = stapleImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(stapleModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Staple/Delete/5
@@ -223,13 +261,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                staple stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
-                farmdb.staples.Remove(stapleModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    staple stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
+                    farmdb.staples.Remove(stapleModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
     }
 }

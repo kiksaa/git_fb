@@ -28,20 +28,22 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IDmac)
-                            <div class="col-sm-4">
-                                <div class="form-group row">
-                                    @Html.LabelFor(model => model.machineImg, htmlAttributes: new { @class = "control-label col-md-3" })
-                                    <div class="col-md-8">
-                                        @Html.EditorFor(model => model.machineImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                                        @{ if (@Model.machineImg != null)
-                                            {
-                                                <br />
-                                                <img src="~/Content/img/upload/vehicle/@Model.machineImg" height="250" width="240">
-                                            } }
+                            @using (Html.BeginForm("Edit", "Machine", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-sm-4">
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.machineImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.machineImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                            @{ if (@Model.machineImg != null)
+                                                {
+                                                    <br />
+                                                    <img src="~/Content/img/upload/machine/@Model.machineImg" height="250" width="240">
+                                                } }
+                                        </div>
                                     </div>
                                 </div>
-                                @ViewBag.ActionMessage
-                            </div>
+                            }
                             <div class="col-sm-4">
                                 <h6><u>ข้อมูลทั่วไป</u></h6><br />
                                 <div class="form-group row">

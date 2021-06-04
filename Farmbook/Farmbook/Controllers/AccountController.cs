@@ -179,6 +179,7 @@ namespace Farmbook.Controllers
 
                     string password = registerDetails.password;
                     string email = registerDetails.email;
+                    
                     string Check = CheckValidUser(email);
                     if(Check == "Success")
                     {
@@ -188,7 +189,6 @@ namespace Farmbook.Controllers
                         farmdb.SaveChanges();
                         ViewBag.Count = farmdb.profiles.SqlQuery(" SELECT * FROM profile ").Count();
                     }
-                    
                 }
                 if(ViewBag.Count > 0)
                 {
@@ -262,7 +262,6 @@ namespace Farmbook.Controllers
             {
                 //Validating the user, whether the user is valid or not.
                 var isValidUser = IsValidUser(model);
-
                 //If user is valid & present in database, we are redirecting it to Welcome page.
                 if (isValidUser != null)
                 {
@@ -277,7 +276,6 @@ namespace Farmbook.Controllers
                          return RedirectToAction("Create", "Register");
                      }*/
                     return RedirectToAction("Create", "Register");
-
                 }
                 else
                 {
@@ -357,7 +355,6 @@ namespace Farmbook.Controllers
                 string userMessage = "";
                 userMessage = userMessage + "<br/><b>อีเมล์ผู้ใช้คือ : </b> " + email;
                 userMessage = userMessage + "<br/><b>รหัสผ่านของคุณคือ : </b>" + password;
-
                 string Body = "คุณ " + email + ", <br/><br/>ข้อมูลบัญชีของคุณคือ : <br/></br> " + userMessage + "<br/><br/>Thanks";
                 mail.Body = Body;
                 mail.IsBodyHtml = true;

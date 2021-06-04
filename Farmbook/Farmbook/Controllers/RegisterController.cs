@@ -23,7 +23,6 @@ namespace Farmbook.Controllers
         {
             register model = new register();
             List<register> registerList = new List<register>();
-            
             /*for(int i = 1; i <= registerList.Count(); i++)
             {
 
@@ -76,7 +75,6 @@ namespace Farmbook.Controllers
                     objcvm.adminBy = item.adminBy;
                     ViewModeltList.Add(objcvm);
                 }
-
                 return View(ViewModeltList);
             }
         }
@@ -103,17 +101,9 @@ namespace Farmbook.Controllers
                            where l.farmerName == id
                            select new
                            {
-                               l.ID,
-                               /*p.provinceName,
-                               a.ampherName,
-                               d.districtName,*/
-                               l.provinceStr,
-                               l.ampherStr,
-                               l.districtStr,
-                               l.plotName,
-                               pro.projectName,
+                               l.ID,/*p.provinceName,a.ampherName,d.districtName,*/
+                               l.provinceStr,l.ampherStr,l.districtStr,l.plotName,pro.projectName,
                            };
-
                 foreach (var item in data)
                 {
                     ViewModel objcvm = new ViewModel();
@@ -125,9 +115,7 @@ namespace Farmbook.Controllers
                     objcvm.projectName = item.projectName;
                     ViewModeltList.Add(objcvm);
                 }
-
                 ViewBag.TotalLandplot = data.Count();
-
                 return View(ViewModeltList);
             }
         }
@@ -152,11 +140,9 @@ namespace Farmbook.Controllers
                 var result = currFrom.ampherID;
                 return Json(result, JsonRequestBehavior.AllowGet);
             }*/
-
             /* var data = GetTransactionBuyingRate();*/
             using (farmdb farmdb = new farmdb())
             {
-
                 List<province> provinces = farmdb.provinces.ToList();
                 IEnumerable<SelectListItem> selprovinces = from p in provinces
                                                            select new SelectListItem
@@ -170,7 +156,6 @@ namespace Farmbook.Controllers
 
                 /*if (selectList.SelectedValue != null)
                 {*/
-
                 var ID = Convert.ToInt32(provinceID);
                 List<ampher> amphers = farmdb.amphers.Where(a => a.proID == ID).ToList();
                 /*List<ampher> amphers = farmdb.amphers.ToList();*/
@@ -217,7 +202,6 @@ namespace Farmbook.Controllers
                     ViewBag.status = selstatuss;
                 }*/
 
-
                 List<bank> banks = farmdb.banks.ToList();
                 IEnumerable<SelectListItem> selbanks = from b in banks
                                                        select new SelectListItem
@@ -226,93 +210,98 @@ namespace Farmbook.Controllers
                                                            Value = b.ID.ToString()
                                                        };
                 ViewBag.banks = selbanks;
-
             }
-
             return View(new register());
         }
-
         // POST: Register/Create
         [HttpPost]
         public ActionResult Create(register registerModel, HttpPostedFileBase farmer_img, HttpPostedFileBase card_img)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
-                if (!Directory.Exists(folderPath))
+                using (farmdb farmdb = new farmdb())
                 {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (farmer_img != null && farmer_img.ContentLength > 0)
-                {
-                    if (farmer_img.ContentType == "image/jpeg" || farmer_img.ContentType == "image/jpg" || farmer_img.ContentType == "image/png")
+                    string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
+                    if (!Directory.Exists(folderPath))
                     {
-                        var fileName = Path.GetFileName(farmer_img.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/farmer/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/farmer/") + farmer_img.FileName;
-                        if (System.IO.File.Exists(fullPath))
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    if (farmer_img != null && farmer_img.ContentLength > 0)
+                    {
+                        if (farmer_img.ContentType == "image/jpeg" || farmer_img.ContentType == "image/jpg" || farmer_img.ContentType == "image/png")
                         {
-                            ViewBag.ActionMessage = "Same File already Exists";
+                            var fileName = Path.GetFileName(farmer_img.FileName);
+                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/farmer/"), fileName);
+                            var fullPath = Server.MapPath("~/Content/img/upload/farmer/") + farmer_img.FileName;
+                            if (System.IO.File.Exists(fullPath))
+                            {
+                                ViewBag.ActionMessage = "Same File already Exists";
+                            }
+                            else
+                            {
+                                farmer_img.SaveAs(userfolderpath);
+                                ViewBag.ActionMessage = "File has been uploaded successfully";
+                                registerModel.farmer_img = farmer_img.FileName;
+                            }
+                            var file = Path.GetFileName(farmer_img.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), file);
+                            farmer_img.SaveAs(path);
                         }
                         else
                         {
-                            farmer_img.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            registerModel.farmer_img = farmer_img.FileName;
+                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                         }
                     }
-                    else
+                    string folderPathid = Server.MapPath("~/Content/img/upload/idcard/");
+                    if (!Directory.Exists(folderPathid))
                     {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                        Directory.CreateDirectory(folderPathid);
                     }
-                }
-                string folderPathid = Server.MapPath("~/Content/img/upload/idcard/");
-                if (!Directory.Exists(folderPathid))
-                {
-                    Directory.CreateDirectory(folderPathid);
-                }
-                if (card_img != null && card_img.ContentLength > 0)
-                {
-                    if (card_img.ContentType == "image/jpeg" || card_img.ContentType == "image/jpg" || card_img.ContentType == "image/png")
+                    if (card_img != null && card_img.ContentLength > 0)
                     {
-                        var fileName = Path.GetFileName(card_img.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/idcard/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/idcard/") + card_img.FileName;
-                        if (System.IO.File.Exists(fullPath))
+                        if (card_img.ContentType == "image/jpeg" || card_img.ContentType == "image/jpg" || card_img.ContentType == "image/png")
                         {
-                            ViewBag.ActionMessage = "Same File already Exists";
+                            var fileName = Path.GetFileName(card_img.FileName);
+                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/idcard/"), fileName);
+                            var fullPath = Server.MapPath("~/Content/img/upload/idcard/") + card_img.FileName;
+                            if (System.IO.File.Exists(fullPath))
+                            {
+                                ViewBag.ActionMessage = "Same File already Exists";
+                            }
+                            else
+                            {
+                                card_img.SaveAs(userfolderpath);
+                                ViewBag.ActionMessage = "File has been uploaded successfully";
+                                registerModel.card_img = card_img.FileName;
+                            }
                         }
                         else
                         {
-                            card_img.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            registerModel.card_img = card_img.FileName;
+                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                         }
                     }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
+                    /*bankuser bank = new bankuser();*/
+                    /* bank.ID = (int)registerModel.bank;*/
+                    farmdb.registers.Add(registerModel);
+                    registerModel.adminBy = User.Identity.Name;
+                    registerModel.dateUpdate = DateTime.Now;
+                    /*farmdb.bankusers.Add(bank);*/
+                    farmdb.SaveChanges();
                 }
-
-                /*bankuser bank = new bankuser();*/
-                /* bank.ID = (int)registerModel.bank;*/
-                farmdb.registers.Add(registerModel);
-                registerModel.adminBy = User.Identity.Name;
-                registerModel.dateUpdate = DateTime.Now;
-                /*farmdb.bankusers.Add(bank);*/
-                
-                farmdb.SaveChanges();
+                return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
             }
-            return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
-
         // GET: Register/Edit/5
         public ActionResult Edit(int id)
         {
             register registerModel = new register();
             bankuser bankuserModel = new bankuser();
-
             using (farmdb farmdb = new farmdb())
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
@@ -378,87 +367,76 @@ namespace Farmbook.Controllers
 
             }
             return View(registerModel);
-
         }
-
         // POST: Register/Edit/5
         [HttpPost]
         public ActionResult Edit(register registerModel, HttpPostedFileBase farmer_img, HttpPostedFileBase card_img)
         {
-            /*register registerModel = new register();*/
-            bankuser bankuserModel = new bankuser();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
-                if (!Directory.Exists(folderPath))
+                /*register registerModel = new register();*/
+                bankuser bankuserModel = new bankuser();
+                using (farmdb farmdb = new farmdb())
                 {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (farmer_img != null && farmer_img.ContentLength > 0)
-                {
-                    if (farmer_img.ContentType == "image/jpeg" || farmer_img.ContentType == "image/jpg" || farmer_img.ContentType == "image/png")
+                    string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
+                    if (!Directory.Exists(folderPath))
                     {
-                        var fileName = Path.GetFileName(farmer_img.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/farmer/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/farmer/") + farmer_img.FileName;
-                        if (System.IO.File.Exists(fullPath))
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    if (farmer_img != null && farmer_img.ContentLength > 0)
+                    {
+                        if (farmer_img.ContentType == "image/jpeg" || farmer_img.ContentType == "image/jpg" || farmer_img.ContentType == "image/png")
                         {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
+                            var fileName = Path.GetFileName(farmer_img.FileName);
+                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/farmer/"), fileName);
                             farmer_img.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
                             registerModel.farmer_img = farmer_img.FileName;
                         }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
-                string folderPathid = Server.MapPath("~/Content/img/upload/idcard/");
-                if (!Directory.Exists(folderPathid))
-                {
-                    Directory.CreateDirectory(folderPathid);
-                }
-                if (card_img != null && card_img.ContentLength > 0)
-                {
-                    if (card_img.ContentType == "image/jpeg" || card_img.ContentType == "image/jpg" || card_img.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(card_img.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/idcard/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/idcard/") + card_img.FileName;
-                        if (System.IO.File.Exists(fullPath))
+                        else
                         {
-                            ViewBag.ActionMessage = "Same File already Exists";
+                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                        }
+                    }
+                    string folderPathid = Server.MapPath("~/Content/img/upload/idcard/");
+                    if (!Directory.Exists(folderPathid))
+                    {
+                        Directory.CreateDirectory(folderPathid);
+                    }
+                    if (card_img != null && card_img.ContentLength > 0)
+                    {
+                        if (card_img.ContentType == "image/jpeg" || card_img.ContentType == "image/jpg" || card_img.ContentType == "image/png")
+                        {
+                            var fileName = Path.GetFileName(card_img.FileName);
+                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/idcard/"), fileName);
+                            card_img.SaveAs(userfolderpath);
+                            registerModel.card_img = card_img.FileName;
                         }
                         else
                         {
-                            card_img.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            registerModel.card_img = card_img.FileName;
+                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                         }
                     }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                     /*bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
                     registerModel.bankuser = bankuserModel;*/
-                registerModel.bank = bankuserModel.ID;
-                /*registerModel.bankuser = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
-                farmdb.Entry(registerModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Added;
-                registerModel.adminBy = User.Identity.Name;
-                registerModel.dateUpdate = DateTime.Now;
-                /*UpdateModel(bankuserModel);*/
-                farmdb.SaveChanges();
-            }
-            return RedirectToAction("Index");
-        }
+                    registerModel.bank = bankuserModel.ID;
 
+                    /*registerModel.bankuser = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
+                    farmdb.Entry(registerModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Added;
+                    registerModel.adminBy = User.Identity.Name;
+                    registerModel.dateUpdate = DateTime.Now;
+                    /*UpdateModel(bankuserModel);*/
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
         // GET: Register/Delete/5
         public ActionResult Delete(int id)
         {
@@ -518,26 +496,34 @@ namespace Farmbook.Controllers
             }
             return View(registerModel);
         }
-
         // POST: Register/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                register registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
-                bankuser bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
-                landplot landplotModel = farmdb.landplots.Where(p => p.farmerName == registerModel.ID).FirstOrDefault();
-                registerModel.bankuser = bankuserModel;
-                farmdb.registers.Remove(registerModel);
-                farmdb.bankusers.Remove(bankuserModel);
-                if (landplotModel != null)
+                using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.landplots.Remove(landplotModel);
+                    register registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
+                    bankuser bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
+                    landplot landplotModel = farmdb.landplots.Where(p => p.farmerName == registerModel.ID).FirstOrDefault();
+                    registerModel.bankuser = bankuserModel;
+                    farmdb.registers.Remove(registerModel);
+                    farmdb.bankusers.Remove(bankuserModel);
+                    if (landplotModel != null)
+                    {
+                        farmdb.landplots.Remove(landplotModel);
+                    }
+                    farmdb.SaveChanges();
                 }
-                farmdb.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         [HttpPost]
@@ -551,21 +537,15 @@ namespace Farmbook.Controllers
                     {
                         string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
                         file.SaveAs(path);
-
                     }
                     ViewBag.FileStatus = "File uploaded successfully.";
                 }
                 catch (Exception)
                 {
-
                     ViewBag.FileStatus = "Error while file uploading.";
                 }
-
             }
             return View("Index");
         }
-
     }
-
-
 }

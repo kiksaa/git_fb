@@ -19,7 +19,6 @@ namespace Farmbook.Controllers
             }
             return View(ActivitytModel);
         }
-
         // GET: Standardlist/Details/5
         public ActionResult Details(int id)
         {
@@ -33,27 +32,35 @@ namespace Farmbook.Controllers
             {
                 List<theory> projectands = farmdb.theories.ToList();
                 IEnumerable<SelectListItem> seltheories = from t in projectands
-                                                             select new SelectListItem
-                                                             {
-                                                                 Text = t.workName,
-                                                                 Value = t.ID.ToString()
-                                                             };
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = t.workName,
+                                                              Value = t.ID.ToString()
+                                                          };
                 ViewBag.theories = seltheories;
 
             }
             return View(new activity());
         }
-
         // POST: Standardlist/Create
         [HttpPost]
         public ActionResult Create(activity StandardlistModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.activities.Add(StandardlistModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.activities.Add(StandardlistModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Theory");
             }
-            return RedirectToAction("Index", "Theory");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                /*MessageBox.Show(ex.InnerException.InnerException.Message);*/
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Standardlist/Edit/5
@@ -80,12 +87,20 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(activity StandardlistModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(StandardlistModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(StandardlistModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Theory");
             }
-            return RedirectToAction("Index", "Theory");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }       
         }
 
         // GET: Standardlist/Delete/5
@@ -111,13 +126,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                activity StandardlistModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
-                farmdb.activities.Remove(StandardlistModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    activity StandardlistModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
+                    farmdb.activities.Remove(StandardlistModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Theory");
             }
-            return RedirectToAction("Index", "Theory");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

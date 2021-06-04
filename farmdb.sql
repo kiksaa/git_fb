@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2021 at 04:12 AM
+-- Generation Time: Jun 04, 2021 at 08:21 AM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -1090,9 +1090,7 @@ INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
 (19, 2, 'yp', '123'),
 (20, 3, 'ศิวกร', '326253526'),
 (21, 2, 'papo', '123456789'),
-(22, 10, 'วาวา คีรีวรรณ', '1231516140'),
-(23, 2, 'ธงชาติ ธรรมรงค์', '3210202103'),
-(24, 10, 'วาวา คีรีวรรณ', '1231516140');
+(22, 2, 'ธงชาติ ธรรมรงค์', '3210202103');
 
 -- --------------------------------------------------------
 
@@ -8787,9 +8785,9 @@ CREATE TABLE `landplot` (
 --
 
 INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
-(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, NULL, NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL),
+(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.445397151744375', '100.14076194888719', 3.75, '3 ไร่ 3 งาน 1 ตารางวา', NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL),
 (2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, NULL, NULL, NULL),
-(3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0.3, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.469461431158903', '100.12672164694303', 2.02, '2 ไร่ 0 งาน 7 ตารางวา', NULL, 2, NULL, NULL, NULL, 200, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (4, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, NULL, NULL),
 (5, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4.18, NULL, NULL, 20, NULL, NULL, NULL, 300, NULL, NULL, NULL, NULL),
 (6, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 106.24, NULL, NULL, 20, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
@@ -9017,7 +9015,8 @@ INSERT INTO `projectand` (`ID`, `dataNow`, `proName`, `buyMethod`, `detail`, `ma
 (2, '2021-04-26 11:20:55', 'pipi', 10, 'ดาด่าด้า', 10),
 (3, '2021-04-26 11:22:32', 'yy', 10, 'ไถนา', 10),
 (4, '2021-04-26 11:33:06', 'rr', 30, 'ดาด่าด้า', 30),
-(6, '2021-04-26 14:35:48', 'tt', 10, 'ไถนา', 20);
+(5, '2021-04-26 14:35:48', 'tt', 10, 'ไถนา', 20),
+(6, '2021-06-04 09:57:53', 'haha', 10, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9152,11 +9151,11 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
-(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1478-04-26', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, NULL, NULL, 24, NULL, '2021-05-31 15:52:40', '', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
-(2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 23, NULL, '2021-05-25 17:38:11', 'admin', NULL, NULL, NULL),
+(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1447-10-23', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 2, NULL, '2021-06-02 10:17:56', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, '2021-05-25 17:38:11', 'admin', NULL, NULL, NULL),
 (3, 'sava gee', '223366', '1423625120103', NULL, '1477-12-30', 635948123, NULL, NULL, 36, 6, 'เจริญ', 1, 1, 3, NULL, NULL, NULL, 1, 100, '2021-01-20 09:14:38', '', NULL, NULL, NULL),
 (4, 'เอก นามเอก', '171816', NULL, 100, NULL, 652195423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-01-20 15:38:32', '', NULL, NULL, NULL),
-(5, 'ศิวกร', '1112', '1234854614822', 100, NULL, 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, 'TTT', 'default-avatar.png', 'mike.jpg', 20, NULL, '2021-05-20 09:55:58', '', NULL, NULL, NULL),
+(5, 'ศิวกร', '1112', '1234854614822', 100, '1478-06-01', 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default-avatar.png', 'mike.jpg', 20, NULL, '2021-06-02 10:04:36', 'Dada@gmail.com', NULL, NULL, NULL),
 (6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
 (7, 'ฟารีน่า ดาหร่า', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 300, '2021-01-27 09:19:13', '', NULL, NULL, NULL),
 (8, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 12, NULL, '2021-01-29 15:22:39', '', NULL, NULL, NULL),
@@ -9271,7 +9270,8 @@ INSERT INTO `standardlist` (`ID`, `list`, `fillin`, `img`, `IDpro`, `IDlist`) VA
 (2, 'พรวนดิน', 0, 1, 4, 1),
 (3, 'เก็บผล', 1, 0, 1, 2),
 (4, 'กำจัดแมลง', 1, 1, 3, 1),
-(5, 'เตรียมปุ๋ย', 1, 0, 3, 2);
+(5, 'เตรียมปุ๋ย', 1, 0, 3, 2),
+(6, 'พรวนดิน', 0, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -9367,8 +9367,9 @@ CREATE TABLE `theory` (
 
 INSERT INTO `theory` (`workProcedure`, `farmingType`, `type`, `sepecies`, `product`, `project`, `workName`, `access`, `reference`, `detail`, `dateUpdate`, `ID`) VALUES
 (102, 'พืช', 'มัน', 'มันสำปะหลัง', 'มันอินทรีย์', 80, 'การปลูกจนถึงเก็บเกี่ยวผลผลิต', 102, 'Organic Thailand', 'เครือข่ายมันอินทรีย์', '2021-05-14 17:43:58', 1),
-(101, 'พืช', 'มัน', 'มันสำปะหลัง', 'มันอินทรีย์', 80, 'การปลูกจนถึงเก็บเกี่ยวผลผลิต', 102, 'Organic Thailand', 'เครือข่ายมันอินทรีย์', '2021-05-14 17:41:30', 2),
-(103, 'พืช', 'มัน', 'มันสำปะหลัง(อินทรีย์)', 'โครงการมันอินทรีย์', 10, 'การปลูกมันสำประหลังอินทรีย์', 101, 'Organic Thailand', 'ติดตามเครือข่ายมันอินทรีย์ ภายในจังหวัดนครราชสีมา', '2021-05-28 10:28:35', 3);
+(101, 'พืช', 'มัน', 'มันสำปะหลัง', 'มันอินทรีย์', 80, 'การปลูกจนถึงเก็บเกี่ยวผลผลิต2', 102, 'Organic Thailand', 'เครือข่ายมันอินทรีย์', '2021-06-04 09:21:07', 2),
+(103, 'พืช', 'มัน', 'มันสำปะหลัง(อินทรีย์)', 'โครงการมันอินทรีย์', 10, 'การปลูกมันสำประหลังอินทรีย์', 101, 'Organic Thailand', 'ติดตามเครือข่ายมันอินทรีย์ ภายในจังหวัดนครราชสีมา', '2021-05-28 10:28:35', 3),
+(101, 'พืช', 'ข้าวโพด', 'เหนียวม่วง', 'ข้าวโพดเหนียวสีม่วง', NULL, 'การปลูกข้าวโพด', 101, 'Organic Thailand', NULL, '2021-06-04 10:04:14', 4);
 
 -- --------------------------------------------------------
 
@@ -9460,7 +9461,7 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`vehicleType`, `vehicleID`, `vehicleName`, `detail`, `price`, `unitBuy`, `unitUse`, `dateBuy`, `workTime`, `fuel`, `energy`, `vehicleImg`, `IDve`) VALUES
-(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2003-01-11', 10, 20, 200, 'favicon.png', 1),
+(600, 'G-09', 'รถไถ', 'ใช้งานในไร่', 500000, 300, 300, '2003-01-11', 10, 20, 200, 'apple-icon.png', 1),
 (600, 'G-10', 'รถไถ', 'ใช้งานในไร่', 600000, 300, 300, '2019-09-02', 10, 20, 200, 'img_3115.jpg', 2);
 
 -- --------------------------------------------------------
@@ -9811,7 +9812,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `buymethod`
@@ -9889,7 +9890,7 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT for table `projectand`
 --
 ALTER TABLE `projectand`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `register`
@@ -9907,7 +9908,7 @@ ALTER TABLE `software`
 -- AUTO_INCREMENT for table `standardlist`
 --
 ALTER TABLE `standardlist`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `staple`
@@ -9919,7 +9920,7 @@ ALTER TABLE `staple`
 -- AUTO_INCREMENT for table `theory`
 --
 ALTER TABLE `theory`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `typeownership`

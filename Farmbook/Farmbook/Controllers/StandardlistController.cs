@@ -39,7 +39,6 @@ namespace Farmbook.Controllers
                                                                 Value = p.ID.ToString()
                                                             };
                 ViewBag.projectands = selprojectands;
-
             }
             return View(new standardlist());
         }
@@ -48,12 +47,20 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(standardlist StandardlistModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.standardlists.Add(StandardlistModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.standardlists.Add(StandardlistModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Project");
             }
-            return RedirectToAction("Index", "Project");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Standardlist/Edit/5
@@ -80,12 +87,21 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(standardlist StandardlistModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(StandardlistModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(StandardlistModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Project");
             }
-            return RedirectToAction("Index", "Project");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Standardlist/Delete/5
@@ -111,13 +127,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                standardlist StandardlistModel = farmdb.standardlists.Where(x => x.ID == id).FirstOrDefault();
-                farmdb.standardlists.Remove(StandardlistModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    standardlist StandardlistModel = farmdb.standardlists.Where(x => x.ID == id).FirstOrDefault();
+                    farmdb.standardlists.Remove(StandardlistModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Project");
             }
-            return RedirectToAction("Index", "Project");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
     }
 }

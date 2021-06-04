@@ -85,12 +85,14 @@ namespace Farmbook.Controllers
             }
             return View(new labor());
         }
-
-        // POST: Labor/Create
-        [HttpPost]
+         
+    // POST: Labor/Create
+    [HttpPost]
         public ActionResult Create(labor laborModel, HttpPostedFileBase laborImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
+            try
+            {
+            string folderPath = Server.MapPath("~/Content/img/upload/labor/");
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -100,8 +102,8 @@ namespace Farmbook.Controllers
                 if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
                 {
                     var fileName = Path.GetFileName(laborImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + laborImg.FileName;
+                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
+                    var fullPath = Server.MapPath("~/Content/img/upload/labor/") + laborImg.FileName;
                     if (System.IO.File.Exists(fullPath))
                     {
                         ViewBag.ActionMessage = "Same File already Exists";
@@ -124,6 +126,13 @@ namespace Farmbook.Controllers
                 farmdb.SaveChanges();
             }
             return RedirectToAction("IndexSum", "Equipment");
+        }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Labor/Edit/5
@@ -157,14 +166,43 @@ namespace Farmbook.Controllers
 
         // POST: Labor/Edit/5
         [HttpPost]
-        public ActionResult Edit(labor laborModel)
+        public ActionResult Edit(labor laborModel, HttpPostedFileBase laborImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(laborModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/labor/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (laborImg != null && laborImg.ContentLength > 0)
+                {
+                    if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(laborImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
+                        laborImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        laborModel.laborImg = laborImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(laborModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Labor/Delete/5
@@ -200,13 +238,21 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                labor laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
-                farmdb.labors.Remove(laborModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    labor laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
+                    farmdb.labors.Remove(laborModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

@@ -25,11 +25,11 @@
         @Html.AntiForgeryToken()
 
         <div class="col">
-            <h4>ขั้นตอนการทำงาน</h4>
+            <h4>แผนการดำเนินงาน</h4>
             <hr />
             <div class="row justify-content-center">
                 <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-success mb-3" style="width: 100rem;">
-                    <h4>เพิ่มขั้นตอนการทำงาน</h4>
+                    <h4>เพิ่มแผนการดำเนินงาน</h4>
                     <div class="card-body">
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -91,15 +91,22 @@
                                 <div class="container">
                                     <div class="row justify-content-md-center">
                                         <div class="form-group row">
-                                            <div class="col-6">
-                                                <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Theory")">
+                                            <div class="col-4">
+                                                <a type="button" class="btn btn-danger" href="@Url.Action("Create", "Theory")">
                                                     <span>
                                                         กลับ
                                                     </span>
                                                 </a>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <input type="submit" value="บันทึก" class="btn btn-success" />
+                                            </div>
+                                            <div class="col-4">
+                                                <a class="btn btn-warning" href="@Url.Action("Index", "Theory")">
+                                                    <span>
+                                                        ข้าม
+                                                    </span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

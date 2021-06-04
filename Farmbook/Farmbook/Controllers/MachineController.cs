@@ -97,40 +97,49 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(machine machineModel, HttpPostedFileBase machineImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-            if (!Directory.Exists(folderPath))
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (machineImg != null && machineImg.ContentLength > 0)
-            {
-                if (machineImg.ContentType == "image/jpeg" || machineImg.ContentType == "image/jpg" || machineImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/machine/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(machineImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + machineImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (machineImg != null && machineImg.ContentLength > 0)
+                {
+                    if (machineImg.ContentType == "image/jpeg" || machineImg.ContentType == "image/jpg" || machineImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(machineImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/machine/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/machine/") + machineImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            machineImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            machineModel.machineImg = machineImg.FileName;
+                        }
                     }
                     else
                     {
-                        machineImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        machineModel.machineImg = machineImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.machines.Add(machineModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
+            catch (Exception ex)
             {
-                farmdb.machines.Add(machineModel);
-                farmdb.SaveChanges();
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            
         }
 
         // GET: Machine/Edit/5
@@ -173,14 +182,43 @@ namespace Farmbook.Controllers
 
         // POST: Machine/Edit/5
         [HttpPost]
-        public ActionResult Edit(machine machineModel)
+        public ActionResult Edit(machine machineModel, HttpPostedFileBase machineImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(machineModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/machine/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (machineImg != null && machineImg.ContentLength > 0)
+                {
+                    if (machineImg.ContentType == "image/jpeg" || machineImg.ContentType == "image/jpg" || machineImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(machineImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/machine/"), fileName);
+                        machineImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        machineModel.machineImg = machineImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(machineModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Machine/Delete/5
@@ -224,13 +262,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                machine machineModel = farmdb.machines.Where(x => x.IDmac == id).FirstOrDefault();
-                farmdb.machines.Remove(machineModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    machine machineModel = farmdb.machines.Where(x => x.IDmac == id).FirstOrDefault();
+                    farmdb.machines.Remove(machineModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

@@ -49,12 +49,14 @@
                                 <th></th>
                             </tr>
                         </thead>
+                        @{ var i = 0;}
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ID)
+                                        @{i++;}
+                                        @i
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.IDlist)

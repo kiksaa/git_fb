@@ -189,19 +189,28 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(landplot plotModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                /*landplot land = new landplot();
-                register re = new register();*/
+                using (farmdb farmdb = new farmdb())
+                {
+                    /*landplot land = new landplot();
+                    register re = new register();*/
 
-                /*re.ID = (int)plotModel.farmerName;*/
+                    /*re.ID = (int)plotModel.farmerName;*/
 
-                farmdb.landplots.Add(plotModel);
-                /*farmdb.landplots.Add(land);
-                farmdb.registers.Add(re);*/
-                farmdb.SaveChanges();
+                    farmdb.landplots.Add(plotModel);
+                    /*farmdb.landplots.Add(land);
+                    farmdb.registers.Add(re);*/
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: LandPlot/Edit/5
@@ -320,15 +329,24 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(landplot plotModel)
         {
-            /*register registerModel = new register();*/
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                /*plotModel.farmerName = registerModel.ID;*/
-                farmdb.Entry(plotModel).State = System.Data.Entity.EntityState.Modified;
-                /*plotModel.farmerName = plotModel.farmerName;*/
-                farmdb.SaveChanges();
+                /*register registerModel = new register();*/
+                using (farmdb farmdb = new farmdb())
+                {
+                    /*plotModel.farmerName = registerModel.ID;*/
+                    farmdb.Entry(plotModel).State = System.Data.Entity.EntityState.Modified;
+                    /*plotModel.farmerName = plotModel.farmerName;*/
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: LandPlot/Delete/5
@@ -409,13 +427,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                landplot plotModel = farmdb.landplots.Where(x => x.ID == id).FirstOrDefault();
-                farmdb.landplots.Remove(plotModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    landplot plotModel = farmdb.landplots.Where(x => x.ID == id).FirstOrDefault();
+                    farmdb.landplots.Remove(plotModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

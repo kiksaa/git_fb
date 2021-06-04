@@ -98,40 +98,49 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(vehicle vehicleModel, HttpPostedFileBase vehicleImg)
         {
-            string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-            if (!Directory.Exists(folderPath))
+            try
             {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (vehicleImg != null && vehicleImg.ContentLength > 0)
-            {
-                if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(vehicleImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + vehicleImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (vehicleImg != null && vehicleImg.ContentLength > 0)
+                {
+                    if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(vehicleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + vehicleImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            vehicleImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            vehicleModel.vehicleImg = vehicleImg.FileName;
+                        }
                     }
                     else
                     {
-                        vehicleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        vehicleModel.vehicleImg = vehicleImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.vehicles.Add(vehicleModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
+            catch (Exception ex)
             {
-                farmdb.vehicles.Add(vehicleModel);
-                farmdb.SaveChanges();
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            
         }
 
         // GET: Equipment/Edit/5
@@ -174,14 +183,43 @@ namespace Farmbook.Controllers
 
         // POST: Equipment/Edit/5
         [HttpPost]
-        public ActionResult Edit(vehicle vehicleModel)
+        public ActionResult Edit(vehicle vehicleModel, HttpPostedFileBase vehicleImg)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(vehicleModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.SaveChanges();
+                string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (vehicleImg != null && vehicleImg.ContentLength > 0)
+                {
+                    if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
+                    {
+                        var fileName = Path.GetFileName(vehicleImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
+                        vehicleImg.SaveAs(userfolderpath);
+                        ViewBag.ActionMessage = "File has been uploaded successfully";
+                        vehicleModel.vehicleImg = vehicleImg.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    }
+                }
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.Entry(vehicleModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Vehicle/Delete/5
@@ -225,13 +263,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                vehicle vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
-                farmdb.vehicles.Remove(vehicleModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    vehicle vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
+                    farmdb.vehicles.Remove(vehicleModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            return RedirectToAction("IndexSum", "Equipment");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

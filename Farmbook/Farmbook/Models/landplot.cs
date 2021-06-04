@@ -45,6 +45,7 @@ namespace Farmbook.Models
         public string coordinatesEnd { get; set; }
         [DisplayName("เนื้อที่")]
         public Nullable<float> areaPlot { get; set; }
+        [DisplayName("เนื้อที่หน่วยเป็นไร่")]
         public string areaPlotS { get; set; }
         [DisplayName("รายละเอียดแปลง")]
         public string plotDetails { get; set; }

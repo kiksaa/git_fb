@@ -127,25 +127,22 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(profile profileModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.profiles.Add(profileModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    farmdb.profiles.Add(profileModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
-
-        // GET: Profile/Edit/5
-        /*public ActionResult Edit(int id)
-        {
-            profile profileModel = new profile();
-            using (farmdb farmdb = new farmdb())
-            {
-                profileModel = farmdb.profiles.Where(x => x.ID == id).FirstOrDefault();
-            }
-            return View(profileModel);
-        }*/
-
         public ActionResult Edit(string email)
         {
             profile profileModel = new profile();
@@ -197,19 +194,28 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Edit(profile profileModel, login loginModel)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                farmdb.Entry(profileModel).State = System.Data.Entity.EntityState.Modified;
-                farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Added;
-                /*if (loginModel == new login())
+                using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Deleted;
-                }*/
-                /*farmdb.Entry(profileModel).State = EntityState.Modified;*/
-                /*farmdb.Entry(loginModel).State = EntityState.Added;*/
-                farmdb.SaveChanges();
+                    farmdb.Entry(profileModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Added;
+                    /*if (loginModel == new login())
+                    {
+                        farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Deleted;
+                    }*/
+                    /*farmdb.Entry(profileModel).State = EntityState.Modified;*/
+                    /*farmdb.Entry(loginModel).State = EntityState.Added;*/
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index", "Profile");
             }
-            return RedirectToAction("Index","Profile");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Profile/Delete/5
@@ -247,7 +253,6 @@ namespace Farmbook.Controllers
                                                            };
                 ViewBag.districts = seldistricts;
 
-
                 List<registertype> registertypes = farmdb.registertypes.ToList();
                 IEnumerable<SelectListItem> selretypes = from rt in registertypes
                                                          select new SelectListItem
@@ -264,15 +269,24 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                profile profileModel = farmdb.profiles.Where(x => x.ID == id).FirstOrDefault();
-                login loginModel = farmdb.logins.Where(l => l.email == profileModel.email).FirstOrDefault();
-                farmdb.profiles.Remove(profileModel);
-                farmdb.logins.Remove(loginModel);
-                farmdb.SaveChanges();
+                using (farmdb farmdb = new farmdb())
+                {
+                    profile profileModel = farmdb.profiles.Where(x => x.ID == id).FirstOrDefault();
+                    login loginModel = farmdb.logins.Where(l => l.email == profileModel.email).FirstOrDefault();
+                    farmdb.profiles.Remove(profileModel);
+                    farmdb.logins.Remove(loginModel);
+                    farmdb.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.InnerException.InnerException.Message;
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
     }
 }

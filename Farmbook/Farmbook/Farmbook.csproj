@@ -519,6 +519,11 @@
     <Content Include="Content\img\Bpu.png" />
     <Content Include="Content\img\Bsd.png" />
     <Content Include="Content\img\Bsu.png" />
+    <Content Include="Content\img\logo\alpha.png" />
+    <Content Include="Content\img\logo\alphabet.png" />
+    <Content Include="Content\img\logo\coloridas.png" />
+    <Content Include="Content\img\logo\girassol.png" />
+    <Content Include="Content\img\logo\tree.png" />
     <Content Include="Content\img\logo\farmbook-logo.png" />
     <Content Include="Content\img\logo\logo-transparent-mini.png" />
     <Content Include="Content\img\logo\logo-transparent.png" />
@@ -549,6 +554,7 @@
     <Content Include="Content\img\upload\idcard\favicon.png" />
     <Content Include="Content\img\upload\idcard\mike.jpg" />
     <Content Include="Content\img\upload\idcard\mstile-150x150.png" />
+    <Content Include="Content\img\upload\staple\bg5.jpg" />
     <Content Include="Content\img\upload\vehicle\bg5.jpg" />
     <Content Include="Content\img\upload\vehicle\default-avatar.png" />
     <Content Include="Content\img\upload\vehicle\favicon.png" />
@@ -2673,6 +2679,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\upload\equipment\" />
+    <Folder Include="Content\img\upload\fuel\" />
+    <Folder Include="Content\img\upload\labor\" />
+    <Folder Include="Content\img\upload\machine\" />
+    <Folder Include="Content\img\upload\software\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

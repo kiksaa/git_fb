@@ -25,7 +25,7 @@ namespace Farmbook.Models
         public Nullable<bool> img { get; set; }
         [DisplayName("ชื่อโครงการ")]
         public int IDpro { get; set; }
-        [DisplayName("ลำดับ")]
+        [DisplayName("ลำดับรายการที่")]
         public Nullable<int> IDlist { get; set; }
         public virtual projectand projectand { get; set; }
     }
