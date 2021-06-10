@@ -199,13 +199,7 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     farmdb.Entry(profileModel).State = System.Data.Entity.EntityState.Modified;
-                    farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Added;
-                    /*if (loginModel == new login())
-                    {
-                        farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Deleted;
-                    }*/
-                    /*farmdb.Entry(profileModel).State = EntityState.Modified;*/
-                    /*farmdb.Entry(loginModel).State = EntityState.Added;*/
+                    farmdb.Entry(loginModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Profile");

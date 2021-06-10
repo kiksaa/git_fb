@@ -98,7 +98,8 @@ namespace Farmbook.Controllers
                            select new
                            {
                                l.ID, l.name, l.cradID, l.email, l.no, l.moo, l.birthday,
-                               l.gender, l.tel, l.password, p.provinceName, a.ampherName, d.districtName,
+                               l.gender, l.tel, l.password, /*p.provinceName, a.ampherName, d.districtName,*/
+                               l.districtStr, l.ampherStr, l.provinceStr
                            };
 
                 foreach (var item in data)
@@ -114,9 +115,9 @@ namespace Farmbook.Controllers
                     objcvm.gender = item.gender;
                     objcvm.tel = item.tel;
                     objcvm.password = item.password;
-                    objcvm.provinceName = item.provinceName;
-                    objcvm.ampherName = item.ampherName;
-                    objcvm.districtName = item.districtName;
+                    objcvm.provinceName = item.provinceStr;
+                    objcvm.ampherName = item.ampherStr;
+                    objcvm.districtName = item.districtStr;
 
                     ViewModeltList.Add(objcvm);
                 }
@@ -397,6 +398,10 @@ namespace Farmbook.Controllers
                 }
             }
             return View(model);
+        }
+        public ActionResult Calendar()
+        {
+            return View();
         }
     }
 }

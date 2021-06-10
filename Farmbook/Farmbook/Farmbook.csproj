@@ -494,9 +494,12 @@
     </Compile>
     <Compile Include="Models\ViewLandPlot.cs" />
     <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Farmbook.dll" />
+    <Content Include="bin\Farmbook.pdb" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -519,10 +522,8 @@
     <Content Include="Content\img\Bpu.png" />
     <Content Include="Content\img\Bsd.png" />
     <Content Include="Content\img\Bsu.png" />
-    <Content Include="Content\img\logo\alpha.png" />
-    <Content Include="Content\img\logo\alphabet.png" />
-    <Content Include="Content\img\logo\coloridas.png" />
-    <Content Include="Content\img\logo\girassol.png" />
+    <Content Include="Content\img\logo\logo-SWI.png" />
+    <Content Include="Content\img\logo\logo-SWI2.png" />
     <Content Include="Content\img\logo\tree.png" />
     <Content Include="Content\img\logo\farmbook-logo.png" />
     <Content Include="Content\img\logo\logo-transparent-mini.png" />
@@ -2298,6 +2299,17 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\FullCalendarJs\app-calendar.js" />
+    <Content Include="Scripts\FullCalendarJs\Calendar.js" />
+    <Content Include="Scripts\FullCalendarJs\Css\app-calendar.css" />
+    <Content Include="Scripts\FullCalendarJs\Css\daygrid.min.css" />
+    <Content Include="Scripts\FullCalendarJs\Css\fullcalendar.min.css" />
+    <Content Include="Scripts\FullCalendarJs\Css\timegrid.min.css" />
+    <Content Include="Scripts\FullCalendarJs\daygrid.min.js" />
+    <Content Include="Scripts\FullCalendarJs\fullcalendar.min.js" />
+    <Content Include="Scripts\FullCalendarJs\interaction.min.js" />
+    <Content Include="Scripts\FullCalendarJs\moment.min.js" />
+    <Content Include="Scripts\FullCalendarJs\timegrid.min.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -2676,6 +2688,7 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
+    <Content Include="Views\Account\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

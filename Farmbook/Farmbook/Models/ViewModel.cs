@@ -39,7 +39,7 @@ namespace Farmbook.Models
         {
             get
             {
-                return no + " หมู่ที่ " + moo + " ถนน/ซอย " + road + " " + districtName + " " + ampherName + " " + provinceName ;
+                return no + " หมู่ที่ " + moo + " ถนน/ซอย " + road + " ตำบล/แขวง " + districtName + " อำเภอ/เขต " + ampherName + " จังหวัด " + provinceName ;
             }
         }
         public int bank { get; set; }

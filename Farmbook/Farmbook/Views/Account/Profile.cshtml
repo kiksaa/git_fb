@@ -108,8 +108,10 @@
                                 </th>
                                 <td class="form-group">
                                     <div class="col-md-12">
-                                        @Html.DropDownListFor(modelItem => item.provinceName, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.EditorFor(modelItem => item.provinceName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
                                         @Html.ValidationMessageFor(modelItem => item.provinceName, "", new { @class = "text-danger" })
+                                       @* @Html.DropDownListFor(modelItem => item.provinceName, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.ValidationMessageFor(modelItem => item.provinceName, "", new { @class = "text-danger" })*@
                                     </div>
                                 </td>
                             </tr>
@@ -119,8 +121,10 @@
                                 </th>
                                 <td class="form-group">
                                     <div class="col-md-12">
-                                        @Html.DropDownListFor(modelItem => item.ampherName, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.EditorFor(modelItem => item.ampherName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
                                         @Html.ValidationMessageFor(modelItem => item.ampherName, "", new { @class = "text-danger" })
+                                       @* @Html.DropDownListFor(modelItem => item.ampherName, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.ValidationMessageFor(modelItem => item.ampherName, "", new { @class = "text-danger" })*@
                                     </div>
                                 </td>
                             </tr>
@@ -130,8 +134,10 @@
                                 </th>
                                 <td class="form-group">
                                     <div class="col-md-12">
-                                        @Html.DropDownListFor(modelItem => item.districtName, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.EditorFor(modelItem => item.districtName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
                                         @Html.ValidationMessageFor(modelItem => item.districtName, "", new { @class = "text-danger" })
+                                        @*@Html.DropDownListFor(modelItem => item.districtName, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                        @Html.ValidationMessageFor(modelItem => item.districtName, "", new { @class = "text-danger" })*@
                                     </div>
                                 </td>
                             </tr>
@@ -170,20 +176,15 @@
                                             <span> แก้ไข</span>
                                         </a>
                                     </div>
-
                                 </td>
                             </tr>
-
                         }
-
                     </table>
                 </div>
                 @*</div>*@
                 @*<div class="col-sm-6">134</div>*@
             </div>
-
-
-         @*   <div class="form-group row">
+            @*<div class="form-group row">
                 <div class="col-1">
                     <a class="btn btn-danger" href="@Url.Action("Index", "Account")">
                         <span>

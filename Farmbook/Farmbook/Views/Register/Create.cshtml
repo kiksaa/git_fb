@@ -280,7 +280,7 @@
                     </div>
                     @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", placeholder = "วัน/เดือน/ปี(พ.ศ) เกิด", required = "required" } })
+                        @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
                         @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -407,7 +407,7 @@
                         @Html.EditorFor(model => model.bankuser.bankNo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.bankuser.bankNo, "", new { @class = "text-danger" })
                     </div>
-                    @*  @Html.Action("Index", "Plot")*@
+                    @*@Html.Action("Index", "Plot")*@
                     @*@Url.Action("Create", "Bankuser")*@
                     <br />
                     <div class="col-md-12">
@@ -434,7 +434,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @* @Html.DisplayFor(model => Model.landplots)*@
+                                        @*@Html.DisplayFor(model => Model.landplots)*@
                                     </td>
                                     <td>
                                     </td>
@@ -443,7 +443,7 @@
                                     <td>
                                     </td>
                                     <td>
-                                       @* @Html.ActionLink("Delete", "#") |
+                                       @*@Html.ActionLink("Delete", "#") |
                                         @Html.ActionLink("Edit", "#")*@
                                     </td>
                                 </tr>

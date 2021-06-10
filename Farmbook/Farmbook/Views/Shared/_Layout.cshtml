@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="~/Content/img/logo/farmbook-logo.png" />
+    <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
     @*<title>FARMBOOK - หน้าแรก</title>*@
 
     <!-- Custom fonts for this template-->
@@ -23,14 +23,14 @@
 
     <!-- Sidebar -->
     <disabled id="wrapper">
-        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav @*bg-gradient-success*@ sidebar sidebar-dark accordion" id="accordionSidebar" style="color:whitesmoke;background-color:mediumseagreen">
 
             <!-- Sidebar - Brand -->
             <li>
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Account")">
                     <div class="sidebar-brand-icon">
                         @* <img src="~/Content/img/logo/logo-transparent-mini.png" width="55" height="45">*@
-                        <img src="~/Content/img/logo/alpha.png" width="45" height="60">
+                        <img src="~/Content/img/logo/logo-SWI.png" width="110" height="55">
                     </div>
                     <div class="sidebar-brand-text mx-1">Farmbook @*<sup>2</sup>*@</div>
                 </a>
@@ -120,7 +120,7 @@
                         <a class="collapse-item" href="@Url.Action("Profile", "Account")" data-toggle="modal" data-target="#profileModal">ข้อมูลผู้ใช้</a>
                         <a class="collapse-item" href="@Url.Action("Logout", "Account")" data-toggle="modal" data-target="#logoutModal">ออกจากระบบ</a>
                         @*@if (@Html.Encode(User.Identity.Name) == "admin")
-                    {*@
+                        {*@
                         <a class="collapse-item" href="@Url.Action("Index", "Profile")">บัญชีรายชื่อ</a>
                         @*}*@
                     </div>
@@ -138,7 +138,7 @@
 
             <!-- Main Content -->
             <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-success topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light @*bg-success*@ topbar mb-4 static-top shadow" style="color:whitesmoke;background-color:mediumseagreen">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -278,7 +278,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-white small">สวัสดีคุณ @Html.Encode(User.Identity.Name)</span>
-                                <img class="img-profile rounded-circle" src="~/Content/img/logo/farmbook-logo.png">
+                                <img class="img-profile rounded-circle" alt="200x200" src="~/Content/img/logo/logo-SWI2.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

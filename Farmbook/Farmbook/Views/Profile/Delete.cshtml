@@ -21,7 +21,7 @@
                 @Html.AntiForgeryToken()
                 <div class="container">
                     <div class="form-actions no-color">
-                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Account")">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Profile")">
                             <span>
                                 ยกเลิก
                             </span>
@@ -41,10 +41,6 @@
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.name) :
                             @Html.DisplayFor(model => model.name)
-                        </li>
-                        <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.cradID) :
-                            @Html.DisplayFor(model => model.cradID)
                         </li>
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.cradID) :
@@ -85,14 +81,19 @@
                             @Html.DisplayNameFor(model => model.district) :
                             @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล / แขวง", htmlAttributes: new { @class = "form-control" })
                         </li>
-                        <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.email) :
-                            @Html.DisplayFor(model => model.email)
-                        </li>
-                        <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.password) :
-                            @Html.DisplayFor(model => model.password)
-                        </li>
+
+                        @if (User.Identity.Name == Model.email)
+                        {
+                            <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.email) :
+                                @Html.DisplayFor(model => model.email)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.password) :
+                                @Html.DisplayFor(model => model.password)
+                            </li>
+                        }
+
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.registerType) :
                             @Html.DropDownListFor(model => model.registerType, (IEnumerable<SelectListItem>)ViewBag.registertypes, "เลือกประเภทเกษตรกร", htmlAttributes: new { @class = "form-control" })
