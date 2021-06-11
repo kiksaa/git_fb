@@ -1,10 +1,10 @@
 /* Calendar */
 /*-------- */
 
-var Calendar = FullCalendar.Calendar;
-var Draggable = FullCalendarInteraction.Draggable;
-var containerEl = document.getElementById('external-events');
-var calendarEl = document.getElementById('fc-external-drag');
+ var Calendar = FullCalendar.Calendar;
+  var Draggable = FullCalendarInteraction.Draggable;
+  var containerEl = document.getElementById('external-events');
+  var calendarEl = document.getElementById('fc-external-drag');
 var checkbox = document.getElementById('drop-remove');
 $(document).ready(function () {
     /*debugger*/
@@ -81,7 +81,13 @@ function GenerateCalender() {
     //            else {
     //                window.open("/Tickets/viewticket?Id=" + ticketId, '_blank');
     //            }
+
+
     //        }
+
+
+
+
     //    },
     //});
     //fcCalendar.render();
@@ -159,9 +165,11 @@ function GenerateCalender() {
             }
         },
         viewRender: function (view, element) {
+
             $('.fc-center')[0].children[0].innerText = view.title.replace(new RegExp("undefined", 'g'), "");
         },
         eventDataTransform: function (event) {
+
             if (event.allDay) {
                 event.end = moment(event.end).add(1, 'days')
             }
@@ -190,7 +198,14 @@ function GenerateCalender() {
             //            window.open("/Tickets/viewticket?Id=" + ticketId, '_blank');
             //        }
             //    }
+
+
+
             //}
+
+
+
+
         },
     });
 
