@@ -31,7 +31,6 @@ namespace Farmbook.Controllers
             {
                 registerList = farmdb.registers.ToList<register>();
                 ViewBag.TotalRegister = registerList.Count();
-                
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from r in farmdb.registers
                            join p in farmdb.provinces on r.province equals p.provinceID into plist
@@ -50,30 +49,34 @@ namespace Farmbook.Controllers
                            {
                                r.ID,r.name,r.registerID,r.cardID,r.no,r.moo,r.road,
                                /*p.provinceName,a.ampherName,d.districtName,*/
-                               r.provinceStr,r.ampherStr,r.districtStr,s.statusName,r.dateUpdate,r.adminBy,
+                               r.provinceStr,r.ampherStr,r.districtStr,s.statusName,r.dateUpdate,r.adminBy,r.active,
                                TotalLandplot = llist.Count(),
-                               Totalarea = llist.Sum(ll => ll.areaPlot)
+                               Totalarea = llist.Sum(ll => ll.areaPlot),
+                               Total = r.gender
                            };
-                
                 foreach (var item in data.Distinct())
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.ID = item.ID;
-                    objcvm.name = item.name;
-                    objcvm.registerID = item.registerID;
-                    objcvm.cardID = item.cardID;
-                    objcvm.no = item.no;
-                    objcvm.moo = item.moo;
-                    objcvm.road = item.road;
-                    objcvm.provinceName = item.provinceStr;
-                    objcvm.ampherName = item.ampherStr;
-                    objcvm.districtName = item.districtStr;
-                    objcvm.statusName = item.statusName;
-                    objcvm.dateUpdate = item.dateUpdate;
-                    objcvm.areaNumber = item.TotalLandplot;
-                    objcvm.areaPlot = item.Totalarea;
-                    objcvm.adminBy = item.adminBy;
-                    ViewModeltList.Add(objcvm);
+                    /*if(item.active == 100 || item.active == null)
+                    {*/
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.name = item.name;
+                        objcvm.registerID = item.registerID;
+                        objcvm.cardID = item.cardID;
+                        objcvm.no = item.no;
+                        objcvm.moo = item.moo;
+                        objcvm.road = item.road;
+                        objcvm.provinceName = item.provinceStr;
+                        objcvm.ampherName = item.ampherStr;
+                        objcvm.districtName = item.districtStr;
+                        objcvm.statusName = item.statusName;
+                        objcvm.dateUpdate = item.dateUpdate;
+                        objcvm.areaNumber = item.TotalLandplot;
+                        objcvm.areaPlot = item.Totalarea;
+                        objcvm.adminBy = item.adminBy;
+                        ViewModeltList.Add(objcvm);
+                    /*}
+                    ViewBag.TotalRegister = ViewModeltList.Count();*/
                 }
                 return View(ViewModeltList);
             }
@@ -292,10 +295,9 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
+                /*ViewBag.Message = ex.InnerException.InnerException.Message;*/
                 return RedirectToAction("Index", "Home");
             }
-            
         }
         // GET: Register/Edit/5
         public ActionResult Edit(int id)
@@ -432,10 +434,9 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
+                /*ViewBag.Message = ex.InnerException.InnerException.Message;*/
                 return RedirectToAction("Index", "Home");
             }
-            
         }
         // GET: Register/Delete/5
         public ActionResult Delete(int id)
@@ -508,22 +509,24 @@ namespace Farmbook.Controllers
                     bankuser bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
                     landplot landplotModel = farmdb.landplots.Where(p => p.farmerName == registerModel.ID).FirstOrDefault();
                     registerModel.bankuser = bankuserModel;
-                    farmdb.registers.Remove(registerModel);
-                    farmdb.bankusers.Remove(bankuserModel);
-                    if (landplotModel != null)
-                    {
-                        farmdb.landplots.Remove(landplotModel);
-                    }
+                    /*if (registerModel.active == 100)
+                    {*/
+                        farmdb.registers.Remove(registerModel);
+                        farmdb.bankusers.Remove(bankuserModel);
+                        if (landplotModel != null)
+                        {
+                            farmdb.landplots.Remove(landplotModel);
+                        }
+                    /*}*/
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
+                /*ViewBag.Message = ex.InnerException.InnerException.Message;*/
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         [HttpPost]

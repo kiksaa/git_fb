@@ -18,6 +18,16 @@
 
             @using (Html.BeginForm())
             {
+                @*@Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.name)
+                @Html.HiddenFor(model => model.registerID)
+                @Html.HiddenFor(model => model.cardID)
+                @Html.HiddenFor(model => model.birthday)
+                @Html.HiddenFor(model => model.tel)
+                @Html.HiddenFor(model => model.email)
+                @Html.HiddenFor(model => model.bankuser.bankID)
+                @Html.HiddenFor(model => model.bankuser.bankName)
+                @Html.HiddenFor(model => model.bankuser.bankNo)*@
                 @Html.AntiForgeryToken()
                 <div class="container">
                     <div class="form-actions no-color">
@@ -27,11 +37,47 @@
                             </span>
                         </a>
                         <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                        <!-- Button trigger modal -->
+                        @*<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                            ลบ
+                        </button>*@
+                        <!-- Modal -->
+                        <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">ลบถาวรหรือไม่?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @Html.RadioButtonFor(model => model.gender, "yes")
+                                        @Html.Label("ใช่")
+                                        <h6>เลือก <strong style="color:green"> ใช่ </strong>เพื่อลบข้อมูลออกจากฐานข้อมูลถาวร</h6>-->
+                                        @*<br />*@
+                                        <!--@Html.RadioButtonFor(model => model.gender, "no")
+                                        @Html.Label("ไม่ใช่")
+                                        <h6>เลือก <strong style="color:red"> ไม่ใช่ </strong> หากยังต้องการกู้ข้อมูลชุดนี้คืนในภายหลัง</h6>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                        <input type="submit" value="ลบ" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
                     </div>
                 </div>
             }
         </div>
     </div>
+
+    @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.ID)
+        
+    }
     <div>
         <hr />
         <div class="container">
@@ -94,7 +140,7 @@
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.card_img) :
                             @Html.DisplayFor(model => model.card_img)
-                            
+
                             @{ if (@Model.card_img != null)
                                 {
                                     <br />

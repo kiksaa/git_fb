@@ -101,6 +101,8 @@
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_2" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_3" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_4" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="farmdbModel.active" Width="1.5" PointX="24.5" PointY="14.375" />
+        <AssociationConnector Association="farmdbModel.register_ibfk_11" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

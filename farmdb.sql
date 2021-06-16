@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2021 at 12:12 PM
+-- Generation Time: Jun 16, 2021 at 11:00 AM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -40,6 +40,25 @@ INSERT INTO `access` (`accessID`, `accessName`) VALUES
 (101, 'ส่วนตัว'),
 (102, 'เฉพาะกลุ่ม'),
 (103, 'สาธารณะ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `active`
+--
+
+CREATE TABLE `active` (
+  `activeID` int NOT NULL,
+  `activeName` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `active`
+--
+
+INSERT INTO `active` (`activeID`, `activeName`) VALUES
+(100, 'Yes'),
+(200, 'No');
 
 -- --------------------------------------------------------
 
@@ -1073,21 +1092,15 @@ INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
 (2, 14, 'วาวา คีรีวรรณ', '1231516140'),
 (3, 3, 'ฟารีน่า ดาหร่า', '136532313'),
 (4, 9, 'pai', '131403141'),
-(5, 9, 'vue', '26164011'),
 (6, 6, 'favi', '1654121'),
 (7, 4, 'vue2', 'vue2'),
-(8, 8, 'testup2', '1234654'),
 (9, 1, 'vue4', '41546845'),
 (10, 7, 'news', '4651461'),
 (11, 7, 'finally', '1235645'),
 (12, 10, 'ภาคิณ สุขฤรินท์', '0203015130'),
-(13, 18, 'qq', '56465'),
+(13, 4, 'what', '213546579'),
 (14, 9, 'dt', '16465132'),
 (15, 13, 'date', '0310025'),
-(16, 7, 'iu', '1452321212'),
-(17, 4, 'testt', '1111222223'),
-(18, 13, 'wee', '161435114'),
-(19, 2, 'yp', '123'),
 (20, 3, 'ศิวกร', '326253526'),
 (21, 2, 'papo', '123456789'),
 (22, 2, 'ธงชาติ ธรรมรงค์', '3210202103');
@@ -8786,12 +8799,11 @@ CREATE TABLE `landplot` (
 
 INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
 (1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.445397151744375', '100.14076194888719', 3.75, '3 ไร่ 3 งาน 1 ตารางวา', NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL),
-(2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, NULL, NULL, NULL),
+(2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.469461431158903', '100.12672164694303', 2.02, '2 ไร่ 0 งาน 7 ตารางวา', NULL, 2, NULL, NULL, NULL, 200, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (4, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, NULL, NULL),
 (5, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.89376912786571', '100.69403831321263', 130.4, '130 ไร่ 1 งาน 60 ตารางวา', NULL, 20, NULL, NULL, NULL, 300, NULL, NULL, NULL, NULL),
 (6, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15.29668030847652', '100.66946839269202', 68.71, '68 ไร่ 2 งาน 82 ตารางวา', NULL, 20, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
-(7, 'iuu', NULL, 100, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '13.627588158580938', '99.6267542737345', 15.57, '15 ไร่ 2 งาน 26 ตารางวา', NULL, 21, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
 (8, 'popo', NULL, 100, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '13.802397182725773', '99.97373136211513', 0.91, '0 ไร่ 3 งาน 65 ตารางวา', NULL, 24, 10, NULL, NULL, 200, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -8962,7 +8974,7 @@ INSERT INTO `profile` (`ID`, `name`, `cradID`, `gender`, `birthday`, `tel`, `no`
 (7, 'ad', '1523020231110', 100, '1475-01-31', NULL, NULL, NULL, NULL, NULL, NULL, 'ad@gmial.com', 'ad123', 100, NULL, NULL, NULL),
 (8, 'UI', '3120012654312', 200, '1993-09-19', NULL, NULL, NULL, NULL, NULL, NULL, 'UI@gmail.com', 'Ui190936', 200, NULL, NULL, NULL),
 (9, 'JA', '7213541569586', 100, '1994-03-26', NULL, NULL, NULL, NULL, NULL, NULL, 'Ja@gmail.com', 'Ja260337', 100, NULL, NULL, NULL),
-(10, 'ดาด้า ใจดี', '5213658451234', 200, '1450-06-24', '0821302569', 5, 263, NULL, NULL, NULL, 'Dada@gmail.com', 'Da147258', 100, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(10, 'ดาด้า ใจดี', '5213658451234', 200, '1447-07-11', '0821302569', 12, 263, NULL, NULL, NULL, 'Dada@gmail.com', 'Da147258', 100, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (11, 'fang', '5613135461203', 200, '1995-01-25', NULL, NULL, NULL, NULL, NULL, NULL, 'samatcha.kukkik@hotmail.com', 'YIhoik145160', 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -9138,6 +9150,7 @@ CREATE TABLE `register` (
   `card_img` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `bank` int DEFAULT NULL,
   `status` int DEFAULT NULL,
+  `active` int DEFAULT NULL,
   `dateUpdate` datetime NOT NULL,
   `adminBy` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `provinceStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -9149,31 +9162,24 @@ CREATE TABLE `register` (
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
-(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1991-10-23', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 2, NULL, '2021-06-02 10:17:56', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
-(2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, '2021-05-25 17:38:11', 'admin', 'นครราชสีมา', 'เมือง', 'โคกกครวด'),
-(3, 'sava gee', '223366', '1423625120103', NULL, '1990-06-12', 635948123, 'adBA@hotmail.com', NULL, 36, 6, 'เจริญ', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2021-06-04 16:16:59', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'บ้านใหม่'),
-(4, 'เอก นามเอก', '171816', '2464645152154', 100, '1448-12-26', 652195423, 'Aone@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-06-07 10:24:02', '', NULL, NULL, NULL),
-(5, 'ศิวกร', '1112', '1234854614822', 100, '1993-06-01', 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default-avatar.png', 'mike.jpg', 20, NULL, '2021-06-02 10:04:36', 'Dada@gmail.com', NULL, NULL, NULL),
-(6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
-(7, 'ฟารีน่า ดาหร่า', '189634', '7616653798989', NULL, NULL, 0, 'Fa@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, '2021-06-04 15:39:56', 'Dada@gmail.com', NULL, NULL, NULL),
-(8, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 12, NULL, '2021-01-29 15:22:39', '', NULL, NULL, NULL),
-(9, 'pai', '461796', '1234854614822', 100, '1989-04-27', 0, 'pai@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, '2021-05-31 15:20:34', 'admin', NULL, NULL, NULL),
-(10, 'wee', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18, NULL, '2021-05-04 10:33:49', '', NULL, NULL, NULL),
-(11, 'vue', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'apple-touch-icon-60x60.png', NULL, 5, NULL, '2021-01-29 13:40:52', '', NULL, NULL, NULL),
-(12, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 6, NULL, '2021-01-29 14:03:24', '', NULL, NULL, NULL),
-(13, 'testup2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime3.png', 'favicon-16x16.png', 8, NULL, '2021-01-29 14:49:21', '', NULL, NULL, NULL),
-(14, 'vue2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 7, NULL, '2021-01-29 14:19:54', '', NULL, NULL, NULL),
-(15, 'vue4', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'System.Web.HttpPostedFileWrapper', 'apple-touch-icon-60x60.png', 9, NULL, '2021-01-29 15:03:36', '', NULL, NULL, NULL),
-(16, 'news', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'safari-pinned-tab.svg', 'msapplication-icon-144x144.png', 10, NULL, '2021-01-29 15:14:28', '', NULL, NULL, NULL),
-(17, 'finally', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mstile-150x150.png', 'favicon.png', 11, NULL, '2021-01-29 15:20:36', '', NULL, NULL, NULL),
-(18, 'qq', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, NULL, '2021-02-05 13:58:11', '', NULL, NULL, NULL),
-(19, 'date', NULL, NULL, NULL, '1991-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'bg5.jpg', 15, NULL, '2021-02-06 11:12:44', '', NULL, NULL, NULL),
-(20, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL, '2021-02-06 11:04:01', '', NULL, NULL, NULL),
-(21, 'iu', NULL, NULL, NULL, NULL, 956231202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 16, NULL, '2021-03-29 10:14:11', '', NULL, NULL, NULL),
-(22, 'test', NULL, NULL, NULL, NULL, 652312369, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 17, NULL, '2021-05-04 08:53:59', '', NULL, NULL, NULL),
-(23, 'yp', NULL, NULL, NULL, '1995-01-10', 921352610, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, '2021-05-04 10:37:47', '', NULL, NULL, NULL),
-(24, 'papo', '1112', '1234854614822', 200, '1992-05-08', 0, 'Ja@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, '2021-05-25 11:09:27', '', NULL, NULL, NULL);
+INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `active`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
+(1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1991-10-23', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 2, NULL, NULL, '2021-06-02 10:17:56', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, NULL, '2021-05-25 17:38:11', 'admin', 'นครราชสีมา', 'เมือง', 'โคกกครวด'),
+(3, 'sava gee', '223366', '1423625120103', NULL, '1990-06-12', 635948123, 'adBA@hotmail.com', NULL, 36, 6, 'เจริญ', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, '2021-06-04 16:16:59', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'บ้านใหม่'),
+(4, 'เอก นามเอก', '171816', '2464645152154', 100, '1448-12-26', 652195423, 'Aone@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, '2021-06-07 10:24:02', '', NULL, NULL, NULL),
+(5, 'ศิวกร', '1112', '1234854614822', 100, '1993-06-01', 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default-avatar.png', 'mike.jpg', 20, NULL, NULL, '2021-06-02 10:04:36', 'Dada@gmail.com', NULL, NULL, NULL),
+(6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 13, NULL, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
+(7, 'ฟารีน่า ดาหร่า', '189634', '7616653798989', NULL, NULL, 0, 'Fa@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL, '2021-06-04 15:39:56', 'Dada@gmail.com', NULL, NULL, NULL),
+(8, 'ภาคิณ สุขฤรินท์', '1646322315', '3152956402103', 100, NULL, 956231568, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mike.jpg', 'emilyz.jpg', 12, NULL, NULL, '2021-01-29 15:22:39', '', NULL, NULL, NULL),
+(9, 'pai', '461796', '1234854614822', 100, '1989-04-27', 0, 'pai@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, '2021-05-31 15:20:34', 'admin', NULL, NULL, NULL),
+(12, 'favi', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'default-avatar.png', 6, NULL, NULL, '2021-01-29 14:03:24', '', NULL, NULL, NULL),
+(14, 'vue2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 7, NULL, NULL, '2021-01-29 14:19:54', '', NULL, NULL, NULL),
+(15, 'vue4', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'System.Web.HttpPostedFileWrapper', 'apple-touch-icon-60x60.png', 9, NULL, NULL, '2021-01-29 15:03:36', '', NULL, NULL, NULL),
+(16, 'news', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'safari-pinned-tab.svg', 'msapplication-icon-144x144.png', 10, NULL, NULL, '2021-01-29 15:14:28', '', NULL, NULL, NULL),
+(17, 'finally', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mstile-150x150.png', 'favicon.png', 11, NULL, NULL, '2021-01-29 15:20:36', '', NULL, NULL, NULL),
+(19, 'date', NULL, NULL, NULL, '1991-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15, NULL, NULL, '2021-06-16 14:41:31', 'Dada@gmail.com', NULL, NULL, NULL),
+(20, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL, NULL, '2021-02-06 11:04:01', '', NULL, NULL, NULL),
+(24, 'papo', '1112', '1234854614822', 200, '1992-05-08', 0, 'Ja@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, NULL, '2021-05-25 11:09:27', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9497,6 +9503,12 @@ ALTER TABLE `access`
   ADD PRIMARY KEY (`accessID`);
 
 --
+-- Indexes for table `active`
+--
+ALTER TABLE `active`
+  ADD PRIMARY KEY (`activeID`);
+
+--
 -- Indexes for table `activity`
 --
 ALTER TABLE `activity`
@@ -9691,7 +9703,8 @@ ALTER TABLE `register`
   ADD KEY `district` (`district`),
   ADD KEY `bank` (`bank`),
   ADD KEY `status` (`status`),
-  ADD KEY `family` (`family`);
+  ADD KEY `family` (`family`),
+  ADD KEY `active` (`active`);
 
 --
 -- Indexes for table `registertype`
@@ -9811,7 +9824,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `buymethod`
@@ -10044,6 +10057,7 @@ ALTER TABLE `projectand`
 ALTER TABLE `register`
   ADD CONSTRAINT `register_ibfk_1` FOREIGN KEY (`family`) REFERENCES `family` (`familyID`),
   ADD CONSTRAINT `register_ibfk_10` FOREIGN KEY (`status`) REFERENCES `status` (`statusID`),
+  ADD CONSTRAINT `register_ibfk_11` FOREIGN KEY (`active`) REFERENCES `active` (`activeID`),
   ADD CONSTRAINT `register_ibfk_2` FOREIGN KEY (`province`) REFERENCES `province` (`provinceID`),
   ADD CONSTRAINT `register_ibfk_5` FOREIGN KEY (`district`) REFERENCES `district` (`districtID`),
   ADD CONSTRAINT `register_ibfk_7` FOREIGN KEY (`ampher`) REFERENCES `ampher` (`ampherID`),

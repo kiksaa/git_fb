@@ -42,10 +42,13 @@
                             @Html.DisplayNameFor(model => model.name) :
                             @Html.DisplayFor(model => model.name)
                         </li>
-                        <li class="list-group-item">
-                            @Html.DisplayNameFor(model => model.cradID) :
-                            @Html.DisplayFor(model => model.cradID)
-                        </li>
+                        @if (User.Identity.Name == Model.email)
+                        {
+                            <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.cradID) :
+                                @Html.DisplayFor(model => model.cradID)
+                            </li>
+                        }
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.gender) :
                             @Html.RadioButtonFor(model => model.gender, "100")
@@ -69,7 +72,7 @@
                             @Html.DisplayNameFor(model => model.moo) :
                             @Html.DisplayFor(model => model.moo)
                         </li>
-                        <li class="list-group-item">
+                       @*<li class="list-group-item">
                             @Html.DisplayNameFor(model => model.province) :
                             @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
                         </li>
@@ -80,6 +83,18 @@
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.district) :
                             @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล / แขวง", htmlAttributes: new { @class = "form-control" })
+                        </li>*@
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.provinceStr) :
+                            @Html.DisplayFor(model => model.provinceStr)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.ampherStr) :
+                            @Html.DisplayFor(model => model.ampherStr)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.districtStr) :
+                            @Html.DisplayFor(model => model.districtStr)
                         </li>
 
                         @if (User.Identity.Name == Model.email)

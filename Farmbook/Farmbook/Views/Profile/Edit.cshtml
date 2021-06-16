@@ -36,14 +36,6 @@
                         </div>
 
                         <div class="form-group row">
-                            @Html.LabelFor(model => model.cradID, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.cradID, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })
-                                @Html.ValidationMessageFor(model => model.cradID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @Html.RadioButtonFor(model => model.gender, "100")
@@ -109,6 +101,14 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
                                 @Html.ValidationMessageFor(model => model.districtStr, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.registerType, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.registerType, (IEnumerable<SelectListItem>)ViewBag.registertypes, "ประเภทเกษตรกร", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.registerType, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     }
@@ -198,35 +198,29 @@
                                 @Html.ValidationMessageFor(model => model.districtStr, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    }
+                        @*<div class="form-group row">
+                            @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/แขวง", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-
-                    @*<div class="form-group row">
-            @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/แขวง", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/เขต", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-                    @if (User.Identity.Name == Model.email)
-                    {
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/เขต", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
                         <div class="form-group row">
                             @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -242,19 +236,7 @@
                                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    }
-                    @if (User.Identity.Name != Model.email)
-                    {
-                        <div class="form-group row">
-                            @Html.LabelFor(model => model.registerType, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.registerType, (IEnumerable<SelectListItem>)ViewBag.registertypes, "ประเภทเกษตรกร", htmlAttributes: new { @class = "form-control", @readonly = "true" })
-                                @Html.ValidationMessageFor(model => model.registerType, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    }
-                    @if (User.Identity.Name == Model.email)
-                    {
+
                         <div class="form-group row">
                             @Html.LabelFor(model => model.registerType, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">

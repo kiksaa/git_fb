@@ -375,6 +375,8 @@
     <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_9" FromRole="register" ToRole="landplot" />
     <NavigationProperty Name="province1" Relationship="Self.register_ibfk_2" FromRole="register" ToRole="province" />
     <NavigationProperty Name="status1" Relationship="Self.register_ibfk_10" FromRole="register" ToRole="status" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="active1" Relationship="farmdbModel.register_ibfk_11" FromRole="register" ToRole="active" />
   </EntityType>
   <EntityType Name="registertype">
     <Key>
@@ -1473,5 +1475,30 @@
       <End Role="vehicletype" EntitySet="vehicletypes" />
       <End Role="vehicle" EntitySet="vehicles" />
     </AssociationSet>
+    <EntitySet Name="actives" EntityType="farmdbModel.active" />
+    <AssociationSet Name="register_ibfk_11" Association="farmdbModel.register_ibfk_11">
+      <End Role="active" EntitySet="actives" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="Int32" Nullable="false" />
+    <Property Name="activeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="registers" Relationship="farmdbModel.register_ibfk_11" FromRole="active" ToRole="register" />
+  </EntityType>
+  <Association Name="register_ibfk_11">
+    <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
+    <End Type="farmdbModel.register" Role="register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="active" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

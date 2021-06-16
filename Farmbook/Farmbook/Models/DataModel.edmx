@@ -4,13 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="farmdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="farmdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="access">
           <Key>
             <PropertyRef Name="accessID" />
           </Key>
           <Property Name="accessID" Type="int" Nullable="false" />
           <Property Name="accessName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="active">
+          <Key>
+            <PropertyRef Name="activeID" />
+          </Key>
+          <Property Name="activeID" Type="int" Nullable="false" />
+          <Property Name="activeName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="activity">
           <Key>
@@ -301,6 +308,7 @@
           <Property Name="card_img" Type="varchar" MaxLength="100" />
           <Property Name="bank" Type="int" />
           <Property Name="status" Type="int" />
+          <Property Name="active" Type="int" />
           <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="provinceStr" Type="varchar" MaxLength="100" />
@@ -878,6 +886,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="register_ibfk_11">
+          <End Role="active" Type="Self.active" Multiplicity="0..1" />
+          <End Role="register" Type="Self.register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="active">
+              <PropertyRef Name="activeID" />
+            </Principal>
+            <Dependent Role="register">
+              <PropertyRef Name="active" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="register_ibfk_2">
           <End Role="province" Type="Self.province" Multiplicity="0..1" />
           <End Role="register" Type="Self.register" Multiplicity="*" />
@@ -1108,6 +1128,7 @@
         </Association>
         <EntityContainer Name="farmdbModelStoreContainer">
           <EntitySet Name="access" EntityType="Self.access" Schema="farmdb" store:Type="Tables" />
+          <EntitySet Name="active" EntityType="Self.active" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="activity" EntityType="Self.activity" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
@@ -1292,6 +1313,10 @@
             <End Role="status" EntitySet="status" />
             <End Role="register" EntitySet="register" />
           </AssociationSet>
+          <AssociationSet Name="register_ibfk_11" Association="Self.register_ibfk_11">
+            <End Role="active" EntitySet="active" />
+            <End Role="register" EntitySet="register" />
+          </AssociationSet>
           <AssociationSet Name="register_ibfk_2" Association="Self.register_ibfk_2">
             <End Role="province" EntitySet="province" />
             <End Role="register" EntitySet="register" />
@@ -1369,8 +1394,7 @@
             <End Role="vehicle" EntitySet="vehicle" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="farmdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1749,6 +1773,8 @@
           <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_9" FromRole="register" ToRole="landplot" />
           <NavigationProperty Name="province1" Relationship="Self.register_ibfk_2" FromRole="register" ToRole="province" />
           <NavigationProperty Name="status1" Relationship="Self.register_ibfk_10" FromRole="register" ToRole="status" />
+          <Property Name="active" Type="Int32" />
+          <NavigationProperty Name="active1" Relationship="farmdbModel.register_ibfk_11" FromRole="register" ToRole="active" />
         </EntityType>
         <EntityType Name="registertype">
           <Key>
@@ -2847,7 +2873,32 @@
             <End Role="vehicletype" EntitySet="vehicletypes" />
             <End Role="vehicle" EntitySet="vehicles" />
           </AssociationSet>
+          <EntitySet Name="actives" EntityType="farmdbModel.active" />
+          <AssociationSet Name="register_ibfk_11" Association="farmdbModel.register_ibfk_11">
+            <End Role="active" EntitySet="actives" />
+            <End Role="register" EntitySet="registers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="active">
+          <Key>
+            <PropertyRef Name="activeID" />
+          </Key>
+          <Property Name="activeID" Type="Int32" Nullable="false" />
+          <Property Name="activeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="registers" Relationship="farmdbModel.register_ibfk_11" FromRole="active" ToRole="register" />
+        </EntityType>
+        <Association Name="register_ibfk_11">
+          <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
+          <End Type="farmdbModel.register" Role="register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="active">
+              <PropertyRef Name="activeID" />
+            </Principal>
+            <Dependent Role="register">
+              <PropertyRef Name="active" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3155,6 +3206,7 @@
           <EntitySetMapping Name="registers">
             <EntityTypeMapping TypeName="farmdbModel.register">
               <MappingFragment StoreEntitySet="register">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="registerID" ColumnName="registerID" />
@@ -3333,6 +3385,14 @@
               <MappingFragment StoreEntitySet="vehicletype">
                 <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
                 <ScalarProperty Name="vehicleT" ColumnName="vehicleT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="actives">
+            <EntityTypeMapping TypeName="farmdbModel.active">
+              <MappingFragment StoreEntitySet="active">
+                <ScalarProperty Name="activeName" ColumnName="activeName" />
+                <ScalarProperty Name="activeID" ColumnName="activeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

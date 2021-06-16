@@ -66,5 +66,6 @@ namespace Farmbook.Models
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<vehicle> vehicles { get; set; }
         public virtual DbSet<vehicletype> vehicletypes { get; set; }
+        public virtual DbSet<active> actives { get; set; }
     }
 }

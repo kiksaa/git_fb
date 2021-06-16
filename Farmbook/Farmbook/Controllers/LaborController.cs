@@ -129,7 +129,6 @@ namespace Farmbook.Controllers
         }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
             
@@ -199,7 +198,6 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
            
@@ -250,7 +248,6 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
         }

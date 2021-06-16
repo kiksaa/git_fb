@@ -35,7 +35,7 @@ namespace Farmbook.Models
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ชื่อขั้นตอนการทำงาน")]
         public int plan { get; set; }
-    
+
         public virtual theory theory { get; set; }
     }
 }

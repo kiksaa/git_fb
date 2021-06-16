@@ -27,6 +27,7 @@ namespace Farmbook.Models
         public int IDpro { get; set; }
         [DisplayName("ลำดับรายการที่")]
         public Nullable<int> IDlist { get; set; }
+
         public virtual projectand projectand { get; set; }
     }
 }

@@ -228,7 +228,7 @@ namespace Farmbook.Controllers
                 htmlBody += "ขอบคุณสำหรับการลงทะเบียนฟาร์มบุ๊ค Farmbook ของเรา. และยินดีต้อนรับเข้าสู่ระบบ Farmbook ครับ/ค่ะ <br />";
                 htmlBody += "<br/><b>ชื่อบัญชีของคุณคือ : </b>" + email + "<br />";
                 htmlBody += "<b>รหัสผ่านของคุณคือ : </b>" + password + "<br />";
-                htmlBody += "เข้าสู่ระบบได้ที่ลิงค์นี้ " + "http://192.168.5.80:81/Account/Account/Login" + "<br /><br />";
+                htmlBody += "เข้าสู่ระบบได้ที่ลิงค์นี้ " + "http://192.168.5.80:81/Account/Login" + "<br /><br />";
                 htmlBody += "ขอบคุณรับ/ค่ะ.";
                 mail.Body = htmlBody;
 

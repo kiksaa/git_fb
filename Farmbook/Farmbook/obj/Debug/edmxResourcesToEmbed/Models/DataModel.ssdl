@@ -7,6 +7,13 @@
     <Property Name="accessID" Type="int" Nullable="false" />
     <Property Name="accessName" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="int" Nullable="false" />
+    <Property Name="activeName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="activity">
     <Key>
       <PropertyRef Name="ID" />
@@ -296,6 +303,7 @@
     <Property Name="card_img" Type="varchar" MaxLength="100" />
     <Property Name="bank" Type="int" />
     <Property Name="status" Type="int" />
+    <Property Name="active" Type="int" />
     <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="provinceStr" Type="varchar" MaxLength="100" />
@@ -873,6 +881,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="register_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="active" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="register_ibfk_2">
     <End Role="province" Type="Self.province" Multiplicity="0..1" />
     <End Role="register" Type="Self.register" Multiplicity="*" />
@@ -1103,6 +1123,7 @@
   </Association>
   <EntityContainer Name="farmdbModelStoreContainer">
     <EntitySet Name="access" EntityType="Self.access" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="active" EntityType="Self.active" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="activity" EntityType="Self.activity" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
@@ -1285,6 +1306,10 @@
     </AssociationSet>
     <AssociationSet Name="register_ibfk_10" Association="Self.register_ibfk_10">
       <End Role="status" EntitySet="status" />
+      <End Role="register" EntitySet="register" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_11" Association="Self.register_ibfk_11">
+      <End Role="active" EntitySet="active" />
       <End Role="register" EntitySet="register" />
     </AssociationSet>
     <AssociationSet Name="register_ibfk_2" Association="Self.register_ibfk_2">

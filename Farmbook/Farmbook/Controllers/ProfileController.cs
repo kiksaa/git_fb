@@ -32,9 +32,9 @@ namespace Farmbook.Controllers
                                    {
                                        p.ID,
                                        p.name,
-                                       p.cradID,
+                                       /*p.cradID,
                                        g.genderName,
-                                       p.birthday,
+                                       p.birthday,*/
                                        p.email,
                                        p.tel,
                                        r.typeName
@@ -44,9 +44,9 @@ namespace Farmbook.Controllers
                             ViewModel objcvm = new ViewModel();
                             objcvm.ID = item.ID;
                             objcvm.name = item.name;
-                            objcvm.cardID = item.cradID;
+                            /*objcvm.cardID = item.cradID;
                             objcvm.genderName = item.genderName;
-                            objcvm.birthday = (DateTime)item.birthday;
+                            objcvm.birthday = (DateTime)item.birthday;*/
                             objcvm.email = item.email;
                             objcvm.tel = item.tel;
                             objcvm.typeName = item.typeName;
@@ -138,7 +138,6 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
             
@@ -206,10 +205,8 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         // GET: Profile/Delete/5
@@ -277,7 +274,6 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.InnerException.InnerException.Message;
                 return RedirectToAction("Index", "Home");
             }
             

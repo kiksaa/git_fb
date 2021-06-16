@@ -356,6 +356,9 @@
     <Compile Include="Models\access.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\active.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\activity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -538,6 +541,7 @@
     <Content Include="Content\img\upload\farmer\anime3.png" />
     <Content Include="Content\img\upload\farmer\anime6.png" />
     <Content Include="Content\img\upload\farmer\apple-touch-icon-180x180.png" />
+    <Content Include="Content\img\upload\farmer\apple-touch-icon-76x76.png" />
     <Content Include="Content\img\upload\farmer\bg5.jpg" />
     <Content Include="Content\img\upload\farmer\default-avatar.png" />
     <Content Include="Content\img\upload\farmer\emilyz.jpg" />
@@ -556,8 +560,11 @@
     <Content Include="Content\img\upload\idcard\mike.jpg" />
     <Content Include="Content\img\upload\idcard\mstile-150x150.png" />
     <Content Include="Content\img\upload\staple\bg5.jpg" />
+    <Content Include="Content\img\upload\vehicle\anime6.png" />
+    <Content Include="Content\img\upload\vehicle\apple-icon.png" />
     <Content Include="Content\img\upload\vehicle\bg5.jpg" />
     <Content Include="Content\img\upload\vehicle\default-avatar.png" />
+    <Content Include="Content\img\upload\vehicle\favicon-32x32.png" />
     <Content Include="Content\img\upload\vehicle\favicon.png" />
     <Content Include="Content\img\upload\vehicle\img_3115.jpg" />
     <Content Include="Content\js\demo\chart-area-demo.js" />
