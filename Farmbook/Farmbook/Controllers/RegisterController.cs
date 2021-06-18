@@ -522,7 +522,10 @@ namespace Farmbook.Controllers
                         }
                     }
                     registerModel.active = 200;
-                    landplotModel.active = 200;
+                    if (landplotModel != null)
+                    {
+                        landplotModel.active = 200;
+                    }
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");
