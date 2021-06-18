@@ -18,6 +18,7 @@ namespace Farmbook.Models
         public active()
         {
             this.registers = new HashSet<register>();
+            this.landplots = new HashSet<landplot>();
         }
     
         public int activeID { get; set; }
@@ -25,5 +26,7 @@ namespace Farmbook.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<register> registers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<landplot> landplots { get; set; }
     }
 }

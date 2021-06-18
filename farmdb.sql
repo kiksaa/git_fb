@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2021 at 11:00 AM
+-- Generation Time: Jun 18, 2021 at 05:34 AM
 -- Server version: 8.0.22
 -- PHP Version: 8.0.0
 
@@ -1100,10 +1100,10 @@ INSERT INTO `bankuser` (`ID`, `bankID`, `bankName`, `bankNo`) VALUES
 (12, 10, 'ภาคิณ สุขฤรินท์', '0203015130'),
 (13, 4, 'what', '213546579'),
 (14, 9, 'dt', '16465132'),
-(15, 13, 'date', '0310025'),
 (20, 3, 'ศิวกร', '326253526'),
 (21, 2, 'papo', '123456789'),
-(22, 2, 'ธงชาติ ธรรมรงค์', '3210202103');
+(22, 2, 'ธงชาติ ธรรมรงค์', '3210202103'),
+(30, 10, 'yaya papa', '1313103246');
 
 -- --------------------------------------------------------
 
@@ -8788,6 +8788,7 @@ CREATE TABLE `landplot` (
   `buyMethod` int DEFAULT NULL,
   `plotStatus` int DEFAULT NULL,
   `administrator` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `active` int DEFAULT NULL,
   `provinceStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `ampherStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `districtStr` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
@@ -8797,14 +8798,15 @@ CREATE TABLE `landplot` (
 -- Dumping data for table `landplot`
 --
 
-INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
-(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.445397151744375', '100.14076194888719', 3.75, '3 ไร่ 3 งาน 1 ตารางวา', NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL),
-(2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
-(3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.469461431158903', '100.12672164694303', 2.02, '2 ไร่ 0 งาน 7 ตารางวา', NULL, 2, NULL, NULL, NULL, 200, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
-(4, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, NULL, NULL),
-(5, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.89376912786571', '100.69403831321263', 130.4, '130 ไร่ 1 งาน 60 ตารางวา', NULL, 20, NULL, NULL, NULL, 300, NULL, NULL, NULL, NULL),
-(6, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15.29668030847652', '100.66946839269202', 68.71, '68 ไร่ 2 งาน 82 ตารางวา', NULL, 20, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL),
-(8, 'popo', NULL, 100, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '13.802397182725773', '99.97373136211513', 0.91, '0 ไร่ 3 งาน 65 ตารางวา', NULL, 24, 10, NULL, NULL, 200, NULL, NULL, NULL, NULL);
+INSERT INTO `landplot` (`ID`, `plotName`, `areaCode`, `typeOwnership`, `license`, `titleDeed`, `landSlip`, `landNumber`, `license_img`, `lease_img`, `district`, `ampher`, `province`, `coordinatesStar`, `coordinatesEnd`, `areaPlot`, `areaPlotS`, `plotDetails`, `farmerName`, `projectName`, `note`, `buyMethod`, `plotStatus`, `administrator`, `active`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
+(1, 'วาวา', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.445397151744375', '100.14076194888719', 3.75, '3 ไร่ 3 งาน 1 ตารางวา', NULL, 1, 20, NULL, NULL, 100, NULL, NULL, NULL, NULL, NULL),
+(2, 'วาวา', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.3, NULL, NULL, 1, 10, NULL, NULL, 300, NULL, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(3, 'ธงชาติ', NULL, 100, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.469461431158903', '100.12672164694303', 2.02, '2 ไร่ 0 งาน 7 ตารางวา', NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, 'นครราชสีมา', 'เมือง', 'ในเมือง'),
+(4, 'ธงชาติ', NULL, 200, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3.2, NULL, NULL, 2, NULL, NULL, NULL, 200, NULL, NULL, NULL, NULL, NULL),
+(5, 'ฟ', NULL, 200, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '14.89376912786571', '100.69403831321263', 130.4, '130 ไร่ 1 งาน 60 ตารางวา', NULL, 20, NULL, NULL, NULL, 300, NULL, NULL, NULL, NULL, NULL),
+(6, 'ป', NULL, 100, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '15.29668030847652', '100.66946839269202', 68.71, '68 ไร่ 2 งาน 82 ตารางวา', NULL, 20, 10, NULL, NULL, 100, NULL, NULL, NULL, NULL, NULL),
+(8, 'popo', NULL, 100, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '13.802397182725773', '99.97373136211513', 0.91, '0 ไร่ 3 งาน 65 ตารางวา', NULL, 24, 10, NULL, NULL, 200, NULL, 200, NULL, NULL, NULL),
+(9, 'yayaaaa', NULL, 100, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2.34, NULL, NULL, 25, 10, NULL, NULL, 100, NULL, 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9165,7 +9167,7 @@ CREATE TABLE `register` (
 INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthday`, `tel`, `email`, `family`, `no`, `moo`, `road`, `province`, `ampher`, `district`, `comment`, `farmer_img`, `card_img`, `bank`, `status`, `active`, `dateUpdate`, `adminBy`, `provinceStr`, `ampherStr`, `districtStr`) VALUES
 (1, 'วาวา ปาร์ค', '1597531230', '3121262541020', 200, '1991-10-23', 845623020, 'Wawa01@gmail.com', 200, 2, 2, '-', NULL, NULL, NULL, NULL, 'anime6.png', 'emilyz.jpg', 2, NULL, NULL, '2021-06-02 10:17:56', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'ในเมือง'),
 (2, 'ธงชาติ ธรรมรงค์', '7777777', '1523012695412', 100, '1992-06-10', 962315201, 'Bank@hotmail.com', 100, 132, 6, '-', NULL, NULL, NULL, NULL, NULL, NULL, 22, NULL, NULL, '2021-05-25 17:38:11', 'admin', 'นครราชสีมา', 'เมือง', 'โคกกครวด'),
-(3, 'sava gee', '223366', '1423625120103', NULL, '1990-06-12', 635948123, 'adBA@hotmail.com', NULL, 36, 6, 'เจริญ', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, '2021-06-04 16:16:59', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'บ้านใหม่'),
+(3, 'sava gee', '223366', '1423625120103', NULL, '1990-06-12', 635948123, 'adBA@hotmail.com', NULL, 36, 6, 'เจริญ', NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 200, '2021-06-04 16:16:59', 'Dada@gmail.com', 'นครราชสีมา', 'เมือง', 'บ้านใหม่'),
 (4, 'เอก นามเอก', '171816', '2464645152154', 100, '1448-12-26', 652195423, 'Aone@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, '2021-06-07 10:24:02', '', NULL, NULL, NULL),
 (5, 'ศิวกร', '1112', '1234854614822', 100, '1993-06-01', 695320123, 'test@gmail.com', 200, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default-avatar.png', 'mike.jpg', 20, NULL, NULL, '2021-06-02 10:04:36', 'Dada@gmail.com', NULL, NULL, NULL),
 (6, 'ญาฎา กฤตศิริ', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 13, NULL, NULL, '2021-01-25 15:00:53', '', NULL, NULL, NULL),
@@ -9177,9 +9179,9 @@ INSERT INTO `register` (`ID`, `name`, `registerID`, `cardID`, `gender`, `birthda
 (15, 'vue4', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'System.Web.HttpPostedFileWrapper', 'apple-touch-icon-60x60.png', 9, NULL, NULL, '2021-01-29 15:03:36', '', NULL, NULL, NULL),
 (16, 'news', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'safari-pinned-tab.svg', 'msapplication-icon-144x144.png', 10, NULL, NULL, '2021-01-29 15:14:28', '', NULL, NULL, NULL),
 (17, 'finally', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'mstile-150x150.png', 'favicon.png', 11, NULL, NULL, '2021-01-29 15:20:36', '', NULL, NULL, NULL),
-(19, 'date', NULL, NULL, NULL, '1991-03-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15, NULL, NULL, '2021-06-16 14:41:31', 'Dada@gmail.com', NULL, NULL, NULL),
 (20, 'dt', NULL, NULL, NULL, '1998-03-12', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL, NULL, '2021-02-06 11:04:01', '', NULL, NULL, NULL),
-(24, 'papo', '1112', '1234854614822', 200, '1992-05-08', 0, 'Ja@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, NULL, '2021-05-25 11:09:27', '', NULL, NULL, NULL);
+(24, 'papo', '1112', '1234854614822', 200, '1992-05-08', 0, 'Ja@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 21, NULL, 200, '2021-05-25 11:09:27', '', NULL, NULL, NULL),
+(25, 'yaya', '310351443', '1141313135463', 200, '1448-06-05', 0, 'Yaya21@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'photos.jpg', 'anime6.png', 30, NULL, 100, '2021-06-18 09:24:10', 'Dada@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9625,7 +9627,8 @@ ALTER TABLE `landplot`
   ADD KEY `projectName` (`projectName`),
   ADD KEY `farmerName` (`farmerName`),
   ADD KEY `plotStatus` (`plotStatus`) USING BTREE,
-  ADD KEY `buyMethod` (`buyMethod`);
+  ADD KEY `buyMethod` (`buyMethod`),
+  ADD KEY `active` (`active`);
 
 --
 -- Indexes for table `license`
@@ -9824,7 +9827,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bankuser`
 --
 ALTER TABLE `bankuser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `buymethod`
@@ -9860,7 +9863,7 @@ ALTER TABLE `labor`
 -- AUTO_INCREMENT for table `landplot`
 --
 ALTER TABLE `landplot`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `license`
@@ -9908,7 +9911,7 @@ ALTER TABLE `projectand`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `software`
@@ -10017,6 +10020,7 @@ ALTER TABLE `labor`
 ALTER TABLE `landplot`
   ADD CONSTRAINT `landplot_ibfk_1` FOREIGN KEY (`license`) REFERENCES `license` (`ID`),
   ADD CONSTRAINT `landplot_ibfk_10` FOREIGN KEY (`buyMethod`) REFERENCES `buymethod` (`ID`),
+  ADD CONSTRAINT `landplot_ibfk_11` FOREIGN KEY (`active`) REFERENCES `active` (`activeID`),
   ADD CONSTRAINT `landplot_ibfk_2` FOREIGN KEY (`typeOwnership`) REFERENCES `typeownership` (`ID`),
   ADD CONSTRAINT `landplot_ibfk_3` FOREIGN KEY (`province`) REFERENCES `province` (`provinceID`),
   ADD CONSTRAINT `landplot_ibfk_5` FOREIGN KEY (`ampher`) REFERENCES `ampher` (`ampherID`),

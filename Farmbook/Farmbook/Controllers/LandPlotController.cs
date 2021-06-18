@@ -16,8 +16,8 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 landplotrList = farmdb.landplots.ToList<landplot>();
-                ViewBag.TotalLandPlot = landplotrList.Count();
-                ViewBag.TotalPlot = landplotrList.Sum(a => a.areaPlot);
+               /* ViewBag.TotalLandPlot = landplotrList.Count();
+                ViewBag.TotalPlot = landplotrList.Sum(a => a.areaPlot);*/
 
                 List<ViewLandPlot> ViewModeltList = new List<ViewLandPlot>();
                 var data = from l in farmdb.landplots
@@ -41,23 +41,28 @@ namespace Farmbook.Controllers
                            {
                                l.ID, l.plotName, /*p.provinceName, a.ampherName, d.districtName,*/
                                l.provinceStr,l.ampherStr,l.districtStr,r.name,
-                               t.ownership, li.licenseName, pro.projectName, s.statusName, l.areaPlot,
+                               t.ownership, li.licenseName, pro.projectName, s.statusName, l.areaPlot, l.active
                            };
                 foreach (var item in data)
                 {
-                    ViewLandPlot objcvm = new ViewLandPlot();
-                    objcvm.ID = item.ID;
-                    objcvm.plotName = item.plotName;
-                    objcvm.provinceName = item.provinceStr;
-                    objcvm.ampherName = item.ampherStr;
-                    objcvm.districtName = item.districtStr;
-                    objcvm.name = item.name;
-                    objcvm.ownership = item.ownership;
-                    objcvm.licenseName = item.licenseName;
-                    objcvm.projectName = item.projectName;
-                    objcvm.plotStatus = item.statusName;
-                    objcvm.areaPlot = item.areaPlot;
-                    ViewModeltList.Add(objcvm);
+                    if (item.active == 100 || item.active == null)
+                    {
+                        ViewLandPlot objcvm = new ViewLandPlot();
+                        objcvm.ID = item.ID;
+                        objcvm.plotName = item.plotName;
+                        objcvm.provinceName = item.provinceStr;
+                        objcvm.ampherName = item.ampherStr;
+                        objcvm.districtName = item.districtStr;
+                        objcvm.name = item.name;
+                        objcvm.ownership = item.ownership;
+                        objcvm.licenseName = item.licenseName;
+                        objcvm.projectName = item.projectName;
+                        objcvm.plotStatus = item.statusName;
+                        objcvm.areaPlot = item.areaPlot;
+                        ViewModeltList.Add(objcvm);
+                    }
+                    ViewBag.TotalLandPlot = ViewModeltList.Count();
+                    ViewBag.TotalPlot = ViewModeltList.Sum(a => a.areaPlot);
 
                 }
                 return View(ViewModeltList);
@@ -201,6 +206,7 @@ namespace Farmbook.Controllers
                     farmdb.landplots.Add(plotModel);
                     /*farmdb.landplots.Add(land);
                     farmdb.registers.Add(re);*/
+                    plotModel.active = 100;
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");
@@ -336,6 +342,7 @@ namespace Farmbook.Controllers
                     /*plotModel.farmerName = registerModel.ID;*/
                     farmdb.Entry(plotModel).State = System.Data.Entity.EntityState.Modified;
                     /*plotModel.farmerName = plotModel.farmerName;*/
+                    plotModel.active = 100;
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");
@@ -430,7 +437,12 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     landplot plotModel = farmdb.landplots.Where(x => x.ID == id).FirstOrDefault();
-                    farmdb.landplots.Remove(plotModel);
+                    plotModel.active = 200;
+                    if (plotModel.active == 100)
+                    {
+                        farmdb.landplots.Remove(plotModel);
+                    }
+                    plotModel.active = 200;
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");

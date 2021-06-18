@@ -186,6 +186,7 @@
           <Property Name="buyMethod" Type="int" />
           <Property Name="plotStatus" Type="int" />
           <Property Name="administrator" Type="varchar" MaxLength="255" />
+          <Property Name="active" Type="int" />
           <Property Name="provinceStr" Type="varchar" MaxLength="100" />
           <Property Name="ampherStr" Type="varchar" MaxLength="100" />
           <Property Name="districtStr" Type="varchar" MaxLength="100" />
@@ -643,6 +644,18 @@
             </Principal>
             <Dependent Role="landplot">
               <PropertyRef Name="buyMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="landplot_ibfk_11">
+          <End Role="active" Type="Self.active" Multiplicity="0..1" />
+          <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="active">
+              <PropertyRef Name="activeID" />
+            </Principal>
+            <Dependent Role="landplot">
+              <PropertyRef Name="active" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1233,6 +1246,10 @@
             <End Role="buymethod" EntitySet="buymethod" />
             <End Role="landplot" EntitySet="landplot" />
           </AssociationSet>
+          <AssociationSet Name="landplot_ibfk_11" Association="Self.landplot_ibfk_11">
+            <End Role="active" EntitySet="active" />
+            <End Role="landplot" EntitySet="landplot" />
+          </AssociationSet>
           <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
             <End Role="typeownership" EntitySet="typeownership" />
             <End Role="landplot" EntitySet="landplot" />
@@ -1619,6 +1636,8 @@
           <NavigationProperty Name="project" Relationship="Self.landplot_ibfk_7" FromRole="landplot" ToRole="project" />
           <NavigationProperty Name="status" Relationship="Self.landplot_ibfk_8" FromRole="landplot" ToRole="status" />
           <NavigationProperty Name="register" Relationship="Self.landplot_ibfk_9" FromRole="landplot" ToRole="register" />
+          <Property Name="active" Type="Int32" />
+          <NavigationProperty Name="active1" Relationship="farmdbModel.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
         </EntityType>
         <EntityType Name="license">
           <Key>
@@ -2878,6 +2897,10 @@
             <End Role="active" EntitySet="actives" />
             <End Role="register" EntitySet="registers" />
           </AssociationSet>
+          <AssociationSet Name="landplot_ibfk_11" Association="farmdbModel.landplot_ibfk_11">
+            <End Role="active" EntitySet="actives" />
+            <End Role="landplot" EntitySet="landplots" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="active">
           <Key>
@@ -2886,6 +2909,7 @@
           <Property Name="activeID" Type="Int32" Nullable="false" />
           <Property Name="activeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="registers" Relationship="farmdbModel.register_ibfk_11" FromRole="active" ToRole="register" />
+          <NavigationProperty Name="landplots" Relationship="farmdbModel.landplot_ibfk_11" FromRole="active" ToRole="landplot" />
         </EntityType>
         <Association Name="register_ibfk_11">
           <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
@@ -2895,6 +2919,18 @@
               <PropertyRef Name="activeID" />
             </Principal>
             <Dependent Role="register">
+              <PropertyRef Name="active" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="landplot_ibfk_11">
+          <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
+          <End Type="farmdbModel.landplot" Role="landplot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="active">
+              <PropertyRef Name="activeID" />
+            </Principal>
+            <Dependent Role="landplot">
               <PropertyRef Name="active" />
             </Dependent>
           </ReferentialConstraint>
@@ -3070,6 +3106,7 @@
           <EntitySetMapping Name="landplots">
             <EntityTypeMapping TypeName="farmdbModel.landplot">
               <MappingFragment StoreEntitySet="landplot">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="plotName" ColumnName="plotName" />
                 <ScalarProperty Name="areaCode" ColumnName="areaCode" />

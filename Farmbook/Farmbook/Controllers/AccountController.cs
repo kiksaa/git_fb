@@ -25,7 +25,7 @@ namespace Farmbook.Controllers
         {
             // count register
             List<register> registerList = new List<register>();
-            List<landplot> landplotrList = new List<landplot>();
+            List<landplot> landplotList = new List<landplot>();
 
             List<vehicle> vehicleList = new List<vehicle>();
             List<machine> MachineList = new List<machine>();
@@ -40,11 +40,13 @@ namespace Farmbook.Controllers
             
             using (farmdb farmdb = new farmdb())
             {
-                registerList = farmdb.registers.ToList<register>();
-                ViewBag.TotalRegisters = registerList.Count();
-
-                landplotrList = farmdb.landplots.ToList<landplot>();
-                ViewBag.TotalLandPlot = landplotrList.Count();
+                registerList = farmdb.registers.Where(a => a.active == null).ToList();
+                var List = farmdb.registers.Where(a => a.active == 100).ToList();
+                ViewBag.TotalRegisters = registerList.Count() + List.Count();
+               
+                landplotList = farmdb.landplots.Where(a => a.active == 100).ToList();
+                var landplot = farmdb.landplots.Where(a => a.active == null).ToList();
+                ViewBag.TotalLandPlot = landplotList.Count() + landplot.Count();
 
                 vehicleList = farmdb.vehicles.ToList<vehicle>();
                 ViewBag.TotalVehicle = vehicleList.Count();

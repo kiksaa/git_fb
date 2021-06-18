@@ -181,6 +181,7 @@
     <Property Name="buyMethod" Type="int" />
     <Property Name="plotStatus" Type="int" />
     <Property Name="administrator" Type="varchar" MaxLength="255" />
+    <Property Name="active" Type="int" />
     <Property Name="provinceStr" Type="varchar" MaxLength="100" />
     <Property Name="ampherStr" Type="varchar" MaxLength="100" />
     <Property Name="districtStr" Type="varchar" MaxLength="100" />
@@ -638,6 +639,18 @@
       </Principal>
       <Dependent Role="landplot">
         <PropertyRef Name="buyMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="active" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1226,6 +1239,10 @@
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_10" Association="Self.landplot_ibfk_10">
       <End Role="buymethod" EntitySet="buymethod" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_11" Association="Self.landplot_ibfk_11">
+      <End Role="active" EntitySet="active" />
       <End Role="landplot" EntitySet="landplot" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">

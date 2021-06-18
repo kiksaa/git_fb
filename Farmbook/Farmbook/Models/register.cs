@@ -76,7 +76,7 @@ namespace Farmbook.Models
         [DisplayName("แก้ไขโดย")]
         public string adminBy { get; set; }
         public Nullable<int> active { get; set; }
-    
+
         public virtual ampher ampher1 { get; set; }
         public virtual bankuser bankuser { get; set; }
         public virtual district district1 { get; set; }

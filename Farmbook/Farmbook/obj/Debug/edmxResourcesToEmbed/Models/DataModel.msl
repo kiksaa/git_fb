@@ -166,6 +166,7 @@
     <EntitySetMapping Name="landplots">
       <EntityTypeMapping TypeName="farmdbModel.landplot">
         <MappingFragment StoreEntitySet="landplot">
+          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="plotName" ColumnName="plotName" />
           <ScalarProperty Name="areaCode" ColumnName="areaCode" />
