@@ -220,8 +220,8 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(register registerModel, HttpPostedFileBase farmer_img, HttpPostedFileBase card_img)
         {
-            /*try
-            {*/
+            try
+            {
                 using (farmdb farmdb = new farmdb())
                 {
                     string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
@@ -293,12 +293,12 @@ namespace Farmbook.Controllers
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
-            /*}
+            }
             catch (Exception ex)
             {
-                *//*ViewBag.Message = ex.InnerException.InnerException.Message;*//*
+                /*ViewBag.Message = ex.InnerException.InnerException.Message;*/
                 return RedirectToAction("Index", "Home");
-            }*/
+            }
         }
         // GET: Register/Edit/5
         public ActionResult Edit(int id)
