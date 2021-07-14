@@ -12,41 +12,46 @@ namespace Farmbook.Controllers
         // GET: Theory
         public ActionResult Index()
         {
-            List<theory> theoryList = new List<theory>();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                theoryList = farmdb.theories.ToList<theory>();
-                ViewBag.TotalTheory = theoryList.Count();
-                List<ViewModel> ViewModeltList = new List<ViewModel>();
-                var data = from t in farmdb.theories
-                           join tt in farmdb.theorytypes on t.workProcedure equals tt.theoryID into tlist
-                           from tt in tlist.DefaultIfEmpty()
-                           join a in farmdb.accesses on t.access equals a.accessID into alist
-                           from a in alist.DefaultIfEmpty()
-                           select new
-                           {
-                               t.ID,
-                               t.dateUpdate,
-                               t.product,
-                               t.workName,
-                               a.accessName,
-                               t.reference,
-                               tt.theoryName
-                           };
-                foreach (var item in data)
+                List<theory> theoryList = new List<theory>();
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.product = item.product;
-                    objcvm.workName = item.workName;
-                    objcvm.accessName = item.accessName;
-                    objcvm.reference = item.reference;
-                    objcvm.theoryName = item.theoryName;
-                    objcvm.dateUpdate = item.dateUpdate;
-                    objcvm.ID = item.ID;
-                    ViewModeltList.Add(objcvm);
+                    theoryList = farmdb.theories.ToList<theory>();
+                    ViewBag.TotalTheory = theoryList.Count();
+
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from t in farmdb.theories
+                               join tt in farmdb.theorytypes on t.workProcedure equals tt.theoryID into tlist
+                               from tt in tlist.DefaultIfEmpty()
+                               join a in farmdb.accesses on t.access equals a.accessID into alist
+                               from a in alist.DefaultIfEmpty()
+                               select new
+                               {
+                                   t.ID, t.dateUpdate, t.product, t.workName, a.accessName, t.reference, tt.theoryName
+                               };
+                    foreach (var item in data)
+                    {
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.product = item.product;
+                        objcvm.workName = item.workName;
+                        objcvm.accessName = item.accessName;
+                        objcvm.reference = item.reference;
+                        objcvm.theoryName = item.theoryName;
+                        objcvm.dateUpdate = item.dateUpdate;
+                        objcvm.ID = item.ID;
+                        ViewModeltList.Add(objcvm);
+                    }
+                    return View(ViewModeltList);
                 }
-               
-                return View(ViewModeltList);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
         public ActionResult IndexActivity(int id)
@@ -56,18 +61,17 @@ namespace Farmbook.Controllers
             {
                 theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
                 List<activity> activityModel = farmdb.activities.Where(a => a.plan == theoryModel.ID).ToList();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from a in farmdb.activities
                            where a.plan == id
                            select new
                            {
-                               a.ID,
-                               a.stepNum,
-                               a.stepName,
-                               a.age,
-                               a.time,
-                               a.activity1,
-                               a.notice
+                               a.ID, a.stepNum, a.stepName, a.age, a.time, a.activity1, a.notice
                            };
 
                 foreach (var item in data)
@@ -82,9 +86,7 @@ namespace Farmbook.Controllers
                     objcvm.notice = item.notice;
                     ViewModeltList.Add(objcvm);
                 }
-
                 ViewBag.TotalActivity = data.Count();
-
                 return View(ViewModeltList);
             }
         }
@@ -96,6 +98,31 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
+                List<theorytype> theorytypes = farmdb.theorytypes.ToList();
+                IEnumerable<SelectListItem> seltheorytypes = from l in theorytypes
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = l.theoryName,
+                                                                 Value = l.theoryID.ToString()
+                                                             };
+                ViewBag.theorytypes = seltheorytypes;
+
+                List<access> accesses = farmdb.accesses.ToList();
+                IEnumerable<SelectListItem> selaccesses = from p in accesses
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = p.accessName,
+                                                              Value = p.accessID.ToString()
+                                                          };
+                ViewBag.accesses = selaccesses;
+                List<project> projects = farmdb.projects.ToList();
+                IEnumerable<SelectListItem> selprojects = from p in projects
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = p.proName,
+                                                              Value = p.ID.ToString()
+                                                          };
+                ViewBag.projects = selprojects;
             }
             return View(theoryModel);
         }
@@ -126,10 +153,18 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from p in projects
                                                           select new SelectListItem
                                                           {
-                                                              Text = p.projectName,
+                                                              Text = p.proName,
                                                               Value = p.ID.ToString()
                                                           };
                 ViewBag.projects = selprojects;
+               /* List<projectand> projectands = farmdb.projectands.ToList();
+                IEnumerable<SelectListItem> selprojectands = from p in projectands
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = p.proName,
+                                                                 Value = p.ID.ToString()
+                                                             };
+                ViewBag.projects = selprojectands;*/
             }
             return View(new theory());
         }
@@ -184,7 +219,7 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from p in projects
                                                           select new SelectListItem
                                                           {
-                                                              Text = p.projectName,
+                                                              Text = p.proName,
                                                               Value = p.ID.ToString()
                                                           };
                 ViewBag.projects = selprojects;
@@ -242,7 +277,7 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from p in projects
                                                           select new SelectListItem
                                                           {
-                                                              Text = p.projectName,
+                                                              Text = p.proName,
                                                               Value = p.ID.ToString()
                                                           };
                 ViewBag.projects = selprojects;

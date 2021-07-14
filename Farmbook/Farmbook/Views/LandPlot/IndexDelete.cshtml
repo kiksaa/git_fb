@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Farmbook.Models.ViewLandPlot>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบทะเบียนแปลง</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>ลบทะเบียนแปลง</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-secondary" href="@Url.Action("Index", "LandPlot")">
+                            <span>
+                                กลับ
+                            </span>
+                        </a>
+                        @* <a type="button" class="btn btn-primary" href="@Url.Action("Delete", "LandPlot", new { id = model.ID })">
+                                <span>
+                                    เลือก
+                                </span>
+                            </a>*@
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div>
+        <br />
+
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                @foreach (var model in Model)
+                {
+                    <div class="card col-6" style="width: 50rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.plotName) :
+                                @Html.DisplayFor(modelItem => model.plotName)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.areaCode) :
+                                @Html.DisplayFor(modelItem => model.areaCode)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.ownership) :
+                                @Html.DisplayFor(modelItem => model.ownership)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.licenseName) :
+                                @Html.DisplayFor(modelItem => model.licenseName)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.titleDeed) :
+                                @Html.DisplayFor(modelItem => model.titleDeed)
+                            </li>
+
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.landNumber) :
+                                @Html.DisplayFor(modelItem => model.landNumber)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.lease_img) :
+                                @Html.DisplayFor(modelItem => model.lease_img)
+                                @{ if (model.lease_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/model.license_img" height="250" width="240">
+                                    } }
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.license_img) :
+                                @Html.DisplayFor(modelItem => model.license_img)
+                                @{ if (model.license_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/model.license_img" height="250" width="240">
+                                    } }
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.areaPlot) :
+                                @Html.DisplayFor(modelItem => model.areaPlot)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.projectName) :
+                                @Html.DisplayFor(modelItem => model.projectName)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.LabelFor(modelItem => model.plotStatus) :
+                                @Html.DisplayFor(modelItem => model.plotStatus)
+                            </li>
+                            <br />
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="form-group row">
+                                        <a type="button" class="btn btn-primary" href="@Url.Action("Delete", "LandPlot", new { id = model.ID })">
+                                            <span>
+                                                เลือก
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

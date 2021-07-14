@@ -99,6 +99,18 @@
     <Property Name="equipmentID" Type="int" Nullable="false" />
     <Property Name="equipmentT" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="start" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="end" Type="datetime" Precision="0" />
+    <Property Name="themeColor" Type="varchar" MaxLength="10" />
+    <Property Name="isFullDay" Type="bool" />
+  </EntityType>
   <EntityType Name="family">
     <Key>
       <PropertyRef Name="familyID" />
@@ -180,6 +192,7 @@
     <Property Name="note" Type="varchar" MaxLength="255" />
     <Property Name="buyMethod" Type="int" />
     <Property Name="plotStatus" Type="int" />
+    <Property Name="theoryName" Type="int" />
     <Property Name="administrator" Type="varchar" MaxLength="255" />
     <Property Name="active" Type="int" />
     <Property Name="provinceStr" Type="varchar" MaxLength="100" />
@@ -260,18 +273,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="projectName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="dataNow" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="proName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="buyMethod" Type="int" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="manuStandards" Type="int" />
   </EntityType>
   <EntityType Name="projectand">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="dataNow" Type="datetime" Precision="0" Nullable="false" />
-    <Property Name="proName" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="buyMethod" Type="int" Nullable="false" />
-    <Property Name="detail" Type="varchar" MaxLength="255" />
-    <Property Name="manuStandards" Type="int" />
+    <Property Name="projectName" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="province">
     <Key>
@@ -391,18 +404,18 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="workProcedure" Type="int" Nullable="false" />
     <Property Name="farmingType" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="sepecies" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="product" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="product" Type="float" Nullable="false" />
     <Property Name="project" Type="int" />
     <Property Name="workName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="access" Type="int" Nullable="false" />
     <Property Name="reference" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="detail" Type="varchar" MaxLength="255" />
     <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="theorytype">
     <Key>
@@ -654,6 +667,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="landplot_ibfk_13">
+    <End Role="theory" Type="Self.theory" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="theoryName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_14">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="projectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="landplot_ibfk_2">
     <End Role="typeownership" Type="Self.typeownership" Multiplicity="1" />
     <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
@@ -699,18 +736,6 @@
       </Principal>
       <Dependent Role="landplot">
         <PropertyRef Name="district" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="landplot_ibfk_7">
-    <End Role="project" Type="Self.project" Multiplicity="0..1" />
-    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="landplot">
-        <PropertyRef Name="projectName" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -846,26 +871,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="projectand_ibfk_1">
+  <Association Name="project_ibfk_1">
     <End Role="standard" Type="Self.standard" Multiplicity="0..1" />
-    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="standard">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="projectand">
+      <Dependent Role="project">
         <PropertyRef Name="manuStandards" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="projectand_ibfk_2">
+  <Association Name="project_ibfk_2">
     <End Role="buymethod" Type="Self.buymethod" Multiplicity="1" />
-    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="buymethod">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="projectand">
+      <Dependent Role="project">
         <PropertyRef Name="buyMethod" />
       </Dependent>
     </ReferentialConstraint>
@@ -1003,10 +1028,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="standardlist_ibfk_1">
-    <End Role="projectand" Type="Self.projectand" Multiplicity="1" />
+    <End Role="project" Type="Self.project" Multiplicity="1" />
     <End Role="standardlist" Type="Self.standardlist" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="projectand">
+      <Principal Role="project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="standardlist">
@@ -1050,18 +1075,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="theory_ibfk_1">
-    <End Role="project" Type="Self.project" Multiplicity="0..1" />
-    <End Role="theory" Type="Self.theory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="theory">
-        <PropertyRef Name="project" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="theory_ibfk_2">
     <End Role="theorytype" Type="Self.theorytype" Multiplicity="1" />
     <End Role="theory" Type="Self.theory" Multiplicity="*" />
@@ -1083,6 +1096,18 @@
       </Principal>
       <Dependent Role="theory">
         <PropertyRef Name="access" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="theory_ibfk_4">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="theory" Type="Self.theory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="theory">
+        <PropertyRef Name="project" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1146,6 +1171,7 @@
     <EntitySet Name="energy" EntityType="Self.energy" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="equipment" EntityType="Self.equipment" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="equipmenttype" EntityType="Self.equipmenttype" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="event" EntityType="Self.event" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="family" EntityType="Self.family" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="fuel" EntityType="Self.fuel" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="fueltype" EntityType="Self.fueltype" Schema="farmdb" store:Type="Tables" />
@@ -1245,6 +1271,14 @@
       <End Role="active" EntitySet="active" />
       <End Role="landplot" EntitySet="landplot" />
     </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_13" Association="Self.landplot_ibfk_13">
+      <End Role="theory" EntitySet="theory" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_14" Association="Self.landplot_ibfk_14">
+      <End Role="project" EntitySet="project" />
+      <End Role="landplot" EntitySet="landplot" />
+    </AssociationSet>
     <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
       <End Role="typeownership" EntitySet="typeownership" />
       <End Role="landplot" EntitySet="landplot" />
@@ -1259,10 +1293,6 @@
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_6" Association="Self.landplot_ibfk_6">
       <End Role="district" EntitySet="district" />
-      <End Role="landplot" EntitySet="landplot" />
-    </AssociationSet>
-    <AssociationSet Name="landplot_ibfk_7" Association="Self.landplot_ibfk_7">
-      <End Role="project" EntitySet="project" />
       <End Role="landplot" EntitySet="landplot" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_8" Association="Self.landplot_ibfk_8">
@@ -1309,13 +1339,13 @@
       <End Role="ampher" EntitySet="ampher" />
       <End Role="profile" EntitySet="profile" />
     </AssociationSet>
-    <AssociationSet Name="projectand_ibfk_1" Association="Self.projectand_ibfk_1">
+    <AssociationSet Name="project_ibfk_1" Association="Self.project_ibfk_1">
       <End Role="standard" EntitySet="standard" />
-      <End Role="projectand" EntitySet="projectand" />
+      <End Role="project" EntitySet="project" />
     </AssociationSet>
-    <AssociationSet Name="projectand_ibfk_2" Association="Self.projectand_ibfk_2">
+    <AssociationSet Name="project_ibfk_2" Association="Self.project_ibfk_2">
       <End Role="buymethod" EntitySet="buymethod" />
-      <End Role="projectand" EntitySet="projectand" />
+      <End Role="project" EntitySet="project" />
     </AssociationSet>
     <AssociationSet Name="register_ibfk_1" Association="Self.register_ibfk_1">
       <End Role="family" EntitySet="family" />
@@ -1362,7 +1392,7 @@
       <End Role="software" EntitySet="software" />
     </AssociationSet>
     <AssociationSet Name="standardlist_ibfk_1" Association="Self.standardlist_ibfk_1">
-      <End Role="projectand" EntitySet="projectand" />
+      <End Role="project" EntitySet="project" />
       <End Role="standardlist" EntitySet="standardlist" />
     </AssociationSet>
     <AssociationSet Name="staple_ibfk_1" Association="Self.staple_ibfk_1">
@@ -1377,16 +1407,16 @@
       <End Role="unit" EntitySet="unit" />
       <End Role="staple" EntitySet="staple" />
     </AssociationSet>
-    <AssociationSet Name="theory_ibfk_1" Association="Self.theory_ibfk_1">
-      <End Role="project" EntitySet="project" />
-      <End Role="theory" EntitySet="theory" />
-    </AssociationSet>
     <AssociationSet Name="theory_ibfk_2" Association="Self.theory_ibfk_2">
       <End Role="theorytype" EntitySet="theorytype" />
       <End Role="theory" EntitySet="theory" />
     </AssociationSet>
     <AssociationSet Name="theory_ibfk_3" Association="Self.theory_ibfk_3">
       <End Role="access" EntitySet="access" />
+      <End Role="theory" EntitySet="theory" />
+    </AssociationSet>
+    <AssociationSet Name="theory_ibfk_4" Association="Self.theory_ibfk_4">
+      <End Role="project" EntitySet="project" />
       <End Role="theory" EntitySet="theory" />
     </AssociationSet>
     <AssociationSet Name="vehicle_ibfk_1" Association="Self.vehicle_ibfk_1">

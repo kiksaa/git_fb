@@ -20,7 +20,10 @@ namespace Farmbook.Models
         public theory()
         {
             this.activities = new HashSet<activity>();
+            this.landplots = new HashSet<landplot>();
         }
+        [DisplayName("ลำดับที่")]
+        public int ID { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ขั้นตอนการทำงาน")]
         public int workProcedure { get; set; }
@@ -35,7 +38,7 @@ namespace Farmbook.Models
         public string sepecies { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ผลิตภัณฑ์ที่ได้")]
-        public string product { get; set; }
+        public float product { get; set; }
         [DisplayName("โครงการ")]
         public Nullable<int> project { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
@@ -49,14 +52,14 @@ namespace Farmbook.Models
         public string reference { get; set; }
         [DisplayName("รายละเอียด")]
         public string detail { get; set; }
-        [DisplayName("ลำดับที่")]
-        public int ID { get; set; }
         [DisplayName("วันที่ปรับปรุง / แก้ไข")]
         public System.DateTime dateUpdate { get; set; }
 
         public virtual access access1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<activity> activities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<landplot> landplots { get; set; }
         public virtual project project1 { get; set; }
         public virtual theorytype theorytype { get; set; }
     }

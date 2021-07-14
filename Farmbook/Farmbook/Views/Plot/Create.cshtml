@@ -85,7 +85,7 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
-        var COLORS = [
+        var COLORS = [//color is startShape
             ["red", "#ff0000"],
             ["orange", "#ff8800"],
             ["green", "#008000"],
@@ -170,6 +170,8 @@
             var Points = [];
             path = polygon.getPath();
             var data_path = "";
+            var data_lat = "";
+            var data_lng = "";
             listener = GGM.event.addListener(map, 'click', function (event) {//สร้างจุด
                 var val_latlng = [event.latLng.lat(), event.latLng.lng()];
 
@@ -179,7 +181,11 @@
                 console.log(val_latlng[1]);*@
                 path.push(event.latLng);
                 Points.push(event.latLng);
+                data_lat += val_latlng[0] + ",";
+                data_lng += val_latlng[1] + ",";
                 data_path += val_latlng[0] + "," + val_latlng[1] + "\r\n";
+                $("#data_lat").val(data_lat);
+                $("#data_lng").val(data_lng);
                 $("#path_arr").val(data_path);
                 $("#distance").val(polygon.inKm());
 
@@ -200,6 +206,8 @@
                     path = [];
                     var Points = [];
                     var data_path = "";
+                    var data_lat = "";
+                    var data_lng = "";
                     polygon.setPath(path);
                     path = polygon.getPath();
 
@@ -207,9 +215,13 @@
                         path.push(marker[m].getPosition());
                         Points.push(marker[m].getPosition());
                         var val_latlng = marker[m].getPosition();
+                        data_lat += val_latlng.lat() + ",";
+                        data_lng += val_latlng.lng() + ",";
                         data_path += val_latlng.lat() + "," + val_latlng.lng() + "\r\n";
                     });
                     calculateArea(Points);
+                    $("#data_lat").val(data_lat);
+                    $("#data_lng").val(data_lng);
                     $("#path_arr").val(data_path);
                     $("#distance").val(polygon.inKm());
                 });
@@ -345,7 +357,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -383,7 +394,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.typeOwnership, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือก", htmlAttributes: new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือกประเภทกรรมสิทธิ์", htmlAttributes: new { @class = "form-control", required = "required" })
                                 @Html.ValidationMessageFor(model => model.typeOwnership, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -391,7 +402,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.license, htmlAttributes: new { @class = "control-label col-md-10" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "เลือก", htmlAttributes: new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "ประเภทเอกสารสิทธิ์", htmlAttributes: new { @class = "form-control", required = "required" })
                                 @Html.ValidationMessageFor(model => model.license, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -429,11 +440,11 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.provinceStr, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                           @* @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
-                            </div>*@
+                            @* @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
+                                </div>*@
                         </div>
 
                         <div class="form-group">
@@ -441,11 +452,11 @@
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.ampherStr, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                           @* @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
-                            </div>*@
+                            @* @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-6" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
+                                </div>*@
                         </div>
 
                         <div class="form-group">
@@ -454,22 +465,24 @@
                                 @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                             @*@Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
-                            </div>*@
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
+                                </div>*@
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.coordinatesStar, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.coordinatesStar, new { htmlAttributes = new { @class = "form-control", id = "lat" } })
+                                @*@Html.TextAreaFor(model => model.coordinatesStar, new { @class = "form-control", id = "data_lat" } )*@
+                                @Html.EditorFor(model => model.coordinatesStar, new { htmlAttributes = new { @class = "form-control", id = "lat" } } )
                             </div>
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.coordinatesEnd, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
+                                @*@Html.TextAreaFor(model => model.coordinatesEnd, new { @class = "form-control", id = "data_lng" } )*@
                                 @Html.EditorFor(model => model.coordinatesEnd, new { htmlAttributes = new { @class = "form-control", id = "lng" } })
                             </div>
                         </div>
@@ -513,7 +526,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.note, new { @class = "form-control" })
                             </div>
                         </div>
 
@@ -553,10 +566,10 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <div id="hand_b"onclick="stopEditing()" />
+                                        <div id="hand_b" onclick="stopEditing()" />
                                     </td>
                                     <td>
-                                        <div id="shape_b"onclick="startShape()" />
+                                        <div id="shape_b" onclick="startShape()" />
                                     </td>
                                 </tr>
                             </table>
@@ -582,7 +595,6 @@
                                 </div>
                             </form>
                         </div>*@
-
                 </div>
             </div>
         </div>

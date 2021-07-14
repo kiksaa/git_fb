@@ -8,6 +8,15 @@
     <Property Name="accessName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_3" FromRole="access" ToRole="theory" />
   </EntityType>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="Int32" Nullable="false" />
+    <Property Name="activeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_11" FromRole="active" ToRole="landplot" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_11" FromRole="active" ToRole="register" />
+  </EntityType>
   <EntityType Name="activity">
     <Key>
       <PropertyRef Name="ID" />
@@ -61,7 +70,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nameBuy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_10" FromRole="buymethod" ToRole="landplot" />
-    <NavigationProperty Name="projectands" Relationship="Self.projectand_ibfk_2" FromRole="buymethod" ToRole="projectand" />
+    <NavigationProperty Name="projects" Relationship="Self.project_ibfk_2" FromRole="buymethod" ToRole="project" />
   </EntityType>
   <EntityType Name="district">
     <Key>
@@ -208,21 +217,23 @@
     <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="buyMethod" Type="Int32" />
     <Property Name="plotStatus" Type="Int32" />
+    <Property Name="theoryName" Type="Int32" />
     <Property Name="administrator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Int32" />
     <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="active1" Relationship="Self.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
     <NavigationProperty Name="ampher1" Relationship="Self.landplot_ibfk_5" FromRole="landplot" ToRole="ampher" />
     <NavigationProperty Name="buymethod1" Relationship="Self.landplot_ibfk_10" FromRole="landplot" ToRole="buymethod" />
     <NavigationProperty Name="district1" Relationship="Self.landplot_ibfk_6" FromRole="landplot" ToRole="district" />
     <NavigationProperty Name="license1" Relationship="Self.landplot_ibfk_1" FromRole="landplot" ToRole="license" />
+    <NavigationProperty Name="theory" Relationship="Self.landplot_ibfk_13" FromRole="landplot" ToRole="theory" />
+    <NavigationProperty Name="project" Relationship="Self.landplot_ibfk_14" FromRole="landplot" ToRole="project" />
     <NavigationProperty Name="typeownership1" Relationship="Self.landplot_ibfk_2" FromRole="landplot" ToRole="typeownership" />
     <NavigationProperty Name="province1" Relationship="Self.landplot_ibfk_3" FromRole="landplot" ToRole="province" />
-    <NavigationProperty Name="project" Relationship="Self.landplot_ibfk_7" FromRole="landplot" ToRole="project" />
     <NavigationProperty Name="status" Relationship="Self.landplot_ibfk_8" FromRole="landplot" ToRole="status" />
     <NavigationProperty Name="register" Relationship="Self.landplot_ibfk_9" FromRole="landplot" ToRole="register" />
-    <Property Name="active" Type="Int32" />
-    <NavigationProperty Name="active1" Relationship="farmdbModel.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
   </EntityType>
   <EntityType Name="license">
     <Key>
@@ -310,23 +321,23 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="projectName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_7" FromRole="project" ToRole="landplot" />
-    <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_1" FromRole="project" ToRole="theory" />
+    <Property Name="dataNow" Type="DateTime" Nullable="false" />
+    <Property Name="proName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="buyMethod" Type="Int32" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="manuStandards" Type="Int32" />
+    <NavigationProperty Name="buymethod1" Relationship="Self.project_ibfk_2" FromRole="project" ToRole="buymethod" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_14" FromRole="project" ToRole="landplot" />
+    <NavigationProperty Name="standard" Relationship="Self.project_ibfk_1" FromRole="project" ToRole="standard" />
+    <NavigationProperty Name="standardlists" Relationship="Self.standardlist_ibfk_1" FromRole="project" ToRole="standardlist" />
+    <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_4" FromRole="project" ToRole="theory" />
   </EntityType>
   <EntityType Name="projectand">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="dataNow" Type="DateTime" Nullable="false" />
-    <Property Name="proName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="buyMethod" Type="Int32" Nullable="false" />
-    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="manuStandards" Type="Int32" />
-    <NavigationProperty Name="buymethod1" Relationship="Self.projectand_ibfk_2" FromRole="projectand" ToRole="buymethod" />
-    <NavigationProperty Name="standard" Relationship="Self.projectand_ibfk_1" FromRole="projectand" ToRole="standard" />
-    <NavigationProperty Name="standardlists" Relationship="Self.standardlist_ibfk_1" FromRole="projectand" ToRole="standardlist" />
+    <Property Name="projectName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="province">
     <Key>
@@ -364,11 +375,13 @@
     <Property Name="card_img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="bank" Type="Int32" />
     <Property Name="status" Type="Int32" />
+    <Property Name="active" Type="Int32" />
     <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
     <Property Name="adminBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="active1" Relationship="Self.register_ibfk_11" FromRole="register" ToRole="active" />
     <NavigationProperty Name="ampher1" Relationship="Self.register_ibfk_7" FromRole="register" ToRole="ampher" />
     <NavigationProperty Name="bankuser" Relationship="Self.register_ibfk_8" FromRole="register" ToRole="bankuser" />
     <NavigationProperty Name="district1" Relationship="Self.register_ibfk_5" FromRole="register" ToRole="district" />
@@ -377,8 +390,6 @@
     <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_9" FromRole="register" ToRole="landplot" />
     <NavigationProperty Name="province1" Relationship="Self.register_ibfk_2" FromRole="register" ToRole="province" />
     <NavigationProperty Name="status1" Relationship="Self.register_ibfk_10" FromRole="register" ToRole="status" />
-    <Property Name="active" Type="Int32" />
-    <NavigationProperty Name="active1" Relationship="farmdbModel.register_ibfk_11" FromRole="register" ToRole="active" />
   </EntityType>
   <EntityType Name="registertype">
     <Key>
@@ -420,7 +431,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="standardName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="projectands" Relationship="Self.projectand_ibfk_1" FromRole="standard" ToRole="projectand" />
+    <NavigationProperty Name="projects" Relationship="Self.project_ibfk_1" FromRole="standard" ToRole="project" />
   </EntityType>
   <EntityType Name="standardlist">
     <Key>
@@ -432,7 +443,7 @@
     <Property Name="img" Type="Boolean" />
     <Property Name="IDpro" Type="Int32" Nullable="false" />
     <Property Name="IDlist" Type="Int32" />
-    <NavigationProperty Name="projectand" Relationship="Self.standardlist_ibfk_1" FromRole="standardlist" ToRole="projectand" />
+    <NavigationProperty Name="project" Relationship="Self.standardlist_ibfk_1" FromRole="standardlist" ToRole="project" />
   </EntityType>
   <EntityType Name="staple">
     <Key>
@@ -473,21 +484,22 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="workProcedure" Type="Int32" Nullable="false" />
     <Property Name="farmingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="sepecies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="product" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product" Type="Single" Nullable="false" />
     <Property Name="project" Type="Int32" />
     <Property Name="workName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="access" Type="Int32" Nullable="false" />
     <Property Name="reference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="access1" Relationship="Self.theory_ibfk_3" FromRole="theory" ToRole="access" />
     <NavigationProperty Name="activities" Relationship="Self.activity_ibfk_1" FromRole="theory" ToRole="activity" />
-    <NavigationProperty Name="project1" Relationship="Self.theory_ibfk_1" FromRole="theory" ToRole="project" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_13" FromRole="theory" ToRole="landplot" />
+    <NavigationProperty Name="project1" Relationship="Self.theory_ibfk_4" FromRole="theory" ToRole="project" />
     <NavigationProperty Name="theorytype" Relationship="Self.theory_ibfk_2" FromRole="theory" ToRole="theorytype" />
   </EntityType>
   <EntityType Name="theorytype">
@@ -564,6 +576,30 @@
       </Principal>
       <Dependent Role="theory">
         <PropertyRef Name="access" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="active" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="active" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -675,14 +711,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="projectand_ibfk_2">
+  <Association Name="project_ibfk_2">
     <End Role="buymethod" Type="Self.buymethod" Multiplicity="1" />
-    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="buymethod">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="projectand">
+      <Dependent Role="project">
         <PropertyRef Name="buyMethod" />
       </Dependent>
     </ReferentialConstraint>
@@ -915,6 +951,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="landplot_ibfk_13">
+    <End Role="theory" Type="Self.theory" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="theoryName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_14">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="projectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="landplot_ibfk_2">
     <End Role="typeownership" Type="Self.typeownership" Multiplicity="1" />
     <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
@@ -936,18 +996,6 @@
       </Principal>
       <Dependent Role="landplot">
         <PropertyRef Name="province" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="landplot_ibfk_7">
-    <End Role="project" Type="Self.project" Multiplicity="0..1" />
-    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="project">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="landplot">
-        <PropertyRef Name="projectName" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1035,7 +1083,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="theory_ibfk_1">
+  <Association Name="project_ibfk_1">
+    <End Role="standard" Type="Self.standard" Multiplicity="0..1" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="standard">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="project">
+        <PropertyRef Name="manuStandards" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="standardlist_ibfk_1">
+    <End Role="project" Type="Self.project" Multiplicity="1" />
+    <End Role="standardlist" Type="Self.standardlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="standardlist">
+        <PropertyRef Name="IDpro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="theory_ibfk_4">
     <End Role="project" Type="Self.project" Multiplicity="0..1" />
     <End Role="theory" Type="Self.theory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1044,30 +1116,6 @@
       </Principal>
       <Dependent Role="theory">
         <PropertyRef Name="project" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="projectand_ibfk_1">
-    <End Role="standard" Type="Self.standard" Multiplicity="0..1" />
-    <End Role="projectand" Type="Self.projectand" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="standard">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="projectand">
-        <PropertyRef Name="manuStandards" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="standardlist_ibfk_1">
-    <End Role="projectand" Type="Self.projectand" Multiplicity="1" />
-    <End Role="standardlist" Type="Self.standardlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="projectand">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="standardlist">
-        <PropertyRef Name="IDpro" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1217,6 +1265,7 @@
   </Association>
   <EntityContainer Name="farmdb" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="accesses" EntityType="Self.access" />
+    <EntitySet Name="actives" EntityType="Self.active" />
     <EntitySet Name="activities" EntityType="Self.activity" />
     <EntitySet Name="amphers" EntityType="Self.ampher" />
     <EntitySet Name="banks" EntityType="Self.bank" />
@@ -1261,6 +1310,14 @@
       <End Role="access" EntitySet="accesses" />
       <End Role="theory" EntitySet="theories" />
     </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_11" Association="Self.landplot_ibfk_11">
+      <End Role="active" EntitySet="actives" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_11" Association="Self.register_ibfk_11">
+      <End Role="active" EntitySet="actives" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
     <AssociationSet Name="activity_ibfk_1" Association="Self.activity_ibfk_1">
       <End Role="theory" EntitySet="theories" />
       <End Role="activity" EntitySet="activities" />
@@ -1297,9 +1354,9 @@
       <End Role="buymethod" EntitySet="buymethods" />
       <End Role="landplot" EntitySet="landplots" />
     </AssociationSet>
-    <AssociationSet Name="projectand_ibfk_2" Association="Self.projectand_ibfk_2">
+    <AssociationSet Name="project_ibfk_2" Association="Self.project_ibfk_2">
       <End Role="buymethod" EntitySet="buymethods" />
-      <End Role="projectand" EntitySet="projectands" />
+      <End Role="project" EntitySet="projects" />
     </AssociationSet>
     <AssociationSet Name="district_ibfk_2" Association="Self.district_ibfk_2">
       <End Role="province" EntitySet="provinces" />
@@ -1377,16 +1434,20 @@
       <End Role="license" EntitySet="licenses" />
       <End Role="landplot" EntitySet="landplots" />
     </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_13" Association="Self.landplot_ibfk_13">
+      <End Role="theory" EntitySet="theories" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_14" Association="Self.landplot_ibfk_14">
+      <End Role="project" EntitySet="projects" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
     <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
       <End Role="typeownership" EntitySet="typeownerships" />
       <End Role="landplot" EntitySet="landplots" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_3" Association="Self.landplot_ibfk_3">
       <End Role="province" EntitySet="provinces" />
-      <End Role="landplot" EntitySet="landplots" />
-    </AssociationSet>
-    <AssociationSet Name="landplot_ibfk_7" Association="Self.landplot_ibfk_7">
-      <End Role="project" EntitySet="projects" />
       <End Role="landplot" EntitySet="landplots" />
     </AssociationSet>
     <AssociationSet Name="landplot_ibfk_8" Association="Self.landplot_ibfk_8">
@@ -1417,17 +1478,17 @@
       <End Role="province" EntitySet="provinces" />
       <End Role="profile" EntitySet="profiles" />
     </AssociationSet>
-    <AssociationSet Name="theory_ibfk_1" Association="Self.theory_ibfk_1">
-      <End Role="project" EntitySet="projects" />
-      <End Role="theory" EntitySet="theories" />
-    </AssociationSet>
-    <AssociationSet Name="projectand_ibfk_1" Association="Self.projectand_ibfk_1">
+    <AssociationSet Name="project_ibfk_1" Association="Self.project_ibfk_1">
       <End Role="standard" EntitySet="standards" />
-      <End Role="projectand" EntitySet="projectands" />
+      <End Role="project" EntitySet="projects" />
     </AssociationSet>
     <AssociationSet Name="standardlist_ibfk_1" Association="Self.standardlist_ibfk_1">
-      <End Role="projectand" EntitySet="projectands" />
+      <End Role="project" EntitySet="projects" />
       <End Role="standardlist" EntitySet="standardlists" />
+    </AssociationSet>
+    <AssociationSet Name="theory_ibfk_4" Association="Self.theory_ibfk_4">
+      <End Role="project" EntitySet="projects" />
+      <End Role="theory" EntitySet="theories" />
     </AssociationSet>
     <AssociationSet Name="register_ibfk_2" Association="Self.register_ibfk_2">
       <End Role="province" EntitySet="provinces" />
@@ -1477,47 +1538,18 @@
       <End Role="vehicletype" EntitySet="vehicletypes" />
       <End Role="vehicle" EntitySet="vehicles" />
     </AssociationSet>
-    <EntitySet Name="actives" EntityType="farmdbModel.active" />
-    <AssociationSet Name="register_ibfk_11" Association="farmdbModel.register_ibfk_11">
-      <End Role="active" EntitySet="actives" />
-      <End Role="register" EntitySet="registers" />
-    </AssociationSet>
-    <AssociationSet Name="landplot_ibfk_11" Association="farmdbModel.landplot_ibfk_11">
-      <End Role="active" EntitySet="actives" />
-      <End Role="landplot" EntitySet="landplots" />
-    </AssociationSet>
+    <EntitySet Name="events" EntityType="farmdbModel.event" />
   </EntityContainer>
-  <EntityType Name="active">
+  <EntityType Name="event">
     <Key>
-      <PropertyRef Name="activeID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="activeID" Type="Int32" Nullable="false" />
-    <Property Name="activeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="registers" Relationship="farmdbModel.register_ibfk_11" FromRole="active" ToRole="register" />
-    <NavigationProperty Name="landplots" Relationship="farmdbModel.landplot_ibfk_11" FromRole="active" ToRole="landplot" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="start" Type="DateTime" Nullable="false" />
+    <Property Name="end" Type="DateTime" />
+    <Property Name="themeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="isFullDay" Type="Boolean" />
   </EntityType>
-  <Association Name="register_ibfk_11">
-    <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
-    <End Type="farmdbModel.register" Role="register" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="active">
-        <PropertyRef Name="activeID" />
-      </Principal>
-      <Dependent Role="register">
-        <PropertyRef Name="active" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="landplot_ibfk_11">
-    <End Type="farmdbModel.active" Role="active" Multiplicity="0..1" />
-    <End Type="farmdbModel.landplot" Role="landplot" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="active">
-        <PropertyRef Name="activeID" />
-      </Principal>
-      <Dependent Role="landplot">
-        <PropertyRef Name="active" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

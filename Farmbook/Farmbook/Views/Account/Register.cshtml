@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ลงทะเบียน</title>
-    <link rel="shortcut icon" href="~/Content/img/logo/farmbook-logo.png" />
+    <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
     <!-- Custom fonts for this template-->
     <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -60,7 +60,7 @@
                                         @Html.RadioButtonFor(a => a.gender, "100")
                                         @Html.Label("ชาย")
                                         @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
-
+                                        &nbsp;&nbsp;&nbsp;
                                         @Html.RadioButtonFor(a => a.gender, "200")
                                         @Html.Label("หญิง")
                                         @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
@@ -83,19 +83,19 @@
                                 </div>
                                 <br />
                                 <div class="row">
-                                    @Html.LabelFor(a => a.registerType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.LabelFor(a => a.registerType, htmlAttributes: new { @class = "control-label col-md-2" })
                                     @*<div class="col-lg-10">@Html.TextBoxFor(a => a.gender, new { @class = "form-control" })</div>*@
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-8">
                                         @Html.RadioButtonFor(a => a.registerType, "100")
-                                        @Html.Label("เกษตรกร/ผู้ใช้งานทั่วไป")
+                                        @Html.Label("ผู้ดูแลระบบ")
                                         @Html.ValidationMessageFor(a => a.registerType, "", new { @class = "text-danger" })
-                                        <br />
+                                        @*<br />*@&nbsp;&nbsp;&nbsp;
                                         @Html.RadioButtonFor(a => a.registerType, "200")
-                                        @Html.Label("สหกรณ์/วิสาหกิจ")
+                                        @Html.Label("ผู้บริหาร")
                                         @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
-                                        <br />
+                                        @*<br />*@&nbsp;&nbsp;&nbsp;
                                         @Html.RadioButtonFor(a => a.registerType, "300")
-                                        @Html.Label("บริษัท/โรงงาน")
+                                        @Html.Label("พนักงาน")
                                         @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

@@ -12,46 +12,62 @@ namespace Farmbook.Controllers
         // GET: Project
         public ActionResult Index()
         {
-            List<projectand> ProjectandList = new List<projectand>();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                ProjectandList = farmdb.projectands.ToList<projectand>();
-                ViewBag.TotalProjectand = ProjectandList.Count();
-
-                List<ViewModel> ViewModeltList = new List<ViewModel>();
-                var data = from p in farmdb.projectands
-                           join b in farmdb.buymethods on p.buyMethod equals b.ID into blist
-                           from b in blist.DefaultIfEmpty()
-                           join s in farmdb.standards on p.manuStandards equals s.ID into slist
-                           from s in slist.DefaultIfEmpty()
-                           select new
-                           {
-                               p.ID,
-                               p.dataNow,
-                               p.proName,
-                               b.nameBuy,
-                               s.standardName
-                           };
-                foreach (var item in data)
+                List<project> ProjectList = new List<project>();
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.ID = item.ID;
-                    objcvm.dateUpdate = item.dataNow;
-                    objcvm.projectName = item.proName;
-                    objcvm.nameBuy = item.nameBuy;
-                    objcvm.standardName = item.standardName;
-                    ViewModeltList.Add(objcvm);
+                    ProjectList = farmdb.projects.ToList<project>();
+                    ViewBag.TotalProjectand = ProjectList.Count();
+
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from p in farmdb.projects
+                               join b in farmdb.buymethods on p.buyMethod equals b.ID into blist
+                               from b in blist.DefaultIfEmpty()
+                               join s in farmdb.standards on p.manuStandards equals s.ID into slist
+                               from s in slist.DefaultIfEmpty()
+                               select new
+                               {
+                                   p.ID,
+                                   p.dataNow,
+                                   p.proName,
+                                   b.nameBuy,
+                                   s.standardName
+                               };
+                    foreach (var item in data)
+                    {
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.dateUpdate = item.dataNow;
+                        objcvm.projectName = item.proName;
+                        objcvm.nameBuy = item.nameBuy;
+                        objcvm.standardName = item.standardName;
+                        ViewModeltList.Add(objcvm);
+                    }
+                    return View(ViewModeltList);
                 }
-                return View(ViewModeltList);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
         public ActionResult IndexStandard(int id)
         {
-            projectand projectandModel = new projectand();
+            project projectModel = new project();
             using (farmdb farmdb = new farmdb())
             {
-                projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
-                List<standardlist> standardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectandModel.ID).ToList();
+                projectModel = farmdb.projects.Where(x => x.ID == id).FirstOrDefault();
+                List<standardlist> standardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectModel.ID).ToList();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from s in farmdb.standardlists
                            where s.IDpro == id
@@ -84,12 +100,34 @@ namespace Farmbook.Controllers
         // GET: Project/Details/5
         public ActionResult Details(int id)
         {
-            projectand ProjectandList = new projectand();
+            project ProjectList = new project();
             using (farmdb farmdb = new farmdb())
             {
-                ProjectandList = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
+                ProjectList = farmdb.projects.Where(x => x.ID == id).FirstOrDefault();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
+                List<buymethod> buymethods = farmdb.buymethods.ToList();
+                IEnumerable<SelectListItem> selbuymethods = from b in buymethods
+                                                            select new SelectListItem
+                                                            {
+                                                                Text = b.nameBuy,
+                                                                Value = b.ID.ToString()
+                                                            };
+                ViewBag.buymethods = selbuymethods;
+
+                List<standard> standards = farmdb.standards.ToList();
+                IEnumerable<SelectListItem> selstandards = from s in standards
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = s.standardName,
+                                                               Value = s.ID.ToString()
+                                                           };
+                ViewBag.standards = selstandards;
             }
-            return View(ProjectandList);
+            return View(ProjectList);
         }
         // GET: Project/Create
         public ActionResult Create()
@@ -117,35 +155,34 @@ namespace Farmbook.Controllers
                     ViewBag.standards = selstandards;
 
                 }
-                return View(new projectand());
+                return View(new project());
             }
             catch (Exception ex)
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
         
         // POST: Project/Create
         [HttpPost]
-        public ActionResult Create(projectand projectandModel)
+        public ActionResult Create(project projectModel)
         {
             using(farmdb farmdb = new farmdb())
             {
-                farmdb.projectands.Add(projectandModel);
-                projectandModel.dataNow = DateTime.Now;
+                farmdb.projects.Add(projectModel);
+                projectModel.dataNow = DateTime.Now;
                 farmdb.SaveChanges();
             }
-            return RedirectToAction("Create", "Standardlist", new { IDpro = projectandModel.ID });
+            return RedirectToAction("Create", "Standardlist", new { IDpro = projectModel.ID });
         }
 
         // GET: Project/Edit/5
         public ActionResult Edit(int id)
         {
-            projectand projectandModel = new projectand();
+            project projectModel = new project();
             using (farmdb farmdb = new farmdb())
             {
-                projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
+                projectModel = farmdb.projects.Where(x => x.ID == id).FirstOrDefault();
                 List<buymethod> buymethods = farmdb.buymethods.ToList();
                 IEnumerable<SelectListItem> selbuymethods = from b in buymethods
                                                             select new SelectListItem
@@ -164,22 +201,22 @@ namespace Farmbook.Controllers
                                                            };
                 ViewBag.standards = selstandards;
             }
-            return View(projectandModel);
+            return View(projectModel);
         }
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(projectand projectandModel)
+        public ActionResult Edit(project projectModel)
         {
             try
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.Entry(projectandModel).State = System.Data.Entity.EntityState.Modified;
-                    projectandModel.dataNow = DateTime.Now;
+                    farmdb.Entry(projectModel).State = System.Data.Entity.EntityState.Modified;
+                    projectModel.dataNow = DateTime.Now;
                     farmdb.SaveChanges();
                 }
-                return RedirectToAction("Edit", "Project");
+                return RedirectToAction("Index", "Project");
             }
             catch (Exception ex)
             {
@@ -190,10 +227,10 @@ namespace Farmbook.Controllers
         // GET: Project/Delete/5
         public ActionResult Delete(int id)
         {
-            projectand projectandModel = new projectand();
+            project projectModel = new project();
             using (farmdb farmdb = new farmdb())
             {
-                projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
+                projectModel = farmdb.projects.Where(x => x.ID == id).FirstOrDefault();
                 List<buymethod> buymethods = farmdb.buymethods.ToList();
                 IEnumerable<SelectListItem> selbuymethods = from b in buymethods
                                                             select new SelectListItem
@@ -212,7 +249,7 @@ namespace Farmbook.Controllers
                                                            };
                 ViewBag.standards = selstandards;
             }
-            return View(projectandModel);
+            return View(projectModel);
         }
 
         // POST: Project/Delete/5
@@ -223,9 +260,9 @@ namespace Farmbook.Controllers
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    projectand projectandModel = farmdb.projectands.Where(x => x.ID == id).FirstOrDefault();
-                    standardlist StandardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectandModel.ID).FirstOrDefault();
-                    farmdb.projectands.Remove(projectandModel);
+                    project projectModel = farmdb.projects.Where(x => x.ID == id).FirstOrDefault();
+                    standardlist StandardlistModel = farmdb.standardlists.Where(s => s.IDpro == projectModel.ID).FirstOrDefault();
+                    farmdb.projects.Remove(projectModel);
                     if (StandardlistModel != null)
                     {
                         farmdb.standardlists.Remove(StandardlistModel);

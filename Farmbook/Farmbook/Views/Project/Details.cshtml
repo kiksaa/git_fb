@@ -1,0 +1,126 @@
+﻿@model Farmbook.Models.project
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function AddData() {
+        $('#ButtonAction').val("Update");
+        $("#btnSubmit").click();
+    }
+    $(document).ready(function () {
+        var t = $('#example').DataTable();
+        var counter = 1;
+
+        $('#addRow').on('click', function () {
+            t.row.add([
+                counter + '.1',
+                counter + '.2',
+                counter + '.3',
+                counter + '.4',
+                counter + '.5'
+            ]).draw(false);
+
+            counter++;
+        });
+
+        // Automatically add a first row of data
+        $('#addRow').click();
+    });
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - โครงการ</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-warning mb-3" style="width: 50rem;">
+                    <h4>โครงการ</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+                            <div class="col-sm-12">
+                                <h6><u>ข้อมูลทั่วไป</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.proName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.proName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.proName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.buyMethod, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.DropDownListFor(model => model.buyMethod, (IEnumerable<SelectListItem>)ViewBag.buymethods, "เลือกวิธีการรับซื้อ", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                        @Html.ValidationMessageFor(model => model.buyMethod, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @readonly = "true" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.manuStandards, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.DropDownListFor(model => model.manuStandards, (IEnumerable<SelectListItem>)ViewBag.standards, "เลือกมาตรฐานการผลิต", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.Label("มาตรฐานแปลง", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @*<div class="col-md-9">
+                                        <a type="button" class="btn btn-info btn-rounded btn-sm" id="newregister" href="@Url.Action("Create", "Standardlist")">
+                                            เพิ่มรายการ<i class="fas fa-plus-square ml-1"></i>
+                                        </a>
+                                    </div>*@
+                                </div>
+
+                                @if (Model != null)
+                                {
+                                    <div class="card shadow mb-6">
+                                        <div class="card-body border-bottom-success alert-success">
+                                            @Html.Action("IndexStandard", "Project", new { IDpro = Model.ID })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <a class="btn btn-danger" href="@Url.Action("Index", "Project")">
+                                        <span>
+                                            กลับ
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

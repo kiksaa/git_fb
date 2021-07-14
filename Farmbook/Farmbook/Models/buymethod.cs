@@ -18,7 +18,7 @@ namespace Farmbook.Models
         public buymethod()
         {
             this.landplots = new HashSet<landplot>();
-            this.projectands = new HashSet<projectand>();
+            this.projects = new HashSet<project>();
         }
     
         public int ID { get; set; }
@@ -27,6 +27,6 @@ namespace Farmbook.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<landplot> landplots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<projectand> projectands { get; set; }
+        public virtual ICollection<project> projects { get; set; }
     }
 }

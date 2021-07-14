@@ -19,6 +19,10 @@ namespace Farmbook.Controllers
                 EquipmentList = farmdb.equipments.ToList<equipment>();
                 ViewBag.TotalEquipment = EquipmentList.Count();
 
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from e in farmdb.equipments
                            join t in farmdb.equipmenttypes on e.equipmentType equals t.equipmentID into tlist
@@ -49,12 +53,23 @@ namespace Farmbook.Controllers
 
         public ActionResult IndexSum()
         {
-            List<equipment> EquipmentList = new List<equipment>();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                EquipmentList = farmdb.equipments.ToList<equipment>();
+                List<equipment> EquipmentList = new List<equipment>();
+                using (farmdb farmdb = new farmdb())
+                {
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    EquipmentList = farmdb.equipments.ToList<equipment>();
+                }
+                return View(EquipmentList);
             }
-            return View(EquipmentList);
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
         // GET: Equipment/Details/5
         public ActionResult Details(int id)
@@ -63,6 +78,33 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+
+                List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
+                IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
+                                                                select new SelectListItem
+                                                                {
+                                                                    Text = e.equipmentT,
+                                                                    Value = e.equipmentID.ToString()
+                                                                };
+                ViewBag.equipmenttypes = selequipmenttypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
             }
             return View(equipmentModel);
         }

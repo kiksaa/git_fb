@@ -19,6 +19,10 @@ namespace Farmbook.Controllers
                 stapleList = farmdb.staples.ToList<staple>();
                 ViewBag.TotalStaple = stapleList.Count();
 
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from s in farmdb.staples
                             join t in farmdb.stapletypes on s.stapleType equals t.stapleID into slist
@@ -54,6 +58,33 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
+
+                List<stapletype> stapletypes = farmdb.stapletypes.ToList();
+                IEnumerable<SelectListItem> selstapletypes = from s in stapletypes
+                                                             select new SelectListItem
+                                                             {
+                                                                 Text = s.stapleT,
+                                                                 Value = s.stapleID.ToString()
+                                                             };
+                ViewBag.stapletypes = selstapletypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
             }
             return View(stapleModel);
         }

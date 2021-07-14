@@ -18,6 +18,11 @@ namespace Farmbook.Controllers
             {
                 softwareList = farmdb.softwares.ToList<software>();
                 ViewBag.TotalSoftware = softwareList.Count();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from s in farmdb.softwares
                             select new
@@ -50,6 +55,33 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
+
+                List<softwaretype> softwaretypes = farmdb.softwaretypes.ToList();
+                IEnumerable<SelectListItem> selsoftwaretypes = from s in softwaretypes
+                                                               select new SelectListItem
+                                                               {
+                                                                   Text = s.softType,
+                                                                   Value = s.softType.ToString()
+                                                               };
+                ViewBag.softwaretypes = selsoftwaretypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
             }
             return View(softwareModel);
         }

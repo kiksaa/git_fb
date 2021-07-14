@@ -42,9 +42,9 @@
                                 { txt = "สวัสดียามเช้า"; }
                             }
                             <h2>@txt</h2>
-                            <img src="~/Content/img/logo/logo-SWI.png" width="110" height="55">
+                            <img src="~/Content/img/logo/logo-SWI.png" width="125" height="Auto">
                             @DateTime.Now.ToString("วันdddd dd MMMM yyyy HH:mm tt")
-                            <img src="~/Content/img/logo/logo-SWI.png" width="110" height="55">
+                            <img src="~/Content/img/logo/logo-SWI.png" width="125" height="Auto">
                             <p>คุณ @Html.Encode(User.Identity.Name)</p>
                         </blockquote>
                     </div>
@@ -149,7 +149,7 @@
                                 <a type="button" href="@Url.Action("Index", "Project")">
                                     <div class="btn btn-outline-warning mb-4 shadow-sm" style="color:lightyellow;background-color:olive;">
                                         <div class="card-body">
-                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalProjectand<small class="text-lightyellow">/ โครงการ</small></h2>
+                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalProject<small class="text-lightyellow">/ โครงการ</small></h2>
                                             <ul class="list-unstyled mt-3 mb-4">
                                                 <li>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
@@ -164,10 +164,10 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a type="button" href="@Url.Action("Calendar", "Account")">
+                                <a type="button" href="@Url.Action("Index", "Event")">
                                     <div class="btn btn-outline-warning mb-4 shadow-sm" href="#" style="color:lightyellow;background-color:olivedrab;">
                                         <div class="card-body">
-                                            <h2 class="card-title pricing-card-title">@* 9 *@<small class="text-lightyellow">@*/*@ ปฏิทินงาน</small></h2>
+                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalEvent <small class="text-lightyellow">/ ปฏิทินงาน</small></h2>
                                             <ul class="list-unstyled mt-3 mb-4">
                                                 <li>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">

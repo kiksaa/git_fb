@@ -151,7 +151,7 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from s in projects
                                                           select new SelectListItem
                                                         {
-                                                            Text = s.projectName,
+                                                            Text = s.proName,
                                                             Value = s.ID.ToString()
                                                         };
                 ViewBag.projects = selprojects;
@@ -173,26 +173,26 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(landplot plotModel)
         {
-            try
-            {
+            /*try
+            {*/
                 using (farmdb farmdb = new farmdb())
                 {
                     /*landplot land = new landplot();
                     register re = new register();*/
-
                     /*re.ID = (int)plotModel.farmerName;*/
 
                     farmdb.landplots.Add(plotModel);
+                    plotModel.theoryName = 2;
                     /*farmdb.landplots.Add(land);
                     farmdb.registers.Add(re);*/
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Register");
-            }
+            /*}
             catch (Exception ex)
             {
                 return RedirectToAction("Index", "Home");
-            }
+            }*/
         }
 
         // GET: Plot/Edit/5
@@ -282,7 +282,7 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from s in projects
                                                           select new SelectListItem
                                                           {
-                                                              Text = s.projectName,
+                                                              Text = s.proName,
                                                               Value = s.ID.ToString()
                                                           };
                 ViewBag.projects = selprojects;
@@ -319,7 +319,6 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         // GET: Plot/Delete/5
@@ -388,7 +387,7 @@ namespace Farmbook.Controllers
                 IEnumerable<SelectListItem> selprojects = from s in projects
                                                           select new SelectListItem
                                                           {
-                                                              Text = s.projectName,
+                                                              Text = s.proName,
                                                               Value = s.ID.ToString()
                                                           };
                 ViewBag.projects = selprojects;

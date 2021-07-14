@@ -31,14 +31,14 @@ namespace Farmbook.Controllers
         {
             using (farmdb farmdb = new farmdb())
             {
-                List<projectand> projectands = farmdb.projectands.ToList();
-                IEnumerable<SelectListItem> selprojectands = from p in projectands
+                List<project> projects = farmdb.projects.ToList();
+                IEnumerable<SelectListItem> selprojects = from p in projects
                                                             select new SelectListItem
                                                             {
                                                                 Text = p.proName,
                                                                 Value = p.ID.ToString()
                                                             };
-                ViewBag.projectands = selprojectands;
+                ViewBag.projects = selprojects;
             }
             return View(new standardlist());
         }
@@ -69,14 +69,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 StandardlistModel = farmdb.standardlists.Where(x => x.ID == id).FirstOrDefault();
-                List<projectand> projectands = farmdb.projectands.ToList();
-                IEnumerable<SelectListItem> selprojectands = from p in projectands
-                                                             select new SelectListItem
-                                                             {
-                                                                 Text = p.proName,
-                                                                 Value = p.ID.ToString()
-                                                             };
-                ViewBag.projectands = selprojectands;
+                List<project> projects = farmdb.projects.ToList();
+                IEnumerable<SelectListItem> selprojects = from p in projects
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = p.proName,
+                                                              Value = p.ID.ToString()
+                                                          };
+                ViewBag.projects = selprojects;
 
             }
             return View(StandardlistModel);
@@ -109,14 +109,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 StandardlistModel = farmdb.standardlists.Where(x => x.ID == id).FirstOrDefault();
-                List<projectand> projectands = farmdb.projectands.ToList();
-                IEnumerable<SelectListItem> selprojectands = from p in projectands
-                                                             select new SelectListItem
-                                                             {
-                                                                 Text = p.proName,
-                                                                 Value = p.ID.ToString()
-                                                             };
-                ViewBag.projectands = selprojectands;
+                List<project> projects = farmdb.projects.ToList();
+                IEnumerable<SelectListItem> selprojects = from p in projects
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = p.proName,
+                                                              Value = p.ID.ToString()
+                                                          };
+                ViewBag.projects = selprojects;
             }
             return View(StandardlistModel);
         }

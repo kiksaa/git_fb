@@ -24,6 +24,7 @@
     <NameOfLastUsedPublishProfile>IISProfile</NameOfLastUsedPublishProfile>
     <_SelectedScaffolderID>MvcControllerEmptyScaffolder</_SelectedScaffolderID>
     <_SelectedScaffolderCategoryPath>root/Common</_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_DbContextTypeFullName>Farmbook.Models.farmdb</WebStackScaffolding_DbContextTypeFullName>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

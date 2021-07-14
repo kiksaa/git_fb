@@ -33,6 +33,8 @@ namespace Farmbook.Models
         public Nullable<int> landNumber { get; set; }
         [DisplayName("เอกสาร (เอกสารสิทธิ์)")]
         public string license_img { get; set; }
+        [DisplayName("เอกสาร (สัญญาเช่า)")]
+        public string lease_img { get; set; }
         [DisplayName("ตำบล/แขวง")]
         public Nullable<int> district { get; set; }
         [DisplayName("อำเภอ/เขต")]
@@ -55,31 +57,32 @@ namespace Farmbook.Models
         public Nullable<int> projectName { get; set; }
         [DisplayName("หมายเหตุ")]
         public string note { get; set; }
-        [DisplayName("สถานะแปลง")]
-        public Nullable<int> plotStatus { get; set; }
-        [DisplayName("เอกสาร (สัญญาเช่า)")]
-        public string lease_img { get; set; }
         [DisplayName("วิธีการรับซื้อ")]
         public Nullable<int> buyMethod { get; set; }
+        [DisplayName("สถานะแปลง")]
+        public Nullable<int> plotStatus { get; set; }
+        [DisplayName("ขั้นตอนการทำงาน")]
+        public Nullable<int> theoryName { get; set; }
         [DisplayName("ผู้รับผิดชอบ")]
         public string administrator { get; set; }
+        public Nullable<int> active { get; set; }
         [DisplayName("จังหวัด")]
         public string provinceStr { get; set; }
         [DisplayName("อำเภอ/เขต")]
         public string ampherStr { get; set; }
         [DisplayName("ตำบล/แขวง")]
         public string districtStr { get; set; }
-        public Nullable<int> active { get; set; }
-    
+
+        public virtual active active1 { get; set; }
         public virtual ampher ampher1 { get; set; }
         public virtual buymethod buymethod1 { get; set; }
         public virtual district district1 { get; set; }
         public virtual license license1 { get; set; }
+        public virtual theory theory { get; set; }
+        public virtual project project { get; set; }
         public virtual typeownership typeownership1 { get; set; }
         public virtual province province1 { get; set; }
-        public virtual project project { get; set; }
         public virtual status status { get; set; }
         public virtual register register { get; set; }
-        public virtual active active1 { get; set; }
     }
 }

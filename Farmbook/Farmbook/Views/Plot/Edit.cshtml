@@ -382,7 +382,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.typeOwnership, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือก", htmlAttributes: new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือกประเภทกรรมสิทธิ์", htmlAttributes: new { @class = "form-control", required = "required" })
                                 @Html.ValidationMessageFor(model => model.typeOwnership, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.license, htmlAttributes: new { @class = "control-label col-md-10" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "เลือก", htmlAttributes: new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "ประเภทเอกสารสิทธิ์", htmlAttributes: new { @class = "form-control", required = "required" })
                                 @Html.ValidationMessageFor(model => model.license, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -513,7 +513,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.note, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.note, new { @class = "form-control" })
                             </div>
                         </div>
 

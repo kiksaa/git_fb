@@ -21,64 +21,75 @@ namespace Farmbook.Controllers
         // GET: Register
         public ActionResult Index()
         {
-            register model = new register();
-            List<register> registerList = new List<register>();
-            /*for(int i = 1; i <= registerList.Count(); i++)
+            try
             {
-
-            }*/
-            using (farmdb farmdb = new farmdb())
-            {
-                registerList = farmdb.registers.ToList<register>();
-                /*ViewBag.TotalRegister = registerList.Count();*/
-                List<ViewModel> ViewModeltList = new List<ViewModel>();
-                var data = from r in farmdb.registers
-                           join p in farmdb.provinces on r.province equals p.provinceID into plist
-                           from p in plist.DefaultIfEmpty()
-                           join a in farmdb.amphers on r.ampher equals a.ampherID into alist
-                           from a in alist.DefaultIfEmpty()
-                           join d in farmdb.districts on r.district equals d.districtID into dlist
-                           from d in dlist.DefaultIfEmpty()
-                           join s in farmdb.status on r.status equals s.statusID into slist
-                           from s in slist.DefaultIfEmpty()
-                           join b in farmdb.bankusers on r.bank equals b.ID into blist
-                           from b in blist.DefaultIfEmpty()
-                           join l in farmdb.landplots on r.ID equals l.farmerName into llist
-                           from l in llist.DefaultIfEmpty()
-                           select new
-                           {
-                               r.ID,r.name,r.registerID,r.cardID,r.no,r.moo,r.road,
-                               /*p.provinceName,a.ampherName,d.districtName,*/
-                               r.provinceStr,r.ampherStr,r.districtStr,s.statusName,r.dateUpdate,r.adminBy,r.active,
-                               TotalLandplot = llist.Count(),
-                               Totalarea = llist.Sum(ll => ll.areaPlot),
-                               Total = r.gender
-                           };
-                foreach (var item in data.Distinct())
+                register model = new register();
+                List<register> registerList = new List<register>();
+                /*for(int i = 1; i <= registerList.Count(); i++)
                 {
-                    if (item.active == 100 || item.active == null)
+
+                }*/
+                using (farmdb farmdb = new farmdb())
+                {
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    registerList = farmdb.registers.ToList<register>();
+                    /*ViewBag.TotalRegister = registerList.Count();*/
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from r in farmdb.registers
+                               join p in farmdb.provinces on r.province equals p.provinceID into plist
+                               from p in plist.DefaultIfEmpty()
+                               join a in farmdb.amphers on r.ampher equals a.ampherID into alist
+                               from a in alist.DefaultIfEmpty()
+                               join d in farmdb.districts on r.district equals d.districtID into dlist
+                               from d in dlist.DefaultIfEmpty()
+                               join s in farmdb.status on r.status equals s.statusID into slist
+                               from s in slist.DefaultIfEmpty()
+                               join b in farmdb.bankusers on r.bank equals b.ID into blist
+                               from b in blist.DefaultIfEmpty()
+                               join l in farmdb.landplots on r.ID equals l.farmerName into llist
+                               from l in llist.DefaultIfEmpty()
+                               select new
+                               {
+                                   r.ID, r.name, r.registerID, r.cardID, r.no, r.moo, r.road,
+                                   /*p.provinceName,a.ampherName,d.districtName,*/
+                                   r.provinceStr, r.ampherStr, r.districtStr, s.statusName, r.dateUpdate, r.adminBy, r.active,
+                                   TotalLandplot = llist.Count(),
+                                   Totalarea = llist.Sum(ll => ll.areaPlot),
+                                   Total = r.gender
+                               };
+                    foreach (var item in data.Distinct())
                     {
-                        ViewModel objcvm = new ViewModel();
-                        objcvm.ID = item.ID;
-                        objcvm.name = item.name;
-                        objcvm.registerID = item.registerID;
-                        objcvm.cardID = item.cardID;
-                        objcvm.no = item.no;
-                        objcvm.moo = item.moo;
-                        objcvm.road = item.road;
-                        objcvm.provinceName = item.provinceStr;
-                        objcvm.ampherName = item.ampherStr;
-                        objcvm.districtName = item.districtStr;
-                        objcvm.statusName = item.statusName;
-                        objcvm.dateUpdate = item.dateUpdate;
-                        objcvm.areaNumber = item.TotalLandplot;
-                        objcvm.areaPlot = item.Totalarea;
-                        objcvm.adminBy = item.adminBy;
-                        ViewModeltList.Add(objcvm);
+                        if (item.active == 100 || item.active == null)
+                        {
+                            ViewModel objcvm = new ViewModel();
+                            objcvm.ID = item.ID;
+                            objcvm.name = item.name;
+                            objcvm.registerID = item.registerID;
+                            objcvm.cardID = item.cardID;
+                            objcvm.no = item.no;
+                            objcvm.moo = item.moo;
+                            objcvm.road = item.road;
+                            objcvm.provinceName = item.provinceStr;
+                            objcvm.ampherName = item.ampherStr;
+                            objcvm.districtName = item.districtStr;
+                            objcvm.statusName = item.statusName;
+                            objcvm.dateUpdate = item.dateUpdate;
+                            objcvm.areaNumber = item.TotalLandplot;
+                            objcvm.areaPlot = item.Totalarea;
+                            objcvm.adminBy = item.adminBy;
+                            ViewModeltList.Add(objcvm);
+                        }
+                        ViewBag.TotalRegister = ViewModeltList.Count();
+                    }
+                    return View(ViewModeltList);
                 }
-                ViewBag.TotalRegister = ViewModeltList.Count();
             }
-                return View(ViewModeltList);
+            catch
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
         public ActionResult IndexPlot(int id)
@@ -88,6 +99,10 @@ namespace Farmbook.Controllers
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
                 List<landplot> landplotModel = farmdb.landplots.Where(p => p.farmerName == registerModel.ID).ToList();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
 
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from l in farmdb.landplots
@@ -105,18 +120,21 @@ namespace Farmbook.Controllers
                            select new
                            {
                                l.ID,/*p.provinceName,a.ampherName,d.districtName,*/
-                               l.provinceStr,l.ampherStr,l.districtStr,l.plotName,pro.projectName,
+                               l.provinceStr,l.ampherStr,l.districtStr,l.plotName,pro.proName,l.active
                            };
                 foreach (var item in data)
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.ID = item.ID;
-                    objcvm.provinceName = item.provinceStr;
-                    objcvm.ampherName = item.ampherStr;
-                    objcvm.districtName = item.districtStr;
-                    objcvm.plotName = item.plotName;
-                    objcvm.projectName = item.projectName;
-                    ViewModeltList.Add(objcvm);
+                    if (item.active == 100 || item.active == null)
+                    {
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.provinceName = item.provinceStr;
+                        objcvm.ampherName = item.ampherStr;
+                        objcvm.districtName = item.districtStr;
+                        objcvm.plotName = item.plotName;
+                        objcvm.projectName = item.proName;
+                        ViewModeltList.Add(objcvm);
+                    }
                 }
                 ViewBag.TotalLandplot = data.Count();
                 return View(ViewModeltList);
@@ -220,8 +238,8 @@ namespace Farmbook.Controllers
         [HttpPost]
         public ActionResult Create(register registerModel, HttpPostedFileBase farmer_img, HttpPostedFileBase card_img)
         {
-            /*try
-            {*/
+            try
+            {
                 using (farmdb farmdb = new farmdb())
                 {
                     string folderPath = Server.MapPath("~/Content/img/upload/farmer/");
@@ -293,12 +311,12 @@ namespace Farmbook.Controllers
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
-            /*}
+            }
             catch (Exception ex)
             {
-                *//*ViewBag.Message = ex.InnerException.InnerException.Message;*//*
+               /* ViewBag.Message = ex.InnerException.InnerException.Message;*/
                 return RedirectToAction("Index", "Home");
-            }*/
+            }
         }
         // GET: Register/Edit/5
         public ActionResult Edit(int id)
@@ -413,6 +431,7 @@ namespace Farmbook.Controllers
                             var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/idcard/"), fileName);
                             card_img.SaveAs(userfolderpath);
                             registerModel.card_img = card_img.FileName;
+                            /*farmdb.registers.Include(registerModel.card_img);*/
                         }
                         else
                         {
@@ -422,13 +441,13 @@ namespace Farmbook.Controllers
                     /*bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
                     registerModel.bankuser = bankuserModel;*/
                     registerModel.bank = bankuserModel.ID;
-
                     /*registerModel.bankuser = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
                     farmdb.Entry(registerModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Added;
                     registerModel.adminBy = User.Identity.Name;
                     registerModel.dateUpdate = DateTime.Now;
                     registerModel.active = 100;
+                    
                     /*UpdateModel(bankuserModel);*/
                     farmdb.SaveChanges();
                 }
@@ -522,7 +541,10 @@ namespace Farmbook.Controllers
                         }
                     }
                     registerModel.active = 200;
-                    landplotModel.active = 200;
+                    if (landplotModel != null)
+                    {
+                        landplotModel.active = 200;
+                    }
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");

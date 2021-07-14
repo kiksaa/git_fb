@@ -1,0 +1,157 @@
+﻿@model Farmbook.Models.machine
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนเครื่องจักร</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <h4>ทะเบียนเครื่องจักร</h4>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-warning mb-3" style="width: 100rem;">
+                    <h4>ข้อมูลทะเบียนเครื่องจักร</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IDmac)
+                            @using (Html.BeginForm("Details", "Machine", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-sm-4">
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.machineImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.machineImg, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "readonly" } })
+                                            @{ if (@Model.machineImg != null)
+                                                {
+                                                    <br />
+                                                    <img src="~/Content/img/upload/machine/@Model.machineImg" height="250" width="240">
+                                                } }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-sm-4">
+                                <h6><u>ข้อมูลทั่วไป</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.machineType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.machineType, (IEnumerable<SelectListItem>)ViewBag.machinetypes, "เลือกประเภทเครื่องจักร", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.machineType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.machineID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.machineID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.machineID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.machineName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.machineName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.machineName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitBuy, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ซื้อ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitBuy, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitUse, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitUse, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ใช้", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitUse, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.dateBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.dateBuy, new { htmlAttributes = new { @class = "form-control datepicker", Type = "DateTime", placeholder = "31/12/2500", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h6><u>ตั้งค่าการทำงานเริ่มต้น</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.workTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.workTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <h6><u>ตั้งค่าเชื้อเพลิงเริ่มต้น</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.energy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.energy, (IEnumerable<SelectListItem>)ViewBag.energies, "เลือกประเภทพลังงาน", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.fuel, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.fuel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            <a type="button" class="btn btn-danger" href="@Url.Action("IndexSum", "Equipment")">
+                                                <span>
+                                                    กลับ
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

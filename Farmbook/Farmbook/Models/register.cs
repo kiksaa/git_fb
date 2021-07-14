@@ -77,6 +77,7 @@ namespace Farmbook.Models
         public string adminBy { get; set; }
         public Nullable<int> active { get; set; }
 
+        public virtual active active1 { get; set; }
         public virtual ampher ampher1 { get; set; }
         public virtual bankuser bankuser { get; set; }
         public virtual district district1 { get; set; }
@@ -86,6 +87,5 @@ namespace Farmbook.Models
         public virtual ICollection<landplot> landplots { get; set; }
         public virtual province province1 { get; set; }
         public virtual status status1 { get; set; }
-        public virtual active active1 { get; set; }
     }
 }

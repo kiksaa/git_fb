@@ -17,43 +17,47 @@ namespace Farmbook.Controllers
             {
                 /*if (User.Identity.Name == "admin")
                 {*/
-                    List<profile> profileList = new List<profile>();
-                    using (farmdb farmdb = new farmdb())
+                List<profile> profileList = new List<profile>();
+                using (farmdb farmdb = new farmdb())
+                {
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    profileList = farmdb.profiles.ToList<profile>();
+                    ViewBag.TotalProfile = profileList.Count();
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from p in farmdb.profiles
+                               join r in farmdb.registertypes on p.registerType equals r.typeID into rlist
+                               from r in rlist.DefaultIfEmpty()
+                               join g in farmdb.genders on p.gender equals g.genderID into glist
+                               from g in glist.DefaultIfEmpty()
+                               select new
+                               {
+                                   p.ID,
+                                   p.name,
+                                   /*p.cradID,
+                                   g.genderName,
+                                   p.birthday,*/
+                                   p.email,
+                                   p.tel,
+                                   r.typeName
+                               };
+                    foreach (var item in data)
                     {
-                        profileList = farmdb.profiles.ToList<profile>();
-                        ViewBag.TotalProfile = profileList.Count();
-                        List<ViewModel> ViewModeltList = new List<ViewModel>();
-                        var data = from p in farmdb.profiles
-                                   join r in farmdb.registertypes on p.registerType equals r.typeID into rlist
-                                   from r in rlist.DefaultIfEmpty()
-                                   join g in farmdb.genders on p.gender equals g.genderID into glist
-                                   from g in glist.DefaultIfEmpty()
-                                   select new
-                                   {
-                                       p.ID,
-                                       p.name,
-                                       /*p.cradID,
-                                       g.genderName,
-                                       p.birthday,*/
-                                       p.email,
-                                       p.tel,
-                                       r.typeName
-                                   };
-                        foreach (var item in data)
-                        {
-                            ViewModel objcvm = new ViewModel();
-                            objcvm.ID = item.ID;
-                            objcvm.name = item.name;
-                            /*objcvm.cardID = item.cradID;
-                            objcvm.genderName = item.genderName;
-                            objcvm.birthday = (DateTime)item.birthday;*/
-                            objcvm.email = item.email;
-                            objcvm.tel = item.tel;
-                            objcvm.typeName = item.typeName;
-                            ViewModeltList.Add(objcvm);
-                        }
-                        return View(ViewModeltList);
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.name = item.name;
+                        /*objcvm.cardID = item.cradID;
+                        objcvm.genderName = item.genderName;
+                        objcvm.birthday = (DateTime)item.birthday;*/
+                        objcvm.email = item.email;
+                        objcvm.tel = item.tel;
+                        objcvm.typeName = item.typeName;
+                        ViewModeltList.Add(objcvm);
                     }
+                    return View(ViewModeltList);
+                }
                 /*}
                 else
                 {
@@ -62,7 +66,7 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return RedirectToAction("Index", "Home");
             }
 
         }
@@ -75,7 +79,7 @@ namespace Farmbook.Controllers
             {
                 profileModel = farmdb.profiles.Where(x => x.ID == id).FirstOrDefault();
             }
-                return View(profileModel);
+            return View(profileModel);
         }
 
         // GET: Profile/Create
@@ -140,7 +144,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+
         }
         public ActionResult Edit(string email)
         {
@@ -276,7 +280,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+
         }
     }
 }

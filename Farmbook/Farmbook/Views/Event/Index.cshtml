@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Farmbook.Models.ViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนพลังงานและเชื้อเพลิง</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="col align-self-start">
+                <div class="col-10">
+                    <h3 class="text-muted">ปฏิทินงาน </h3>
+                </div>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
+                <span>
+                    กลับหน้าแรก
+                </span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            @*@if (ViewBag.status == "100")
+            {*@
+            <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Event")">
+                <span>
+                    + สร้างใหม่
+                </span>
+            </a>
+            @*}*@
+        </div>
+        <hr />
+        <div class="row">
+            @foreach (var model in Model.OrderBy(s => s.start))
+            {
+                <div class="col-sm-3">
+                    <div class="card-body">
+                        <div class="card" style="width: 24rem;">
+                            <div class="card-body" style="background-color: beige">
+                                <h5 class="card-title">หัวข้อ : @Html.DisplayFor(modelItem => model.subject) </h5>
+                                <hr />
+                                <p>วันที่เริ่มต้น : @Html.DisplayFor(modelItem => model.start) </p>
+                                <p>วันที่สิ้นสุด : @Html.DisplayFor(modelItem => model.end) </p>
+                                <p>รายละเอียด : @Html.DisplayFor(modelItem => model.description) </p>
+                                <p>เต็มวัน : @Html.DisplayFor(modelItem => model.isFullDay) </p>
+                                <hr />
+                                @*<a class="btn-sm btn-outline-danger" href="@Url.Action("Delete", "Event", new { id = model.ID })">  ลบ </a>
+                                <a class="btn-sm btn-outline-primary" href="@Url.Action("Edit", "Event", new { id = model.ID })">  แก้ไข </a>*@
+                                <a class="btn-sm btn-outline-danger" href="@Url.Action("Delete", "Event", new { id = model.ID })">
+                                    <span>
+                                        ลบ
+                                    </span>
+                                </a> @*&nbsp;&nbsp;*@
+                                <a class="btn-sm btn-outline-primary" href="@Url.Action("Edit", "Event", new { id = model.ID })">
+                                    <span>
+                                        แก้ไข
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }&nbsp;&nbsp;
+        </div>
+
+    </div>
+
+</body>
+</html>

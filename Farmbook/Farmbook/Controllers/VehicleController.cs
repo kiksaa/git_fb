@@ -18,6 +18,11 @@ namespace Farmbook.Controllers
             {
                 vehicleList = farmdb.vehicles.ToList<vehicle>();
                 ViewBag.TotalVehicle = vehicleList.Count();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from v in farmdb.vehicles
                             join t in farmdb.vehicletypes on v.vehicleType equals t.vehicleID into tlist
@@ -55,6 +60,33 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
+
+                List<vehicletype> vehicletypes = farmdb.vehicletypes.ToList();
+                IEnumerable<SelectListItem> selvehicletypes = from v in vehicletypes
+                                                              select new SelectListItem
+                                                              {
+                                                                  Text = v.vehicleT,
+                                                                  Value = v.vehicleID.ToString()
+                                                              };
+                ViewBag.vehicletypes = selvehicletypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
             }
             return View(vehicleModel);
         }

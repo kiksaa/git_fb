@@ -1,7 +1,8 @@
 ﻿@model Farmbook.Models.equipment
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 }
 
 <!DOCTYPE html>
@@ -9,114 +10,150 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <title>FARMBOOK - ทะเบียนอุปกรณ์</title>
 </head>
-<body>
-    <div>
-        <h4>equipment</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.equipmentType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.equipmentType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.equipmentID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.equipmentID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.equipmentName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.equipmentName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.detail)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.detail)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.price)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.price)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.unitBuy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.unitBuy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.unitUse)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.unitUse)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.dateBuy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.dateBuy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.workTime)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.workTime)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.fuel)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.fuel)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.energy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.energy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.equipmentImg)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.equipmentImg)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.equipmentID }) |
-        @Html.ActionLink("Back to List", "IndexSum")
-    </p>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col">
+            <h4>ทะเบียนอุปกรณ์</h4>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-warning mb-3" style="width: 100rem;">
+                    <h4>ข้อมูลทะเบียนอุปกรณ์</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IDequip)
+                            @using (Html.BeginForm("Edit", "Equipment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-sm-4">
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.equipmentImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.equipmentImg, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "readonly" } })
+                                            @{ if (@Model.equipmentImg != null)
+                                                {
+                                                    <br />
+                                                    <img src="~/Content/img/upload/equipment/@Model.equipmentImg" height="250" width="240">
+                                                } }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-sm-4">
+                                <h6><u>ข้อมูลทั่วไป</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.equipmentType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.equipmentType, (IEnumerable<SelectListItem>)ViewBag.equipmenttypes, "เลือกประเภทอุปกรณ์", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.equipmentType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.equipmentID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.equipmentID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.equipmentID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.equipmentName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.equipmentName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.equipmentName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitBuy, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ซื้อ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitBuy, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitUse, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitUse, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ใช้", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitUse, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.dateBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.dateBuy, new { htmlAttributes = new { @class = "form-control datepicker", Type = "DateTime", placeholder = "31/12/2500", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h6><u>ตั้งค่าการทำงานเริ่มต้น</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.workTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.workTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <h6><u>ตั้งค่าเชื้อเพลิงเริ่มต้น</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.energy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.energy, (IEnumerable<SelectListItem>)ViewBag.energies, "เลือกประเภทพลังงาน", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.fuel, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.fuel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            <a type="button" class="btn btn-danger" href="@Url.Action("IndexSum", "Equipment")">
+                                                <span>
+                                                    กลับ
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

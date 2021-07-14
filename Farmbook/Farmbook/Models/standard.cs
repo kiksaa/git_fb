@@ -17,13 +17,13 @@ namespace Farmbook.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public standard()
         {
-            this.projectands = new HashSet<projectand>();
+            this.projects = new HashSet<project>();
         }
     
         public int ID { get; set; }
         public string standardName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<projectand> projectands { get; set; }
+        public virtual ICollection<project> projects { get; set; }
     }
 }

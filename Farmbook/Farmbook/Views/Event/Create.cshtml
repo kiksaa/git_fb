@@ -1,0 +1,94 @@
+﻿@model Farmbook.Models.@event
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FARMBOOK - เพิ่มทะเบียนอุปกรณ์</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @using (Html.BeginForm("Create", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <h4>ทะเบียนอุปกรณ์</h4>
+            <hr />
+                <div class="row justify-content-center">
+                    <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-info mb-3" style="width: 50rem;">
+                        <h4>โครงการ</h4>
+                        <div class="card-body">
+                            <div class="row-12">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ID)
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.subject, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.start, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "form-control", required = "required", type = "datetime-local" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.isFullDay, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.CheckBox("isFullDay", Model.isFullDay.HasValue ? Model.isFullDay : false)
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.end, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.end, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.TextAreaFor(model => model.description, new { @class = "form-control", required = "required" } )
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="row justify-content-md-center">
+                                        <div class="form-group row">
+                                            <div class="col-6">
+                                                <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Event")">
+                                                    <span>
+                                                        กลับ
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="submit" value="บันทึก" class="btn btn-success" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

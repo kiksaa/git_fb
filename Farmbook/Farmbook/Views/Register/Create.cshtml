@@ -367,7 +367,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.comment, new { @class = "form-control" } )
                     </div>
                 </div>
                 <div class="container">

@@ -18,6 +18,11 @@ namespace Farmbook.Controllers
             {
                 laborList = farmdb.labors.ToList<labor>();
                 ViewBag.TotalLabor = laborList.Count();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from l in farmdb.labors
                             join t in farmdb.labortypes on l.laborType equals t.laborID into tlist
@@ -56,6 +61,24 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
+
+                List<labortype> labortypes = farmdb.labortypes.ToList();
+                IEnumerable<SelectListItem> sellabortypes = from l in labortypes
+                                                            select new SelectListItem
+                                                            {
+                                                                Text = l.laborT,
+                                                                Value = l.laborID.ToString()
+                                                            };
+                ViewBag.labortypes = sellabortypes;
+
+                List<position> positions = farmdb.positions.ToList();
+                IEnumerable<SelectListItem> selpositions = from p in positions
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = p.positionName,
+                                                               Value = p.positionID.ToString()
+                                                           };
+                ViewBag.positions = selpositions;
             }
             return View(laborModel);
         }

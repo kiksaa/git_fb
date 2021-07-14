@@ -11,32 +11,10 @@ namespace Farmbook.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class projectand
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public projectand()
-        {
-            this.standardlists = new HashSet<standardlist>();
-        }
-        [DisplayName("ลำดับที่")]
         public int ID { get; set; }
-
-        [DisplayName("วันที่ปรับปรุง/แก้ไข")]
-        public System.DateTime dataNow { get; set; }
-        [DisplayName("ชื่อโครงการ")]
-        public string proName { get; set; }
-        [DisplayName("วิธีการรับซื้อ")]
-        public int buyMethod { get; set; }
-        [DisplayName("รายละเอียด")]
-        public string detail { get; set; }
-        [DisplayName("มาตรฐานการผลิต")]
-        public Nullable<int> manuStandards { get; set; }
-
-        public virtual buymethod buymethod1 { get; set; }
-        public virtual standard standard { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<standardlist> standardlists { get; set; }
+        public string projectName { get; set; }
     }
 }

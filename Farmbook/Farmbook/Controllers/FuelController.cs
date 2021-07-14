@@ -18,18 +18,23 @@ namespace Farmbook.Controllers
             {
                 fuelList = farmdb.fuels.ToList<fuel>();
                 ViewBag.TotalFuel = fuelList.Count();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from f in farmdb.fuels
-                            join t in farmdb.fueltypes on f.fuelType equals t.fuelID into tlist
-                            from t in tlist.DefaultIfEmpty()
-                            select new
-                            {
-                                t.fuelType1,
-                                f.fuelName,
-                                f.detail,
-                                f.price,
-                                f.IDfule
-                            };
+                           join t in farmdb.fueltypes on f.fuelType equals t.fuelID into tlist
+                           from t in tlist.DefaultIfEmpty()
+                           select new
+                           {
+                               t.fuelType1,
+                               f.fuelName,
+                               f.detail,
+                               f.price,
+                               f.IDfule
+                           };
                 foreach (var item in data)
                 {
                     ViewModel objcvm = new ViewModel();
@@ -51,6 +56,33 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
+
+                List<fueltype> fueltypes = farmdb.fueltypes.ToList();
+                IEnumerable<SelectListItem> selfueltypes = from f in fueltypes
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = f.fuelType1,
+                                                               Value = f.fuelID.ToString()
+                                                           };
+                ViewBag.fueltypes = selfueltypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
             }
             return View(fuelModel);
         }
@@ -223,10 +255,10 @@ namespace Farmbook.Controllers
                 List<fueltype> fueltypes = farmdb.fueltypes.ToList();
                 IEnumerable<SelectListItem> selfueltypes = from f in fueltypes
                                                            select new SelectListItem
-                                                              {
-                                                                  Text = f.fuelType1,
-                                                                  Value = f.fuelID.ToString()
-                                                              };
+                                                           {
+                                                               Text = f.fuelType1,
+                                                               Value = f.fuelID.ToString()
+                                                           };
                 ViewBag.fueltypes = selfueltypes;
 
                 List<unit> units = farmdb.units.ToList();
@@ -268,7 +300,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+
         }
     }
 }

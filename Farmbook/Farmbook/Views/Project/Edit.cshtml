@@ -1,4 +1,4 @@
-﻿@model Farmbook.Models.projectand
+﻿@model Farmbook.Models.project
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -70,7 +70,7 @@
                                 <div class="form-group row">
                                     @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-9">
-                                        @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.TextAreaFor(model => model.detail, new { @class = "form-control" })
                                     </div>
                                 </div>
 

@@ -42,5 +42,23 @@ namespace Farmbook.Models
                 return " ตำบล/แขวง " + districtName + " อำเภอ/เขต  " + ampherName + " จังหวัด " + provinceName;
             }
         }
+        [DisplayName("ผู้รับผิดชอบ")]
+        public string administrator { get; set; }
+        [DisplayName("เลขที่เอกสารสิทธิ์ (เลขที่โฉนดที่ดิน)")]
+        public string titleDeed { get; set; }
+        [DisplayName("เลขที่ดิน")]
+        public Nullable<int> landNumber { get; set; }
+        [DisplayName("เอกสาร (สัญญาเช่า)")]
+        public string lease_img { get; set; }
+        [DisplayName("รายละเอียดแปลง")]
+        public string plotDetails { get; set; }
+        [DisplayName("วิธีการรับซื้อ")]
+        public string nameBuy { get; set; }
+        [DisplayName("เอกสาร (เอกสารสิทธิ์)")]
+        public string license_img { get; set; }
+        [DisplayName("ผลผลิต (กก.)")]
+        public float product { get; set; }
+        [DisplayName("ขั้นตอนการทำงาน")]
+        public string workName { get; set; }
     }
 }

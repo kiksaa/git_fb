@@ -21,6 +21,11 @@
                 @Html.AntiForgeryToken()
                 <div class="container">
                     <div class="form-actions no-color">
+                        @*<a type="button" class="btn btn-danger" href="@Url.Action("IndexDelete", "LandPlot", new { id = Model.ID})">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>*@
                         <a type="button" class="btn btn-danger" href="@Url.Action("Index", "LandPlot")">
                             <span>
                                 ยกเลิก

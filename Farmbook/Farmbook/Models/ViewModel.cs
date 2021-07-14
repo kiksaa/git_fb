@@ -197,7 +197,7 @@ namespace Farmbook.Models
         public Nullable<int> IDlist { get; set; }
 
         [DisplayName("ผลผลิตที่ได้")]
-        public string product { get; set; }
+        public float product { get; set; }
 
         [DisplayName("ชื่อขั้นตอนการทำงาน")]
         public string workName { get; set; }
@@ -226,5 +226,18 @@ namespace Farmbook.Models
         public string activity1 { get; set; }
         [DisplayName("ข้อสังเกต")]
         public string notice { get; set; }
+
+        [DisplayName("หัวข้อ")]
+        public string subject { get; set; }
+        [DisplayName("รายละเอียด")]
+        public string description { get; set; }
+        [DisplayName("วันที่เริ่มต้น")]
+        public System.DateTime start { get; set; }
+        [DisplayName("วันที่สิ้นสุด")]
+        public Nullable<System.DateTime> end { get; set; }
+        [DisplayName("สีข้อความ")]
+        public string themeColor { get; set; }
+        [DisplayName("เต็มวัน")]
+        public Nullable<bool> isFullDay { get; set; }
     }
 }

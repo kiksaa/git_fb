@@ -1,194 +1,284 @@
 ﻿@model Farmbook.Models.register
-
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 
-<html>
+<html lang="th">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FARMBOOK - ทะเบียนเกษตรกร</title>
+
+
+    <script type="text/javascript">
+        $(function () {
+            // DATEPICKER JQUERY ADDITION
+            $("#datepicker").datepicker({
+                timepicker: false,
+                dateFormat: "dd/MM/yyyy",
+                lang: 'th',
+                changeMonth: true,
+                changeYear: true,
+                onChangeMonth: thaiYear,
+                onShow: thaiYear,
+                yearOffset: +543,
+               @* shownOn: "button"*@
+            })@*.css("display", "inline-block")
+                .next("button").button({
+                    icons: { primary: "ui-icon-calendar" },
+                    label: "Select a Date",
+                    text: false
+                });*@
+        });
+        $("#datepicker-th").datepicker({
+            dateFormat: 'dd/mm/yy',
+            isBuddhist: true,
+            timepicker: false,
+            lang: 'th',
+            changeMonth: true,
+            changeYear: true,
+            onChangeMonth: thaiYear,
+            onShow: thaiYear,
+            yearOffset: +543,
+            defaultDate: toDay
+        });
+    </script>
 </head>
-<body>
-    <div>
-        <h4>register</h4>
-        <hr />
-        <dl class="dl-horizontal">
-           @* <dt>
-                @Html.DisplayNameFor(model => model.ID)
-            </dt>*@
-    
-            <dd>
-                @Html.DisplayFor(model => model.name)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.cardID)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.cardID)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.gender)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.gender)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.birthday)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.birthday)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tel)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tel)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.email)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.email)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.family)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.family)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.no)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.no)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.moo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.moo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.road)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.road)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.province)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.province)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ampher)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ampher)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.district)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.district)
-            </dd>
-    
-            @*<dt>
-                @Html.DisplayNameFor(model => model.latilude)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.latilude)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.longitude)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.longitude)
-            </dd>*@
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.comment)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.comment)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.farmer_img)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.farmer_img)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.card_img)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.card_img)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.bank)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.bank)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.status)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.status)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.dateUpdate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.dateUpdate)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <h4>ทะเบียนเกษตรกร</h4>
+            <hr />
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.farmer_img, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        type = "file",@*disabled = "disabled",@readonly = "readonly"*@}
+})
+                                @{ if (@Model.farmer_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/farmer/@Model.farmer_img" height="160" width="155">
+                                    } }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.card_img, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        type = "file",@*disabled = "disabled", @readonly = "readonly"*@}
+})
+                                @{ if (@Model.card_img != null)
+                                    {
+                                        <br />
+                                        <img src="~/Content/img/upload/idcard/@Model.card_img" height="160" width="155">
+                                    } }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="col-sm-6">
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.registerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.registerID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.registerID, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.cardID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.cardID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.cardID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @if (Model.gender == 100)
+                        {
+                            <div class="col-md-4">
+                                @Html.DisplayFor(model => model.gender.HasValue)
+                                @Html.Label("ชาย")
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+                        }
+                        @if (Model.gender == 200)
+                        {
+                            <div class="col-md-4">
+                                @Html.DisplayFor(model => model.gender.HasValue)
+                                @Html.Label("หญิง")
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+                        }
+                        @if (Model.gender == null)
+                        {
+                            <div class="col-md-4"></div>
+                        }
+
+                        @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @if (Model.birthday == null)
+                            {
+                                @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "datepicker-th", @readonly = "readonly" } })
+                            }
+                            @if (Model.birthday != null)
+                            {
+                                @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "datepicker-th", @readonly = "readonly" } })
+                            }
+                            @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.family, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @if (Model.family == 100)
+                        {
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.family.HasValue)
+                                @Html.Label("หัวหน้าครอบครัว")
+                                @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                            </div>
+                        }
+                        @if (Model.family == 200)
+                        {
+                            <div class="col-md-8">
+                                @Html.DisplayFor(model => model.family.HasValue)
+                                @Html.Label("สมาชิกในครอบครัว")
+                                @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.no, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.no, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.no, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.moo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.moo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.moo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.road, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.road, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.road, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.provinceStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.provinceStr, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.provinceStr, "", new { @class = "text-danger" })
+                        </div>
+                        @*@Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control", @field = "Update", id = "proID", onchange = "Create" })
+                                @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
+                            </div>*@
+                    </div>
+
+                    <div class="form-group row">
+                        @*@Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/แขวง", htmlAttributes: new { @class = "form-control", @field = "Update", id = "province", name = "province" })
+                                @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
+                            </div>*@
+                        @Html.LabelFor(model => model.ampherStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ampherStr, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.ampherStr, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.districtStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.districtStr, "", new { @class = "text-danger" })
+                        </div>
+                        @*@Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/เขต", htmlAttributes: new { @class = "form-control", @field = "Update" })
+                                @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
+                            </div>*@
+                    </div>
+
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.comment, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Register")">
+                                        <span>
+                                            กลับ
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    @Html.Action("IndexPlot", "Register", new { farmerName = Model.ID })
+                </div>
+            </div>
+        </div>
+
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,136 @@
+﻿@model Farmbook.Models.staple
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนวัตถุดิบ</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <h4>ทะเบียนวัตถุดิบ</h4>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-success mb-3" style="width: 100rem;">
+                    <h4>ข้อมูลทะเบียนวัตถุดิบ</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IDstap)
+                            @using (Html.BeginForm("Details", "Staple", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-sm-6">
+                                    <div class="form-group row">
+                                        @Html.LabelFor(model => model.stapleImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.stapleImg, new { htmlAttributes = new { @class = "form-control", type = "file", @readonly = "readonly" } })
+                                            @{ if (@Model.stapleImg != null)
+                                                {
+                                                    <br />
+                                                    <img src="~/Content/img/upload/staple/@Model.stapleImg" height="250" width="240">
+                                                } }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-sm-6">
+                                <h6><u>ข้อมูลทั่วไป</u></h6><br />
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.stapleType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.stapleType, (IEnumerable<SelectListItem>)ViewBag.stapletypes, "เลือกประเภทวัตถุดิบ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.stapleType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.stapleID, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.stapleID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.stapleID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.stapleName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.stapleName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.stapleName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitBuy, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ซื้อ", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitBuy, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.unitUse, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.unitUse, (IEnumerable<SelectListItem>)ViewBag.units, "เลือกหน่วยที่ใช้", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.unitUse, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.dateBuy, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.dateBuy, new { htmlAttributes = new { @class = "form-control datepicker", Type = "DateTime", placeholder = "31/12/2500", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            <a type="button" class="btn btn-danger" href="@Url.Action("IndexSum", "Equipment")">
+                                                <span>
+                                                    กลับ
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+

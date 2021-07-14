@@ -9,6 +9,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="actives">
+      <EntityTypeMapping TypeName="farmdbModel.active">
+        <MappingFragment StoreEntitySet="active">
+          <ScalarProperty Name="activeID" ColumnName="activeID" />
+          <ScalarProperty Name="activeName" ColumnName="activeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="activities">
       <EntityTypeMapping TypeName="farmdbModel.activity">
         <MappingFragment StoreEntitySet="activity">
@@ -166,7 +174,6 @@
     <EntitySetMapping Name="landplots">
       <EntityTypeMapping TypeName="farmdbModel.landplot">
         <MappingFragment StoreEntitySet="landplot">
-          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="plotName" ColumnName="plotName" />
           <ScalarProperty Name="areaCode" ColumnName="areaCode" />
@@ -190,7 +197,9 @@
           <ScalarProperty Name="note" ColumnName="note" />
           <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
           <ScalarProperty Name="plotStatus" ColumnName="plotStatus" />
+          <ScalarProperty Name="theoryName" ColumnName="theoryName" />
           <ScalarProperty Name="administrator" ColumnName="administrator" />
+          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
           <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
           <ScalarProperty Name="districtStr" ColumnName="districtStr" />
@@ -276,7 +285,11 @@
       <EntityTypeMapping TypeName="farmdbModel.project">
         <MappingFragment StoreEntitySet="project">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="projectName" ColumnName="projectName" />
+          <ScalarProperty Name="dataNow" ColumnName="dataNow" />
+          <ScalarProperty Name="proName" ColumnName="proName" />
+          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+          <ScalarProperty Name="manuStandards" ColumnName="manuStandards" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -284,11 +297,7 @@
       <EntityTypeMapping TypeName="farmdbModel.projectand">
         <MappingFragment StoreEntitySet="projectand">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="dataNow" ColumnName="dataNow" />
-          <ScalarProperty Name="proName" ColumnName="proName" />
-          <ScalarProperty Name="buyMethod" ColumnName="buyMethod" />
-          <ScalarProperty Name="detail" ColumnName="detail" />
-          <ScalarProperty Name="manuStandards" ColumnName="manuStandards" />
+          <ScalarProperty Name="projectName" ColumnName="projectName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -303,7 +312,6 @@
     <EntitySetMapping Name="registers">
       <EntityTypeMapping TypeName="farmdbModel.register">
         <MappingFragment StoreEntitySet="register">
-          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="registerID" ColumnName="registerID" />
@@ -324,6 +332,7 @@
           <ScalarProperty Name="card_img" ColumnName="card_img" />
           <ScalarProperty Name="bank" ColumnName="bank" />
           <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
           <ScalarProperty Name="adminBy" ColumnName="adminBy" />
           <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
@@ -419,6 +428,7 @@
     <EntitySetMapping Name="theories">
       <EntityTypeMapping TypeName="farmdbModel.theory">
         <MappingFragment StoreEntitySet="theory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="workProcedure" ColumnName="workProcedure" />
           <ScalarProperty Name="farmingType" ColumnName="farmingType" />
           <ScalarProperty Name="type" ColumnName="type" />
@@ -430,7 +440,6 @@
           <ScalarProperty Name="reference" ColumnName="reference" />
           <ScalarProperty Name="detail" ColumnName="detail" />
           <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -485,11 +494,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="actives">
-      <EntityTypeMapping TypeName="farmdbModel.active">
-        <MappingFragment StoreEntitySet="active">
-          <ScalarProperty Name="activeName" ColumnName="activeName" />
-          <ScalarProperty Name="activeID" ColumnName="activeID" />
+    <EntitySetMapping Name="events">
+      <EntityTypeMapping TypeName="farmdbModel.event">
+        <MappingFragment StoreEntitySet="event">
+          <ScalarProperty Name="isFullDay" ColumnName="isFullDay" />
+          <ScalarProperty Name="themeColor" ColumnName="themeColor" />
+          <ScalarProperty Name="end" ColumnName="end" />
+          <ScalarProperty Name="start" ColumnName="start" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

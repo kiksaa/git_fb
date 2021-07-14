@@ -35,8 +35,9 @@ namespace Farmbook.Controllers
             List<labor> LaborList = new List<labor>();
             List<fuel> FuelList = new List<fuel>();
             
-            List<projectand> ProjectandList = new List<projectand>();
+            List<project> ProjectList = new List<project>();
             List<theory> TheoryList = new List<theory>();
+            List<@event> EventList = new List<@event>();
             
             using (farmdb farmdb = new farmdb())
             {
@@ -71,11 +72,14 @@ namespace Farmbook.Controllers
 
                 ViewBag.Total = vehicleList.Count() + MachineList.Count() + EquipmentList.Count() + SoftwareList.Count() + StapleList.Count() + LaborList.Count() + FuelList.Count();
 
-                ProjectandList = farmdb.projectands.ToList<projectand>();
-                ViewBag.TotalProjectand = ProjectandList.Count();
+                ProjectList = farmdb.projects.ToList<project>();
+                ViewBag.TotalProject = ProjectList.Count();
 
                 TheoryList = farmdb.theories.ToList<theory>();
                 ViewBag.TotalTheory = TheoryList.Count();
+
+                EventList = farmdb.events.ToList<@event>();
+                ViewBag.TotalEvent = EventList.Count();
             }
             return View(registerList);
         }
@@ -278,7 +282,16 @@ namespace Farmbook.Controllers
                          *//*return RedirectToAction("WebForm.aspx", "WebForm.aspx");*//*
                          return RedirectToAction("Create", "Register");
                      }*/
-                    return RedirectToAction("Create", "Register");
+
+                    profile profileModel = new profile();
+                    farmdb farmdb = new farmdb();
+                    profileModel = farmdb.profiles.Where(e => e.email == model.email).FirstOrDefault();
+                    var w = profileModel.registerType.ToString();
+                    if (w == "100")
+                    {
+                        return RedirectToAction("Create", "Register");
+                    }
+                    return RedirectToAction("Index", "Account");
                 }
                 else
                 {
@@ -318,7 +331,7 @@ namespace Farmbook.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon(); // it will clear the session at the end of request
-            return RedirectToAction("Index");
+            return RedirectToAction("Login");
         }
 
         public ActionResult ForgotPassword()
@@ -400,10 +413,6 @@ namespace Farmbook.Controllers
                 }
             }
             return View(model);
-        }
-        public ActionResult Calendar()
-        {
-            return View();
         }
     }
 }

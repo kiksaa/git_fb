@@ -26,6 +26,7 @@ namespace Farmbook.Models
         }
     
         public virtual DbSet<access> accesses { get; set; }
+        public virtual DbSet<active> actives { get; set; }
         public virtual DbSet<activity> activities { get; set; }
         public virtual DbSet<ampher> amphers { get; set; }
         public virtual DbSet<bank> banks { get; set; }
@@ -66,6 +67,6 @@ namespace Farmbook.Models
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<vehicle> vehicles { get; set; }
         public virtual DbSet<vehicletype> vehicletypes { get; set; }
-        public virtual DbSet<active> actives { get; set; }
+        public virtual DbSet<@event> events { get; set; }
     }
 }
