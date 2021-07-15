@@ -314,11 +314,7 @@ namespace Farmbook.Controllers
             }
             catch (Exception ex)
             {
-<<<<<<< HEAD
                /* ViewBag.Message = ex.InnerException.InnerException.Message;*/
-=======
-                /*ViewBag.Message = ex.InnerException.InnerException.Message;*/
->>>>>>> 6e83b3b27a90adc08e545f2428c880614f0f86ec
                 return RedirectToAction("Index", "Home");
             }
         }
