@@ -428,6 +428,7 @@
     <EntitySetMapping Name="theories">
       <EntityTypeMapping TypeName="farmdbModel.theory">
         <MappingFragment StoreEntitySet="theory">
+          <ScalarProperty Name="productType" ColumnName="productType" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="workProcedure" ColumnName="workProcedure" />
           <ScalarProperty Name="farmingType" ColumnName="farmingType" />

@@ -32,12 +32,12 @@ namespace Farmbook.Controllers
                                from a in alist.DefaultIfEmpty()
                                select new
                                {
-                                   t.ID, t.dateUpdate, t.product, t.workName, a.accessName, t.reference, tt.theoryName
+                                   t.ID, t.dateUpdate, t.productType, t.workName, a.accessName, t.reference, tt.theoryName
                                };
                     foreach (var item in data)
                     {
                         ViewModel objcvm = new ViewModel();
-                        objcvm.product = item.product;
+                        objcvm.product = item.productType;
                         objcvm.workName = item.workName;
                         objcvm.accessName = item.accessName;
                         objcvm.reference = item.reference;

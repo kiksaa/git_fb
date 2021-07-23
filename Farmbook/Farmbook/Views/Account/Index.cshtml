@@ -164,22 +164,44 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a type="button" href="@Url.Action("Index", "Event")">
-                                    <div class="btn btn-outline-warning mb-4 shadow-sm" href="#" style="color:lightyellow;background-color:olivedrab;">
-                                        <div class="card-body">
-                                            <h2 class="card-title pricing-card-title">@ViewBag.TotalEvent <small class="text-lightyellow">/ ปฏิทินงาน</small></h2>
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
-                                                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                                                    </svg>
-                                                </li>
-                                            </ul>
+                                @if (ViewBag.status == "100")
+                                {
+                                    <a type="button" href="@Url.Action("Index", "Event")">
+                                        <div class="btn btn-outline-warning mb-4 shadow-sm" style="color:lightyellow;background-color:olivedrab;">
+                                            <div class="card-body">
+                                                <h2 class="card-title pricing-card-title">@ViewBag.TotalEvent <small class="text-lightyellow">/ ปฏิทินงาน</small></h2>
+                                                <ul class="list-unstyled mt-3 mb-4">
+                                                    <li>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
+                                                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                                        </svg>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                }
+
+                                @if (ViewBag.status == "200" || ViewBag.status == "300")
+                                {
+                                    <a type="button" href="#">
+                                        <div class="btn btn-outline-warning mb-4 shadow-sm" style="color:lightyellow;background-color:olivedrab;">
+                                            <div class="card-body">
+                                                <h2 class="card-title pricing-card-title">@ViewBag.TotalEvent <small class="text-lightyellow">/ ปฏิทินงาน</small></h2>
+                                                <ul class="list-unstyled mt-3 mb-4">
+                                                    <li>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17em" height="6em" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
+                                                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                                        </svg>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                                </div>
                             <div class="col">
                                 <div class="btn btn-outline-warning mb-4 shadow-sm" href="#" style="color:lightyellow;background-color:darkseagreen;">
                                     <div class="card-body">

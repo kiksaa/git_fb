@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>FARMBOOK - เพิ่มทะเบียนอุปกรณ์</title>
+    <title>FARMBOOK - ปฏิทินงาน</title>
 </head>
 <body style="color:black;background-color:whitesmoke;">
     @Scripts.Render("~/bundles/jquery")
@@ -23,11 +23,11 @@
     {
         @Html.AntiForgeryToken()
     <div class="col">
-        <h4>ทะเบียนอุปกรณ์</h4>
+        <h4>ปฏิทินงาน</h4>
         <hr />
         <div class="row justify-content-center">
             <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-danger mb-3" style="width: 50rem;">
-                <h4>โครงการ</h4>
+                <h4>ลบกิจกรรมงาน</h4>
                 <div class="card-body">
                     <div class="row-12">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

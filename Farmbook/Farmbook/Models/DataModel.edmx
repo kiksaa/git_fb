@@ -415,6 +415,7 @@
           <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="sepecies" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="product" Type="float" Nullable="false" />
+          <Property Name="productType" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="project" Type="int" />
           <Property Name="workName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="access" Type="int" Nullable="false" />
@@ -1946,6 +1947,7 @@
           <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_13" FromRole="theory" ToRole="landplot" />
           <NavigationProperty Name="project1" Relationship="Self.theory_ibfk_4" FromRole="theory" ToRole="project" />
           <NavigationProperty Name="theorytype" Relationship="Self.theory_ibfk_2" FromRole="theory" ToRole="theorytype" />
+          <Property Name="productType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="theorytype">
           <Key>
@@ -3430,6 +3432,7 @@
           <EntitySetMapping Name="theories">
             <EntityTypeMapping TypeName="farmdbModel.theory">
               <MappingFragment StoreEntitySet="theory">
+                <ScalarProperty Name="productType" ColumnName="productType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="workProcedure" ColumnName="workProcedure" />
                 <ScalarProperty Name="farmingType" ColumnName="farmingType" />

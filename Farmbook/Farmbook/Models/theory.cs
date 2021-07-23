@@ -37,7 +37,7 @@ namespace Farmbook.Models
         [DisplayName("สายพันธุ์")]
         public string sepecies { get; set; }
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
-        [DisplayName("ผลิตภัณฑ์ที่ได้")]
+        [DisplayName("ปริมาณผลผลิต(กิโลกรัม)")]
         public float product { get; set; }
         [DisplayName("โครงการ")]
         public Nullable<int> project { get; set; }
@@ -54,7 +54,10 @@ namespace Farmbook.Models
         public string detail { get; set; }
         [DisplayName("วันที่ปรับปรุง / แก้ไข")]
         public System.DateTime dateUpdate { get; set; }
-
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
+        [DisplayName("ผลิตภัณฑ์ที่ได้")]
+        public string productType { get; set; }
+    
         public virtual access access1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<activity> activities { get; set; }

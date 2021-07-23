@@ -501,6 +501,7 @@
     <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_13" FromRole="theory" ToRole="landplot" />
     <NavigationProperty Name="project1" Relationship="Self.theory_ibfk_4" FromRole="theory" ToRole="project" />
     <NavigationProperty Name="theorytype" Relationship="Self.theory_ibfk_2" FromRole="theory" ToRole="theorytype" />
+    <Property Name="productType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="theorytype">
     <Key>

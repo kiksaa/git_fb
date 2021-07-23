@@ -197,7 +197,7 @@ namespace Farmbook.Models
         public Nullable<int> IDlist { get; set; }
 
         [DisplayName("ผลผลิตที่ได้")]
-        public float product { get; set; }
+        public string product { get; set; }
 
         [DisplayName("ชื่อขั้นตอนการทำงาน")]
         public string workName { get; set; }

@@ -10,13 +10,13 @@ namespace Farmbook.Controllers
 {
     public class EventController : Controller
     {
-        // GET: Labor
+        // GET: Event
         public ActionResult Index()
         {
-            List<@event> EventtList = new List<@event>();
+            List<@event> EventList = new List<@event>();
             using (farmdb farmdb = new farmdb())
             {
-                EventtList = farmdb.events.ToList<@event>();
+                EventList = farmdb.events.ToList<@event>();
                 List<ViewModel> ViewModeltList = new List<ViewModel>();
                 var data = from e in farmdb.events
                            select new
@@ -45,7 +45,7 @@ namespace Farmbook.Controllers
             }
         }
 
-        // GET: Labor/Details/5
+        // GET: Event/Details/5
         public ActionResult Details(int id)
         {
             @event eventModel = new @event();
@@ -56,13 +56,13 @@ namespace Farmbook.Controllers
             return View(eventModel);
         }
 
-        // GET: Labor/Create
+        // GET: Event/Create
         public ActionResult Create()
         {
             return View(new @event());
         }
 
-        // POST: Labor/Create
+        // POST: Event/Create
         [HttpPost]
         public ActionResult Create(@event eventModel)
         {
@@ -71,7 +71,8 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     farmdb.events.Add(eventModel);
-                    eventModel.themeColor = User.Identity.Name;
+                    /*eventModel.themeColor = User.Identity.Name;*/
+                    //themeColor -> responsible AND change length 10 -> 100
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Event");
@@ -80,10 +81,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
-        // GET: Labor/Edit/5
+        // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
             @event eventModel = new @event();
@@ -94,7 +94,7 @@ namespace Farmbook.Controllers
             return View(eventModel);
         }
 
-        // POST: Labor/Edit/5
+        // POST: Event/Edit/5
         [HttpPost]
         public ActionResult Edit(@event eventModel)
         {
@@ -103,7 +103,7 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     farmdb.Entry(eventModel).State = System.Data.Entity.EntityState.Modified;
-                    eventModel.themeColor = User.Identity.Name;
+                    /*eventModel.themeColor = User.Identity.Name;*/
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Event");
@@ -112,10 +112,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
 
-        // GET: Labor/Delete/5
+        // GET: Event/Delete/5
         public ActionResult Delete(int id)
         {
             @event eventModel = new @event();
@@ -126,7 +125,7 @@ namespace Farmbook.Controllers
             return View(eventModel);
         }
 
-        // POST: Labor/Delete/5
+        // POST: Event/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

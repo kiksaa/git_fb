@@ -27,7 +27,7 @@
             </a>
             &nbsp;&nbsp;&nbsp;
             @*@if (ViewBag.status == "100")
-            {*@
+                {*@
             <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Event")">
                 <span>
                     + สร้างใหม่
@@ -43,20 +43,18 @@
                     <div class="card-body">
                         <div class="card" style="width: 24rem;">
                             <div class="card-body" style="background-color: beige">
-                                <h5 class="card-title">หัวข้อ : @Html.DisplayFor(modelItem => model.subject) </h5>
+                                <h5 class="card-title"> <b> @Html.DisplayNameFor(item => item.subject) : </b> @Html.DisplayFor(modelItem => model.subject) </h5>
                                 <hr />
-                                <p>วันที่เริ่มต้น : @Html.DisplayFor(modelItem => model.start) </p>
-                                <p>วันที่สิ้นสุด : @Html.DisplayFor(modelItem => model.end) </p>
-                                <p>รายละเอียด : @Html.DisplayFor(modelItem => model.description) </p>
-                                <p>เต็มวัน : @Html.DisplayFor(modelItem => model.isFullDay) </p>
+                                <p> <b> @Html.DisplayNameFor(item => item.start) :</b> @Html.DisplayFor(modelItem => model.start) </p>
+                                <p> <b> @Html.DisplayNameFor(item => item.end) :</b> @Html.DisplayFor(modelItem => model.end) </p>
+                                <p> <b> @Html.DisplayNameFor(item => item.description) :</b> @Html.DisplayFor(modelItem => model.description) </p>
+                                <p> <b> @Html.DisplayNameFor(item => item.isFullDay) :</b> @Html.DisplayFor(modelItem => model.isFullDay) </p>
                                 <hr />
-                                @*<a class="btn-sm btn-outline-danger" href="@Url.Action("Delete", "Event", new { id = model.ID })">  ลบ </a>
-                                <a class="btn-sm btn-outline-primary" href="@Url.Action("Edit", "Event", new { id = model.ID })">  แก้ไข </a>*@
+                                <!-- Button trigger modal -->
                                 <a class="btn-sm btn-outline-danger" href="@Url.Action("Delete", "Event", new { id = model.ID })">
-                                    <span>
-                                        ลบ
-                                    </span>
-                                </a> @*&nbsp;&nbsp;*@
+                                    @*<a class="btn-sm btn-outline-danger" data-toggle="modal" data-target="#exampleModal" data-id="{{ $company->id }}" data-id="@Html.ValueFor(modelItem => model.ID)", new { id=model.ID }>*@
+                                    ลบ
+                                </a>
                                 <a class="btn-sm btn-outline-primary" href="@Url.Action("Edit", "Event", new { id = model.ID })">
                                     <span>
                                         แก้ไข
@@ -66,10 +64,35 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal -->
+                @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">ลบกิจกรรม <span>@Html.DisplayFor(modelItem => model.subject)</span> </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p> คุณต้องการลบกิจกรรม <b style="color:red; background-color:cornsilk;">@Html.DisplayFor(modelItem => model.subject)</b> ใช่หรือไม่ </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                @using (Html.BeginForm("Delete", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(modelItem => model.ID)
+                                    <input type="submit" value="ลบ" class="btn btn-success" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
             }&nbsp;&nbsp;
         </div>
-
     </div>
-
 </body>
 </html>

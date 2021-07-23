@@ -64,6 +64,14 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    @Html.LabelFor(model => model.productType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.productType, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.productType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     @Html.LabelFor(model => model.product, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
                                         @Html.EditorFor(model => model.product, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })

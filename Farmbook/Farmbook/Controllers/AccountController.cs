@@ -23,65 +23,77 @@ namespace Farmbook.Controllers
         // Return Home page.
         public ActionResult Index()
         {
-            // count register
-            List<register> registerList = new List<register>();
-            List<landplot> landplotList = new List<landplot>();
-
-            List<vehicle> vehicleList = new List<vehicle>();
-            List<machine> MachineList = new List<machine>();
-            List<equipment> EquipmentList = new List<equipment>();
-            List<software> SoftwareList = new List<software>();
-            List<staple> StapleList = new List<staple>();
-            List<labor> LaborList = new List<labor>();
-            List<fuel> FuelList = new List<fuel>();
-            
-            List<project> ProjectList = new List<project>();
-            List<theory> TheoryList = new List<theory>();
-            List<@event> EventList = new List<@event>();
-            
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                registerList = farmdb.registers.Where(a => a.active == null).ToList();
-                var List = farmdb.registers.Where(a => a.active == 100).ToList();
-                ViewBag.TotalRegisters = registerList.Count() + List.Count();
-               
-                landplotList = farmdb.landplots.Where(a => a.active == 100).ToList();
-                var landplot = farmdb.landplots.Where(a => a.active == null).ToList();
-                ViewBag.TotalLandPlot = landplotList.Count() + landplot.Count();
+                // count register
+                List<register> registerList = new List<register>();
+                List<landplot> landplotList = new List<landplot>();
 
-                vehicleList = farmdb.vehicles.ToList<vehicle>();
-                ViewBag.TotalVehicle = vehicleList.Count();
+                List<vehicle> vehicleList = new List<vehicle>();
+                List<machine> MachineList = new List<machine>();
+                List<equipment> EquipmentList = new List<equipment>();
+                List<software> SoftwareList = new List<software>();
+                List<staple> StapleList = new List<staple>();
+                List<labor> LaborList = new List<labor>();
+                List<fuel> FuelList = new List<fuel>();
 
-                MachineList = farmdb.machines.ToList<machine>();
-                ViewBag.TotalMachine = MachineList.Count();
-                
-                EquipmentList = farmdb.equipments.ToList<equipment>();
-                ViewBag.TotalEquipment = EquipmentList.Count();
+                List<project> ProjectList = new List<project>();
+                List<theory> TheoryList = new List<theory>();
+                List<@event> EventList = new List<@event>();
 
-                SoftwareList = farmdb.softwares.ToList<software>();
-                ViewBag.TotalSoftware = SoftwareList.Count();
+                using (farmdb farmdb = new farmdb())
+                {
+                    registerList = farmdb.registers.Where(a => a.active == null).ToList();
+                    var List = farmdb.registers.Where(a => a.active == 100).ToList();
+                    ViewBag.TotalRegisters = registerList.Count() + List.Count();
 
-                StapleList = farmdb.staples.ToList<staple>();
-                ViewBag.TotalStaple = StapleList.Count();
+                    landplotList = farmdb.landplots.Where(a => a.active == 100).ToList();
+                    var landplot = farmdb.landplots.Where(a => a.active == null).ToList();
+                    ViewBag.TotalLandPlot = landplotList.Count() + landplot.Count();
 
-                LaborList = farmdb.labors.ToList<labor>();
-                ViewBag.TotalLabor = LaborList.Count();
+                    vehicleList = farmdb.vehicles.ToList<vehicle>();
+                    ViewBag.TotalVehicle = vehicleList.Count();
 
-                FuelList = farmdb.fuels.ToList<fuel>();
-                ViewBag.TotalFuel = FuelList.Count();
+                    MachineList = farmdb.machines.ToList<machine>();
+                    ViewBag.TotalMachine = MachineList.Count();
 
-                ViewBag.Total = vehicleList.Count() + MachineList.Count() + EquipmentList.Count() + SoftwareList.Count() + StapleList.Count() + LaborList.Count() + FuelList.Count();
+                    EquipmentList = farmdb.equipments.ToList<equipment>();
+                    ViewBag.TotalEquipment = EquipmentList.Count();
 
-                ProjectList = farmdb.projects.ToList<project>();
-                ViewBag.TotalProject = ProjectList.Count();
+                    SoftwareList = farmdb.softwares.ToList<software>();
+                    ViewBag.TotalSoftware = SoftwareList.Count();
 
-                TheoryList = farmdb.theories.ToList<theory>();
-                ViewBag.TotalTheory = TheoryList.Count();
+                    StapleList = farmdb.staples.ToList<staple>();
+                    ViewBag.TotalStaple = StapleList.Count();
 
-                EventList = farmdb.events.ToList<@event>();
-                ViewBag.TotalEvent = EventList.Count();
+                    LaborList = farmdb.labors.ToList<labor>();
+                    ViewBag.TotalLabor = LaborList.Count();
+
+                    FuelList = farmdb.fuels.ToList<fuel>();
+                    ViewBag.TotalFuel = FuelList.Count();
+
+                    ViewBag.Total = vehicleList.Count() + MachineList.Count() + EquipmentList.Count() + SoftwareList.Count() + StapleList.Count() + LaborList.Count() + FuelList.Count();
+
+                    ProjectList = farmdb.projects.ToList<project>();
+                    ViewBag.TotalProject = ProjectList.Count();
+
+                    TheoryList = farmdb.theories.ToList<theory>();
+                    ViewBag.TotalTheory = TheoryList.Count();
+
+                    EventList = farmdb.events.ToList<@event>();
+                    ViewBag.TotalEvent = EventList.Count();
+
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+                }
+                return View(registerList);
             }
-            return View(registerList);
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
         }
 
         public ActionResult Profile(string email)
@@ -370,7 +382,7 @@ namespace Farmbook.Controllers
                 mail.Subject = "รหัสผ่านอีเมล์คุณ " + email;
                 string userMessage = "";
                 userMessage = userMessage + "<br/><b>อีเมล์ผู้ใช้คือ : </b> " + email;
-                userMessage = userMessage + "<br/><b>รหัสผ่านของคุณคือ : </b>" + password;
+                userMessage = userMessage + "<br/><b>รหัสผ่านของคุณคือ : </b> " + password;
                 string Body = "คุณ " + email + ", <br/><br/>ข้อมูลบัญชีของคุณคือ : <br/></br> " + userMessage + "<br/><br/>Thanks";
                 mail.Body = Body;
                 mail.IsBodyHtml = true;

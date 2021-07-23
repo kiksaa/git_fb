@@ -410,6 +410,7 @@
     <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="sepecies" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="product" Type="float" Nullable="false" />
+    <Property Name="productType" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="project" Type="int" />
     <Property Name="workName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="access" Type="int" Nullable="false" />
