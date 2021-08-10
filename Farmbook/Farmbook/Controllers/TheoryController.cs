@@ -56,38 +56,51 @@ namespace Farmbook.Controllers
         }
         public ActionResult IndexActivity(int id)
         {
-            theory theoryModel = new theory();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
-                List<activity> activityModel = farmdb.activities.Where(a => a.plan == theoryModel.ID).ToList();
-
-                profile profileModel = new profile();
-                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
-                ViewBag.status = profileModel.registerType.ToString();
-
-                List<ViewModel> ViewModeltList = new List<ViewModel>();
-                var data = from a in farmdb.activities
-                           where a.plan == id
-                           select new
-                           {
-                               a.ID, a.stepNum, a.stepName, a.age, a.time, a.activity1, a.notice
-                           };
-
-                foreach (var item in data)
+                theory theoryModel = new theory();
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.ID = item.ID;
-                    objcvm.stepNum = item.stepNum;
-                    objcvm.stepName = item.stepName;
-                    objcvm.age = item.age;
-                    objcvm.time = item.time;
-                    objcvm.activity1 = item.activity1;
-                    objcvm.notice = item.notice;
-                    ViewModeltList.Add(objcvm);
+                    theoryModel = farmdb.theories.Where(x => x.ID == id).FirstOrDefault();
+                    List<activity> activityModel = farmdb.activities.Where(a => a.plan == theoryModel.ID).ToList();
+
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from a in farmdb.activities
+                               where a.plan == id
+                               select new
+                               {
+                                   a.ID,
+                                   a.stepNum,
+                                   a.stepName,
+                                   a.age,
+                                   a.time,
+                                   a.activity1,
+                                   a.notice
+                               };
+
+                    foreach (var item in data)
+                    {
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.stepNum = item.stepNum;
+                        objcvm.stepName = item.stepName;
+                        objcvm.age = item.age;
+                        objcvm.time = item.time;
+                        objcvm.activity1 = item.activity1;
+                        objcvm.notice = item.notice;
+                        ViewModeltList.Add(objcvm);
+                    }
+                    ViewBag.TotalActivity = data.Count();
+                    return View(ViewModeltList);
                 }
-                ViewBag.TotalActivity = data.Count();
-                return View(ViewModeltList);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
 
@@ -245,7 +258,6 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         // GET: Theory/Delete/5

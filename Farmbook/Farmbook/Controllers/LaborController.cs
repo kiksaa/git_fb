@@ -108,53 +108,52 @@ namespace Farmbook.Controllers
             }
             return View(new labor());
         }
-         
-    // POST: Labor/Create
-    [HttpPost]
+
+        // POST: Labor/Create
+        [HttpPost]
         public ActionResult Create(labor laborModel, HttpPostedFileBase laborImg)
         {
             try
             {
-            string folderPath = Server.MapPath("~/Content/img/upload/labor/");
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-            if (laborImg != null && laborImg.ContentLength > 0)
-            {
-                if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
+                string folderPath = Server.MapPath("~/Content/img/upload/labor/");
+                if (!Directory.Exists(folderPath))
                 {
-                    var fileName = Path.GetFileName(laborImg.FileName);
-                    var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
-                    var fullPath = Server.MapPath("~/Content/img/upload/labor/") + laborImg.FileName;
-                    if (System.IO.File.Exists(fullPath))
+                    Directory.CreateDirectory(folderPath);
+                }
+                if (laborImg != null && laborImg.ContentLength > 0)
+                {
+                    if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
                     {
-                        ViewBag.ActionMessage = "Same File already Exists";
+                        var fileName = Path.GetFileName(laborImg.FileName);
+                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
+                        var fullPath = Server.MapPath("~/Content/img/upload/labor/") + laborImg.FileName;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            ViewBag.ActionMessage = "Same File already Exists";
+                        }
+                        else
+                        {
+                            laborImg.SaveAs(userfolderpath);
+                            ViewBag.ActionMessage = "File has been uploaded successfully";
+                            laborModel.laborImg = laborImg.FileName;
+                        }
                     }
                     else
                     {
-                        laborImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        laborModel.laborImg = laborImg.FileName;
+                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                     }
                 }
-                else
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
+                    farmdb.labors.Add(laborModel);
+                    farmdb.SaveChanges();
                 }
+                return RedirectToAction("IndexSum", "Equipment");
             }
-            using (farmdb farmdb = new farmdb())
-            {
-                farmdb.labors.Add(laborModel);
-                farmdb.SaveChanges();
-            }
-            return RedirectToAction("IndexSum", "Equipment");
-        }
             catch (Exception ex)
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         // GET: Labor/Edit/5
@@ -223,7 +222,6 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-           
         }
 
         // GET: Labor/Delete/5

@@ -16,7 +16,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "LandPlot", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
@@ -41,6 +41,11 @@
                                                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                     @Html.HiddenFor(model => model.ID)
+                                                    @Html.HiddenFor(model => model.lease_img)
+                                                    @Html.HiddenFor(model => model.license_img)
+                                                    @Html.HiddenFor(model => model.province)
+                                                    @Html.HiddenFor(model => model.ampher)
+                                                    @Html.HiddenFor(model => model.district)
                                                     <br />
                                                     <h5>ข้อมูลแปลง</h5>
                                                     <br />
@@ -92,29 +97,33 @@
                                                             @Html.ValidationMessageFor(model => model.typeOwnership, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
-                                                        @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-4">
-                                                            @Html.EditorFor(model => model.lease_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                                                            @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
-                                                            @{ if (@Model.license_img != null)
-                                                                {
-                                                                    <br />
-                                                                    <img src="~/Content/img/upload/@Model.license_img" height="250" width="240">
-                                                                } }
+                                                    @using (Html.BeginForm("Create", "LandPlot", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+
+                                                        <div class="form-group row">
+                                                            @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
+                                                            @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.EditorFor(model => model.lease_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                                                @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
+                                                                @{ if (@Model.lease_img != null)
+                                                                    {
+                                                                        <br />
+                                                                        <img src="~/Content/img/upload/lease/@Model.lease_img" height="250" width="240">
+                                                                    } }
+                                                            </div>
+                                                            @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                                                @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
+                                                                @{ if (@Model.license_img != null)
+                                                                    {
+                                                                        <br />
+                                                                        <img src="~/Content/img/upload/license/@Model.license_img" height="250" width="240">
+                                                                    } }
+                                                            </div>
                                                         </div>
-                                                        @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        <div class="col-md-4">
-                                                            @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                                                            @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
-                                                            @{ if (@Model.license_img != null)
-                                                                {
-                                                                    <br />
-                                                                    <img src="~/Content/img/upload/@Model.license_img" height="250" width="240">
-                                                                } }
-                                                        </div>
-                                                    </div>
+                                                    }
                                                     <br />
                                                     <h5>ข้อมูลโครงการ</h5>
                                                     <br />

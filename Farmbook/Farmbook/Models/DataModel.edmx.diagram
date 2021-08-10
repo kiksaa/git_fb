@@ -92,18 +92,14 @@
         <AssociationConnector Association="farmdbModel.profile_ibfk_2" ManuallyRouted="true" >
           <ConnectorPoint PointX="12.35390556813897" PointY="7.875" />
           <ConnectorPoint PointX="12.35390556813897" PointY="6.71875" />
-          <ConnectorPoint PointX="12.480215947917738" PointY="6.7187499999999991" />
-          <ConnectorPoint PointX="12.646882614584406" PointY="6.71875" />
-          <ConnectorPoint PointX="14.864574515651521" PointY="6.7187499999999991" />
-          <ConnectorPoint PointX="15.031241182318189" PointY="6.71875" />
-          <ConnectorPoint PointX="17.25662715390202" PointY="6.7187499999999991" />
-          <ConnectorPoint PointX="17.423293820568684" PointY="6.71875" />
+          <ConnectorPoint PointX="17.916666666666668" PointY="6.7187499999999991" />
+          <ConnectorPoint PointX="18.083333333333332" PointY="6.71875" />
           <ConnectorPoint PointX="19.166666666666668" PointY="6.7187499999999991" />
           <ConnectorPoint PointX="19.333333333333332" PointY="6.71875" />
-          <ConnectorPoint PointX="21.276040666666667" PointY="6.7187499999999991" />
-          <ConnectorPoint PointX="21.442707333333331" PointY="6.71875" />
+          <ConnectorPoint PointX="21.315663090010982" PointY="6.7187499999999991" />
+          <ConnectorPoint PointX="21.482329756677647" PointY="6.71875" />
           <ConnectorPoint PointX="22.158489693377259" PointY="6.71875" />
-          <ConnectorPoint PointX="22.158489693377259" PointY="7.375" />
+          <ConnectorPoint PointX="22.158489693377259" PointY="7.3750000000000675" />
         </AssociationConnector>
         <AssociationConnector Association="farmdbModel.project_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.standardlist_ibfk_1" ManuallyRouted="false" />
@@ -121,6 +117,7 @@
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_3" ManuallyRouted="false" />
         <AssociationConnector Association="farmdbModel.vehicle_ibfk_4" ManuallyRouted="false" />
         <EntityTypeShape EntityType="farmdbModel.event" Width="1.5" PointX="16.5" PointY="3.375" />
+        <EntityTypeShape EntityType="farmdbModel.filedetail" Width="1.5" PointX="6.375" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

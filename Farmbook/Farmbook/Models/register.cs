@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class register
     {
@@ -32,13 +33,15 @@ namespace Farmbook.Models
         public string cardID { get; set; }
         [DisplayName("เพศ")]
         public Nullable<int> gender { get; set; }
-        [DisplayName("วัน/เดือน/ปี เกิด")]
+        [DisplayName("วันเกิด")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> birthday { get; set; }
         [DisplayName("เบอร์โทรศัพท์")]
         public int tel { get; set; }
         [DisplayName("อีเมล์")]
+        [Required(ErrorMessage = "อีเมล์ของคุณควรประกอบไปด้วย")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         public string email { get; set; }
         [DisplayName("สถานะครอบครัว")]
         public Nullable<int> family { get; set; }
@@ -87,5 +90,8 @@ namespace Farmbook.Models
         public virtual ICollection<landplot> landplots { get; set; }
         public virtual province province1 { get; set; }
         public virtual status status1 { get; set; }
+        public IEnumerable<SelectListItem> ProvinceList { get; set; }
+        public IEnumerable<SelectListItem> AmpherList { get; set; }
+        public IEnumerable<SelectListItem> DistrictList { get; set; }
     }
 }

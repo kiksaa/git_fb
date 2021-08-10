@@ -57,7 +57,7 @@ namespace Farmbook.Models
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         [DisplayName("ผลิตภัณฑ์ที่ได้")]
         public string productType { get; set; }
-    
+
         public virtual access access1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<activity> activities { get; set; }

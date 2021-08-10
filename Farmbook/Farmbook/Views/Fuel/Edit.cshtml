@@ -15,7 +15,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Fule", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="col">
@@ -28,7 +28,8 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IDfule)
-                            @using (Html.BeginForm("Edit", "Fule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @Html.HiddenFor(model => model.fuleImg)
+                            @using (Html.BeginForm("Create", "Fule", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <div class="col-sm-6">
                                     <div class="form-group row">

@@ -13,35 +13,46 @@ namespace Farmbook.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            List<@event> EventList = new List<@event>();
-            using (farmdb farmdb = new farmdb())
+            try
             {
-                EventList = farmdb.events.ToList<@event>();
-                List<ViewModel> ViewModeltList = new List<ViewModel>();
-                var data = from e in farmdb.events
-                           select new
-                           {
-                               e.ID,
-                               e.subject,
-                               e.start,
-                               e.end,
-                               e.description,
-                               e.isFullDay,
-                               e.themeColor
-                           };
-                foreach (var item in data)
+                List<@event> EventList = new List<@event>();
+                using (farmdb farmdb = new farmdb())
                 {
-                    ViewModel objcvm = new ViewModel();
-                    objcvm.ID = item.ID;
-                    objcvm.subject = item.subject;
-                    objcvm.start = item.start;
-                    objcvm.end = item.end;
-                    objcvm.description = item.description;
-                    objcvm.isFullDay = item.isFullDay;
-                    objcvm.themeColor = item.themeColor;
-                    ViewModeltList.Add(objcvm);
+                    profile profileModel = new profile();
+                    profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                    ViewBag.status = profileModel.registerType.ToString();
+
+                    EventList = farmdb.events.ToList<@event>();
+                    List<ViewModel> ViewModeltList = new List<ViewModel>();
+                    var data = from e in farmdb.events
+                               select new
+                               {
+                                   e.ID,
+                                   e.subject,
+                                   e.start,
+                                   e.end,
+                                   e.description,
+                                   e.isFullDay,
+                                   e.themeColor
+                               };
+                    foreach (var item in data)
+                    {
+                        ViewModel objcvm = new ViewModel();
+                        objcvm.ID = item.ID;
+                        objcvm.subject = item.subject;
+                        objcvm.start = item.start;
+                        objcvm.end = item.end;
+                        objcvm.description = item.description;
+                        objcvm.isFullDay = item.isFullDay;
+                        objcvm.themeColor = item.themeColor;
+                        ViewModeltList.Add(objcvm);
+                    }
+                    return View(ViewModeltList);
                 }
-                return View(ViewModeltList);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
             }
         }
 

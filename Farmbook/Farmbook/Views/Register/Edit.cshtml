@@ -28,13 +28,13 @@
                 onChangeMonth: thaiYear,
                 onShow: thaiYear,
                 yearOffset: +543,
-               @* shownOn: "button"*@
-            })@*.css("display", "inline-block")
+                shownOn: "button"
+            }).css("display", "inline-block")
                 .next("button").button({
                     icons: { primary: "ui-icon-calendar" },
                     label: "Select a Date",
                     text: false
-                });*@
+                });
         });
         $("#datepicker-th").datepicker({
             dateFormat: 'dd/mm/yy',
@@ -49,12 +49,81 @@
             defaultDate: toDay
         });
     </script>
+    <script type="text/javascript" src="~/scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ProvinceID").change(function () {
+                var selectedCountry = $(this).val();
+                if (selectedCountry != "") {
+                    $.ajax({
+                        url: "/Register/GetAmpher",
+                        data: { proID: selectedCountry },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#AmpherID").empty();
+                                $("#AmpherID").append($("<option></option>").attr("value", "").text("เลือกอำเภอ/เขต"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#AmpherID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#AmpherID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                                $("#AmpherID").change();
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#AmpherID").change(function () {
+                var selectedState = $(this).val();
+                if (selectedState != "") {
+                    $.ajax({
+                        url: "/Register/GetDistrict",
+                        data: { amID: selectedState },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#DistrictID").empty();
+                                $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#DistrictID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#DistrictID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    $("#DistrictID").empty();
+                    $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                }
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .row {
+            margin-bottom: 10px !important;
+        }
+    </style>
 </head>
 <body style="color:black;background-color:whitesmoke;">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="col">
@@ -63,30 +132,48 @@
             <div class="row">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.ID)
-                @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @Html.HiddenFor(model => model.bank)
+                @Html.HiddenFor(model => model.card_img)
+                @Html.HiddenFor(model => model.farmer_img)
+                @Html.HiddenFor(model => model.birthday)
+                @Html.HiddenFor(model => model.bankuser.ID)
+                @using (Html.BeginForm("Create", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="col-sm-2">
                         <div class="form-group">
                             @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new{ @class = "form-control",type = "file", @*disabled = "disabled",@readonly = "readonly"*@ } })
+                                @Html.EditorFor(model => model.farmer_img, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        type = "file",@*disabled = "disabled",@readonly = "readonly"*@}
+})
                                 @{ if (@Model.farmer_img != null)
                                     {
                                         <br />
                                         <img src="~/Content/img/upload/farmer/@Model.farmer_img" height="160" width="155">
+
                                     } }
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
                             <div class="col-md-12">
-                                @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file", @*disabled = "disabled", @readonly = "readonly"*@ } })
+                                @Html.EditorFor(model => model.card_img, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        type = "file",@*disabled = "disabled", @readonly = "readonly"*@}
+})
                                 @{ if (@Model.card_img != null)
                                     {
                                         <br />
                                         <img src="~/Content/img/upload/idcard/@Model.card_img" height="160" width="155">
-                                    } }
 
+                                    } }
                             </div>
                         </div>
                     </div>
@@ -126,19 +213,20 @@
                             @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
                         </div>
                         @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @if (Model.birthday == null)
-                        {
-                            @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date", @id = "datepicker-th" } })
-                        }
-
-                        @if (Model.birthday != null)
-                        {
-                            @Html.TextBoxFor(model => model.birthday, new { @class = "form-control", @readonly = "readonly" })
-                        }
-                        @*@Html.TextBox("birthday", String.Format("{0:dd/MM/yyyy}", (Model.birthday == DateTime.MinValue) ? null : Model.birthday), new { @class = "form-control" })*@
-                        @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
-                    </div>
+                        <div class="col-md-4">
+                            @if (Model.birthday != null)
+                            {
+                                @*@Html.DisplayFor(model => model.birthday)*@
+                                @*@Html.TextBoxFor(x => x.birthday, new { @class = "form-control", @readonly = "readonly" } )*@
+                                @Html.TextBox("birthday", String.Format("{0:MM/dd/yyyy}", (Model.birthday == DateTime.MinValue) ? null : Model.birthday), new { @class = "form-control", @readonly = "readonly" })
+                            }
+                            @if (Model.birthday == null)
+                            {
+                                @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date", @id = "datepicker-th" } })
+                            }
+                            @*@Html.TextBox("birthday", String.Format("{0:dd/MM/yyyy}", (Model.birthday == DateTime.MinValue) ? null : Model.birthday), new { @class = "form-control" })*@
+                            @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -187,68 +275,53 @@
                             @Html.EditorFor(model => model.road, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.road, "", new { @class = "text-danger" })
                         </div>
-                        @Html.LabelFor(model => model.provinceStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @Html.EditorFor(model => model.provinceStr, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.provinceStr, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.province, new SelectList(Model.ProvinceList, "Value", "Text"), "เลือกจังหวัด", new { id = "ProvinceID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
                         </div>
-                        @*@Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control", @field = "Update", id = "proID", onchange = "Create" })
-                                @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
-                            </div>*@
                     </div>
 
                     <div class="form-group row">
-                        @*@Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/แขวง", htmlAttributes: new { @class = "form-control", @field = "Update", id = "province", name = "province" })
-                                @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
-                            </div>*@
-                        @Html.LabelFor(model => model.ampherStr, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @Html.EditorFor(model => model.ampherStr, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ampherStr, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ampher, new SelectList(Model.AmpherList, "Value", "Text"), "เลือกอำเภอ/เขต", new { id = "AmpherID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
                         </div>
-                        @Html.LabelFor(model => model.districtStr, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-4">
-                            @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.districtStr, "", new { @class = "text-danger" })
-                        </div>
-                        @*@Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/เขต", htmlAttributes: new { @class = "form-control", @field = "Update" })
-                                @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
-                            </div>*@
+                        @Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.district, new SelectList(Model.DistrictList, "Value", "Text"), "เลือกตำบล/แขวง", new { id = "DistrictID", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
+                    </div>
                     </div>
 
                     @* <div class="form-group row">
-                            @Html.LabelFor(model => model.latilude, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.EditorFor(model => model.latilude, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.latilude, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.EditorFor(model => model.longitude, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                @Html.LabelFor(model => model.latilude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.latilude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.latilude, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.longitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
                     <div class="form-group row">
-                            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.TextAreaFor(model => model.comment, new { @class = "form-control" })
                         </div>
-                        </div>
+                    </div>
 
                     @* <div class="form-group row">
-                            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.status, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.status, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
                     <div class="container">
                         <div class="row justify-content-md-center">
                             <div class="form-group row">

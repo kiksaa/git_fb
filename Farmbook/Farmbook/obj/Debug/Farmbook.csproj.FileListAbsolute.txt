@@ -387,3 +387,5 @@ C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csproj.CopyComple
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.dll
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.pdb
 C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Debug\Farmbook.csprojAssemblyReference.cache
+C:\Users\samatcha\Desktop\Farmbook\Farmbook\bin\Dapper.dll
+C:\Users\samatcha\Desktop\Farmbook\Farmbook\bin\Dapper.xml

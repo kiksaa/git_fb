@@ -200,9 +200,6 @@
           <ScalarProperty Name="theoryName" ColumnName="theoryName" />
           <ScalarProperty Name="administrator" ColumnName="administrator" />
           <ScalarProperty Name="active" ColumnName="active" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -275,9 +272,6 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="registerType" ColumnName="registerType" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -335,9 +329,6 @@
           <ScalarProperty Name="active" ColumnName="active" />
           <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
           <ScalarProperty Name="adminBy" ColumnName="adminBy" />
-          <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-          <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-          <ScalarProperty Name="districtStr" ColumnName="districtStr" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -505,6 +496,16 @@
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="subject" ColumnName="subject" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="filedetails">
+      <EntityTypeMapping TypeName="farmdbModel.filedetail">
+        <MappingFragment StoreEntitySet="filedetails">
+          <ScalarProperty Name="fileData" ColumnName="fileData" />
+          <ScalarProperty Name="fileContentType" ColumnName="fileContentType" />
+          <ScalarProperty Name="fileName" ColumnName="fileName" />
+          <ScalarProperty Name="fileID" ColumnName="fileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

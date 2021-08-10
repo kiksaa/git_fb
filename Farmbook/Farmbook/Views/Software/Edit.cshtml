@@ -32,7 +32,8 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IDsoft)
-                            @using (Html.BeginForm("Edit", "Software", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @Html.HiddenFor(model => model.softwareImg)
+                            @using (Html.BeginForm("Create", "Software", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <div class="col-sm-6">
                                     <div class="form-group row">

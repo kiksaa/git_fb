@@ -87,33 +87,15 @@ namespace Farmbook.Controllers
         {
             using (farmdb farmdb = new farmdb())
             {
-                List<province> provinces = farmdb.provinces.ToList();
-                IEnumerable<SelectListItem> selprovinces = from p in provinces
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = p.provinceName,
-                                                               Value = p.provinceID.ToString()
-                                                           };
-                ViewBag.provinces = selprovinces;
-
-                List<ampher> amphers = farmdb.amphers.ToList();
-                IEnumerable<SelectListItem> selamphers = from a in amphers
-                                                         select new SelectListItem
-                                                         {
-                                                             Text = a.ampherName,
-                                                             Value = a.ampherID.ToString()
-                                                         };
-                ViewBag.amphers = selamphers;
-
-                List<district> districts = farmdb.districts.ToList();
-                IEnumerable<SelectListItem> seldistricts = from d in districts
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = d.districtName,
-                                                               Value = d.districtID.ToString()
-                                                           };
-                ViewBag.districts = seldistricts;
-
+                List<SelectListItem> itemCountries = new List<SelectListItem>();
+                profile model = new profile();
+                var countries = (from pro in farmdb.provinces select pro).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.provinceID.ToString(),
+                    Text = x.provinceName
+                });
+                itemCountries.AddRange(countries);
+                model.ProvinceList = itemCountries;
 
                 List<registertype> registertypes = farmdb.registertypes.ToList();
                 IEnumerable<SelectListItem> selretypes = from rt in registertypes
@@ -123,6 +105,7 @@ namespace Farmbook.Controllers
                                                              Value = rt.typeID.ToString()
                                                          };
                 ViewBag.registertypes = selretypes;
+                return View(model);
             }
             return View(new profile());
         }
@@ -153,33 +136,34 @@ namespace Farmbook.Controllers
             {
                 profileModel = farmdb.profiles.Where(x => x.email == email).FirstOrDefault();
 
-                List<province> provinces = farmdb.provinces.ToList();
-                IEnumerable<SelectListItem> selprovinces = from p in provinces
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = p.provinceName,
-                                                               Value = p.provinceID.ToString()
-                                                           };
-                ViewBag.provinces = selprovinces;
+                List<SelectListItem> itemCountries = new List<SelectListItem>();
+                List<SelectListItem> itemCountries2 = new List<SelectListItem>();
+                List<SelectListItem> itemCountries3 = new List<SelectListItem>();
+                /*register model = new register();*/
+                var countries = (from pro in farmdb.provinces select pro).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.provinceID.ToString(),
+                    Text = x.provinceName
+                });
+                itemCountries.AddRange(countries);
+                profileModel.ProvinceList = itemCountries;
 
-                List<ampher> amphers = farmdb.amphers.ToList();
-                IEnumerable<SelectListItem> selamphers = from a in amphers
-                                                         select new SelectListItem
-                                                         {
-                                                             Text = a.ampherName,
-                                                             Value = a.ampherID.ToString()
-                                                         };
-                ViewBag.amphers = selamphers;
 
-                List<district> districts = farmdb.districts.ToList();
-                IEnumerable<SelectListItem> seldistricts = from d in districts
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = d.districtName,
-                                                               Value = d.districtID.ToString()
-                                                           };
-                ViewBag.districts = seldistricts;
+                var countries2 = (from amp in farmdb.amphers select amp).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.ampherID.ToString(),
+                    Text = x.ampherName
+                });
+                itemCountries2.AddRange(countries2);
+                profileModel.AmpherList = itemCountries2;
 
+                var countries3 = (from dis in farmdb.districts select dis).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.districtID.ToString(),
+                    Text = x.districtName
+                });
+                itemCountries3.AddRange(countries3);
+                profileModel.DistrictList = itemCountries3;
 
                 List<registertype> registertypes = farmdb.registertypes.ToList();
                 IEnumerable<SelectListItem> selretypes = from rt in registertypes

@@ -118,6 +118,15 @@
     <Property Name="familyID" Type="int" Nullable="false" />
     <Property Name="familyName" Type="varchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <EntityType Name="filedetails">
+    <Key>
+      <PropertyRef Name="fileID" />
+    </Key>
+    <Property Name="fileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileName" Type="varchar" MaxLength="100" />
+    <Property Name="fileContentType" Type="varchar" MaxLength="60" />
+    <Property Name="fileData" Type="bit" />
+  </EntityType>
   <EntityType Name="fuel">
     <Key>
       <PropertyRef Name="IDfule" />
@@ -195,9 +204,6 @@
     <Property Name="theoryName" Type="int" />
     <Property Name="administrator" Type="varchar" MaxLength="255" />
     <Property Name="active" Type="int" />
-    <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-    <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-    <Property Name="districtStr" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="license">
     <Key>
@@ -264,9 +270,6 @@
     <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="registerType" Type="int" Nullable="false" />
-    <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-    <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-    <Property Name="districtStr" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="project">
     <Key>
@@ -320,9 +323,6 @@
     <Property Name="active" Type="int" />
     <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-    <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-    <Property Name="districtStr" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="registertype">
     <Key>
@@ -1174,6 +1174,7 @@
     <EntitySet Name="equipmenttype" EntityType="Self.equipmenttype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="event" EntityType="Self.event" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="family" EntityType="Self.family" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="filedetails" EntityType="Self.filedetails" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="fuel" EntityType="Self.fuel" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="fueltype" EntityType="Self.fueltype" Schema="farmdb" store:Type="Tables" />
     <EntitySet Name="gender" EntityType="Self.gender" Schema="farmdb" store:Type="Tables" />

@@ -12,6 +12,7 @@ namespace Farmbook.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Web.Mvc;
 
     public partial class landplot
     {
@@ -84,5 +85,8 @@ namespace Farmbook.Models
         public virtual province province1 { get; set; }
         public virtual status status { get; set; }
         public virtual register register { get; set; }
+        public IEnumerable<SelectListItem> ProvinceList { get; set; }
+        public IEnumerable<SelectListItem> AmpherList { get; set; }
+        public IEnumerable<SelectListItem> DistrictList { get; set; }
     }
 }

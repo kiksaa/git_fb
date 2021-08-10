@@ -220,9 +220,6 @@
     <Property Name="theoryName" Type="Int32" />
     <Property Name="administrator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="active" Type="Int32" />
-    <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="active1" Relationship="Self.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
     <NavigationProperty Name="ampher1" Relationship="Self.landplot_ibfk_5" FromRole="landplot" ToRole="ampher" />
     <NavigationProperty Name="buymethod1" Relationship="Self.landplot_ibfk_10" FromRole="landplot" ToRole="buymethod" />
@@ -307,9 +304,6 @@
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="registerType" Type="Int32" Nullable="false" />
-    <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ampher1" Relationship="Self.profile_ibfk_5" FromRole="profile" ToRole="ampher" />
     <NavigationProperty Name="district1" Relationship="Self.profile_ibfk_3" FromRole="profile" ToRole="district" />
     <NavigationProperty Name="gender1" Relationship="Self.profile_ibfk_4" FromRole="profile" ToRole="gender" />
@@ -378,9 +372,6 @@
     <Property Name="active" Type="Int32" />
     <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
     <Property Name="adminBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="active1" Relationship="Self.register_ibfk_11" FromRole="register" ToRole="active" />
     <NavigationProperty Name="ampher1" Relationship="Self.register_ibfk_7" FromRole="register" ToRole="ampher" />
     <NavigationProperty Name="bankuser" Relationship="Self.register_ibfk_8" FromRole="register" ToRole="bankuser" />
@@ -1540,6 +1531,7 @@
       <End Role="vehicle" EntitySet="vehicles" />
     </AssociationSet>
     <EntitySet Name="events" EntityType="farmdbModel.event" />
+    <EntitySet Name="filedetails" EntityType="farmdbModel.filedetail" />
   </EntityContainer>
   <EntityType Name="event">
     <Key>
@@ -1552,5 +1544,14 @@
     <Property Name="end" Type="DateTime" />
     <Property Name="themeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="isFullDay" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="filedetail">
+    <Key>
+      <PropertyRef Name="fileID" />
+    </Key>
+    <Property Name="fileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="fileData" Type="Boolean" />
   </EntityType>
 </Schema>

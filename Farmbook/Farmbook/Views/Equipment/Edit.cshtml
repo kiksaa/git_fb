@@ -17,7 +17,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Equipment", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -31,7 +31,8 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IDequip)
-                            @using (Html.BeginForm("Edit", "Equipment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @Html.HiddenFor(model => model.equipmentImg)
+                            @using (Html.BeginForm("Create", "Equipment", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <div class="col-sm-4">
                                     <div class="form-group row">

@@ -15,186 +15,75 @@
     <meta name="author" content="">
 
     <title>FARMBOOK - เพิ่มทะเบียนเกษตรกร</title>
-
+    <script type="text/javascript" src="~/scripts/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        $("#selectlist").change(function () {
-            var provinceID = $("#selectlist").val();
-            $.ajax
-                ({
-                    type: "GET",
-                    url: "/RegisterController/GetCityList?ProvinceID=" + provinceID,
-                    success: function (result) {
-                        $("#cityListWrapper").html(result)
-                    }
-                });
-        });
-    </script>
-    <script type="text/javascript">
-            $('#Country').change(function () {
-                var selectedCountry = $("#Country").val();
-                var regionsSelect = $('#Region');
-                regionsSelect.empty();
-                if (selectedCountry != null && selectedCountry != '') {
-                    $.getJSON('@Url.Action("GetRegions")', { iso3: selectedCountry }, function (regions) {
-                        if (regions != null && !jQuery.isEmptyObject(regions))
-                        {
-                            regionsSelect.append($('<option/>', {
-                                value: null,
-                                text: ""
-                            }));
-                            $.each(regions, function (index, region) {
-                                regionsSelect.append($('<option/>', {
-                                    value: region.Value,
-                                    text: region.Text
-                                }));
-                            });
-                        };
+        $(function () {
+            $("#ProvinceID").change(function () {
+                var selectedCountry = $(this).val();
+                if (selectedCountry != "") {
+                    $.ajax({
+                        url: "/Register/GetAmpher",
+                        data: { proID: selectedCountry },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#AmpherID").empty();
+                                $("#AmpherID").append($("<option></option>").attr("value", "").text("เลือกอำเภอ/เขต"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#AmpherID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#AmpherID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                                $("#AmpherID").change();
+                            }
+                        }
                     });
                 }
             });
-    </script>
 
-    <script type="text/javascript">
-        $('#province').change(function () {
-            var provinceID = $("province").val();
-            if (provinceID) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Register/Create/" + provinceID,
-                    success: function (res) {
-                        if (res) {
-                            $("#districts").empty();
-                            $("#districts").append('<option>Select</option>');
-                            $.each(res, function (key, value) {
-                                $("#districts").append('<option value="' + key + '">' + value + '</option>');
-                            });
-
-                        } else {
-                            $("#districts").empty();
-                        }
-                    }
-                });
-            } else {
-                $("#districts").empty();
-                $("#subdistrict").empty();
-            }
-            console.log('province id', provinceID);
-        });
-        $('#districts').on('change', function () {
-            var districtsID = $(this).val();
-            if (districtsID) {
-                $.ajax({
-                    type: "GET",
-                    url: "http://dev.example.com/api/subdistrict_list?kab=" + districtsID,
-                    success: function (res) {
-                        if (res) {
-                            $("#subdistrict").empty();
-                            $.each(res, function (key, value) {
-                                $("#subdistrict").append('<option value="' + key + '">' + value + '</option>');
-                            });
-
-                        } else {
-                            $("#subdistrict").empty();
-                        }
-                    }
-                });
-            } else {
-                $("#subdistrict").empty();
-            }
-        });
-    </script>
-
-    <script type="text/javascript">
-        function Create() {
-           @* $("#Subdistrict").empty();//ล้างข้อมูล
-            $("#DisID").val("");//ล้างข้อมูล
-            $("#SubID").val("");//ล้างข้อมูล*@
-            var provinceID = document.getElementById("proID").value;
-            var NRB;
-            alert(provinceID);
-            if (provinceID) {
-                $.ajax(
-                    {
-                       url: '@Url.Action("Create", "Register")',
-                                type: 'GET',
-                       data: { provinceID: provinceID },
-                        cache: false,
-                        dataType: "json",
-                        success: function (provinceID) {
-                            window.Selection.ampherID.reload();
-                            $('select[name="ampherName"]').empty();
-                            $.each(data, function (key, value) {
-                                $('select[name="ampherName"]').append('<option value="' + value + '">' + value + '</option>');
-                            });
-                        }
-                    });
-            } else {
-                $('select[name="ampherName"]').empty();
-            }
-        }
-        function Amphers() {
-            @*$("#Subdistrict").empty();
-            $("#SubID").val("");*@
-           @* $('#ampID').change(function () {*@
-                var ampherID = document.getElementById("ampID").value;
-                var NRB;
-                alert(ampherID);
-                $.ajax(
-                    {
-                        url: '@Url.Action("Create", "Register")',
-                        type: 'GET',
-                        data: { ampherID: ampherID },
-                        cache: false,
+            $("#AmpherID").change(function () {
+                var selectedState = $(this).val();
+                if (selectedState != "") {
+                    $.ajax({
+                        url: "/Register/GetDistrict",
+                        data: { amID: selectedState },
                         success: function (result) {
-                            var NCRB = '@Session["NewBTrate"]';
-                            alert(NCRB);
-                            $('#Transaction_Rate').val(NCRB);
-                            window.location.reload();
+                            if (result != undefined) {
+                                $("#DistrictID").empty();
+                                $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#DistrictID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#DistrictID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                            }
                         }
                     });
-            @*$("#DisID").val($(this).val());*@
-           @* });*@
-        }
-    </script>
-    <script>
-        function myFunction() {
-            var x = document.getElementById("mySelect").value;// คืนค่า value ที่เลือก
-            @*var value = x.selectElement.options[x.selectedIndex].value;// get selected option value
-            var text = x.options[x.selectedIndex].text;//get the selected option text*@
-            @*alert(value , text);*@
-            document.getElementById("demo").innerHTML = "You selected: " + x;
-            console.log("x:", x);
-        };
-
-        function Function() {
-            var y = document.getElementById("Select").selectedIndex;// คืนค่าอันดับที่เลือก
-            document.getElementById("mo").innerHTML = "You selected: " + y;
-            console.log("y:", y);
-        };
-    </script>
-    <script>
-        var carsAndModels = {};
-        carsAndModels['VO'] = ['V70', 'XC60', 'XC90'];
-        carsAndModels['VW'] = ['Golf', 'Polo', 'Scirocco', 'Touareg'];
-        carsAndModels['BMW'] = ['M6', 'X5', 'Z3'];
-
-        function ChangeCarList() {
-            var carList = document.getElementById("car");
-            var modelList = document.getElementById("carmodel");
-            var selCar = carList.options[carList.selectedIndex].value;
-            while (modelList.options.length) {
-                modelList.remove(0);
-            }
-            var cars = carsAndModels[selCar];
-            if (cars) {
-                var i;
-                for (i = 0; i < cars.length; i++) {
-                    var car = new Option(cars[i], i);
-                    modelList.options.add(car);
                 }
-            }
-        }
+                else {
+                    $("#DistrictID").empty();
+                    $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                }
+            });
+
+        });
     </script>
+    <style type="text/css">
+        .row {
+            margin-bottom: 10px !important;
+        }
+    </style>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -215,247 +104,246 @@
     @using (Html.BeginForm("Create", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-    <div class="col">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#info-fill" /></svg>
-            <strong>ขั้นตอนแรก!</strong> เพิ่มข้อมูลเกษตกรให้สมบูรณ์
-            <button class="close" type="button" data-dismiss="alert" aria-label="Close">&times;</button>
-        </div>
-        <h4>เพิ่มทะเบียนเกษตรกร</h4>
-        <hr />
-        <div class="row">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
-            <div class="col-sm-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
-                    </div>
-                </div>
-                @ViewBag.ActionMessage
+        <div class="col">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#info-fill" /></svg>
+                <strong>ขั้นตอนแรก!</strong> เพิ่มข้อมูลเกษตกรให้สมบูรณ์
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close">&times;</button>
             </div>
-            <div class="col-sm-6">
+            <h4>เพิ่มทะเบียนเกษตรกร</h4>
+            <hr />
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.farmer_img, htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.farmer_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.card_img, htmlAttributes: new { @class = "control-label col-md-7" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.card_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                        </div>
+                    </div>
+                    @ViewBag.ActionMessage
+                </div>
+                <div class="col-sm-6">
 
-                <div class="form-group row">
-                    @*@Html.Label("*", new { @class = "text-danger" })*@
-                    @*<span style="color:red;">*</span>*@
-                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", placeholder = "ชื่อ นามสกุล", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @*@Html.Label("*", new { @class = "text-danger" })*@
+                        @*<span style="color:red;">*</span>*@
+                        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", placeholder = "ชื่อ นามสกุล", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.registerID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.registerID, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.registerID, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.registerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.registerID, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.registerID, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.cardID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.cardID, new { htmlAttributes = new { @class = "form-control", placeholder = "xxxxxxxxxxxxx", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.cardID, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    @Html.LabelFor(model => model.cardID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.cardID, new { htmlAttributes = new { @class = "form-control", placeholder = "xxxxxxxxxxxxx", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.cardID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-2">
-                        @Html.RadioButtonFor(model => model.gender, "100")
-                        @Html.Label("ชาย")
-                        @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.RadioButtonFor(model => model.gender, "100")
+                            @Html.Label("ชาย")
+                            @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.RadioButtonFor(model => model.gender, "200")
+                            @Html.Label("หญิง")
+                            @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        @Html.RadioButtonFor(model => model.gender, "200")
-                        @Html.Label("หญิง")
-                        @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.birthday, new { htmlAttributes = new { @class = "form-control", required = "required", @type = "date" } })
-                        @Html.ValidationMessageFor(model => model.birthday, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    @*@Html.Label("*", htmlAttributes: new { @class = "text-danger" })*@
-                    @Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @*@Html.Label("*", htmlAttributes: new { @class = "text-danger" })*@
+                        @Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "example@gmail.com", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "example@gmail.com", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.family, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.RadioButtonFor(model => model.family, "100")
-                        @Html.Label("หัวหน้าครอบครัว")
-                        @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.family, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.RadioButtonFor(model => model.family, "100")
+                            @Html.Label("หัวหน้าครอบครัว")
+                            @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RadioButtonFor(model => model.family, "200")
+                            @Html.Label("สมาชิกในครอบครัว")
+                            @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        @Html.RadioButtonFor(model => model.family, "200")
-                        @Html.Label("สมาชิกในครอบครัว")
-                        @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.no, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.no, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.no, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.no, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.no, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.no, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.moo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.moo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.moo, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    @Html.LabelFor(model => model.moo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.moo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.moo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.road, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.road, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.road, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.road, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.road, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.road, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.province, new SelectList(Model.ProvinceList, "Value", "Text"), "เลือกจังหวัด", new { id = "ProvinceID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                    @Html.LabelFor(model => model.provinceStr, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.provinceStr, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.provinceStr, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("ampher", new List<SelectListItem>(), "เลือกอำเภอ/เขต", new { id = "AmpherID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("district", new List<SelectListItem>(), "เลือกตำบล/แขวง", new { id = "DistrictID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.ampherStr, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.ampherStr, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ampherStr, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.districtStr, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.districtStr, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <p id="mo"></p>
-                @*<div class="form-group row">
-                    @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>*@
-
-                @*<div class="form-group row">
-                    @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownListFor(model => model.status, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.comment, new { @class = "form-control" } )
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row justify-content-md-center">
-                        <div class="form-group row">
-                            <div class="col-6">
-                                <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Register")">
-                                    <span>
-                                        กลับ
-                                    </span>
-                                </a>
+                    @*<div class="form-group row">
+                            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
-                            <div class="col-6">
-                                <input type="submit" value="บันทึก" class="btn btn-success" />
+                        </div>*@
+
+                    @*<div class="form-group row">
+                            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.status, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.comment, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Register")">
+                                        <span>
+                                            กลับ
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <input type="submit" value="บันทึก" class="btn btn-success" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.bankuser.bankID, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-12">
-                        @Html.DropDownListFor(modelItem => modelItem.bankuser.bankID, (IEnumerable<SelectListItem>)ViewBag.banks, "เลือกธนาคาร", htmlAttributes: new { @class = "form-control", required = "required" })
-                        @Html.ValidationMessageFor(model => model.bankuser.bankID, "", new { @class = "text-danger" })
-                    </div>
-                    <br />
-                    @Html.LabelFor(model => model.bankuser.bankName, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.bankuser.bankName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.bankuser.bankName, "", new { @class = "text-danger" })
-                    </div>
-                    <br />
-                    @Html.LabelFor(model => model.bankuser.bankNo, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-12">
-                        @Html.EditorFor(model => model.bankuser.bankNo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                        @Html.ValidationMessageFor(model => model.bankuser.bankNo, "", new { @class = "text-danger" })
-                    </div>
-                    @*@Html.Action("Index", "Plot")*@
-                    @*@Url.Action("Create", "Bankuser")*@
-                    <br />
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        โครงการ
-                                    </th>
-                                    <th>
-                                        ชื่อแปลง
-                                    </th>
-                                    <th>
-                                        ที่อยู่
-                                    </th>
-                                    <th>
-                                        ลบ/ แก้ไข
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        @*@Html.DisplayFor(model => Model.landplots)*@
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                       @*@Html.ActionLink("Delete", "#") |
-                                        @Html.ActionLink("Edit", "#")*@
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <input type="submit" value="เพิ่มข้อมูลแปลง" class="btn btn-warning" href="@Url.Action("Create", "Plot", new { id = Model.ID })" />
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.bankuser.bankID, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(modelItem => modelItem.bankuser.bankID, (IEnumerable<SelectListItem>)ViewBag.banks, "เลือกธนาคาร", htmlAttributes: new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(model => model.bankuser.bankID, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+                        @Html.LabelFor(model => model.bankuser.bankName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.bankuser.bankName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.bankuser.bankName, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+                        @Html.LabelFor(model => model.bankuser.bankNo, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.bankuser.bankNo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(model => model.bankuser.bankNo, "", new { @class = "text-danger" })
+                        </div>
+                        @*@Html.Action("Index", "Plot")*@
+                        @*@Url.Action("Create", "Bankuser")*@
+                        <br />
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            โครงการ
+                                        </th>
+                                        <th>
+                                            ชื่อแปลง
+                                        </th>
+                                        <th>
+                                            ที่อยู่
+                                        </th>
+                                        <th>
+                                            ลบ/ แก้ไข
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @*@Html.DisplayFor(model => Model.landplots)*@
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            @*@Html.ActionLink("Delete", "#") |
+                                                @Html.ActionLink("Edit", "#")*@
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="submit" value="เพิ่มข้อมูลแปลง" class="btn btn-warning" href="@Url.Action("Create", "Plot", new { id = Model.ID })" />
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-    </div>
     }
     <!-- Bootstrap core JavaScript-->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>

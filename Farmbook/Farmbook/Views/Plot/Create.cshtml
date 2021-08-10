@@ -83,6 +83,76 @@
             }
     </style>
 
+    <script type="text/javascript" src="~/scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ProvinceID").change(function () {
+                var selectedCountry = $(this).val();
+                if (selectedCountry != "") {
+                    $.ajax({
+                        url: "/Register/GetAmpher",
+                        data: { proID: selectedCountry },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#AmpherID").empty();
+                                $("#AmpherID").append($("<option></option>").attr("value", "").text("เลือกอำเภอ/เขต"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#AmpherID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#AmpherID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                                $("#AmpherID").change();
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#AmpherID").change(function () {
+                var selectedState = $(this).val();
+                if (selectedState != "") {
+                    $.ajax({
+                        url: "/Register/GetDistrict",
+                        data: { amID: selectedState },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#DistrictID").empty();
+                                $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#DistrictID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#DistrictID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    $("#DistrictID").empty();
+                    $("#DistrictID").append($("<option></option>").attr("value", "").text("เลือกตำบล/แขวง"));
+                }
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .row {
+            margin-bottom: 10px !important;
+        }
+    </style>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
         var COLORS = [//color is startShape
@@ -357,7 +427,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Create", "Plot", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <br />
@@ -436,46 +506,31 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.provinceStr, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-10" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.provinceStr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownListFor(model => model.province, new SelectList(Model.ProvinceList, "Value", "Text"), "เลือกจังหวัด", new { id = "ProvinceID", @class = "form-control" })
                             </div>
-                            @* @Html.LabelFor(model => model.province, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.province, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.province, "", new { @class = "text-danger" })
-                                </div>*@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ampherStr, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-10" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.ampherStr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownList("ampher", new List<SelectListItem>(), "เลือกอำเภอ/เขต", new { id = "AmpherID", @class = "form-control" })
                             </div>
-                            @* @Html.LabelFor(model => model.ampher, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.ampher, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.ampher, "", new { @class = "text-danger" })
-                                </div>*@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.districtStr, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-10" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.districtStr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownList("district", new List<SelectListItem>(), "เลือกตำบล/แขวง", new { id = "DistrictID", @class = "form-control" })
                             </div>
-                            @*@Html.LabelFor(model => model.district, htmlAttributes: new { @class = "control-label col-md-6" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.district, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.district, "", new { @class = "text-danger" })
-                                </div>*@
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.coordinatesStar, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @*@Html.TextAreaFor(model => model.coordinatesStar, new { @class = "form-control", id = "data_lat" } )*@
-                                @Html.EditorFor(model => model.coordinatesStar, new { htmlAttributes = new { @class = "form-control", id = "lat" } } )
+                                @Html.EditorFor(model => model.coordinatesStar, new { htmlAttributes = new { @class = "form-control", id = "lat" } })
                             </div>
                         </div>
 
@@ -497,6 +552,7 @@
                             @Html.LabelFor(model => model.areaPlot, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control", id = "area" } })
+                                @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">

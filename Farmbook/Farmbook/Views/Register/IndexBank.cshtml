@@ -1,0 +1,47 @@
+﻿
+@model IEnumerable<Farmbook.Models.ViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexStandard</title>
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+        <div class="form-group">
+            @* @Html.DisplayNameFor(model => model.ID)
+                @Html.DisplayFor(modelItem => item.ID)*@
+            <h5>บัญชีธนาคาร</h5>
+            <br />
+            <div class="col-md-12">
+                @Html.DisplayNameFor(model => model.bankType)
+
+                @Html.EditorFor(modelItem => item.bankType, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(modelItem => item.bankType, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                @Html.DisplayNameFor(model => model.bankName)
+
+                @Html.EditorFor(modelItem => item.bankName, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(modelItem => item.bankName, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div class="col-md-12">
+                @Html.DisplayNameFor(model => model.bankNo)
+
+                @Html.EditorFor(modelItem => item.bankNo, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(modelItem => item.bankNo, "", new { @class = "text-danger" })
+            </div>
+            <br />
+
+        </div>
+    }
+</body>
+</html>

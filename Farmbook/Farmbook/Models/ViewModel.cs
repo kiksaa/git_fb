@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Farmbook.Models
 {
@@ -44,7 +45,7 @@ namespace Farmbook.Models
         }
         public int bank { get; set; }
         [DisplayName("ธนาคาร")]
-        public int bankType { get; set; }
+        public string bankType { get; set; }
         [DisplayName("ชื่อบัญชี")]
         public string bankName { get; set; }
         [DisplayName("หมายเลขบัญชี")]
@@ -239,5 +240,8 @@ namespace Farmbook.Models
         public string themeColor { get; set; }
         [DisplayName("เต็มวัน")]
         public Nullable<bool> isFullDay { get; set; }
+
+        public IEnumerable<SelectListItem> CountryList { get; set; }
+        public IEnumerable<SelectListItem> CountryList2 { get; set; }
     }
 }

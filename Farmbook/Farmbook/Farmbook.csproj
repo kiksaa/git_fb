@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.90\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Devart.Data, Version=5.0.2584.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <HintPath>..\packages\Devart.Data.5.0.2584\lib\netstandard2.0\Devart.Data.dll</HintPath>
     </Reference>
@@ -406,6 +409,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\family.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\filedetail.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\fuel.cs">
@@ -2737,12 +2743,16 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Register\IndexBank.cshtml" />
+    <Content Include="Views\Register\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\upload\equipment\" />
     <Folder Include="Content\img\upload\fuel\" />
     <Folder Include="Content\img\upload\labor\" />
+    <Folder Include="Content\img\upload\lease\" />
+    <Folder Include="Content\img\upload\license\" />
     <Folder Include="Content\img\upload\machine\" />
     <Folder Include="Content\img\upload\software\" />
   </ItemGroup>

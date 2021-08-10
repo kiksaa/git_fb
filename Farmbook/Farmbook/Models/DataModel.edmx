@@ -123,6 +123,15 @@
           <Property Name="familyID" Type="int" Nullable="false" />
           <Property Name="familyName" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="filedetails">
+          <Key>
+            <PropertyRef Name="fileID" />
+          </Key>
+          <Property Name="fileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fileName" Type="varchar" MaxLength="100" />
+          <Property Name="fileContentType" Type="varchar" MaxLength="60" />
+          <Property Name="fileData" Type="bit" />
+        </EntityType>
         <EntityType Name="fuel">
           <Key>
             <PropertyRef Name="IDfule" />
@@ -200,9 +209,6 @@
           <Property Name="theoryName" Type="int" />
           <Property Name="administrator" Type="varchar" MaxLength="255" />
           <Property Name="active" Type="int" />
-          <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-          <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-          <Property Name="districtStr" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="license">
           <Key>
@@ -269,9 +275,6 @@
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="registerType" Type="int" Nullable="false" />
-          <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-          <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-          <Property Name="districtStr" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="project">
           <Key>
@@ -325,9 +328,6 @@
           <Property Name="active" Type="int" />
           <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="provinceStr" Type="varchar" MaxLength="100" />
-          <Property Name="ampherStr" Type="varchar" MaxLength="100" />
-          <Property Name="districtStr" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="registertype">
           <Key>
@@ -1179,6 +1179,7 @@
           <EntitySet Name="equipmenttype" EntityType="Self.equipmenttype" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="event" EntityType="Self.event" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="family" EntityType="Self.family" Schema="farmdb" store:Type="Tables" />
+          <EntitySet Name="filedetails" EntityType="Self.filedetails" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="fuel" EntityType="Self.fuel" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="fueltype" EntityType="Self.fueltype" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="gender" EntityType="Self.gender" Schema="farmdb" store:Type="Tables" />
@@ -1666,9 +1667,6 @@
           <Property Name="theoryName" Type="Int32" />
           <Property Name="administrator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="active" Type="Int32" />
-          <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="active1" Relationship="Self.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
           <NavigationProperty Name="ampher1" Relationship="Self.landplot_ibfk_5" FromRole="landplot" ToRole="ampher" />
           <NavigationProperty Name="buymethod1" Relationship="Self.landplot_ibfk_10" FromRole="landplot" ToRole="buymethod" />
@@ -1753,9 +1751,6 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="registerType" Type="Int32" Nullable="false" />
-          <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ampher1" Relationship="Self.profile_ibfk_5" FromRole="profile" ToRole="ampher" />
           <NavigationProperty Name="district1" Relationship="Self.profile_ibfk_3" FromRole="profile" ToRole="district" />
           <NavigationProperty Name="gender1" Relationship="Self.profile_ibfk_4" FromRole="profile" ToRole="gender" />
@@ -1824,9 +1819,6 @@
           <Property Name="active" Type="Int32" />
           <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
           <Property Name="adminBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="provinceStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ampherStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="districtStr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="active1" Relationship="Self.register_ibfk_11" FromRole="register" ToRole="active" />
           <NavigationProperty Name="ampher1" Relationship="Self.register_ibfk_7" FromRole="register" ToRole="ampher" />
           <NavigationProperty Name="bankuser" Relationship="Self.register_ibfk_8" FromRole="register" ToRole="bankuser" />
@@ -2986,6 +2978,7 @@
             <End Role="vehicle" EntitySet="vehicles" />
           </AssociationSet>
           <EntitySet Name="events" EntityType="farmdbModel.event" />
+          <EntitySet Name="filedetails" EntityType="farmdbModel.filedetail" />
         </EntityContainer>
         <EntityType Name="event">
           <Key>
@@ -2998,6 +2991,15 @@
           <Property Name="end" Type="DateTime" />
           <Property Name="themeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="isFullDay" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="filedetail">
+          <Key>
+            <PropertyRef Name="fileID" />
+          </Key>
+          <Property Name="fileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="fileData" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3204,10 +3206,7 @@
                 <ScalarProperty Name="theoryName" ColumnName="theoryName" />
                 <ScalarProperty Name="administrator" ColumnName="administrator" />
                 <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-                <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-                <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="licenses">
@@ -3279,10 +3278,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="registerType" ColumnName="registerType" />
-                <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-                <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-                <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="projects">
@@ -3339,10 +3335,7 @@
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
                 <ScalarProperty Name="adminBy" ColumnName="adminBy" />
-                <ScalarProperty Name="provinceStr" ColumnName="provinceStr" />
-                <ScalarProperty Name="ampherStr" ColumnName="ampherStr" />
-                <ScalarProperty Name="districtStr" ColumnName="districtStr" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="registertypes">
@@ -3509,6 +3502,16 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="subject" ColumnName="subject" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="filedetails">
+            <EntityTypeMapping TypeName="farmdbModel.filedetail">
+              <MappingFragment StoreEntitySet="filedetails">
+                <ScalarProperty Name="fileData" ColumnName="fileData" />
+                <ScalarProperty Name="fileContentType" ColumnName="fileContentType" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="fileID" ColumnName="fileID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

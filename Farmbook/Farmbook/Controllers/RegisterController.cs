@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Farmbook.Models;
+using Farmbook.Data;
 
 namespace Farmbook.Controllers
 {
@@ -49,15 +50,18 @@ namespace Farmbook.Controllers
                                from s in slist.DefaultIfEmpty()
                                join b in farmdb.bankusers on r.bank equals b.ID into blist
                                from b in blist.DefaultIfEmpty()
-                               join l in farmdb.landplots on r.ID equals l.farmerName into llist
+                               join l in farmdb.landplots on r.ID equals l.farmerName into llist 
                                from l in llist.DefaultIfEmpty()
                                select new
                                {
                                    r.ID, r.name, r.registerID, r.cardID, r.no, r.moo, r.road,
-                                   /*p.provinceName,a.ampherName,d.districtName,*/
-                                   r.provinceStr, r.ampherStr, r.districtStr, s.statusName, r.dateUpdate, r.adminBy, r.active,
-                                   TotalLandplot = llist.Count(),
-                                   Totalarea = llist.Sum(ll => ll.areaPlot),
+                                   p.provinceName,
+                                   a.ampherName,
+                                   d.districtName,s.statusName, r.dateUpdate, r.adminBy, r.active,
+                                   TotalLandplot = llist.Where(a => a.active == null || a.active == 100).Count(),
+                                   /*TotalLandplot = llist.Count(),*/
+                                   Totalarea = llist.Where(a => a.active == null || a.active == 100).Sum(ll => ll.areaPlot),
+                                   /*Totalarea = llist.Sum(ll => ll.areaPlot),*/
                                    Total = r.gender
                                };
                     foreach (var item in data.Distinct())
@@ -72,9 +76,9 @@ namespace Farmbook.Controllers
                             objcvm.no = item.no;
                             objcvm.moo = item.moo;
                             objcvm.road = item.road;
-                            objcvm.provinceName = item.provinceStr;
-                            objcvm.ampherName = item.ampherStr;
-                            objcvm.districtName = item.districtStr;
+                            objcvm.provinceName = item.provinceName;
+                            objcvm.ampherName = item.ampherName;
+                            objcvm.districtName = item.districtName;
                             objcvm.statusName = item.statusName;
                             objcvm.dateUpdate = item.dateUpdate;
                             objcvm.areaNumber = item.TotalLandplot;
@@ -119,8 +123,10 @@ namespace Farmbook.Controllers
                            where l.farmerName == id
                            select new
                            {
-                               l.ID,/*p.provinceName,a.ampherName,d.districtName,*/
-                               l.provinceStr,l.ampherStr,l.districtStr,l.plotName,pro.proName,l.active
+                               l.ID,
+                               p.provinceName,
+                               a.ampherName,
+                               d.districtName,l.plotName,pro.proName,l.active
                            };
                 foreach (var item in data)
                 {
@@ -128,9 +134,9 @@ namespace Farmbook.Controllers
                     {
                         ViewModel objcvm = new ViewModel();
                         objcvm.ID = item.ID;
-                        objcvm.provinceName = item.provinceStr;
-                        objcvm.ampherName = item.ampherStr;
-                        objcvm.districtName = item.districtStr;
+                        objcvm.provinceName = item.provinceName;
+                        objcvm.ampherName = item.ampherName;
+                        objcvm.districtName = item.districtName;
                         objcvm.plotName = item.plotName;
                         objcvm.projectName = item.proName;
                         ViewModeltList.Add(objcvm);
@@ -147,60 +153,71 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
+
+                List<SelectListItem> itemCountries = new List<SelectListItem>();
+                List<SelectListItem> itemCountries2 = new List<SelectListItem>();
+                List<SelectListItem> itemCountries3 = new List<SelectListItem>();
+                /*register model = new register();*/
+                var countries = (from pro in farmdb.provinces select pro).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.provinceID.ToString(),
+                    Text = x.provinceName
+                });
+                itemCountries.AddRange(countries);
+                registerModel.ProvinceList = itemCountries;
+
+
+                var countries2 = (from amp in farmdb.amphers select amp).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.ampherID.ToString(),
+                    Text = x.ampherName
+                });
+                itemCountries2.AddRange(countries2);
+                registerModel.AmpherList = itemCountries2;
+
+                var countries3 = (from dis in farmdb.districts select dis).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.districtID.ToString(),
+                    Text = x.districtName
+                });
+                itemCountries3.AddRange(countries3);
+                registerModel.DistrictList = itemCountries3;
             }
             return View(registerModel);
         }
-        // GET: Register/Create
-        public ActionResult Create(int? provinceID, decimal? NRB, int? ampherID)
+        public ActionResult GetProvince()
         {
-            /*using (farmdb db = new farmdb())
-            {
-                var currFrom = db.amphers.Where(u => u.proID == eventIdB).First();
-                Session["NewBTrate"] = currFrom.ampherID;
-                NRB = currFrom.ampherID;
-                var result = currFrom.ampherID;
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }*/
-            /* var data = GetTransactionBuyingRate();*/
+            farmdb farmdb = new farmdb();
+            List<province> list = farmdb.provinces.ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetAmpher(int proID)
+        {
+            farmdb farmdb = new farmdb();
+            return Json(farmdb.amphers.Where(data => data.proID == proID).Select(x => new { value = x.ampherID, text = x.ampherName })
+                , JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDistrict(int amID)
+        {
+            farmdb farmdb = new farmdb();
+            return Json(farmdb.districts.Where(data => data.amID == amID).Select(x => new { value = x.districtID, text = x.districtName })
+                , JsonRequestBehavior.AllowGet);
+        }
+        // GET: Register/Create
+        public ActionResult Create()
+        {
             using (farmdb farmdb = new farmdb())
             {
-                List<province> provinces = farmdb.provinces.ToList();
-                IEnumerable<SelectListItem> selprovinces = from p in provinces
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = p.provinceName,
-                                                               Value = p.provinceID.ToString(),
-
-                                                           };
-                var selectList = new SelectList(selprovinces, "provinceID", "provinceName");
-                ViewBag.provinces = selprovinces;
-
-                /*if (selectList.SelectedValue != null)
-                {*/
-                var ID = Convert.ToInt32(provinceID);
-                List<ampher> amphers = farmdb.amphers.Where(a => a.proID == ID).ToList();
-                /*List<ampher> amphers = farmdb.amphers.ToList();*/
-                /*if(amphers.Count == 0)
-                {*/
-                IEnumerable<SelectListItem> selamphers = from a in amphers
-                                                             /*where a.proID == ID*/
-                                                         select new SelectListItem
-                                                         {
-                                                             Text = a.ampherName,
-                                                             Value = a.ampherID.ToString()
-                                                         };
-                ViewBag.amphers = selamphers;
-                /*}*/
-
-                List<district> districts = farmdb.districts.ToList();
-                IEnumerable<SelectListItem> seldistricts = from d in districts
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = d.districtName,
-                                                               Value = d.districtID.ToString()
-                                                           };
-                ViewBag.districts = seldistricts;
-
+                List<SelectListItem> itemCountries = new List<SelectListItem>();
+                register model = new register();
+                var countries = (from pro in farmdb.provinces select pro).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.provinceID.ToString(),
+                    Text = x.provinceName
+                });
+                itemCountries.AddRange(countries);
+                model.ProvinceList = itemCountries;
+                
                 /*List<status> status = farmdb.status.ToList();
                 if (User.Identity.Name == "admin")
                 {
@@ -231,7 +248,9 @@ namespace Farmbook.Controllers
                                                            Value = b.ID.ToString()
                                                        };
                 ViewBag.banks = selbanks;
+                return View(model);
             }
+            
             return View(new register());
         }
         // POST: Register/Create
@@ -328,6 +347,35 @@ namespace Farmbook.Controllers
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
                 bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
 
+                List<SelectListItem> itemCountries = new List<SelectListItem>();
+                List<SelectListItem> itemCountries2 = new List<SelectListItem>();
+                List<SelectListItem> itemCountries3 = new List<SelectListItem>();
+                /*register model = new register();*/
+                var countries = (from pro in farmdb.provinces select pro).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.provinceID.ToString(),
+                    Text = x.provinceName
+                });
+                itemCountries.AddRange(countries);
+                registerModel.ProvinceList = itemCountries;
+
+
+                var countries2 = (from amp in farmdb.amphers select amp).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.ampherID.ToString(),
+                    Text = x.ampherName
+                });
+                itemCountries2.AddRange(countries2);
+                registerModel.AmpherList = itemCountries2;
+
+                var countries3 = (from dis in farmdb.districts select dis).AsEnumerable().Select(x => new SelectListItem
+                {
+                    Value = x.districtID.ToString(),
+                    Text = x.districtName
+                });
+                itemCountries3.AddRange(countries3);
+                registerModel.DistrictList = itemCountries3;
+
                 /*List<status> status = farmdb.status.ToList();
                 if (User.Identity.Name == "admin")
                 {
@@ -350,32 +398,6 @@ namespace Farmbook.Controllers
                     ViewBag.status = selstatuss;
                 }*/
 
-                List<province> provinces = farmdb.provinces.ToList();
-                IEnumerable<SelectListItem> selprovinces = from p in provinces
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = p.provinceName,
-                                                               Value = p.provinceID.ToString()
-                                                           };
-                ViewBag.provinces = selprovinces;
-
-                List<ampher> amphers = farmdb.amphers.ToList();
-                IEnumerable<SelectListItem> selamphers = from a in amphers
-                                                         select new SelectListItem
-                                                         {
-                                                             Text = a.ampherName,
-                                                             Value = a.ampherID.ToString()
-                                                         };
-                ViewBag.amphers = selamphers;
-
-                List<district> districts = farmdb.districts.ToList();
-                IEnumerable<SelectListItem> seldistricts = from d in districts
-                                                           select new SelectListItem
-                                                           {
-                                                               Text = d.districtName,
-                                                               Value = d.districtID.ToString()
-                                                           };
-                ViewBag.districts = seldistricts;
 
                 List<bank> banks = farmdb.banks.ToList();
                 IEnumerable<SelectListItem> selbanks = from b in banks
@@ -385,7 +407,6 @@ namespace Farmbook.Controllers
                                                            Value = b.ID.ToString()
                                                        };
                 ViewBag.banks = selbanks;
-
             }
             return View(registerModel);
         }
@@ -438,17 +459,11 @@ namespace Farmbook.Controllers
                             ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
                         }
                     }
-                    /*bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
-                    registerModel.bankuser = bankuserModel;*/
-                    registerModel.bank = bankuserModel.ID;
-                    /*registerModel.bankuser = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
                     farmdb.Entry(registerModel).State = System.Data.Entity.EntityState.Modified;
-                    farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Added;
+                    farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Modified;
                     registerModel.adminBy = User.Identity.Name;
                     registerModel.dateUpdate = DateTime.Now;
                     registerModel.active = 100;
-                    
-                    /*UpdateModel(bankuserModel);*/
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index");

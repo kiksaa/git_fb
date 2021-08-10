@@ -68,5 +68,6 @@ namespace Farmbook.Models
         public virtual DbSet<vehicle> vehicles { get; set; }
         public virtual DbSet<vehicletype> vehicletypes { get; set; }
         public virtual DbSet<@event> events { get; set; }
+        public virtual DbSet<filedetail> filedetails { get; set; }
     }
 }

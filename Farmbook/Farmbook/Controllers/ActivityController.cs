@@ -44,13 +44,13 @@ namespace Farmbook.Controllers
         }
         // POST: Standardlist/Create
         [HttpPost]
-        public ActionResult Create(activity StandardlistModel)
+        public ActionResult Create(activity ActivitytModel)
         {
             try
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.activities.Add(StandardlistModel);
+                    farmdb.activities.Add(ActivitytModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Theory");
@@ -64,10 +64,10 @@ namespace Farmbook.Controllers
         // GET: Standardlist/Edit/5
         public ActionResult Edit(int id)
         {
-            activity StandardlistModel = new activity();
+            activity ActivitytModel = new activity();
             using (farmdb farmdb = new farmdb())
             {
-                StandardlistModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
+                ActivitytModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
                 List<theory> projectands = farmdb.theories.ToList();
                 IEnumerable<SelectListItem> seltheories = from t in projectands
                                                           select new SelectListItem
@@ -78,18 +78,18 @@ namespace Farmbook.Controllers
                 ViewBag.theories = seltheories;
 
             }
-            return View(StandardlistModel);
+            return View(ActivitytModel);
         }
 
         // POST: Standardlist/Edit/5
         [HttpPost]
-        public ActionResult Edit(activity StandardlistModel)
+        public ActionResult Edit(activity ActivitytModel)
         {
             try
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    farmdb.Entry(StandardlistModel).State = System.Data.Entity.EntityState.Modified;
+                    farmdb.Entry(ActivitytModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Theory");
@@ -103,10 +103,10 @@ namespace Farmbook.Controllers
         // GET: Standardlist/Delete/5
         public ActionResult Delete(int id)
         {
-            activity StandardlistModel = new activity();
+            activity ActivitytModel = new activity();
             using (farmdb farmdb = new farmdb())
             {
-                StandardlistModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
+                ActivitytModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
                 List<theory> projectands = farmdb.theories.ToList();
                 IEnumerable<SelectListItem> seltheories = from t in projectands
                                                           select new SelectListItem
@@ -116,7 +116,7 @@ namespace Farmbook.Controllers
                                                           };
                 ViewBag.theories = seltheories;
             }
-            return View(StandardlistModel);
+            return View(ActivitytModel);
         }
 
         // POST: Standardlist/Delete/5
@@ -127,8 +127,8 @@ namespace Farmbook.Controllers
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    activity StandardlistModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
-                    farmdb.activities.Remove(StandardlistModel);
+                    activity ActivitytModel = farmdb.activities.Where(x => x.ID == id).FirstOrDefault();
+                    farmdb.activities.Remove(ActivitytModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("Index", "Theory");

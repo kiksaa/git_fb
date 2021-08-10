@@ -101,7 +101,7 @@
                                 <div class="form-group row">
                                     @Html.LabelFor(model => model.dateBuy, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
-                                        @Html.EditorFor(model => model.dateBuy, new { htmlAttributes = new { @class = "form-control datepicker", Type = "DateTime", placeholder = "31/12/2500" } })
+                                        @Html.EditorFor(model => model.dateBuy, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control datepicker", Type = "DateTime", placeholder = "31/12/2500" } })
                                         @Html.ValidationMessageFor(model => model.dateBuy, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -132,8 +132,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="container">
                                 <div class="row justify-content-md-center">
                                     <div class="form-group row">

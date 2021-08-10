@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class profile
     {
@@ -62,5 +63,8 @@ namespace Farmbook.Models
         public virtual gender gender1 { get; set; }
         public virtual registertype registertype1 { get; set; }
         public virtual province province1 { get; set; }
+        public IEnumerable<SelectListItem> ProvinceList { get; set; }
+        public IEnumerable<SelectListItem> AmpherList { get; set; }
+        public IEnumerable<SelectListItem> DistrictList { get; set; }
     }
 }
