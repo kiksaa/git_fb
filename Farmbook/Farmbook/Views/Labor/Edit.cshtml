@@ -33,11 +33,13 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.laborImg, htmlAttributes: new { @class = "control-label col-md-3" })
                                         <div class="col-md-8">
-                                            @Html.EditorFor(model => model.laborImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                            @Html.TextBoxFor(model => model.file_laborImg, "", new { @type = "file", @multiple = "multiple" })
                                             @{ if (@Model.laborImg != null)
                                                 {
                                                     <br />
-                                                    <img src="~/Content/img/upload/labor/@Model.laborImg" height="250" width="240">
+                                                    <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />
+                                                    <br />
+                                                    @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.laborImg })
                                                 } }
                                         </div>
                                     </div>

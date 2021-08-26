@@ -126,40 +126,33 @@ namespace Farmbook.Controllers
 
         // POST: Staple/Create
         [HttpPost]
-        public ActionResult Create(staple stapleModel, HttpPostedFileBase stapleImg)
+        public ActionResult Create(staple stapleModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/staple/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (stapleImg != null && stapleImg.ContentLength > 0)
-                {
-                    if (stapleImg.ContentType == "image/jpeg" || stapleImg.ContentType == "image/jpg" || stapleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(stapleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/staple/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/staple/") + stapleImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            stapleImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            stapleModel.stapleImg = stapleImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (stapleModel.file_stapleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(stapleModel.file_stapleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[stapleModel.file_stapleImg.ContentLength];
+                                stapleModel.file_stapleImg.InputStream.Read(data, 0, stapleModel.file_stapleImg.ContentLength);
+                                filesModel.fileName = "staple_" + stapleModel.file_stapleImg.FileName;
+                                filesModel.fileData = data;
+                                stapleModel.stapleImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.staples.Add(stapleModel);
                     farmdb.SaveChanges();
                 }
@@ -179,6 +172,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == stapleModel.stapleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == stapleModel.stapleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<stapletype> stapletypes = farmdb.stapletypes.ToList();
                 IEnumerable<SelectListItem> selstapletypes = from s in stapletypes
                                                              select new SelectListItem
@@ -211,32 +212,34 @@ namespace Farmbook.Controllers
 
         // POST: Staple/Edit/5
         [HttpPost]
-        public ActionResult Edit(staple stapleModel, HttpPostedFileBase stapleImg)
+        public ActionResult Edit(staple stapleModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/staple/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (stapleImg != null && stapleImg.ContentLength > 0)
-                {
-                    if (stapleImg.ContentType == "image/jpeg" || stapleImg.ContentType == "image/jpg" || stapleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(stapleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/staple/"), fileName);
-                        stapleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        stapleModel.stapleImg = stapleImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (stapleModel.file_stapleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(stapleModel.file_stapleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[stapleModel.file_stapleImg.ContentLength];
+                                stapleModel.file_stapleImg.InputStream.Read(data, 0, stapleModel.file_stapleImg.ContentLength);
+                                filesModel.fileName = "staple_" + stapleModel.file_stapleImg.FileName;
+                                filesModel.fileData = data;
+                                stapleModel.stapleImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(stapleModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -295,7 +298,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     staple stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == stapleModel.stapleImg).FirstOrDefault();
                     farmdb.staples.Remove(stapleModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -304,7 +309,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-           
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

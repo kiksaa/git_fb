@@ -36,7 +36,7 @@
                                 <div class="form-group row">
                                     @Html.LabelFor(model => model.laborImg, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
-                                        @Html.EditorFor(model => model.laborImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                        @Html.TextBoxFor(model => model.file_laborImg, "", new { @type = "file", @multiple = "multiple" })
                                     </div>
                                 </div>
                                 @ViewBag.ActionMessage

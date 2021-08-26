@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class labor
     {
@@ -37,5 +38,8 @@ namespace Farmbook.Models
 
         public virtual labortype labortype1 { get; set; }
         public virtual position position1 { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_laborImg { get; set; }
     }
 }

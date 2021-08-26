@@ -64,33 +64,32 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Modal -->
                 @*<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">ลบกิจกรรม <span>@Html.DisplayFor(modelItem => model.subject)</span> </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p> คุณต้องการลบกิจกรรม <b style="color:red; background-color:cornsilk;">@Html.DisplayFor(modelItem => model.subject)</b> ใช่หรือไม่ </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                                @using (Html.BeginForm("Delete", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(modelItem => model.ID)
-                                    <input type="submit" value="ลบ" class="btn btn-success" />
-                                }
-                            </div>
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">ลบกิจกรรม <span>@Html.DisplayFor(modelItem => model.subject)</span> </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p> คุณต้องการลบกิจกรรม <b style="color:red; background-color:cornsilk;">@Html.DisplayFor(modelItem => model.subject)</b> ใช่หรือไม่ </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            @using (Html.BeginForm("Delete", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(modelItem => model.ID)
+                                <input type="submit" value="ลบ" class="btn btn-success" />
+                            }
                         </div>
                     </div>
-                </div>*@
+                </div>
+            </div>*@
             }&nbsp;&nbsp;
         </div>
     </div>

@@ -146,40 +146,34 @@ namespace Farmbook.Controllers
 
         // POST: Equipment/Create
         [HttpPost]
-        public ActionResult Create(equipment equipmentModel, HttpPostedFileBase equipmentImg)
+        public ActionResult Create(equipment equipmentModel, filedetail filesModel)
         {
             try 
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/equipment/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (equipmentImg != null && equipmentImg.ContentLength > 0)
-                {
-                    if (equipmentImg.ContentType == "image/jpeg" || equipmentImg.ContentType == "image/jpg" || equipmentImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(equipmentImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/equipment/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/equipment/") + equipmentImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            equipmentImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            equipmentModel.equipmentImg = equipmentImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (equipmentModel.file_equipmentImg != null)
+                    {
+                        String FileExt = Path.GetExtension(equipmentModel.file_equipmentImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[equipmentModel.file_equipmentImg.ContentLength];
+                                equipmentModel.file_equipmentImg.InputStream.Read(data, 0, equipmentModel.file_equipmentImg.ContentLength);
+                                filesModel.fileName = "equipment_" + equipmentModel.file_equipmentImg.FileName;
+                                filesModel.fileData = data;
+                                equipmentModel.equipmentImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
+
                     farmdb.equipments.Add(equipmentModel);
                     farmdb.SaveChanges();
                 }
@@ -198,6 +192,15 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == equipmentModel.equipmentImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == equipmentModel.equipmentImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
                 IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
                                                                 select new SelectListItem
@@ -234,28 +237,30 @@ namespace Farmbook.Controllers
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/equipment/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (equipmentImg != null && equipmentImg.ContentLength > 0)
-                {
-                    if (equipmentImg.ContentType == "image/jpeg" || equipmentImg.ContentType == "image/jpg" || equipmentImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(equipmentImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/equipment/"), fileName);
-                        equipmentImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        equipmentModel.equipmentImg = equipmentImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (equipmentModel.file_equipmentImg != null)
+                    {
+                        String FileExt = Path.GetExtension(equipmentModel.file_equipmentImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[equipmentModel.file_equipmentImg.ContentLength];
+                                equipmentModel.file_equipmentImg.InputStream.Read(data, 0, equipmentModel.file_equipmentImg.ContentLength);
+                                filesModel.fileName = "equipment_" + equipmentModel.file_equipmentImg.FileName;
+                                filesModel.fileData = data;
+                                equipmentModel.equipmentImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(equipmentModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -314,7 +319,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     equipment equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == equipmentModel.equipmentImg).FirstOrDefault();
                     farmdb.equipments.Remove(equipmentModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum");
@@ -323,7 +330,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

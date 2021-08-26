@@ -333,9 +333,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
-    <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaborController.cs" />
@@ -365,7 +365,6 @@
     <Compile Include="Models\activity.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\ampher.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -414,6 +413,7 @@
     <Compile Include="Models\filedetail.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\fuel.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -536,7 +536,6 @@
     <Content Include="Content\img\Bsu.png" />
     <Content Include="Content\img\logo\logo-SWI.png" />
     <Content Include="Content\img\logo\logo-SWI2.png" />
-    <Content Include="Content\img\logo\tree.png" />
     <Content Include="Content\img\logo\farmbook-logo.png" />
     <Content Include="Content\img\logo\logo-transparent-mini.png" />
     <Content Include="Content\img\logo\logo-transparent.png" />
@@ -2717,7 +2716,6 @@
     <Content Include="Views\Standardlist\Edit.cshtml" />
     <Content Include="Views\Project\IndexStandard.cshtml" />
     <Content Include="Views\Standardlist\Delete.cshtml" />
-    <Content Include="Views\Address\Index.cshtml" />
     <Content Include="Views\Theory\Index.cshtml" />
     <Content Include="Views\Theory\Create.cshtml" />
     <Content Include="Views\Theory\Edit.cshtml" />
@@ -2745,6 +2743,10 @@
     <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Register\IndexBank.cshtml" />
     <Content Include="Views\Register\Index2.cshtml" />
+    <Content Include="Views\File\FileUpload.cshtml" />
+    <Content Include="Views\File\DownLoadFile.cshtml" />
+    <Content Include="Views\File\FileDetails.cshtml" />
+    <Content Include="Views\Plot\DownLoadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

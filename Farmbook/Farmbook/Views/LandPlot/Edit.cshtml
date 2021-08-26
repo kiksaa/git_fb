@@ -104,22 +104,22 @@
                                                             @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
                                                             @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
                                                             <div class="col-md-4">
-                                                                @Html.EditorFor(model => model.lease_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                                                @Html.TextBoxFor(model => model.file_lease, "", new { @type = "file", @multiple = "multiple" })
                                                                 @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
                                                                 @{ if (@Model.lease_img != null)
                                                                     {
                                                                         <br />
-                                                                        <img src="~/Content/img/upload/lease/@Model.lease_img" height="250" width="240">
+                                                                        @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.lease_img })
                                                                     } }
                                                             </div>
                                                             @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
                                                             <div class="col-md-4">
-                                                                @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                                                @Html.TextBoxFor(model => model.file_license, "", new { @type = "file", @multiple = "multiple" })
                                                                 @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
                                                                 @{ if (@Model.license_img != null)
                                                                     {
                                                                         <br />
-                                                                        <img src="~/Content/img/upload/license/@Model.license_img" height="250" width="240">
+                                                                        @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.license_img })
                                                                     } }
                                                             </div>
                                                         </div>

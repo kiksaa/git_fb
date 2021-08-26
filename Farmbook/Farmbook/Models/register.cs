@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
     using System.Web.Mvc;
 
     public partial class register
@@ -93,5 +94,11 @@ namespace Farmbook.Models
         public IEnumerable<SelectListItem> ProvinceList { get; set; }
         public IEnumerable<SelectListItem> AmpherList { get; set; }
         public IEnumerable<SelectListItem> DistrictList { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_farmerImg { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_cardImg { get; set; }
     }
 }

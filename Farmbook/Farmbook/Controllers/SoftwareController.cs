@@ -123,40 +123,33 @@ namespace Farmbook.Controllers
 
         // POST: Software/Create
         [HttpPost]
-        public ActionResult Create(software softwareModel, HttpPostedFileBase softwareImg)
+        public ActionResult Create(software softwareModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/software/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (softwareImg != null && softwareImg.ContentLength > 0)
-                {
-                    if (softwareImg.ContentType == "image/jpeg" || softwareImg.ContentType == "image/jpg" || softwareImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(softwareImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/software/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/software/") + softwareImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            softwareImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            softwareModel.softwareImg = softwareImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (softwareModel.file_softwareImg != null)
+                    {
+                        String FileExt = Path.GetExtension(softwareModel.file_softwareImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[softwareModel.file_softwareImg.ContentLength];
+                                softwareModel.file_softwareImg.InputStream.Read(data, 0, softwareModel.file_softwareImg.ContentLength);
+                                filesModel.fileName = "software_" + softwareModel.file_softwareImg.FileName;
+                                filesModel.fileData = data;
+                                softwareModel.softwareImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.softwares.Add(softwareModel);
                     farmdb.SaveChanges();
                 }
@@ -176,7 +169,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
-
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == softwareModel.softwareImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == softwareModel.softwareImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<softwaretype> softwaretypes = farmdb.softwaretypes.ToList();
                 IEnumerable<SelectListItem> selsoftwaretypes = from s in softwaretypes
                                                                select new SelectListItem
@@ -209,32 +209,34 @@ namespace Farmbook.Controllers
 
         // POST: Software/Edit/5
         [HttpPost]
-        public ActionResult Edit(software softwareModel, HttpPostedFileBase softwareImg)
+        public ActionResult Edit(software softwareModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/software/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (softwareImg != null && softwareImg.ContentLength > 0)
-                {
-                    if (softwareImg.ContentType == "image/jpeg" || softwareImg.ContentType == "image/jpg" || softwareImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(softwareImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/software/"), fileName);
-                        softwareImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        softwareModel.softwareImg = softwareImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (softwareModel.file_softwareImg != null)
+                    {
+                        String FileExt = Path.GetExtension(softwareModel.file_softwareImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[softwareModel.file_softwareImg.ContentLength];
+                                softwareModel.file_softwareImg.InputStream.Read(data, 0, softwareModel.file_softwareImg.ContentLength);
+                                filesModel.fileName = "software_" + softwareModel.file_softwareImg.FileName;
+                                filesModel.fileData = data;
+                                softwareModel.softwareImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(softwareModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -294,7 +296,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     software softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == softwareModel.softwareImg).FirstOrDefault();
                     farmdb.softwares.Remove(softwareModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -304,6 +308,16 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

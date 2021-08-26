@@ -33,9 +33,9 @@
                             @Html.HiddenFor(model => model.IDmac)
                             <div class="col-sm-4">
                                 <div class="form-group row">
-                                    @Html.LabelFor(model => model.machineImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    @Html.LabelFor(model => model.machineImg, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-8">
-                                        @Html.EditorFor(model => model.machineImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                        @Html.TextBoxFor(model => model.file_machineImg, "", new { @type = "file", @multiple = "multiple" })
                                     </div>
                                 </div>
                                 @ViewBag.ActionMessage

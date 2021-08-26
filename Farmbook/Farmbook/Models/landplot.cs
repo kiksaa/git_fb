@@ -12,6 +12,8 @@ namespace Farmbook.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
     using System.Web.Mvc;
 
     public partial class landplot
@@ -88,5 +90,11 @@ namespace Farmbook.Models
         public IEnumerable<SelectListItem> ProvinceList { get; set; }
         public IEnumerable<SelectListItem> AmpherList { get; set; }
         public IEnumerable<SelectListItem> DistrictList { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_license { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_lease { get; set; }
     }
 }

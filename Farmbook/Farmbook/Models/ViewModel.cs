@@ -240,8 +240,24 @@ namespace Farmbook.Models
         public string themeColor { get; set; }
         [DisplayName("เต็มวัน")]
         public Nullable<bool> isFullDay { get; set; }
+        [DisplayName("รูปภาพเกษตรกร")]
+        public string farmer_img { get; set; }
+        [DisplayName("รูปถ่ายบัตรประชาชน")]
+        public string card_img { get; set; }
 
         public IEnumerable<SelectListItem> CountryList { get; set; }
         public IEnumerable<SelectListItem> CountryList2 { get; set; }
+
+        [DisplayName("ลำดับที่")]
+        public int fileID { get; set; }
+        [DisplayName("ชื่อไฟล์")]
+        public string fileName { get; set; }
+        [DisplayName("ขนาดไฟล์")]
+        public string fileContentType { get; set; }
+        [DisplayName("ข้อมูลไฟล์")]
+        public byte[] fileData { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase files { get; set; }
     }
 }

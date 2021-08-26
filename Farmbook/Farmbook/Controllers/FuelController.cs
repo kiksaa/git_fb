@@ -124,40 +124,33 @@ namespace Farmbook.Controllers
 
         // POST: Fuel/Create
         [HttpPost]
-        public ActionResult Create(fuel fuelModel, HttpPostedFileBase fuleImg)
+        public ActionResult Create(fuel fuelModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/fuel/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (fuleImg != null && fuleImg.ContentLength > 0)
-                {
-                    if (fuleImg.ContentType == "image/jpeg" || fuleImg.ContentType == "image/jpg" || fuleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(fuleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/fuel/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/fuel/") + fuleImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            fuleImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            fuelModel.fuleImg = fuleImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (fuelModel.file_fuleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(fuelModel.file_fuleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[fuelModel.file_fuleImg.ContentLength];
+                                fuelModel.file_fuleImg.InputStream.Read(data, 0, fuelModel.file_fuleImg.ContentLength);
+                                filesModel.fileName = "fule_" + fuelModel.file_fuleImg.FileName;
+                                filesModel.fileData = data;
+                                fuelModel.fuleImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.fuels.Add(fuelModel);
                     farmdb.SaveChanges();
                 }
@@ -176,6 +169,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == fuelModel.fuleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == fuelModel.fuleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<fueltype> fueltypes = farmdb.fueltypes.ToList();
                 IEnumerable<SelectListItem> selfueltypes = from f in fueltypes
                                                            select new SelectListItem
@@ -208,32 +209,34 @@ namespace Farmbook.Controllers
 
         // POST: Fuel/Edit/5
         [HttpPost]
-        public ActionResult Edit(fuel fuelModel, HttpPostedFileBase fuleImg)
+        public ActionResult Edit(fuel fuelModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/fuel/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (fuleImg != null && fuleImg.ContentLength > 0)
-                {
-                    if (fuleImg.ContentType == "image/jpeg" || fuleImg.ContentType == "image/jpg" || fuleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(fuleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/fuel/"), fileName);
-                        fuleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        fuelModel.fuleImg = fuleImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (fuelModel.file_fuleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(fuelModel.file_fuleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[fuelModel.file_fuleImg.ContentLength];
+                                fuelModel.file_fuleImg.InputStream.Read(data, 0, fuelModel.file_fuleImg.ContentLength);
+                                filesModel.fileName = "fule_" + fuelModel.file_fuleImg.FileName;
+                                filesModel.fileData = data;
+                                fuelModel.fuleImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(fuelModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -291,7 +294,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     fuel fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == fuelModel.fuleImg).FirstOrDefault();
                     farmdb.fuels.Remove(fuelModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -300,7 +305,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

@@ -128,40 +128,33 @@ namespace Farmbook.Controllers
 
         // POST: Vehicle/Create
         [HttpPost]
-        public ActionResult Create(vehicle vehicleModel, HttpPostedFileBase vehicleImg)
+        public ActionResult Create(vehicle vehicleModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (vehicleImg != null && vehicleImg.ContentLength > 0)
-                {
-                    if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(vehicleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/vehicle/") + vehicleImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            vehicleImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            vehicleModel.vehicleImg = vehicleImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (vehicleModel.file_vehicleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(vehicleModel.file_vehicleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[vehicleModel.file_vehicleImg.ContentLength];
+                                vehicleModel.file_vehicleImg.InputStream.Read(data, 0, vehicleModel.file_vehicleImg.ContentLength);
+                                filesModel.fileName = "vehicle_" + vehicleModel.file_vehicleImg.FileName;
+                                filesModel.fileData = data;
+                                vehicleModel.vehicleImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.vehicles.Add(vehicleModel);
                     farmdb.SaveChanges();
                 }
@@ -171,7 +164,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
+        }
+        public async System.Threading.Tasks.Task<ActionResult> RenderImage(int id)
+        {
+            farmdb farmdb = new farmdb();
+            /*filedetail filedetailModel = farmdb.filedetails.Where(x => x.fileName == id).FirstOrDefault();*/
+            filedetail item = await farmdb.filedetails.FindAsync(id);
+
+            byte[] photoBack = item.fileData;
+
+            return File(photoBack, "image/png");
         }
 
         // GET: Equipment/Edit/5
@@ -181,7 +183,15 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
-
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == vehicleModel.vehicleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == vehicleModel.vehicleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
+                
                 List<vehicletype> vehicletypes = farmdb.vehicletypes.ToList();
                 IEnumerable<SelectListItem> selvehicletypes = from v in vehicletypes
                                                               select new SelectListItem
@@ -208,38 +218,42 @@ namespace Farmbook.Controllers
                                                               Value = e.energyID.ToString()
                                                           };
                 ViewBag.energies = selenergies;
+                /*return View(filedetailModel.fileData);*/
             }
             return View(vehicleModel);
         }
-
         // POST: Equipment/Edit/5
         [HttpPost]
-        public ActionResult Edit(vehicle vehicleModel, HttpPostedFileBase vehicleImg)
+        public ActionResult Edit(vehicle vehicleModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/vehicle/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (vehicleImg != null && vehicleImg.ContentLength > 0)
-                {
-                    if (vehicleImg.ContentType == "image/jpeg" || vehicleImg.ContentType == "image/jpg" || vehicleImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(vehicleImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/vehicle/"), fileName);
-                        vehicleImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        vehicleModel.vehicleImg = vehicleImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (vehicleModel.file_vehicleImg != null)
+                    {
+                        String FileExt = Path.GetExtension(vehicleModel.file_vehicleImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[vehicleModel.file_vehicleImg.ContentLength];
+                                vehicleModel.file_vehicleImg.InputStream.Read(data, 0, vehicleModel.file_vehicleImg.ContentLength);
+                                filesModel.fileName = "vehicle_" + vehicleModel.file_vehicleImg.FileName;
+                                filesModel.fileData = data;
+                                vehicleModel.vehicleImg = filesModel.fileName;
+                                ViewBag.Image = filesModel.fileData;
+                               
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(vehicleModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -249,7 +263,6 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
 
         // GET: Vehicle/Delete/5
@@ -298,7 +311,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     vehicle vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == vehicleModel.vehicleImg).FirstOrDefault();
                     farmdb.vehicles.Remove(vehicleModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -308,6 +323,26 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName); 
+        }
+        [HttpPost]
+        public ActionResult DeleteFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return RedirectToAction("IndexSum", "Equipment");
         }
     }
 }

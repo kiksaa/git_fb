@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class staple
     {
@@ -42,5 +43,8 @@ namespace Farmbook.Models
         public virtual stapletype stapletype1 { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_stapleImg { get; set; }
     }
 }

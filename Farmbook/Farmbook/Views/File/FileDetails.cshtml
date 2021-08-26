@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Farmbook.Models.ViewModel>
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th class="col-md-4">
+            @Html.DisplayNameFor(model => model.fileID)
+        </th>
+        <th class="col-md-4">
+            @Html.DisplayNameFor(model => model.fileName)
+        </th>
+        @* <th class="col-md-2">  @Html.DisplayNameFor(model => model.fileContentType) </th>*@
+        <th>
+            รูป
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Downlaod", "DownLoadFile", new { id = item.fileID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fileName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.fileContentType)
+                </td>*@
+            <td>
+                <img src="data:image;base64,@System.Convert.ToBase64String(item.fileData)" width="80" height="80" />
+            </td>
+        </tr>
+    }
+
+</table> 

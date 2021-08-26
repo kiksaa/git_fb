@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class machine
     {
@@ -49,5 +50,9 @@ namespace Farmbook.Models
         public virtual machinetype machinetype1 { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
+
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_machineImg { get; set; }
     }
 }

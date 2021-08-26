@@ -126,40 +126,34 @@ namespace Farmbook.Controllers
         }
         // POST: Machine/Create
         [HttpPost]
-        public ActionResult Create(machine machineModel, HttpPostedFileBase machineImg)
+        public ActionResult Create(machine machineModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/machine/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (machineImg != null && machineImg.ContentLength > 0)
-                {
-                    if (machineImg.ContentType == "image/jpeg" || machineImg.ContentType == "image/jpg" || machineImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(machineImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/machine/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/machine/") + machineImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            machineImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            machineModel.machineImg = machineImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (machineModel.file_machineImg != null)
+                    {
+                        String FileExt = Path.GetExtension(machineModel.file_machineImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[machineModel.file_machineImg.ContentLength];
+                                machineModel.file_machineImg.InputStream.Read(data, 0, machineModel.file_machineImg.ContentLength);
+                                filesModel.fileName = "machine_" + machineModel.file_machineImg.FileName;
+                                filesModel.fileData = data;
+                                machineModel.machineImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
+
                     farmdb.machines.Add(machineModel);
                     farmdb.SaveChanges();
                 }
@@ -179,6 +173,15 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 machineModel = farmdb.machines.Where(x => x.IDmac == id).FirstOrDefault();
+
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == machineModel.machineImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == machineModel.machineImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
 
                 List<machinetype> machinetypes = farmdb.machinetypes.ToList();
                 IEnumerable<SelectListItem> selmachinetypes = from m in machinetypes
@@ -212,32 +215,34 @@ namespace Farmbook.Controllers
 
         // POST: Machine/Edit/5
         [HttpPost]
-        public ActionResult Edit(machine machineModel, HttpPostedFileBase machineImg)
+        public ActionResult Edit(machine machineModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/machine/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (machineImg != null && machineImg.ContentLength > 0)
-                {
-                    if (machineImg.ContentType == "image/jpeg" || machineImg.ContentType == "image/jpg" || machineImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(machineImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/machine/"), fileName);
-                        machineImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        machineModel.machineImg = machineImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (machineModel.file_machineImg != null)
+                    {
+                        String FileExt = Path.GetExtension(machineModel.file_machineImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[machineModel.file_machineImg.ContentLength];
+                                machineModel.file_machineImg.InputStream.Read(data, 0, machineModel.file_machineImg.ContentLength);
+                                filesModel.fileName = "machine_" + machineModel.file_machineImg.FileName;
+                                filesModel.fileData = data;
+                                machineModel.machineImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(machineModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -296,7 +301,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     machine machineModel = farmdb.machines.Where(x => x.IDmac == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == machineModel.machineImg).FirstOrDefault();
                     farmdb.machines.Remove(machineModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -306,6 +313,16 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Farmbook.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class vehicle
     {
@@ -42,12 +43,17 @@ namespace Farmbook.Models
         public Nullable<int> energy { get; set; }
         [DisplayName("รูปภาพยานพาหนะ")]
         public string vehicleImg { get; set; }
+        
         [DisplayName("ลำดับที่")]
         public int IDve { get; set; }
-
+        public Nullable<int> fileImge { get; set; }
         public virtual energy energy1 { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
         public virtual vehicletype vehicletype1 { get; set; }
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase file_vehicleImg { get; set; }
+        public virtual filedetail filedetail { get; set; }
     }
 }

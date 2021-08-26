@@ -130,7 +130,7 @@
           <Property Name="fileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fileName" Type="varchar" MaxLength="100" />
           <Property Name="fileContentType" Type="varchar" MaxLength="60" />
-          <Property Name="fileData" Type="bit" />
+          <Property Name="fileData" Type="varbinary" MaxLength="65000" />
         </EntityType>
         <EntityType Name="fuel">
           <Key>
@@ -460,6 +460,7 @@
           <Property Name="fuel" Type="int" />
           <Property Name="energy" Type="int" />
           <Property Name="vehicleImg" Type="varchar" MaxLength="255" />
+          <Property Name="fileImge" Type="int" />
           <Property Name="IDve" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="vehicletype">
@@ -1165,6 +1166,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="vehicle_ibfk_5">
+          <End Role="filedetails" Type="Self.filedetails" Multiplicity="1" />
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="filedetails">
+              <PropertyRef Name="fileID" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="IDve" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="farmdbModelStoreContainer">
           <EntitySet Name="access" EntityType="Self.access" Schema="farmdb" store:Type="Tables" />
           <EntitySet Name="active" EntityType="Self.active" Schema="farmdb" store:Type="Tables" />
@@ -1440,6 +1453,10 @@
           </AssociationSet>
           <AssociationSet Name="vehicle_ibfk_4" Association="Self.vehicle_ibfk_4">
             <End Role="vehicletype" EntitySet="vehicletype" />
+            <End Role="vehicle" EntitySet="vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="vehicle_ibfk_5" Association="Self.vehicle_ibfk_5">
+            <End Role="filedetails" EntitySet="filedetails" />
             <End Role="vehicle" EntitySet="vehicle" />
           </AssociationSet>
         </EntityContainer>
@@ -1997,6 +2014,8 @@
           <NavigationProperty Name="unit" Relationship="Self.vehicle_ibfk_2" FromRole="vehicle" ToRole="unit" />
           <NavigationProperty Name="unit1" Relationship="Self.vehicle_ibfk_3" FromRole="vehicle" ToRole="unit" />
           <NavigationProperty Name="vehicletype1" Relationship="Self.vehicle_ibfk_4" FromRole="vehicle" ToRole="vehicletype" />
+          <Property Name="fileImge" Type="Int32" />
+          <NavigationProperty Name="filedetail" Relationship="farmdbModel.vehicle_ibfk_5" FromRole="vehicle" ToRole="filedetail" />
         </EntityType>
         <EntityType Name="vehicletype">
           <Key>
@@ -2979,6 +2998,10 @@
           </AssociationSet>
           <EntitySet Name="events" EntityType="farmdbModel.event" />
           <EntitySet Name="filedetails" EntityType="farmdbModel.filedetail" />
+          <AssociationSet Name="vehicle_ibfk_5" Association="farmdbModel.vehicle_ibfk_5">
+            <End Role="filedetail" EntitySet="filedetails" />
+            <End Role="vehicle" EntitySet="vehicles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="event">
           <Key>
@@ -2999,8 +3022,21 @@
           <Property Name="fileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="fileData" Type="Boolean" />
+          <Property Name="fileData" Type="Binary" />
+          <NavigationProperty Name="vehicle" Relationship="farmdbModel.vehicle_ibfk_5" FromRole="filedetail" ToRole="vehicle" />
         </EntityType>
+        <Association Name="vehicle_ibfk_5">
+          <End Type="farmdbModel.filedetail" Role="filedetail" Multiplicity="1" />
+          <End Type="farmdbModel.vehicle" Role="vehicle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="filedetail">
+              <PropertyRef Name="fileID" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="IDve" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3468,6 +3504,7 @@
           <EntitySetMapping Name="vehicles">
             <EntityTypeMapping TypeName="farmdbModel.vehicle">
               <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="fileImge" ColumnName="fileImge" />
                 <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
                 <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
                 <ScalarProperty Name="vehicleName" ColumnName="vehicleName" />

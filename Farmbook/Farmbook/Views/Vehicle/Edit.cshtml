@@ -33,16 +33,17 @@
                             {
                                 <div class="col-sm-4">
                                     <div class="form-group row">
-                                        @Html.LabelFor(model => model.vehicleImg, htmlAttributes: new { @class = "control-label col-md-3" })
+                                        @Html.LabelFor(model => model.vehicleImg, htmlAttributes: new { @class = "control-label col-md-4" })
                                         <div class="col-md-8">
-                                            @Html.EditorFor(model => model.vehicleImg, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                            @Html.TextBoxFor(model => model.file_vehicleImg, "", new { @type = "file", @multiple = "multiple" })
                                             @Html.ValidationMessageFor(model => model.vehicleImg, "", new { @class = "text-danger" })
                                             @{ if (@Model.vehicleImg != null)
                                                 {
                                                     <br />
-                                                    <img src="~/Content/img/upload/vehicle/@Model.vehicleImg" height="250" width="240">
+                                                    <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />
+                                                    <br />
+                                                    @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.vehicleImg })
                                                 } }
-
                                         </div>
                                     </div>
                                 </div>

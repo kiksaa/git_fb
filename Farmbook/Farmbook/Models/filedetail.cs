@@ -11,12 +11,28 @@ namespace Farmbook.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.IO;
+    using System.Web;
+
+
     public partial class filedetail
     {
+        [DisplayName("ลำดับที่")]
         public int fileID { get; set; }
+        [DisplayName("ชื่อไฟล์")]
         public string fileName { get; set; }
+        [DisplayName("ขนาดไฟล์")]
         public string fileContentType { get; set; }
-        public Nullable<bool> fileData { get; set; }
+        [DisplayName("ข้อมูลไฟล์")]
+        public byte[] fileData { get; set; }
+        /*[Required]*/
+        [DataType(DataType.Upload)]
+        [DisplayName("Select File")]
+        public HttpPostedFileBase files { get; set; }
+        public Stream InputStream { get; internal set; }
+
+        public virtual vehicle vehicle { get; set; }
     }
 }

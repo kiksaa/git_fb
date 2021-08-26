@@ -8,7 +8,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using Dapper;
 using Farmbook.Models;
 
 namespace Farmbook.Controllers
@@ -64,6 +63,8 @@ namespace Farmbook.Controllers
                                    s.statusName,
                                    l.areaPlot,
                                    l.active,
+                                   l.lease_img,
+                                   l.license_img,
                                    th.product,
                                    th.workName,
                                    Totalarea = th.product * l.areaPlot,
@@ -81,6 +82,8 @@ namespace Farmbook.Controllers
                             objcvm.name = item.name;
                             objcvm.ownership = item.ownership;
                             objcvm.licenseName = item.licenseName;
+                            objcvm.lease_img = item.lease_img;
+                            objcvm.license_img = item.license_img;
                             objcvm.projectName = item.proName;
                             objcvm.plotStatus = item.statusName;
                             objcvm.areaPlot = item.areaPlot;
@@ -322,80 +325,60 @@ namespace Farmbook.Controllers
 
         // POST: LandPlot/Create
         [HttpPost]
-        public ActionResult Create(landplot plotModel, HttpPostedFileBase lease_img, HttpPostedFileBase license_img)
+        public ActionResult Create(landplot plotModel, filedetail filesModel)
         {
-            try
+            try 
             {
                 using (farmdb farmdb = new farmdb())
                 {
-                    string folderPath = Server.MapPath("~/Content/img/upload/lease/");
-                    if (!Directory.Exists(folderPath))
+                    if (plotModel.file_license != null)
                     {
-                        Directory.CreateDirectory(folderPath);
-                    }
-                    if (lease_img != null && lease_img.ContentLength > 0)
-                    {
-                        if (lease_img.ContentType == "image/jpeg" || lease_img.ContentType == "image/jpg" || lease_img.ContentType == "image/png")
+                        String FileExt = Path.GetExtension(plotModel.file_license.FileName).ToUpper();
+                        if (FileExt != null)
                         {
-                            var fileName = Path.GetFileName(lease_img.FileName);
-                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/lease/"), fileName);
-                            var fullPath = Server.MapPath("~/Content/img/upload/lease/") + lease_img.FileName;
-                            if (System.IO.File.Exists(fullPath))
+                            if (FileExt == ".PDF")
                             {
-                                ViewBag.ActionMessage = "Same File already Exists";
+                                Byte[] data = new byte[plotModel.file_license.ContentLength];
+                                plotModel.file_license.InputStream.Read(data, 0, plotModel.file_license.ContentLength);
+                                filesModel.fileName = "01_" + plotModel.farmerName + plotModel.file_license.FileName;
+                                filesModel.fileData = data;
+                                plotModel.license_img = filesModel.fileName;
                             }
                             else
                             {
-                                lease_img.SaveAs(userfolderpath);
-                                ViewBag.ActionMessage = "File has been uploaded successfully";
-                                plotModel.lease_img = lease_img.FileName;
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
                             }
-                            /*var file = Path.GetFileName(farmer_img.FileName);
-                            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), file);
-                            farmer_img.SaveAs(path);*/
                         }
-                        else
-                        {
-                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                        }
+                        farmdb.filedetails.Add(filesModel);
                     }
-                    string folderPathid = Server.MapPath("~/Content/img/upload/license/");
-                    if (!Directory.Exists(folderPathid))
+                    if (plotModel.file_lease != null)
                     {
-                        Directory.CreateDirectory(folderPathid);
-                    }
-                    if (license_img != null && license_img.ContentLength > 0)
-                    {
-                        if (license_img.ContentType == "image/jpeg" || license_img.ContentType == "image/jpg" || license_img.ContentType == "image/png")
+                        String FileExt2 = Path.GetExtension(plotModel.file_lease.FileName).ToUpper();
+                        if (FileExt2 != null)
                         {
-                            var fileName = Path.GetFileName(license_img.FileName);
-                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/license/"), fileName);
-                            var fullPath = Server.MapPath("~/Content/img/upload/license/") + license_img.FileName;
-                            if (System.IO.File.Exists(fullPath))
+                            if (FileExt2 == ".PDF")
                             {
-                                ViewBag.ActionMessage = "Same File already Exists";
+                                Byte[] data = new byte[plotModel.file_lease.ContentLength];
+                                plotModel.file_lease.InputStream.Read(data, 0, plotModel.file_lease.ContentLength);
+                                filesModel.fileName = "02_" + plotModel.farmerName + plotModel.file_lease.FileName;
+                                filesModel.fileData = data;
+                                plotModel.lease_img = filesModel.fileName;
                             }
                             else
                             {
-                                license_img.SaveAs(userfolderpath);
-                                ViewBag.ActionMessage = "File has been uploaded successfully";
-                                plotModel.license_img = license_img.FileName;
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
                             }
                         }
-                        else
-                        {
-                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                        }
+                        farmdb.filedetails.Add(filesModel);
                     }
                     /*landplot land = new landplot();
                     register re = new register();*/
-
                     /*re.ID = (int)plotModel.farmerName;*/
-
                     farmdb.landplots.Add(plotModel);
                     /*farmdb.landplots.Add(land);
                     farmdb.registers.Add(re);*/
-                    plotModel.administrator = User.Identity.Name;
                     plotModel.active = 100;
                     farmdb.SaveChanges();
                 }
@@ -609,56 +592,61 @@ namespace Farmbook.Controllers
 
         // POST: LandPlot/Edit/5
         [HttpPost]
-        public ActionResult Edit(landplot plotModel, HttpPostedFileBase lease_img, HttpPostedFileBase license_img)
+        public ActionResult Edit(landplot plotModel)
         {
             try
             {
+                filedetail filesModel = new filedetail();
                 /*register registerModel = new register();*/
                 using (farmdb farmdb = new farmdb())
                 {
-                    string folderPath = Server.MapPath("~/Content/img/upload/lease/");
-                    if (!Directory.Exists(folderPath))
+                    if (plotModel.file_license != null) 
                     {
-                        Directory.CreateDirectory(folderPath);
+                        String FileExt = Path.GetExtension(plotModel.file_license.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PDF")
+                            {
+                                Byte[] data = new byte[plotModel.file_license.ContentLength];
+                                plotModel.file_license.InputStream.Read(data, 0, plotModel.file_license.ContentLength);
+                                filesModel.fileName = "01_" + plotModel.farmerName + plotModel.file_license.FileName;
+                                filesModel.fileData = data;
+                                plotModel.license_img = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
+                        farmdb.filedetails.Add(filesModel);
                     }
-                    if (lease_img != null && lease_img.ContentLength > 0)
+                    if (plotModel.file_lease != null)
                     {
-                        if (lease_img.ContentType == "image/jpeg" || lease_img.ContentType == "image/jpg" || lease_img.ContentType == "image/png")
+                        String FileExt2 = Path.GetExtension(plotModel.file_lease.FileName).ToUpper();
+                        if (FileExt2 != null)
                         {
-                            var fileName = Path.GetFileName(lease_img.FileName);
-                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/lease/"), fileName);
-                            lease_img.SaveAs(userfolderpath);
-                            plotModel.lease_img = lease_img.FileName;
+                            if (FileExt2 == ".PDF")
+                            {
+                                Byte[] data = new byte[plotModel.file_lease.ContentLength];
+                                plotModel.file_lease.InputStream.Read(data, 0, plotModel.file_lease.ContentLength);
+                                filesModel.fileName = "02_" + plotModel.farmerName + plotModel.file_lease.FileName;
+                                filesModel.fileData = data;
+                                plotModel.lease_img = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
                         }
-                        else
-                        {
-                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                        }
-                    }
-                    string folderPathid = Server.MapPath("~/Content/img/upload/license/");
-                    if (!Directory.Exists(folderPathid))
-                    {
-                        Directory.CreateDirectory(folderPathid);
-                    }
-                    if (license_img != null && license_img.ContentLength > 0)
-                    {
-                        if (license_img.ContentType == "image/jpeg" || license_img.ContentType == "image/jpg" || license_img.ContentType == "image/png")
-                        {
-                            var fileName = Path.GetFileName(license_img.FileName);
-                            var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/license/"), fileName);
-                            license_img.SaveAs(userfolderpath);
-                            plotModel.license_img = license_img.FileName;
-                            /*farmdb.registers.Include(registerModel.card_img);*/
-                        }
-                        else
-                        {
-                            ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                        }
+                        farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
+                        farmdb.filedetails.Add(filesModel);
                     }
                     /*plotModel.farmerName = registerModel.ID;*/
                     farmdb.Entry(plotModel).State = System.Data.Entity.EntityState.Modified;
                     /*plotModel.farmerName = plotModel.farmerName;*/
-                    plotModel.administrator = User.Identity.Name;
                     plotModel.active = 100;
                     farmdb.SaveChanges();
                 }
@@ -668,7 +656,6 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
         public ActionResult IndexDelete(int id)
         {
@@ -902,10 +889,12 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     landplot plotModel = farmdb.landplots.Where(x => x.ID == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == plotModel.license_img || f.fileName == plotModel.lease_img).FirstOrDefault();
                     plotModel.active = 200;
                     if (plotModel.active == 100)
                     {
                         farmdb.landplots.Remove(plotModel);
+                        farmdb.filedetails.Remove(filesModel);
                     }
                     plotModel.active = 200;
                     farmdb.SaveChanges();
@@ -916,6 +905,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }

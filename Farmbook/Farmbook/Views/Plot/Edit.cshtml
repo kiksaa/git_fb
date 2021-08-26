@@ -424,6 +424,9 @@
             <div class="row">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.license_img)
+                @Html.HiddenFor(model => model.file_license.FileName)
+                @Html.HiddenFor(model => model.file_license.ContentType)
+                @Html.HiddenFor(model => model.file_license.InputStream)
                 <div class="col-sm-2">
                     <div id="div">
                         <div class="form-group">
@@ -489,11 +492,12 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-12" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.TextBoxFor(model => model.file_license, "", new { @type = "file", @multiple = "multiple" })
+                                    @*  @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })*@
                                     @{ if (@Model.license_img != null)
                                         {
                                             <br />
-                                            <img src="~/Content/img/upload/license/@Model.license_img" height="250" width="240">
+                                            @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.license_img })
                                         } }
                                 </div>
                             </div>

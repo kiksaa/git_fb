@@ -111,40 +111,33 @@ namespace Farmbook.Controllers
 
         // POST: Labor/Create
         [HttpPost]
-        public ActionResult Create(labor laborModel, HttpPostedFileBase laborImg)
+        public ActionResult Create(labor laborModel, filedetail filesModel)
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/labor/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (laborImg != null && laborImg.ContentLength > 0)
-                {
-                    if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(laborImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
-                        var fullPath = Server.MapPath("~/Content/img/upload/labor/") + laborImg.FileName;
-                        if (System.IO.File.Exists(fullPath))
-                        {
-                            ViewBag.ActionMessage = "Same File already Exists";
-                        }
-                        else
-                        {
-                            laborImg.SaveAs(userfolderpath);
-                            ViewBag.ActionMessage = "File has been uploaded successfully";
-                            laborModel.laborImg = laborImg.FileName;
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (laborModel.file_laborImg != null)
+                    {
+                        String FileExt = Path.GetExtension(laborModel.file_laborImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[laborModel.file_laborImg.ContentLength];
+                                laborModel.file_laborImg.InputStream.Read(data, 0, laborModel.file_laborImg.ContentLength);
+                                filesModel.fileName = "labor_" + laborModel.file_laborImg.FileName;
+                                filesModel.fileData = data;
+                                laborModel.laborImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.labors.Add(laborModel);
                     farmdb.SaveChanges();
                 }
@@ -163,6 +156,15 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
+
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == laborModel.laborImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == laborModel.laborImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
 
                 List<labortype> labortypes = farmdb.labortypes.ToList();
                 IEnumerable<SelectListItem> sellabortypes = from l in labortypes
@@ -191,28 +193,30 @@ namespace Farmbook.Controllers
         {
             try
             {
-                string folderPath = Server.MapPath("~/Content/img/upload/labor/");
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-                if (laborImg != null && laborImg.ContentLength > 0)
-                {
-                    if (laborImg.ContentType == "image/jpeg" || laborImg.ContentType == "image/jpg" || laborImg.ContentType == "image/png")
-                    {
-                        var fileName = Path.GetFileName(laborImg.FileName);
-                        var userfolderpath = Path.Combine(Server.MapPath("~/Content/img/upload/labor/"), fileName);
-                        laborImg.SaveAs(userfolderpath);
-                        ViewBag.ActionMessage = "File has been uploaded successfully";
-                        laborModel.laborImg = laborImg.FileName;
-                    }
-                    else
-                    {
-                        ViewBag.ActionMessage = "Please upload only imag (jpg,gif,png)";
-                    }
-                }
+                filedetail filesModel = new filedetail();
                 using (farmdb farmdb = new farmdb())
                 {
+                    if (laborModel.file_laborImg != null)
+                    {
+                        String FileExt = Path.GetExtension(laborModel.file_laborImg.FileName).ToUpper();
+                        if (FileExt != null)
+                        {
+                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            {
+                                Byte[] data = new byte[laborModel.file_laborImg.ContentLength];
+                                laborModel.file_laborImg.InputStream.Read(data, 0, laborModel.file_laborImg.ContentLength);
+                                filesModel.fileName = "labor_" + laborModel.file_laborImg.FileName;
+                                filesModel.fileData = data;
+                                laborModel.laborImg = filesModel.fileName;
+                            }
+                            else
+                            {
+                                ViewBag.FileStatus = "Invalid file format.";
+                                return View();
+                            }
+                        }
+                        farmdb.filedetails.Add(filesModel);
+                    }
                     farmdb.Entry(laborModel).State = System.Data.Entity.EntityState.Modified;
                     farmdb.SaveChanges();
                 }
@@ -262,7 +266,9 @@ namespace Farmbook.Controllers
                 using (farmdb farmdb = new farmdb())
                 {
                     labor laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
+                    filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == laborModel.laborImg).FirstOrDefault();
                     farmdb.labors.Remove(laborModel);
+                    farmdb.filedetails.Remove(filesModel);
                     farmdb.SaveChanges();
                 }
                 return RedirectToAction("IndexSum", "Equipment");
@@ -271,6 +277,16 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+        [HttpGet]
+        public FileResult DownLoadFile(string name)
+        {
+            filedetail filesModel = new filedetail();
+            using (farmdb farmdb = new farmdb())
+            {
+                filesModel = farmdb.filedetails.Where(x => x.fileName == name).FirstOrDefault();
+            }
+            return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
     }
 }
