@@ -462,7 +462,6 @@
     <EntitySetMapping Name="vehicles">
       <EntityTypeMapping TypeName="farmdbModel.vehicle">
         <MappingFragment StoreEntitySet="vehicle">
-          <ScalarProperty Name="fileImge" ColumnName="fileImge" />
           <ScalarProperty Name="vehicleType" ColumnName="vehicleType" />
           <ScalarProperty Name="vehicleID" ColumnName="vehicleID" />
           <ScalarProperty Name="vehicleName" ColumnName="vehicleName" />

@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class PlotController : Controller
     {
+        #region Index
         // GET: Plot
         public ActionResult Index()
         {
@@ -56,8 +57,9 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
                 /*return View(landplotList);*/
             }
-        }  
-
+        }
+        #endregion
+        #region Details
         // GET: Plot/Details/5
         public ActionResult Details(int id)
         {
@@ -68,6 +70,8 @@ namespace Farmbook.Controllers
             }
             return View(plotModel);
         }
+        #endregion
+        #region Create
         // GET: Plot/Create
         public ActionResult Create()
         {
@@ -201,7 +205,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }*/
         }
-
+        #endregion
+        #region Edit
         // GET: Plot/Edit/5
         public ActionResult Edit(int id)
         {
@@ -351,7 +356,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Plot/Delete/5
         public ActionResult Delete(int id)
         {
@@ -456,6 +462,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -466,5 +474,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

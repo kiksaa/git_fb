@@ -9,6 +9,7 @@ namespace Farmbook.Controllers
 {
     public class TheoryController : Controller
     {
+        #region Index
         // GET: Theory
         public ActionResult Index()
         {
@@ -54,6 +55,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        #endregion
+        #region IndexActivity
         public ActionResult IndexActivity(int id)
         {
             try
@@ -103,7 +106,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
+        #endregion
+        #region Details
         // GET: Theory/Details/5
         public ActionResult Details(int id)
         {
@@ -139,7 +143,8 @@ namespace Farmbook.Controllers
             }
             return View(theoryModel);
         }
-
+        #endregion
+        #region Create
         // GET: Theory/Create
         public ActionResult Create()
         {
@@ -200,9 +205,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Edit
         // GET: Theory/Edit/5
         public ActionResult Edit(int id)
         {
@@ -259,7 +264,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Theory/Delete/5
         public ActionResult Delete(int id)
         {
@@ -320,7 +326,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class MachineController : Controller
     {
+        #region Index
         // GET: Machine
         public ActionResult Index()
         {
@@ -51,7 +52,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region Details
         // GET: Machine/Details/5
         public ActionResult Details(int id)
         {
@@ -89,7 +91,8 @@ namespace Farmbook.Controllers
             }
             return View(machineModel);
         }
-
+        #endregion
+        #region Create
         // GET: Machine/Create
         public ActionResult Create()
         {
@@ -163,9 +166,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Edit
         // GET: Machine/Edit/5
         public ActionResult Edit(int id)
         {
@@ -252,9 +255,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Delete
         // GET: Machine/Delete/5
         public ActionResult Delete(int id)
         {
@@ -262,6 +265,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 machineModel = farmdb.machines.Where(x => x.IDmac == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == machineModel.machineImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == machineModel.machineImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<machinetype> machinetypes = farmdb.machinetypes.ToList();
                 IEnumerable<SelectListItem> selmachinetypes = from m in machinetypes
                                                               select new SelectListItem
@@ -312,8 +323,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -324,5 +336,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

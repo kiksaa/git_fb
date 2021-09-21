@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class EventController : Controller
     {
+        #region Index
         // GET: Event
         public ActionResult Index()
         {
@@ -55,7 +56,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
+        #endregion
+        #region Details
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
@@ -66,7 +68,8 @@ namespace Farmbook.Controllers
             }
             return View(eventModel);
         }
-
+        #endregion
+        #region Create
         // GET: Event/Create
         public ActionResult Create()
         {
@@ -93,7 +96,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Edit
         // GET: Event/Edit/5
         public ActionResult Edit(int id)
         {
@@ -125,6 +129,8 @@ namespace Farmbook.Controllers
             }
         }
 
+        #endregion
+        #region Delete
         // GET: Event/Delete/5
         public ActionResult Delete(int id)
         {
@@ -155,5 +161,6 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
     }
 }

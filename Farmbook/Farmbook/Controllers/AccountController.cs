@@ -21,6 +21,7 @@ namespace Farmbook.Controllers
     public class AccountController : Controller
     {
         // Return Home page.
+        #region Index
         public ActionResult Index()
         {
             try
@@ -93,9 +94,10 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
         }
+        #endregion
 
+        #region Profile
         public ActionResult Profile(string email)
         {
             login loginModel = new login();
@@ -171,11 +173,14 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
+        #endregion
         //Return Register view
         public ActionResult Register()
         {
             return View();
         }
+
+        #region SaveRegisterDetails
         [HttpPost]
         public ActionResult SaveRegisterDetails(profile registerDetails)
         {
@@ -221,6 +226,9 @@ namespace Farmbook.Controllers
                 return View("Register", registerDetails);
             }
         }
+        #endregion
+
+        #region CheckValidUser
         public string CheckValidUser(string email)
         {
             /*login model = new login();*/
@@ -232,6 +240,9 @@ namespace Farmbook.Controllers
             }
             return ViewBag.Message1 = "Success";
         }
+        #endregion
+
+        #region sendEmail
         public string sendEmail(string password, string email)
         {
             try
@@ -267,7 +278,9 @@ namespace Farmbook.Controllers
                 return ViewBag.Message2 = "อีเมล์คุณไม่ถูกต้อง";
             }
         }
-        
+        #endregion
+
+        #region Login
         public ActionResult Login()
         {
             return View();
@@ -319,7 +332,9 @@ namespace Farmbook.Controllers
                 return View(model);
             }
         }
+        #endregion
 
+        #region IsValidUser
         //function to check if User is valid or not
         public login IsValidUser(login model)
         {
@@ -339,14 +354,18 @@ namespace Farmbook.Controllers
                 }
             }
         }
+        #endregion
 
+        #region Logout
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             Session.Abandon(); // it will clear the session at the end of request
             return RedirectToAction("Login");
         }
+        #endregion
 
+        #region ForgotPassword
         public ActionResult ForgotPassword()
         {
             return View();
@@ -373,6 +392,9 @@ namespace Farmbook.Controllers
             }
             return View();
         }
+        #endregion
+
+        #region SendPassword
         public string SendPassword(string password, string email)
          {
             try
@@ -404,6 +426,9 @@ namespace Farmbook.Controllers
                 return ViewBag.Message2 = "บัญชีไม่ถูกต้อง";
             }
         }
+        #endregion
+
+        #region ResetPassword
         public ActionResult ResetPassword(string code, string email)
         {
             login model = new login();
@@ -427,5 +452,6 @@ namespace Farmbook.Controllers
             }
             return View(model);
         }
+        #endregion
     }
 }

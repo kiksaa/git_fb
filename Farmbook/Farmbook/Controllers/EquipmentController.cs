@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class EquipmentController : Controller
     {
+        #region Index
         // GET: Equipment
         public ActionResult Index()
         {
@@ -50,7 +51,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region IndexSum
         public ActionResult IndexSum()
         {
             try
@@ -71,6 +73,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        #endregion
+        #region Details
         // GET: Equipment/Details/5
         public ActionResult Details(int id)
         {
@@ -108,7 +112,8 @@ namespace Farmbook.Controllers
             }
             return View(equipmentModel);
         }
-
+        #endregion
+        #region Create
         // GET: Equipment/Create
         public ActionResult Create()
         {
@@ -184,7 +189,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Edit
         // GET: Equipment/Edit/5
         public ActionResult Edit(int id)
         {
@@ -270,9 +276,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Delete
         // GET: Equipment/Delete/5
         public ActionResult Delete(int id)
         {
@@ -280,6 +286,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 equipmentModel = farmdb.equipments.Where(x => x.IDequip == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == equipmentModel.equipmentImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == equipmentModel.equipmentImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<equipmenttype> equipmenttypes = farmdb.equipmenttypes.ToList();
                 IEnumerable<SelectListItem> selequipmenttypes = from e in equipmenttypes
                                                                 select new SelectListItem
@@ -331,6 +345,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -341,5 +357,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

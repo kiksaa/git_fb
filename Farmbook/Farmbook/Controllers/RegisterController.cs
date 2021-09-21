@@ -19,6 +19,7 @@ namespace Farmbook.Controllers
 {
     public class RegisterController : Controller
     {
+        #region Index
         // GET: Register
         public ActionResult Index()
         {
@@ -97,6 +98,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        #endregion
+        #region IndexPlot
         public ActionResult IndexPlot(int id)
         {
             register registerModel = new register();
@@ -147,6 +150,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
+        #endregion
+        #region Details
         // GET: Register/Details/5
         public ActionResult Details(int id)
         {
@@ -186,6 +191,7 @@ namespace Farmbook.Controllers
             }
             return View(registerModel);
         }
+        #endregion
         public ActionResult GetProvince()
         {
             farmdb farmdb = new farmdb();
@@ -204,6 +210,7 @@ namespace Farmbook.Controllers
             return Json(farmdb.districts.Where(data => data.amID == amID).Select(x => new { value = x.districtID, text = x.districtName })
                 , JsonRequestBehavior.AllowGet);
         }
+        #region Create
         // GET: Register/Create
         public ActionResult Create()
         {
@@ -251,7 +258,6 @@ namespace Farmbook.Controllers
                 ViewBag.banks = selbanks;
                 return View(model);
             }
-            
             return View(new register());
         }
         // POST: Register/Create
@@ -321,6 +327,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+        #region Edit
         // GET: Register/Edit/5
         public ActionResult Edit(int id)
         {
@@ -481,6 +489,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion]
+        #region Delete
         // GET: Register/Delete/5
         public ActionResult Delete(int id)
         {
@@ -491,6 +501,22 @@ namespace Farmbook.Controllers
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
                 bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == registerModel.card_img).FirstOrDefault();
+                filedetail fileModel = farmdb.filedetails.Where(f =>  f.fileName == registerModel.farmer_img).FirstOrDefault();
+                if(filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == registerModel.card_img)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
+                if (fileModel != null)
+                {
+                    if (fileModel.fileName == registerModel.farmer_img)
+                    {
+                        ViewBag.img2 = fileModel.fileData;
+                    }
+                }
 
                 List<province> provinces = farmdb.provinces.ToList();
                 IEnumerable<SelectListItem> selprovinces = from p in provinces
@@ -579,6 +605,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -589,5 +617,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

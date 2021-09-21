@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class VehicleController : Controller
     {
+        #region Index
         // GET: Vehicle
         public ActionResult Index()
         {
@@ -50,9 +51,9 @@ namespace Farmbook.Controllers
                 }
                 return View(ViewModeltList);
             }
-            
         }
-
+        #endregion
+        #region Details
         // GET: Vehicle/Details/5
         public ActionResult Details(int id)
         {
@@ -90,7 +91,8 @@ namespace Farmbook.Controllers
             }
             return View(vehicleModel);
         }
-
+        #endregion
+        #region Create
         // GET: Vehicle/Create
         public ActionResult Create()
         {
@@ -165,17 +167,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public async System.Threading.Tasks.Task<ActionResult> RenderImage(int id)
-        {
-            farmdb farmdb = new farmdb();
-            /*filedetail filedetailModel = farmdb.filedetails.Where(x => x.fileName == id).FirstOrDefault();*/
-            filedetail item = await farmdb.filedetails.FindAsync(id);
-
-            byte[] photoBack = item.fileData;
-
-            return File(photoBack, "image/png");
-        }
-
+        #endregion
+        #region Edit
         // GET: Equipment/Edit/5
         public ActionResult Edit(int id)
         {
@@ -264,7 +257,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Vehicle/Delete/5
         public ActionResult Delete(int id)
         {
@@ -272,6 +266,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == vehicleModel.vehicleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == vehicleModel.vehicleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<vehicletype> vehicletypes = farmdb.vehicletypes.ToList();
                 IEnumerable<SelectListItem> selvehicletypes = from v in vehicletypes
                                                               select new SelectListItem
@@ -322,8 +324,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -334,6 +337,8 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName); 
         }
+        #endregion
+        #region DeleteFile
         [HttpPost]
         public ActionResult DeleteFile(string name)
         {
@@ -344,5 +349,6 @@ namespace Farmbook.Controllers
             }
             return RedirectToAction("IndexSum", "Equipment");
         }
+        #endregion
     }
 }

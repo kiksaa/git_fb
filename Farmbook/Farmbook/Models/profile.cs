@@ -51,12 +51,6 @@ namespace Farmbook.Models
         public string password { get; set; }
         [DisplayName("ประเภทเกษตรกร")]
         public int registerType { get; set; }
-        [DisplayName("จังหวัด")]
-        public string provinceStr { get; set; }
-        [DisplayName("อำเภอ/เขต")]
-        public string ampherStr { get; set; }
-        [DisplayName("ตำบล/แขวง")]
-        public string districtStr { get; set; }
 
         public virtual ampher ampher1 { get; set; }
         public virtual district district1 { get; set; }

@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class FuelController : Controller
     {
+        #region Index
         // GET: Fuel
         public ActionResult Index()
         {
@@ -48,7 +49,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region Details
         // GET: Fuel/Details/5
         public ActionResult Details(int id)
         {
@@ -86,7 +88,8 @@ namespace Farmbook.Controllers
             }
             return View(fuelModel);
         }
-
+        #endregion
+        #region Create
         // GET: Fuel/Create
         public ActionResult Create()
         {
@@ -161,7 +164,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Edit
         // GET: Fuel/Edit/5
         public ActionResult Edit(int id)
         {
@@ -247,7 +251,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Fuel/Delete/5
         public ActionResult Delete(int id)
         {
@@ -255,6 +260,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 fuelModel = farmdb.fuels.Where(x => x.IDfule == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == fuelModel.fuleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == fuelModel.fuleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<fueltype> fueltypes = farmdb.fueltypes.ToList();
                 IEnumerable<SelectListItem> selfueltypes = from f in fueltypes
                                                            select new SelectListItem
@@ -306,7 +319,9 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        [HttpGet]
+        #endregion
+        #region DownLoadFile
+        [HttpGet] 
         public FileResult DownLoadFile(string name)
         {
             filedetail filesModel = new filedetail();
@@ -316,5 +331,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

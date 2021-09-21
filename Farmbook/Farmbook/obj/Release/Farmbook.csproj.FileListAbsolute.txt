@@ -1,0 +1,2 @@
+C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Release\Farmbook.csprojAssemblyReference.cache
+C:\Users\samatcha\Desktop\farmbook\Farmbook\obj\Release\Farmbook.csproj.CoreCompileInputs.cache

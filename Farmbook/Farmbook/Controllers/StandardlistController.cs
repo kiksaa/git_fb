@@ -9,6 +9,7 @@ namespace Farmbook.Controllers
 {
     public class StandardlistController : Controller
     {
+        #region Index
         // GET: Standardlist
         public ActionResult Index()
         {
@@ -19,13 +20,15 @@ namespace Farmbook.Controllers
             }
             return View(StandardlistModel);
         }
-
+        #endregion
+        #region Details
         // GET: Standardlist/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
-
+        #endregion
+        #region Create
         // GET: Standardlist/Create
         public ActionResult Create()
         {
@@ -61,7 +64,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Edit
         // GET: Standardlist/Edit/5
         public ActionResult Edit(int id)
         {
@@ -99,9 +103,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Delete
         // GET: Standardlist/Delete/5
         public ActionResult Delete(int id)
         {
@@ -139,7 +143,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-           
         }
+        #endregion
     }
 }

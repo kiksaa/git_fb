@@ -79,20 +79,10 @@
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.lease_img) :
                             @Html.DisplayFor(model => model.lease_img)
-                            @{ if (@Model.lease_img != null)
-                                {
-                                    <br />
-                                    <img src="~/Content/img/upload/lease/@Model.lease_img" height="250" width="240">
-                                } }
                         </li>
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.license_img) :
                             @Html.DisplayFor(model => model.license_img)
-                            @{ if (@Model.license_img != null)
-                                {
-                                    <br />
-                                    <img src="~/Content/img/upload/license/@Model.license_img" height="250" width="240">
-                                } }
                         </li>
                         <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.coordinatesStar) :

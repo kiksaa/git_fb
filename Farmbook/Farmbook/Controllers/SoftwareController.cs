@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class SoftwareController : Controller
     {
+        #region Index
         // GET: Software
         public ActionResult Index()
         {
@@ -47,7 +48,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region Details
         // GET: Software/Details/5
         public ActionResult Details(int id)
         {
@@ -85,7 +87,8 @@ namespace Farmbook.Controllers
             }
             return View(softwareModel);
         }
-
+        #endregion
+        #region Create
         // GET: Software/Create
         public ActionResult Create()
         {
@@ -159,9 +162,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Edit
         // GET: Software/Edit/5
         public ActionResult Edit(int id)
         {
@@ -246,9 +249,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Delete
         // GET: Software/Delete/5
         public ActionResult Delete(int id)
         {
@@ -256,7 +259,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 softwareModel = farmdb.softwares.Where(x => x.IDsoft == id).FirstOrDefault();
-
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == softwareModel.softwareImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == softwareModel.softwareImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<softwaretype> softwaretypes = farmdb.softwaretypes.ToList();
                 IEnumerable<SelectListItem> selsoftwaretypes = from s in softwaretypes
                                                                select new SelectListItem
@@ -307,8 +317,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -319,5 +330,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

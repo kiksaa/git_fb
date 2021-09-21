@@ -550,8 +550,6 @@
     <NavigationProperty Name="unit" Relationship="Self.vehicle_ibfk_2" FromRole="vehicle" ToRole="unit" />
     <NavigationProperty Name="unit1" Relationship="Self.vehicle_ibfk_3" FromRole="vehicle" ToRole="unit" />
     <NavigationProperty Name="vehicletype1" Relationship="Self.vehicle_ibfk_4" FromRole="vehicle" ToRole="vehicletype" />
-    <Property Name="fileImge" Type="Int32" />
-    <NavigationProperty Name="filedetail" Relationship="farmdbModel.vehicle_ibfk_5" FromRole="vehicle" ToRole="filedetail" />
   </EntityType>
   <EntityType Name="vehicletype">
     <Key>
@@ -1534,10 +1532,6 @@
     </AssociationSet>
     <EntitySet Name="events" EntityType="farmdbModel.event" />
     <EntitySet Name="filedetails" EntityType="farmdbModel.filedetail" />
-    <AssociationSet Name="vehicle_ibfk_5" Association="farmdbModel.vehicle_ibfk_5">
-      <End Role="filedetail" EntitySet="filedetails" />
-      <End Role="vehicle" EntitySet="vehicles" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="event">
     <Key>
@@ -1559,18 +1553,5 @@
     <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="fileData" Type="Binary" />
-    <NavigationProperty Name="vehicle" Relationship="farmdbModel.vehicle_ibfk_5" FromRole="filedetail" ToRole="vehicle" />
   </EntityType>
-  <Association Name="vehicle_ibfk_5">
-    <End Type="farmdbModel.filedetail" Role="filedetail" Multiplicity="1" />
-    <End Type="farmdbModel.vehicle" Role="vehicle" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="filedetail">
-        <PropertyRef Name="fileID" />
-      </Principal>
-      <Dependent Role="vehicle">
-        <PropertyRef Name="IDve" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

@@ -9,6 +9,7 @@ namespace Farmbook.Controllers
 {
     public class ProjectController : Controller
     {
+        #region Index
         // GET: Project
         public ActionResult Index()
         {
@@ -56,6 +57,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        #endregion
+        #region IndexStandard
         public ActionResult IndexStandard(int id)
         {
             project projectModel = new project();
@@ -97,6 +100,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
+        #endregion
+        #region Details
         // GET: Project/Details/5
         public ActionResult Details(int id)
         {
@@ -129,6 +134,8 @@ namespace Farmbook.Controllers
             }
             return View(ProjectList);
         }
+        #endregion
+        #region Create
         // GET: Project/Create
         public ActionResult Create()
         {
@@ -175,7 +182,8 @@ namespace Farmbook.Controllers
             }
             return RedirectToAction("Create", "Standardlist", new { IDpro = projectModel.ID });
         }
-
+        #endregion
+        #region Edit
         // GET: Project/Edit/5
         public ActionResult Edit(int id)
         {
@@ -222,8 +230,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
+        #region Delete
         // GET: Project/Delete/5
         public ActionResult Delete(int id)
         {
@@ -275,7 +284,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
+        #endregion
     }
 }

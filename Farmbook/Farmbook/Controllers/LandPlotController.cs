@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Farmbook.Models;
 
@@ -14,6 +15,7 @@ namespace Farmbook.Controllers
 {
     public class LandPlotController : Controller
     {
+        #region Index 
         // GET: LandPlot
         public ActionResult Index()
         {
@@ -50,23 +52,10 @@ namespace Farmbook.Controllers
                                from th in thlist.DefaultIfEmpty()
                                select new
                                {
-                                   l.ID,
-                                   l.plotName,
-                                   p.provinceName,
-                                   a.ampherName,
-                                   d.districtName,
+                                   l.ID, l.plotName, p.provinceName, a.ampherName, d.districtName,
                                    /*l.provinceStr, l.ampherStr, l.districtStr,*/
-                                   r.name,
-                                   t.ownership,
-                                   li.licenseName,
-                                   pro.proName,
-                                   s.statusName,
-                                   l.areaPlot,
-                                   l.active,
-                                   l.lease_img,
-                                   l.license_img,
-                                   th.product,
-                                   th.workName,
+                                   r.name, t.ownership, li.licenseName, pro.proName, s.statusName, l.areaPlot,
+                                   l.areaPlotS, l.active, l.lease_img, l.license_img, th.product, th.workName,
                                    Totalarea = th.product * l.areaPlot,
                                };
                     foreach (var item in data)
@@ -104,7 +93,9 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        #endregion
 
+        #region detail 
         // GET: LandPlot/Details/5
         public ActionResult Details(int id)
         {
@@ -202,6 +193,13 @@ namespace Farmbook.Controllers
             }
             return View(plotModel);
         }
+        #endregion
+        public ActionResult GetProvince()
+        {
+            farmdb farmdb = new farmdb();
+            List<province> list = farmdb.provinces.ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetAmpher(int proID)
         {
             farmdb farmdb = new farmdb();
@@ -214,6 +212,7 @@ namespace Farmbook.Controllers
             return Json(farmdb.districts.Where(data => data.amID == amID).Select(x => new { value = x.districtID, text = x.districtName })
                 , JsonRequestBehavior.AllowGet);
         }
+        #region create 
         // GET: LandPlot/Create
         public ActionResult Create()
         {
@@ -388,8 +387,10 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
+        #endregion
+
+        #region IndexEdit
         public ActionResult IndexEdit(int id)
         {
             landplot plotModel = new landplot();
@@ -468,6 +469,9 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
+        #endregion
+
+        #region edit 
         // GET: LandPlot/Edit/5
         public ActionResult Edit(int id)
         {
@@ -657,6 +661,9 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+
+        #region IndexDelete
         public ActionResult IndexDelete(int id)
         {
             landplot plotModel = new landplot();
@@ -798,6 +805,9 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
+        #endregion
+
+        #region delete
         // GET: LandPlot/Delete/5
         public ActionResult Delete(int id)
         {
@@ -906,6 +916,9 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+
+        #region DownLoadFile 
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -916,5 +929,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

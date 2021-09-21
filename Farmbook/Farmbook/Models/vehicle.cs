@@ -43,10 +43,10 @@ namespace Farmbook.Models
         public Nullable<int> energy { get; set; }
         [DisplayName("รูปภาพยานพาหนะ")]
         public string vehicleImg { get; set; }
-        
+
         [DisplayName("ลำดับที่")]
         public int IDve { get; set; }
-        public Nullable<int> fileImge { get; set; }
+
         public virtual energy energy1 { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
@@ -54,6 +54,5 @@ namespace Farmbook.Models
         [DataType(DataType.Upload)]
         [DisplayName("Select File")]
         public HttpPostedFileBase file_vehicleImg { get; set; }
-        public virtual filedetail filedetail { get; set; }
     }
 }

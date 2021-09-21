@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class LaborController : Controller
     {
+        #region Index
         // GET: Labor
         public ActionResult Index()
         {
@@ -53,7 +54,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region Details
         // GET: Labor/Details/5
         public ActionResult Details(int id)
         {
@@ -82,7 +84,8 @@ namespace Farmbook.Controllers
             }
             return View(laborModel);
         }
-
+        #endregion
+        #region Create
         // GET: Labor/Create
         public ActionResult Create()
         {
@@ -148,7 +151,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Edit
         // GET: Labor/Edit/5
         public ActionResult Edit(int id)
         {
@@ -227,7 +231,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Labor/Delete/5
         public ActionResult Delete(int id)
         {
@@ -235,7 +240,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 laborModel = farmdb.labors.Where(x => x.IDlab == id).FirstOrDefault();
-
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == laborModel.laborImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == laborModel.laborImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<labortype> labortypes = farmdb.labortypes.ToList();
                 IEnumerable<SelectListItem> sellabortypes = from l in labortypes
                                                             select new SelectListItem
@@ -278,6 +290,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        #endregion
+        #region DownLoadFile
         [HttpGet]
         public FileResult DownLoadFile(string name)
         {
@@ -288,5 +302,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class StapleController : Controller
     {
+        #region Index
         // GET: Staple
         public ActionResult Index()
         {
@@ -50,7 +51,8 @@ namespace Farmbook.Controllers
                 return View(ViewModeltList);
             }
         }
-
+        #endregion
+        #region Details
         // GET: Staple/Details/5
         public ActionResult Details(int id)
         {
@@ -88,7 +90,8 @@ namespace Farmbook.Controllers
             }
             return View(stapleModel);
         }
-
+        #endregion
+        #region Create
         // GET: Staple/Create
         public ActionResult Create()
         {
@@ -162,9 +165,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
         }
-
+        #endregion
+        #region Edit
         // GET: Staple/Edit/5
         public ActionResult Edit(int id)
         {
@@ -249,9 +252,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-           
         }
-
+        #endregion
+        #region Delete
         // GET: Staple/Delete/5
         public ActionResult Delete(int id)
         {
@@ -259,6 +262,14 @@ namespace Farmbook.Controllers
             using (farmdb farmdb = new farmdb())
             {
                 stapleModel = farmdb.staples.Where(x => x.IDstap == id).FirstOrDefault();
+                filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == stapleModel.stapleImg).FirstOrDefault();
+                if (filedetailModel != null)
+                {
+                    if (filedetailModel.fileName == stapleModel.stapleImg)
+                    {
+                        ViewBag.img = filedetailModel.fileData;
+                    }
+                }
                 List<stapletype> stapletypes = farmdb.stapletypes.ToList();
                 IEnumerable<SelectListItem> selstapletypes = from s in stapletypes
                                                              select new SelectListItem
@@ -310,7 +321,9 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        [HttpGet]
+        #endregion
+        #region DownLoadFile
+        [HttpGet] 
         public FileResult DownLoadFile(string name)
         {
             filedetail filesModel = new filedetail();
@@ -320,5 +333,6 @@ namespace Farmbook.Controllers
             }
             return File(filesModel.fileData, "application/pdf", filesModel.fileName);
         }
+        #endregion
     }
 }

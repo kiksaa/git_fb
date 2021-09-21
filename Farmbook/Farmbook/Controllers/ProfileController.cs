@@ -10,6 +10,7 @@ namespace Farmbook.Controllers
 {
     public class ProfileController : Controller
     {
+        #region Index
         // GET: Profile
         public ActionResult Index()
         {
@@ -68,9 +69,9 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
-
+        #endregion
+        #region Details
         // GET: Profile/Details/5
         public ActionResult Details(int id)
         {
@@ -81,7 +82,8 @@ namespace Farmbook.Controllers
             }
             return View(profileModel);
         }
-
+        #endregion
+        #region Create
         // GET: Profile/Create
         public ActionResult Create()
         {
@@ -129,6 +131,8 @@ namespace Farmbook.Controllers
             }
 
         }
+        #endregion
+        #region Edit
         public ActionResult Edit(string email)
         {
             profile profileModel = new profile();
@@ -196,7 +200,8 @@ namespace Farmbook.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        #endregion
+        #region Delete
         // GET: Profile/Delete/5
         public ActionResult Delete(int id)
         {
@@ -264,7 +269,7 @@ namespace Farmbook.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
         }
+        #endregion
     }
 }
