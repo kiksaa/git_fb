@@ -1,0 +1,175 @@
+﻿@model WebApp.Models.register
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบทะเบียนเกษตรกร</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @*@Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.name)
+                @Html.HiddenFor(model => model.registerID)
+                @Html.HiddenFor(model => model.cardID)
+                @Html.HiddenFor(model => model.birthday)
+                @Html.HiddenFor(model => model.tel)
+                @Html.HiddenFor(model => model.email)
+                @Html.HiddenFor(model => model.bankuser.bankID)
+                @Html.HiddenFor(model => model.bankuser.bankName)
+                @Html.HiddenFor(model => model.bankuser.bankNo)*@
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Register")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                        <!-- Button trigger modal -->
+                        @*<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                            ลบ
+                        </button>*@
+                        <!-- Modal -->
+                        <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">ลบถาวรหรือไม่?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @Html.RadioButtonFor(model => model.gender, "yes")
+                                        @Html.Label("ใช่")
+                                        <h6>เลือก <strong style="color:green"> ใช่ </strong>เพื่อลบข้อมูลออกจากฐานข้อมูลถาวร</h6>-->
+                                        @*<br />*@
+                                        <!--@Html.RadioButtonFor(model => model.gender, "no")
+                                        @Html.Label("ไม่ใช่")
+                                        <h6>เลือก <strong style="color:red"> ไม่ใช่ </strong> หากยังต้องการกู้ข้อมูลชุดนี้คืนในภายหลัง</h6>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                        <input type="submit" value="ลบ" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Edit", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.ID)
+        
+    }
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.name) :
+                            @Html.DisplayFor(model => model.name)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.cardID) :
+                            @Html.DisplayFor(model => model.cardID)
+                        </li>
+                        @* <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.gender) :
+                                @Html.DisplayFor(model => model.gender)
+                            </li>*@
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.birthday) :
+                            @Html.DisplayFor(model => model.birthday)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.tel) :
+                            @Html.DisplayFor(model => model.tel)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.email) :
+                            @Html.DisplayFor(model => model.email)
+                        </li>
+                        @* <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.family) :
+                                @Html.DisplayFor(model => model.family)
+                            </li>*@
+                         <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.no)
+                                @Html.DisplayFor(model => model.no)
+                                @Html.DisplayNameFor(model => model.moo)
+                                @Html.DisplayFor(model => model.moo)
+                                @Html.DisplayNameFor(model => model.road)
+                                @Html.DisplayFor(model => model.road)
+                                @Html.DisplayNameFor(model => model.district)
+                                @Html.DisplayFor(model => model.district1.districtName)
+                                @Html.DisplayNameFor(model => model.ampher)
+                                @Html.DisplayFor(model => model.ampher1.ampherName)
+                                @Html.DisplayNameFor(model => model.province)
+                                @Html.DisplayFor(model => model.province1.provinceName)
+                            </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.comment) :
+                            @Html.DisplayFor(model => model.comment)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.farmer_img) :
+                            @Html.DisplayFor(model => model.farmer_img)
+                            @{ if (@Model.farmer_img != null)
+                                {
+                                    <br />
+                                    <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img2)" width="190" height="210" />
+                                } }
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.card_img) :
+                            @Html.DisplayFor(model => model.card_img)
+
+                            @{ if (@Model.card_img != null)
+                                {
+                                    <br />
+                                    <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />
+                                } }
+                        </li>
+                        @* <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.bank) :
+                                @Html.DisplayFor(model => model.bank)
+                            </li>
+                            <li class="list-group-item">
+                                @Html.DisplayNameFor(model => model.status) :
+                                @Html.DisplayFor(model => model.status)
+                            </li>*@
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.dateUpdate) :
+                            @Html.DisplayFor(model => model.dateUpdate)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+        </div>
+
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

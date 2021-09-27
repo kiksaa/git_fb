@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
+    @*<title>FARMBOOK - หน้าแรก</title>*@
+
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+
+    <!-- Sidebar -->
+    <disabled id="wrapper">
+        <nav class="sidebar">
+            <ul class="navbar-nav flex-column fixed-top sidebar sidebar-dark accordion" style="color:whitesmoke;background-color:mediumseagreen">
+                <!-- Sidebar - Brand -->
+                <li>
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Account")">
+                        <div class="sidebar-brand-icon">
+                            @* <img src="~/Content/img/logo/logo-transparent-mini.png" width="55" height="45">*@
+                            <img src="~/Content/img/logo/logo-SWI.png" width="105" height="Aoto">
+                        </div>
+                        <div class="sidebar-brand-text mx-1">Farmbook @*<sup>2</sup>*@</div>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <li>
+                    <hr class="sidebar-divider my-0">
+                </li>
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Account")">
+                        <i class="fas fa-home"></i>
+                        <span>หน้าแรก</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Theory")">
+                        <i class="fas fa-edit"></i>
+                        <span>
+                            ขั้นตอนการทำงาน
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li><!-- Divider -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Register")">
+                        <i class="fas fa-user-friends"></i>
+                        <span>
+                            ทะเบียนเกษตรกร
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("IndexSum", "Equipment")">
+                        <i class="fas fa-tractor"></i>
+                        <span>
+                            ทะเบียนอุปกรณ์
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li><!-- Divider -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "LandPlot")">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>
+                            ทะเบียนแปลง
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Project")">
+                        <i class="fas fa-leaf"></i>
+                        <span>
+                            โครงการ
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link disabled" href="#">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>
+                            แผนที่
+                        </span>
+                        @*<span>ทะเบียนเกษตรกร</span>*@
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <li><hr class="sidebar-divider"></li>
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item  active">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                       aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>ตั้งค่า</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Login Screens:</h6>
+                            <a class="collapse-item" href="@Url.Action("Profilea", "Account")" data-toggle="modal" data-target="#profileModal">ข้อมูลผู้ใช้</a>
+                            <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">ออกจากระบบ</a>
+                            @*@if (@Html.Encode(User.Identity.Name) == "admin")
+                                {*@
+                            <a class="collapse-item" href="@Url.Action("Index", "Profile")">บัญชีรายชื่อ</a>
+                            @*}*@
+                        </div>
+                    </div>
+                </li>
+                <!-- Divider -->
+                <li><hr class="sidebar-divider d-none d-md-block"></li>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <a class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </a>
+            </ul>
+            <ul class="navbar-nav flex-column @*bg-gradient-success*@ sidebar sidebar-dark accordion" id="accordionSidebar" style="color:whitesmoke;background-color:mediumseagreen" />
+        </nav>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                @*<nav class="navbar navbar-nav navbar-expand navbar-light navbar-inverse topbar mb-4 fixed-top shadow" style="color:whitesmoke;background-color:rebeccapurple">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">WebSiteName</a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Page 1</a></li>
+                                <li><a href="#">Page 2</a></li>
+                                <li><a href="#">Page 3</a></li>
+                            </ul>
+                        </div>
+                    </nav>*@
+                <nav class="navbar navbar-expand navbar-light @*bg-success*@ topbar mb-4 static-top shadow" style="color:whitesmoke;background-color:mediumseagreen">
+                    @* Sidebar Toggle (Topbar) *@
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    @* Topbar Navbar *@
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        @* Nav Item - User Information *@
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-white small">สวัสดีคุณ @Html.Encode(User.Identity.Name)</span>
+                                <img class="img-profile rounded-circle" alt="200x200" src="~/Content/img/logo/logo-SWI2.png">
+                            </a>
+                            @* Dropdown - User Information *@
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Profilea", "Account")" data-toggle="modal" data-target="#profileModal">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Account")" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                @RenderBody()
+            </div>
+            <div class="body-content">
+                <!-- Footer -->
+                <footer class="sticky-footer bg-gradient-light">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>&copy;@DateTime.Now.Year</span>
+                            <a href="https://www.farmbook.co/index.php" style="color:gray">Farmbook </a> <span>| Versoin 1.0</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ออกจากระบบ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">คุณแน่ใจออกจากระบบ</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">ไม่ใช่</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout", "Account")">ใช่</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ประวัติส่วนตัว</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">@Html.Action("Profilea", "Account")</div>
+                </div>
+            </div>
+        </div>
+    </disabled>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/js/demo/chart-area-demo.js"></script>
+    <script src="~/Content/js/demo/chart-pie-demo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/js/demo/datatables-demo.js"></script>
+
+</body>
+</html>

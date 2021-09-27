@@ -1,0 +1,130 @@
+﻿@model WebApp.Models.profile
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>profile</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.cradID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.cradID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.gender)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.gender)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.birthday)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.birthday)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tel)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tel)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.no)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.no)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.moo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.moo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.province)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.province)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ampher)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ampher)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.district)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.district)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.registerType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.registerType)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

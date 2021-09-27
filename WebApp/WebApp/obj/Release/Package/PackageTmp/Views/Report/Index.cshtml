@@ -1,0 +1,182 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนอุปกรณ์</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            <div class="col-10">
+                <h3 class="text-muted">รายงาน</h3>
+            </div>
+            <a type="button" class="btn btn-info me-md-2" href="@Url.Action("Index", "Account")">
+                <span>
+                    กลับหน้าแรก
+                </span>
+            </a>
+        </div>
+        <br />
+        @* @if (ViewBag.status == "100")
+        {
+            <a type="submit" class="btn btn-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 1 })">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                </svg>
+                <span>
+                    รายงานทะเบียนแปลง
+                </span>
+            </a>
+            <a type="submit" class="btn btn-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 2 })">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                </svg>
+                <span>
+                    รายงานทะเบียนเกษตรกร
+                </span>
+            </a>
+        }
+        <br />
+        <br />*@
+        @if (ViewBag.status == "100")
+        {
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-locale="th-TH">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ลำดับที่
+                                    </th>
+                                    <th>
+                                        รายการ
+                                    </th>
+                                    <th>
+                                        รายงาน
+                                    </th>
+                                </tr>
+                            </thead>
+                            @{ var i = 0;}
+                        <tbody>
+                            <tr>
+                                <td style="padding-left: 20px;">
+
+                                    @{i++;}
+                                    @i
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    ทะเบียนแปลง
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a type="submit" class="btn btn-outline-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 1 })">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        <span>
+                                            ดาวน์โหลดรายงาน
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 20px;">
+                                    @{i++;}
+                                    @i
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    ทะเบียนเกษตกร
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a type="submit" class="btn btn-outline-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 2 })">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        <span>
+                                            ดาวน์โหลดรายงาน
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 20px;">
+                                    @{i++;}
+                                    @i
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    ขั้นตอนการทำงาน
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a type="submit" class="btn btn-outline-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 3 })">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        <span>
+                                            ดาวน์โหลดรายงาน
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 20px;">
+                                    @{i++;}
+                                    @i
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    โครงการ
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a type="submit" class="btn btn-outline-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 4 })">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        <span>
+                                            ดาวน์โหลดรายงาน
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 20px;">
+                                    @{i++;}
+                                    @i
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    ปฏิทินงาน
+                                </td>
+                                <td style="padding-left: 20px;">
+                                    <a type="submit" class="btn btn-outline-primary" id="newregister" href="@Url.Action("ExportToExcel", "Report", new { id = 5 })">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                        <span>
+                                            ดาวน์โหลดรายงาน
+                                        </span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

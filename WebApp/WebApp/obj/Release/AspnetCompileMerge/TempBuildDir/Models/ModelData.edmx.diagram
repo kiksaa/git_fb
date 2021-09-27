@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5cc14ec71db4fc58776c19ca42ceed0" Name="Diagram1">
+        <EntityTypeShape EntityType="farmdbModel1.access" Width="1.5" PointX="11" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.active" Width="1.5" PointX="13.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.activity" Width="1.5" PointX="15.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.ampher" Width="1.5" PointX="11" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.bank" Width="1.5" PointX="17" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.bankuser" Width="1.5" PointX="19.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.buymethod" Width="1.5" PointX="13.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.district" Width="1.5" PointX="13.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.energy" Width="1.5" PointX="3.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.equipment" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.equipmenttype" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.event" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.family" Width="1.5" PointX="19.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.filedetail" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.fuel" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.fueltype" Width="1.5" PointX="3.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.gender" Width="1.5" PointX="19.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.labor" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.labortype" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.landplot" Width="1.5" PointX="15.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.license" Width="1.5" PointX="13.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.login" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.machine" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.machinetype" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.position" Width="1.5" PointX="5.75" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.profile" Width="1.5" PointX="18.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.project" Width="1.5" PointX="11" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.projectand" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.province" Width="1.5" PointX="8.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.register" Width="1.5" PointX="21.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.registertype" Width="1.5" PointX="16.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.software" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.softwaretype" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.standard" Width="1.5" PointX="8.75" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.standardlist" Width="1.5" PointX="13.25" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.staple" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.stapletype" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.status" Width="1.5" PointX="13.25" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.theory" Width="1.5" PointX="13.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.theorytype" Width="1.5" PointX="11" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.typeownership" Width="1.5" PointX="13.25" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.unit" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.vehicle" Width="1.5" PointX="6" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="farmdbModel1.vehicletype" Width="1.5" PointX="3.75" PointY="26.75" IsExpanded="true" />
+        <AssociationConnector Association="farmdbModel1.theory_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_11" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_11" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.activity_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.ampher_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.district_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_5" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.profile_ibfk_5" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_7" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.bankuser_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_8" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_10" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.project_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.district_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_6" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.profile_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_5" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.equipment_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.machine_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.vehicle_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.equipment_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.equipment_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.equipment_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.fuel_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.fuel_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.fuel_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.profile_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_9" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.labor_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.labor_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_13" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_14" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_8" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.landplot_ibfk_9" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.machine_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.machine_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.machine_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.profile_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.profile_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.project_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.standardlist_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.theory_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.register_ibfk_10" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.software_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.software_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.software_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.staple_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.staple_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.staple_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.theory_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.vehicle_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.vehicle_ibfk_3" ManuallyRouted="false" />
+        <AssociationConnector Association="farmdbModel1.vehicle_ibfk_4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

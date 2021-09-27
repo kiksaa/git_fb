@@ -1,0 +1,177 @@
+﻿@model WebApp.Models.theory
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>FARMBOOK - ขั้นตอนการทำงาน</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @using (Html.BeginForm("Edit", "Theory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <h4>ขั้นตอนการทำงาน</h4>
+            <hr />
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-warning mb-3" style="width: 100rem;">
+                    <h4>ข้อมูลขั้นตอนการทำงาน</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+                            <div class="col-sm-6">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.workProcedure, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.workProcedure, (IEnumerable<SelectListItem>)ViewBag.theorytypes, "เลือกขั้นตอนการทำงาน", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                        @Html.ValidationMessageFor(model => model.workProcedure, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.farmingType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.farmingType, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.farmingType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.sepecies, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.sepecies, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.sepecies, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.productType, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.productType, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.productType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.product, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.product, new { htmlAttributes = new { @class = "form-control", required = "required", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.product, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.project, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.project, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.workName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.workName, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.workName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.access, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.access, (IEnumerable<SelectListItem>)ViewBag.accesses, "เลือกการเข้าถึง", htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                                        @Html.ValidationMessageFor(model => model.access, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.reference, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.reference, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(model => model.reference, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.TextAreaFor(model => model.detail, new { @class = "form-control", @readonly = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-warning mb-3" style="width: 100rem;">
+                    <div class="row justify-content-start">
+                        <div class="col-2">
+                            <h4>แผนการดำเนินงาน</h4>
+                        </div>
+                        @*<div class="col-2">
+                            <a type="button" class="btn btn-info btn-rounded btn-sm" id="newregister" href="@Url.Action("Create", "Activity")">
+                                เพิ่มแผนการ<i class="fas fa-plus-square ml-1"></i>
+                            </a>
+                        </div>*@
+                    </div>
+                    <div class="card-body">
+                        <div class="row-12">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    @if (Model != null)
+                                    {
+                                        <div class="card shadow mb-12">
+                                            <div class="card-body border-bottom-success alert-success">
+                                                @Html.Action("IndexActivity", "Theory", new { plan = Model.ID })
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="form-group row">
+                    <div class="col-6">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Theory")">
+                            <span>
+                                กลับ
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

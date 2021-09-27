@@ -1,0 +1,988 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="farmdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="access">
+    <Key>
+      <PropertyRef Name="accessID" />
+    </Key>
+    <Property Name="accessID" Type="int" Nullable="false" />
+    <Property Name="accessName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="int" Nullable="false" />
+    <Property Name="activeName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="activity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="stepNum" Type="int" />
+    <Property Name="stepName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="time" Type="int" Nullable="false" />
+    <Property Name="activity" Type="varchar" MaxLength="255" />
+    <Property Name="notice" Type="varchar" MaxLength="255" />
+    <Property Name="plan" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ampher">
+    <Key>
+      <PropertyRef Name="ampherID" />
+    </Key>
+    <Property Name="ampherID" Type="int" Nullable="false" />
+    <Property Name="ampherName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="proID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="bankType" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bankuser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="bankID" Type="int" Nullable="false" />
+    <Property Name="bankName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="bankNo" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="buymethod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="nameBuy" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="district">
+    <Key>
+      <PropertyRef Name="districtID" />
+    </Key>
+    <Property Name="districtID" Type="int" Nullable="false" />
+    <Property Name="districtName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="proID" Type="int" Nullable="false" />
+    <Property Name="amID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="energy">
+    <Key>
+      <PropertyRef Name="energyID" />
+    </Key>
+    <Property Name="energyID" Type="int" Nullable="false" />
+    <Property Name="energyName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="equipment">
+    <Key>
+      <PropertyRef Name="equipmentType" />
+      <PropertyRef Name="equipmentID" />
+      <PropertyRef Name="equipmentName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDequip" />
+    </Key>
+    <Property Name="equipmentType" Type="int" Nullable="false" />
+    <Property Name="equipmentID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="equipmentName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="equipmentImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDequip" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.equipmenttype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="equipmenttype">
+    <Key>
+      <PropertyRef Name="equipmentID" />
+      <PropertyRef Name="equipmentT" />
+    </Key>
+    <Property Name="equipmentID" Type="int" Nullable="false" />
+    <Property Name="equipmentT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="subject" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="start" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="subject" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="start" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="end" Type="datetime" Precision="0" />
+    <Property Name="themeColor" Type="varchar" MaxLength="10" />
+    <Property Name="isFullDay" Type="bool" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.family' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="family">
+    <Key>
+      <PropertyRef Name="familyID" />
+      <PropertyRef Name="familyName" />
+    </Key>
+    <Property Name="familyID" Type="int" Nullable="false" />
+    <Property Name="familyName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.filedetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="filedetails">
+    <Key>
+      <PropertyRef Name="fileID" />
+    </Key>
+    <Property Name="fileID" Type="int" Nullable="false" />
+    <Property Name="fileName" Type="varchar" MaxLength="100" />
+    <Property Name="fileContentType" Type="varchar" MaxLength="60" />
+    <Property Name="fileData" Type="varbinary" MaxLength="65000" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.fuel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="fuel">
+    <Key>
+      <PropertyRef Name="fuelType" />
+      <PropertyRef Name="fuelName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDfule" />
+    </Key>
+    <Property Name="fuelType" Type="int" Nullable="false" />
+    <Property Name="fuelName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="fuleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDfule" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.fueltype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="fueltype">
+    <Key>
+      <PropertyRef Name="fuelID" />
+      <PropertyRef Name="fuelType" />
+    </Key>
+    <Property Name="fuelID" Type="int" Nullable="false" />
+    <Property Name="fuelType" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="gender">
+    <Key>
+      <PropertyRef Name="genderID" />
+      <PropertyRef Name="genderName" />
+    </Key>
+    <Property Name="genderID" Type="int" Nullable="false" />
+    <Property Name="genderName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.labor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="labor">
+    <Key>
+      <PropertyRef Name="laborType" />
+      <PropertyRef Name="position" />
+      <PropertyRef Name="laborID" />
+      <PropertyRef Name="laborName" />
+      <PropertyRef Name="IDlab" />
+    </Key>
+    <Property Name="laborType" Type="int" Nullable="false" />
+    <Property Name="position" Type="int" Nullable="false" />
+    <Property Name="laborID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="laborName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="salary" Type="int" />
+    <Property Name="workDate" Type="date" />
+    <Property Name="laborImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDlab" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.labortype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="labortype">
+    <Key>
+      <PropertyRef Name="laborID" />
+      <PropertyRef Name="laborT" />
+    </Key>
+    <Property Name="laborID" Type="int" Nullable="false" />
+    <Property Name="laborT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.landplot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="landplot">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="plotName" />
+      <PropertyRef Name="typeOwnership" />
+      <PropertyRef Name="license" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="plotName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="areaCode" Type="varchar" MaxLength="30" />
+    <Property Name="typeOwnership" Type="int" Nullable="false" />
+    <Property Name="license" Type="int" Nullable="false" />
+    <Property Name="titleDeed" Type="varchar" MaxLength="20" />
+    <Property Name="landSlip" Type="varchar" MaxLength="20" />
+    <Property Name="landNumber" Type="int" />
+    <Property Name="license_img" Type="varchar" MaxLength="255" />
+    <Property Name="lease_img" Type="varchar" MaxLength="255" />
+    <Property Name="district" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="province" Type="int" />
+    <Property Name="coordinatesStar" Type="varchar" MaxLength="30" />
+    <Property Name="coordinatesEnd" Type="varchar" MaxLength="30" />
+    <Property Name="areaPlot" Type="float" />
+    <Property Name="areaPlotS" Type="varchar" MaxLength="100" />
+    <Property Name="plotDetails" Type="varchar" MaxLength="255" />
+    <Property Name="farmerName" Type="int" />
+    <Property Name="projectName" Type="int" />
+    <Property Name="note" Type="varchar" MaxLength="255" />
+    <Property Name="buyMethod" Type="int" />
+    <Property Name="plotStatus" Type="int" />
+    <Property Name="theoryName" Type="int" />
+    <Property Name="administrator" Type="varchar" MaxLength="255" />
+    <Property Name="active" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.license' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="license">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="licenseName" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="licenseName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.login' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="password" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.machine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="machine">
+    <Key>
+      <PropertyRef Name="machineType" />
+      <PropertyRef Name="machineID" />
+      <PropertyRef Name="machineName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDmac" />
+    </Key>
+    <Property Name="machineType" Type="int" Nullable="false" />
+    <Property Name="machineID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="machineName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="machineImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDmac" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.machinetype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="machinetype">
+    <Key>
+      <PropertyRef Name="machineID" />
+      <PropertyRef Name="machineT" />
+    </Key>
+    <Property Name="machineID" Type="int" Nullable="false" />
+    <Property Name="machineT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="positionID" />
+      <PropertyRef Name="positionName" />
+    </Key>
+    <Property Name="positionID" Type="int" Nullable="false" />
+    <Property Name="positionName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.profile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="profile">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="cradID" />
+      <PropertyRef Name="gender" />
+      <PropertyRef Name="birthday" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="registerType" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cradID" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="gender" Type="int" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="tel" Type="varchar" MaxLength="10" />
+    <Property Name="no" Type="int" />
+    <Property Name="moo" Type="int" />
+    <Property Name="province" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="district" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="registerType" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.project' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="dataNow" />
+      <PropertyRef Name="proName" />
+      <PropertyRef Name="buyMethod" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="dataNow" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="proName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="buyMethod" Type="int" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="manuStandards" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.projectand' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="projectand">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="projectName" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="projectName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.province' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="province">
+    <Key>
+      <PropertyRef Name="provinceID" />
+      <PropertyRef Name="provinceName" />
+    </Key>
+    <Property Name="provinceID" Type="int" Nullable="false" />
+    <Property Name="provinceName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.register' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="register">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="tel" />
+      <PropertyRef Name="dateUpdate" />
+      <PropertyRef Name="adminBy" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="registerID" Type="varchar" MaxLength="20" />
+    <Property Name="cardID" Type="varchar" MaxLength="13" />
+    <Property Name="gender" Type="int" />
+    <Property Name="birthday" Type="date" />
+    <Property Name="tel" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="family" Type="int" />
+    <Property Name="no" Type="int" />
+    <Property Name="moo" Type="int" />
+    <Property Name="road" Type="varchar" MaxLength="100" />
+    <Property Name="province" Type="int" />
+    <Property Name="ampher" Type="int" />
+    <Property Name="district" Type="int" />
+    <Property Name="comment" Type="varchar" MaxLength="255" />
+    <Property Name="farmer_img" Type="varchar" MaxLength="100" />
+    <Property Name="card_img" Type="varchar" MaxLength="100" />
+    <Property Name="bank" Type="int" />
+    <Property Name="status" Type="int" />
+    <Property Name="active" Type="int" />
+    <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="adminBy" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.registertype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="registertype">
+    <Key>
+      <PropertyRef Name="typeID" />
+      <PropertyRef Name="typeName" />
+    </Key>
+    <Property Name="typeID" Type="int" Nullable="false" />
+    <Property Name="typeName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.software' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="software">
+    <Key>
+      <PropertyRef Name="softwareType" />
+      <PropertyRef Name="softwareID" />
+      <PropertyRef Name="softwareName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="softwareType" Type="int" Nullable="false" />
+    <Property Name="softwareID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="softwareName" Type="text" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="int" />
+    <Property Name="softwareImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDsoft" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.softwaretype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="softwaretype">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+      <PropertyRef Name="softType" />
+    </Key>
+    <Property Name="IDsoft" Type="int" Nullable="false" />
+    <Property Name="softType" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.standard' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="standard">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="standardName" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="standardName" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.standardlist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="standardlist">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDpro" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="list" Type="varchar" MaxLength="255" />
+    <Property Name="fillin" Type="bool" />
+    <Property Name="img" Type="bool" />
+    <Property Name="IDpro" Type="int" Nullable="false" />
+    <Property Name="IDlist" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.staple' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="staple">
+    <Key>
+      <PropertyRef Name="stapleType" />
+      <PropertyRef Name="stapleID" />
+      <PropertyRef Name="stapleName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDstap" />
+    </Key>
+    <Property Name="stapleType" Type="int" Nullable="false" />
+    <Property Name="stapleID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="stapleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="stapleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDstap" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.stapletype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="stapletype">
+    <Key>
+      <PropertyRef Name="stapleID" />
+      <PropertyRef Name="stapleT" />
+    </Key>
+    <Property Name="stapleID" Type="int" Nullable="false" />
+    <Property Name="stapleT" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.status' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="statusID" />
+      <PropertyRef Name="statusName" />
+    </Key>
+    <Property Name="statusID" Type="int" Nullable="false" />
+    <Property Name="statusName" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.theory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="theory">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="workProcedure" />
+      <PropertyRef Name="farmingType" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="sepecies" />
+      <PropertyRef Name="product" />
+      <PropertyRef Name="productType" />
+      <PropertyRef Name="workName" />
+      <PropertyRef Name="access" />
+      <PropertyRef Name="reference" />
+      <PropertyRef Name="dateUpdate" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="workProcedure" Type="int" Nullable="false" />
+    <Property Name="farmingType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sepecies" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="product" Type="float" Nullable="false" />
+    <Property Name="productType" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="project" Type="int" />
+    <Property Name="workName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="access" Type="int" Nullable="false" />
+    <Property Name="reference" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="dateUpdate" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.theorytype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="theorytype">
+    <Key>
+      <PropertyRef Name="theoryID" />
+      <PropertyRef Name="theoryName" />
+    </Key>
+    <Property Name="theoryID" Type="int" Nullable="false" />
+    <Property Name="theoryName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.typeownership' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="typeownership">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ownership" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ownership" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.unit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+      <PropertyRef Name="unitName" />
+    </Key>
+    <Property Name="unitID" Type="int" Nullable="false" />
+    <Property Name="unitName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.vehicle' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="vehicleType" />
+      <PropertyRef Name="vehicleID" />
+      <PropertyRef Name="vehicleName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDve" />
+    </Key>
+    <Property Name="vehicleType" Type="int" Nullable="false" />
+    <Property Name="vehicleID" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="vehicleName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="detail" Type="varchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="unitBuy" Type="int" Nullable="false" />
+    <Property Name="unitUse" Type="int" Nullable="false" />
+    <Property Name="dateBuy" Type="date" />
+    <Property Name="workTime" Type="int" />
+    <Property Name="fuel" Type="int" />
+    <Property Name="energy" Type="int" />
+    <Property Name="vehicleImg" Type="varchar" MaxLength="255" />
+    <Property Name="IDve" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'def.farmdb.vehicletype' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vehicletype">
+    <Key>
+      <PropertyRef Name="vehicleID" />
+      <PropertyRef Name="vehicleT" />
+    </Key>
+    <Property Name="vehicleID" Type="int" Nullable="false" />
+    <Property Name="vehicleT" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="farmdbModelStoreContainer">
+    <EntitySet Name="access" EntityType="Self.access" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="active" EntityType="Self.active" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="activity" EntityType="Self.activity" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="ampher" EntityType="Self.ampher" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="bank" EntityType="Self.bank" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="bankuser" EntityType="Self.bankuser" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="buymethod" EntityType="Self.buymethod" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="district" EntityType="Self.district" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="energy" EntityType="Self.energy" Schema="farmdb" store:Type="Tables" />
+    <EntitySet Name="equipment" EntityType="Self.equipment" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`equipment`.`equipmentType`, 
+`equipment`.`equipmentID`, 
+`equipment`.`equipmentName`, 
+`equipment`.`detail`, 
+`equipment`.`price`, 
+`equipment`.`unitBuy`, 
+`equipment`.`unitUse`, 
+`equipment`.`dateBuy`, 
+`equipment`.`workTime`, 
+`equipment`.`fuel`, 
+`equipment`.`energy`, 
+`equipment`.`equipmentImg`, 
+`equipment`.`IDequip`
+FROM `farmdb.equipment` AS `equipment`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="equipmenttype" EntityType="Self.equipmenttype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`equipmenttype`.`equipmentID`, 
+`equipmenttype`.`equipmentT`
+FROM `farmdb.equipmenttype` AS `equipmenttype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="event" EntityType="Self.event" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`event`.`ID`, 
+`event`.`subject`, 
+`event`.`description`, 
+`event`.`start`, 
+`event`.`end`, 
+`event`.`themeColor`, 
+`event`.`isFullDay`
+FROM `farmdb.event` AS `event`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="family" EntityType="Self.family" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`family`.`familyID`, 
+`family`.`familyName`
+FROM `farmdb.family` AS `family`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="filedetails" EntityType="Self.filedetails" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`filedetails`.`fileID`, 
+`filedetails`.`fileName`, 
+`filedetails`.`fileContentType`, 
+`filedetails`.`fileData`
+FROM `farmdb.filedetails` AS `filedetails`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="fuel" EntityType="Self.fuel" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`fuel`.`fuelType`, 
+`fuel`.`fuelName`, 
+`fuel`.`detail`, 
+`fuel`.`price`, 
+`fuel`.`unitBuy`, 
+`fuel`.`unitUse`, 
+`fuel`.`fuleImg`, 
+`fuel`.`IDfule`
+FROM `farmdb.fuel` AS `fuel`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="fueltype" EntityType="Self.fueltype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`fueltype`.`fuelID`, 
+`fueltype`.`fuelType`
+FROM `farmdb.fueltype` AS `fueltype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="gender" EntityType="Self.gender" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`gender`.`genderID`, 
+`gender`.`genderName`
+FROM `farmdb.gender` AS `gender`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="labor" EntityType="Self.labor" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`labor`.`laborType`, 
+`labor`.`position`, 
+`labor`.`laborID`, 
+`labor`.`laborName`, 
+`labor`.`salary`, 
+`labor`.`workDate`, 
+`labor`.`laborImg`, 
+`labor`.`IDlab`
+FROM `farmdb.labor` AS `labor`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="labortype" EntityType="Self.labortype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`labortype`.`laborID`, 
+`labortype`.`laborT`
+FROM `farmdb.labortype` AS `labortype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="landplot" EntityType="Self.landplot" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`landplot`.`ID`, 
+`landplot`.`plotName`, 
+`landplot`.`areaCode`, 
+`landplot`.`typeOwnership`, 
+`landplot`.`license`, 
+`landplot`.`titleDeed`, 
+`landplot`.`landSlip`, 
+`landplot`.`landNumber`, 
+`landplot`.`license_img`, 
+`landplot`.`lease_img`, 
+`landplot`.`district`, 
+`landplot`.`ampher`, 
+`landplot`.`province`, 
+`landplot`.`coordinatesStar`, 
+`landplot`.`coordinatesEnd`, 
+`landplot`.`areaPlot`, 
+`landplot`.`areaPlotS`, 
+`landplot`.`plotDetails`, 
+`landplot`.`farmerName`, 
+`landplot`.`projectName`, 
+`landplot`.`note`, 
+`landplot`.`buyMethod`, 
+`landplot`.`plotStatus`, 
+`landplot`.`theoryName`, 
+`landplot`.`administrator`, 
+`landplot`.`active`
+FROM `farmdb.landplot` AS `landplot`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="license" EntityType="Self.license" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`license`.`ID`, 
+`license`.`licenseName`
+FROM `farmdb.license` AS `license`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="login" EntityType="Self.login" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`login`.`ID`, 
+`login`.`email`, 
+`login`.`password`
+FROM `farmdb.login` AS `login`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="machine" EntityType="Self.machine" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`machine`.`machineType`, 
+`machine`.`machineID`, 
+`machine`.`machineName`, 
+`machine`.`detail`, 
+`machine`.`price`, 
+`machine`.`unitBuy`, 
+`machine`.`unitUse`, 
+`machine`.`dateBuy`, 
+`machine`.`workTime`, 
+`machine`.`fuel`, 
+`machine`.`energy`, 
+`machine`.`machineImg`, 
+`machine`.`IDmac`
+FROM `farmdb.machine` AS `machine`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="machinetype" EntityType="Self.machinetype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`machinetype`.`machineID`, 
+`machinetype`.`machineT`
+FROM `farmdb.machinetype` AS `machinetype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="position" EntityType="Self.position" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`position`.`positionID`, 
+`position`.`positionName`
+FROM `farmdb.position` AS `position`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="profile" EntityType="Self.profile" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`profile`.`ID`, 
+`profile`.`name`, 
+`profile`.`cradID`, 
+`profile`.`gender`, 
+`profile`.`birthday`, 
+`profile`.`tel`, 
+`profile`.`no`, 
+`profile`.`moo`, 
+`profile`.`province`, 
+`profile`.`ampher`, 
+`profile`.`district`, 
+`profile`.`email`, 
+`profile`.`password`, 
+`profile`.`registerType`
+FROM `farmdb.profile` AS `profile`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="project" EntityType="Self.project" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`project`.`ID`, 
+`project`.`dataNow`, 
+`project`.`proName`, 
+`project`.`buyMethod`, 
+`project`.`detail`, 
+`project`.`manuStandards`
+FROM `farmdb.project` AS `project`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="projectand" EntityType="Self.projectand" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`projectand`.`ID`, 
+`projectand`.`projectName`
+FROM `farmdb.projectand` AS `projectand`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="province" EntityType="Self.province" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`province`.`provinceID`, 
+`province`.`provinceName`
+FROM `farmdb.province` AS `province`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="register" EntityType="Self.register" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`register`.`ID`, 
+`register`.`name`, 
+`register`.`registerID`, 
+`register`.`cardID`, 
+`register`.`gender`, 
+`register`.`birthday`, 
+`register`.`tel`, 
+`register`.`email`, 
+`register`.`family`, 
+`register`.`no`, 
+`register`.`moo`, 
+`register`.`road`, 
+`register`.`province`, 
+`register`.`ampher`, 
+`register`.`district`, 
+`register`.`comment`, 
+`register`.`farmer_img`, 
+`register`.`card_img`, 
+`register`.`bank`, 
+`register`.`status`, 
+`register`.`active`, 
+`register`.`dateUpdate`, 
+`register`.`adminBy`
+FROM `farmdb.register` AS `register`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="registertype" EntityType="Self.registertype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`registertype`.`typeID`, 
+`registertype`.`typeName`
+FROM `farmdb.registertype` AS `registertype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="software" EntityType="Self.software" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`software`.`softwareType`, 
+`software`.`softwareID`, 
+`software`.`softwareName`, 
+`software`.`detail`, 
+`software`.`price`, 
+`software`.`unitBuy`, 
+`software`.`unitUse`, 
+`software`.`dateBuy`, 
+`software`.`softwareImg`, 
+`software`.`IDsoft`
+FROM `farmdb.software` AS `software`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="softwaretype" EntityType="Self.softwaretype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`softwaretype`.`IDsoft`, 
+`softwaretype`.`softType`
+FROM `farmdb.softwaretype` AS `softwaretype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="standard" EntityType="Self.standard" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`standard`.`ID`, 
+`standard`.`standardName`
+FROM `farmdb.standard` AS `standard`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="standardlist" EntityType="Self.standardlist" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`standardlist`.`ID`, 
+`standardlist`.`list`, 
+`standardlist`.`fillin`, 
+`standardlist`.`img`, 
+`standardlist`.`IDpro`, 
+`standardlist`.`IDlist`
+FROM `farmdb.standardlist` AS `standardlist`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="staple" EntityType="Self.staple" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`staple`.`stapleType`, 
+`staple`.`stapleID`, 
+`staple`.`stapleName`, 
+`staple`.`detail`, 
+`staple`.`price`, 
+`staple`.`unitBuy`, 
+`staple`.`unitUse`, 
+`staple`.`dateBuy`, 
+`staple`.`stapleImg`, 
+`staple`.`IDstap`
+FROM `farmdb.staple` AS `staple`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="stapletype" EntityType="Self.stapletype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`stapletype`.`stapleID`, 
+`stapletype`.`stapleT`
+FROM `farmdb.stapletype` AS `stapletype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="status" EntityType="Self.status" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`status`.`statusID`, 
+`status`.`statusName`
+FROM `farmdb.status` AS `status`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="theory" EntityType="Self.theory" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`theory`.`ID`, 
+`theory`.`workProcedure`, 
+`theory`.`farmingType`, 
+`theory`.`type`, 
+`theory`.`sepecies`, 
+`theory`.`product`, 
+`theory`.`productType`, 
+`theory`.`project`, 
+`theory`.`workName`, 
+`theory`.`access`, 
+`theory`.`reference`, 
+`theory`.`detail`, 
+`theory`.`dateUpdate`
+FROM `farmdb.theory` AS `theory`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="theorytype" EntityType="Self.theorytype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`theorytype`.`theoryID`, 
+`theorytype`.`theoryName`
+FROM `farmdb.theorytype` AS `theorytype`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="typeownership" EntityType="Self.typeownership" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`typeownership`.`ID`, 
+`typeownership`.`ownership`
+FROM `farmdb.typeownership` AS `typeownership`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="unit" EntityType="Self.unit" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`unit`.`unitID`, 
+`unit`.`unitName`
+FROM `farmdb.unit` AS `unit`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vehicle" EntityType="Self.vehicle" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`vehicle`.`vehicleType`, 
+`vehicle`.`vehicleID`, 
+`vehicle`.`vehicleName`, 
+`vehicle`.`detail`, 
+`vehicle`.`price`, 
+`vehicle`.`unitBuy`, 
+`vehicle`.`unitUse`, 
+`vehicle`.`dateBuy`, 
+`vehicle`.`workTime`, 
+`vehicle`.`fuel`, 
+`vehicle`.`energy`, 
+`vehicle`.`vehicleImg`, 
+`vehicle`.`IDve`
+FROM `farmdb.vehicle` AS `vehicle`</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vehicletype" EntityType="Self.vehicletype" store:Type="Tables" store:Schema="farmdb">
+      <DefiningQuery>SELECT
+`vehicletype`.`vehicleID`, 
+`vehicletype`.`vehicleT`
+FROM `farmdb.vehicletype` AS `vehicletype`</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,118 @@
+﻿@model WebApp.Models.ViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+    <script type="text/javascript" src="~/scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ProvinceID").change(function () {
+                var selectedCountry = $(this).val();
+                if (selectedCountry != "") {
+                    $.ajax({
+                        url: "/Register/GetAmpher",
+                        data: { proID: selectedCountry },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#AmpherID").empty();
+                                $("#AmpherID").append($("<option></option>").attr("value", "").text("-- Select State --"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#AmpherID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#AmpherID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                                $("#AmpherID").change();
+                            }
+                        }
+                    });
+                }
+            });
+
+            $("#AmpherID").change(function () {
+                var selectedState = $(this).val();
+                if (selectedState != "") {
+                    $.ajax({
+                        url: "/Register/GetDistrict",
+                        data: { amID: selectedState },
+                        success: function (result) {
+                            if (result != undefined) {
+                                $("#DistrictID").empty();
+                                $("#DistrictID").append($("<option></option>").attr("value", "").text("-- Select City --"));
+                                $.each(result, function (index, elem) {
+                                    if (index == 0) {
+                                        $("#DistrictID").append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", elem.value)
+                                            .text(elem.text));
+                                    }
+                                    else {
+                                        $("#DistrictID").append($("<option></option>").attr("value", elem.value).text(elem.text));
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    $("#DistrictID").empty();
+                    $("#DistrictID").append($("<option></option>").attr("value", "").text("-- Select City --"));
+                }
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .row {
+            margin-bottom: 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    Country:
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CountryList, new SelectList(Model.CountryList, "Value", "Text"),
+                                      "-- Select Country --", new { id = "ProvinceID", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    State:
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownList("AmpherID", new List<SelectListItem>(), "-- Select State --", new { id = "AmpherID", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    City:
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownList("DistrictID", new List<SelectListItem>(), "-- Select City --", new { id = "DistrictID", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

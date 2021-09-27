@@ -1,0 +1,93 @@
+﻿@model WebApp.Models.theory
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบขั้นตอนการทำงาน</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Theory")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.workProcedure) :
+                            @Html.DropDownListFor(model => model.workProcedure, (IEnumerable<SelectListItem>)ViewBag.theorytypes, "เลือกขั้นตอนการทำงาน", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.farmingType) :
+                            @Html.DisplayFor(model => model.farmingType)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.type) :
+                            @Html.DisplayFor(model => model.type)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.sepecies) :
+                            @Html.DisplayFor(model => model.sepecies)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.productType) :
+                            @Html.DisplayFor(model => model.productType)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.product) :
+                            @Html.DisplayFor(model => model.product)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.project) :
+                            @Html.DropDownListFor(model => model.project, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.workName) :
+                            @Html.DisplayFor(model => model.workName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.access) :
+                            @Html.DropDownListFor(model => model.access, (IEnumerable<SelectListItem>)ViewBag.accesses, "เลือกการเข้าถึง", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.reference) :
+                            @Html.DisplayFor(model => model.reference)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.detail) :
+                            @Html.DisplayFor(model => model.detail)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

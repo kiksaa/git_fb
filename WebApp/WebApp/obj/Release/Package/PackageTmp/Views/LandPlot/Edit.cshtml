@@ -1,0 +1,210 @@
+﻿@model WebApp.Models.landplot
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - แก้ไขทะเบียนแปลง</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm("Edit", "LandPlot", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            <div class="container-fluid">
+                <h4>แผนงาน</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <div class="col">
+                                    <nav>
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link alert-success" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">โครงการ</a>
+                                        </div>
+                                    </nav>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <br />
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    @Html.HiddenFor(model => model.ID)
+                                                    @Html.HiddenFor(model => model.lease_img)
+                                                    @Html.HiddenFor(model => model.license_img)
+                                                    @Html.HiddenFor(model => model.province)
+                                                    @Html.HiddenFor(model => model.ampher)
+                                                    @Html.HiddenFor(model => model.district)
+                                                    <br />
+                                                    <h5>ข้อมูลแปลง</h5>
+                                                    <br />
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.farmerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.farmerName, (IEnumerable<SelectListItem>)ViewBag.registers, "เลือกชื่อเกษตรกร", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.farmerName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.plotName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.EditorFor(model => model.plotName, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.plotName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.administrator, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.EditorFor(model => model.administrator, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.administrator, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.areaPlot, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.license, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "เลือกประเภทเอกสารสิทธิ์", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.license, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.titleDeed, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.EditorFor(model => model.titleDeed, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.titleDeed, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.landNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.EditorFor(model => model.landNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => model.landNumber, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.typeOwnership, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือกประเภทกรรมสิทธิ์", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.typeOwnership, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    @using (Html.BeginForm("Create", "LandPlot", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+
+                                                        <div class="form-group row">
+                                                            @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
+                                                            @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(model => model.file_lease, "", new { @type = "file", @multiple = "multiple" })
+                                                                @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
+                                                                @{ if (@Model.lease_img != null)
+                                                                    {
+                                                                        <br />
+                                                                        @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.lease_img })
+                                                                    } }
+                                                            </div>
+                                                            @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(model => model.file_license, "", new { @type = "file", @multiple = "multiple" })
+                                                                @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
+                                                                @{ if (@Model.license_img != null)
+                                                                    {
+                                                                        <br />
+                                                                        @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.license_img })
+                                                                    } }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <br />
+                                                    <h5>ข้อมูลโครงการ</h5>
+                                                    <br />
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.projectName, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control", required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.projectName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.theoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.theoryName, (IEnumerable<SelectListItem>)ViewBag.theories, "เลือกขั้นตอนการทำงาน", htmlAttributes: new { @class = "form-control", required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.theoryName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.buyMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.buyMethod, (IEnumerable<SelectListItem>)ViewBag.buymethods, "เลือกวิธีการรับซื้อ", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.buyMethod, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        @Html.LabelFor(model => model.plotDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.TextAreaFor(model => model.plotDetails, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.plotDetails, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        @Html.LabelFor(model => model.plotStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-4">
+                                                            @Html.DropDownListFor(model => model.plotStatus, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.plotStatus, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <br />
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="container">
+                                            <div class="row justify-content-md-center">
+                                                <div class="form-group row">
+                                                    <div class="col-6">
+                                                        @*<a class="btn btn-danger" href="@Url.Action("IndexEdit", "LandPlot", new { id = Model.ID})">
+                                                                <span>
+                                                                    กลับ
+                                                                </span>
+                                                            </a>*@
+                                                        <a class="btn btn-danger" href="@Url.Action("Index", "LandPlot")">
+                                                            <span>
+                                                                กลับ
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type="submit" value="บันทึก" class="btn btn-success" />
+                                                    </div>
+                                                    @* <div class="col-4">
+                                                            <a class="btn btn-warning" href="@Url.Action("Index", "Register")">
+                                                                <span>
+                                                                    ข้าม
+                                                                </span>
+                                                            </a>
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

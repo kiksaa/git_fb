@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApp.Models.standardlist>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ทะเบียนอุปกรณ์</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <br />
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row  justify-content-between">
+                    @* <div class="col-2">
+                            <h4 class="m-0 font-weight-bold text-primary">@ViewBag.TotalEquipment รายการ</h4>
+                        </div>*@
+                    <a type="button" class="btn btn-success" id="newregister" href="@Url.Action("Create", "Standardlist")">
+                        <span>
+                            + สร้างใหม่
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IDlist)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.list)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fillin)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.img)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @{ var i = 0;}
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @{i++;}
+                                        @i
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IDlist)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.list)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fillin)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.img)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

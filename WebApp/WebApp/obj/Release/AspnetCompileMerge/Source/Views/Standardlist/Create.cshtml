@@ -1,0 +1,114 @@
+﻿@model WebApp.Models.standardlist
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function AddData() {
+        $('#ButtonAction').val("Update");
+        $("#btnSubmit").click();
+    }
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - มาตรฐานแปลง</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @using (Html.BeginForm("Create", "Standardlist", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded border-bottom-info mb-3" style="width: 50rem;">
+                    <h4>มาตรฐานแปลง</h4>
+                    <div class="card-body">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @*@Html.HiddenFor(model => model.ID)*@
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.IDlist, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.IDlist, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.IDlist, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.list, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.list, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                        @Html.ValidationMessageFor(model => model.list, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.fillin, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @*<div class="checkbox">*@
+                                       @* @Html.EditorFor(model => model.fillin, new { htmlAttributes = new { @class = "form-control" } })*@
+                                        @Html.CheckBox("fillin", Model.fillin.HasValue? Model.fillin : false)
+                                        @Html.ValidationMessageFor(model => model.fillin, "", new { @class = "text-danger" })
+                                        @*</div>*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @*<div class="checkbox">*@
+                                       @* @Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })*@
+                                        @Html.CheckBox("img", Model.img.HasValue? Model.img : false)
+                                        @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+                                        @*</div>*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.IDpro, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.IDpro, (IEnumerable<SelectListItem>)ViewBag.projects, "ชื่อโปรเจค", htmlAttributes: new { @class = "form-control", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.IDpro, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <a type="button" class="btn btn-danger" href="@Url.Action("Create", "Project")">
+                                            <span>
+                                                กลับ
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="submit" value="บันทึก" class="btn btn-success" />
+                                    </div>
+                                    <div class="col-4">
+                                        <a class="btn btn-warning" href="@Url.Action("Index", "Project")">
+                                            <span>
+                                                ข้าม
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
