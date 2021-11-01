@@ -1,0 +1,298 @@
+﻿@model IEnumerable<WebApp.Models.ViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - แก้ไขทะเบียนแปลง</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col">
+                <div class="row">
+                    <div class="col-md-11">
+                        <h4>
+                            <span class="m-0 font-weight-bold text-primary">
+                                ทะเบียนยานพาหนะ @ViewBag.Vehicle รายการ
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="col-md-1">
+                        <a class="btn btn-secondary" href="@Url.Action("IndexSum", "Equipment")">
+                            <span>
+                                กลับ
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                @*<h4 class="m-0 font-weight-bold text-primary">แปลงที่ดิน @ViewBag.LandPlot แปลง</h4>*@
+                <hr />
+                @{ var i = 0;}
+                @foreach (var model in Model)
+                {
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-item nav-link alert-success" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                                                    รายการที่  @{i++;}
+                                                    @i
+                                                </a>
+                                            </div>
+                                        </nav>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <br />
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                        @Html.HiddenFor(modelItem => model.IDve)
+                                                        <br />
+                                                        <h5>ข้อมูลทั่วไป</h5>
+                                                        <br />
+                                                        <div class="form-group row">
+                                                            @Html.LabelFor(modelItem => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.name, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.vehicleType, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.vehicleType, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.vehicleType, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.vehicleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.vehicleName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.vehicleName, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            @Html.LabelFor(modelItem => model.vehicleID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.vehicleID, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.vehicleID, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.detail, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.detail, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.priceV, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.priceV, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.priceV, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div><div class="form-group row">
+                                                            @Html.LabelFor(modelItem => model.unitBuy, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.unitBuy, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.unitBuy, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.unitUse, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.unitUse, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.unitUse, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.dateBuy, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-2">
+                                                                @Html.DisplayFor(modelItem => model.dateBuy, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.dateBuy, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <h5>ตั้งค่าการทำงานเริ่มต้น</h5>
+                                                        <br />
+                                                        <div class="form-group row">
+                                                            @Html.LabelFor(modelItem => model.workTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.DisplayFor(modelItem => model.workTime, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.workTime, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.energyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.DisplayFor(modelItem => model.energyName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.energyName, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            @Html.LabelFor(modelItem => model.fuel, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            <div class="col-md-4">
+                                                                @Html.DisplayFor(modelItem => model.fuel, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(modelItem => model.fuel, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <br />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="container">
+                                                <div class="row justify-content-md-center">
+                                                    <div class="form-group row">
+                                                        @* <div class="col-6">
+                                                                <a class="btn btn-secondary" href="@Url.Action("Index", "LandPlot")">
+                                                                    <span>
+                                                                        กลับ
+                                                                    </span>
+                                                                </a>
+                                                            </div>*@
+                                                        <div class="col-12">
+                                                            <a class="btn btn-primary" href="@Url.Action("Edit", "vehicle", new { id = model.IDve })">
+                                                                <span>
+                                                                    แก้ไข
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                }
+
+            </div>
+        </div>
+    }
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+@*
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDve)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicleType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicleID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.energyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDequip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.equipmentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.equipmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.equipmentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detailV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.priceV)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IDve)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vehicleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vehicleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vehicleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.energyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDequip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.equipmentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.equipmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.equipmentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detailV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.priceV)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+*@

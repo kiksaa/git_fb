@@ -1,0 +1,201 @@
+﻿@model IEnumerable<WebApp.Models.ViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+    <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+    @*<br />*@
+    <div class="card-body">
+        <div class="container">
+            @* <h4> ประวัติส่วนตัว </h4>
+                <br />*@
+            <div class="row">
+                @*<div class="col-sm-6">*@
+                <div class="table-responsive">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.name)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.name, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.name, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.cardID)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.cardID, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.cardID, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.gender)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.RadioButtonFor(modelItem => item.gender, "100", htmlAttributes: new { @class = "control-label col-md-1", disabled = "disabled", @readonly = "true" })
+                                        @Html.Label("ชาย")
+                                        @Html.ValidationMessageFor(modelItem => item.gender, "", new { @class = "text-danger" })
+
+                                        @Html.RadioButtonFor(modelItem => item.gender, "200", htmlAttributes: new { @class = "control-label col-md-1", disabled = "disabled", @readonly = "true" })
+                                        @Html.Label("หญิง")
+                                        @Html.ValidationMessageFor(modelItem => item.gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.birthday)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.birthday, new { htmlAttributes = new { @class = "form-control", placeholder = "วัน/เดือน/ปี(พ.ศ) เกิด", Type = "DateTime", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.birthday, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tel)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.tel, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.tel, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.addresspro)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.addresspro, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.addresspro, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.provinceName)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.provinceName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.provinceName, "", new { @class = "text-danger" })
+                                        @* @Html.DropDownListFor(modelItem => item.provinceName, (IEnumerable<SelectListItem>)ViewBag.provinces, "เลือกจังหวัด", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                            @Html.ValidationMessageFor(modelItem => item.provinceName, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ampherName)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.ampherName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.ampherName, "", new { @class = "text-danger" })
+                                        @* @Html.DropDownListFor(modelItem => item.ampherName, (IEnumerable<SelectListItem>)ViewBag.amphers, "เลือกอำเภอ/เขต", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                            @Html.ValidationMessageFor(modelItem => item.ampherName, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.districtName)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.districtName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.districtName, "", new { @class = "text-danger" })
+                                        @*@Html.DropDownListFor(modelItem => item.districtName, (IEnumerable<SelectListItem>)ViewBag.districts, "เลือกตำบล/แขวง", htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "true" })
+                                            @Html.ValidationMessageFor(modelItem => item.districtName, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.email)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.email, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.email, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.password)
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.password, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "true" } })
+                                        @Html.ValidationMessageFor(modelItem => item.password, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+
+                                </th>
+                                <td class="form-group">
+                                    <div class="col-md-12">
+                                        <a type="button" class="btn btn-danger me-md-2" href="@Url.Action("Index", "Account", new { email = item.email })">
+                                            <span> ปิด</span>
+                                        </a>
+                                        <a type="button" class="btn btn-primary me-md-2" href="@Url.Action("Edit", "Profile", new { email = item.email })">
+                                            <span> แก้ไข</span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                @*</div>*@
+                @*<div class="col-sm-6">134</div>*@
+            </div>
+            @*<div class="form-group row">
+                    <div class="col-1">
+                        <a class="btn btn-danger" href="@Url.Action("Index", "Account")">
+                            <span>
+                                กลับ
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</body>
+</html>

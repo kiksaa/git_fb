@@ -163,3 +163,4 @@ C:\Users\samatcha\Desktop\WebApp\WebApp\obj\Debug\WebApp.csproj.CoreCompileInput
 C:\Users\samatcha\Desktop\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\samatcha\Desktop\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\samatcha\Desktop\WebApp\WebApp\obj\Debug\WebApp.pdb
+C:\Users\samatcha\Desktop\WebApp\WebApp\obj\Debug\WebApp.csproj.AssemblyReference.cache

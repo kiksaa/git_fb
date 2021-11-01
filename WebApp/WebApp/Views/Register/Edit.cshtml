@@ -132,11 +132,11 @@
             <div class="row">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.ID)
-                @Html.HiddenFor(model => model.bank)
+                @*@Html.HiddenFor(model => model.bank)*@
                 @Html.HiddenFor(model => model.card_img)
                 @Html.HiddenFor(model => model.farmer_img)
                 @Html.HiddenFor(model => model.birthday)
-                @Html.HiddenFor(model => model.bankuser.ID)
+                @*@Html.HiddenFor(model => model.bankuser.ID)*@
                 @using (Html.BeginForm("Create", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="col-sm-2">
@@ -160,8 +160,8 @@
                                 @Html.TextBoxFor(model => model.file_cardImg, "", new { @type = "file", @multiple = "multiple" })
                                 @{ if (@Model.card_img != null)
                                     {
-                                        <br />
-                                        <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />
+                                        @*<br />
+                                        <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />*@
                                         <br />
                                         @Html.ActionLink("Downlaod", "DownLoadFile", new { name = Model.card_img })
 
@@ -175,7 +175,7 @@
                     <div class="form-group row">
                         @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
-                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", required = "required" } })
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                             {
                                 @*@Html.DisplayFor(model => model.birthday)*@
                                 @*@Html.TextBoxFor(x => x.birthday, new { @class = "form-control", @readonly = "readonly" } )*@
-                                @Html.TextBox("birthday", String.Format("{0:MM/dd/yyyy}", (Model.birthday == DateTime.MinValue) ? null : Model.birthday), new { @class = "form-control", @readonly = "readonly" })
+                                @Html.TextBox("birthday", String.Format("{0:MM/dd/yyyy}", (Model.birthday == DateTime.MinValue) ? null : Model.birthday), new { @class = "form-control"@*, @readonly = "readonly"*@ })
                             }
                             @if (Model.birthday == null)
                             {
@@ -332,28 +332,19 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.bankuser.bankID, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-12">
-                            @Html.DropDownListFor(modelItem => modelItem.bankuser.bankID, (IEnumerable<SelectListItem>)ViewBag.banks, "เลือกธนาคาร", htmlAttributes: new { @class = "form-control", required = "required" })
-                            @Html.ValidationMessageFor(model => model.bankuser.bankID, "", new { @class = "text-danger" })
-                        </div>
-                        <br />
-                        @Html.LabelFor(model => model.bankuser.bankName, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.bankuser.bankName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                            @Html.ValidationMessageFor(model => model.bankuser.bankName, "", new { @class = "text-danger" })
-                        </div>
-                        <br />
-                        @Html.LabelFor(model => model.bankuser.bankNo, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.bankuser.bankNo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                            @Html.ValidationMessageFor(model => model.bankuser.bankNo, "", new { @class = "text-danger" })
-                        </div>
+
+                    @* <input type="submit" value="เพิ่มข้อมูลธนาคาร" class="btn btn-warning" href="@Url.Action("Create", "Bank", new { regisName = Model.ID })" />*@
+                    @Html.Action("IndexBank", "Register", new { regisName = Model.ID })
+                    <div class="container-fluid">
+                        <a class="btn btn-success" href="@Url.Action("Create", "Bank", new { Model.ID })">
+                            <span>
+                                เพิ่มบัญชีธนาคาร
+                            </span>
+                        </a>
                     </div>
-                    @Html.Action("IndexPlot", "Register", new { farmerName = Model.ID })
+                        @Html.Action("IndexPlot", "Register", new { farmerName = Model.ID })
+                    </div>
                 </div>
-            </div>
         </div>
 
     }

@@ -47,9 +47,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="bankID" Type="int" Nullable="false" />
-    <Property Name="bankName" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="bankNo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="bankID" Type="int" />
+    <Property Name="bankName" Type="varchar" MaxLength="100" />
+    <Property Name="bankNo" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="buymethod">
     <Key>
@@ -262,7 +262,7 @@
     <Property Name="gender" Type="int" Nullable="false" />
     <Property Name="birthday" Type="date" Nullable="false" />
     <Property Name="tel" Type="varchar" MaxLength="10" />
-    <Property Name="no" Type="int" />
+    <Property Name="no" Type="varchar" MaxLength="11" />
     <Property Name="moo" Type="int" />
     <Property Name="province" Type="int" />
     <Property Name="ampher" Type="int" />
@@ -306,10 +306,10 @@
     <Property Name="cardID" Type="varchar" MaxLength="13" />
     <Property Name="gender" Type="int" />
     <Property Name="birthday" Type="date" />
-    <Property Name="tel" Type="int" Nullable="false" />
+    <Property Name="tel" Type="varchar" MaxLength="11" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="100" />
     <Property Name="family" Type="int" />
-    <Property Name="no" Type="int" />
+    <Property Name="no" Type="varchar" MaxLength="11" />
     <Property Name="moo" Type="int" />
     <Property Name="road" Type="varchar" MaxLength="100" />
     <Property Name="province" Type="int" />
@@ -489,7 +489,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="bankuser_ibfk_1">
-    <End Role="bank" Type="Self.bank" Multiplicity="1" />
+    <End Role="bank" Type="Self.bank" Multiplicity="0..1" />
     <End Role="bankuser" Type="Self.bankuser" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="bank">

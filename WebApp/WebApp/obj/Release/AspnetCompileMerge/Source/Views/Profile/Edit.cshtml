@@ -94,6 +94,7 @@
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.birthday)
                     @if (User.Identity.Name != Model.email)
                     {
                         <div class="form-group row">

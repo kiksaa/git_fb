@@ -47,25 +47,11 @@ namespace WebApp.Controllers
                                from th in thlist.DefaultIfEmpty()
                                select new
                                {
-                                   l.ID,
-                                   l.plotName,
-                                   p.provinceName,
-                                   a.ampherName,
-                                   d.districtName,
+                                   l.ID, l.plotName, p.provinceName, a.ampherName, d.districtName,
                                    /*l.provinceStr, l.ampherStr, l.districtStr,*/
-                                   r.name,
-                                   t.ownership,
-                                   li.licenseName,
-                                   pro.proName,
-                                   s.statusName,
-                                   l.areaPlot,
-                                   l.areaPlotS,
-                                   l.active,
-                                   l.lease_img,
-                                   l.license_img,
-                                   th.product,
-                                   th.workName,
-                                   Totalarea = th.product * l.areaPlot,
+                                   r.name, t.ownership, li.licenseName, pro.proName, s.statusName,
+                                   l.areaPlot, l.areaPlotS, l.active, l.lease_img, l.license_img,
+                                   th.product, th.workName,Totalarea = th.product * l.areaPlot,
                                };
                     foreach (var item in data)
                     {
@@ -485,6 +471,7 @@ namespace WebApp.Controllers
         public ActionResult Edit(int id)
         {
             landplot plotModel = new landplot();
+            register registerModel = new register();
             using (farmdbEntities farmdb = new farmdbEntities())
             {
                 plotModel = farmdb.landplots.Where(x => x.ID == id).FirstOrDefault();
@@ -537,7 +524,7 @@ namespace WebApp.Controllers
                 ViewBag.licenses = sellicenses;
 
                 List<status> status = farmdb.status.ToList();
-                /* if (User.Identity.Name == "admin")
+                /*if (User.Identity.Name == "admin")
                  {
                      IEnumerable<SelectListItem> selstatus = from s in status
                                                              select new SelectListItem
@@ -634,6 +621,7 @@ namespace WebApp.Controllers
                         }
                         farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     if (plotModel.file_lease != null)
                     {
@@ -656,6 +644,7 @@ namespace WebApp.Controllers
                         }
                         farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     /*plotModel.farmerName = registerModel.ID;*/
                     farmdb.Entry(plotModel).State = System.Data.Entity.EntityState.Modified;

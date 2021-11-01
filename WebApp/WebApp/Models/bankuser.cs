@@ -12,25 +12,20 @@ namespace WebApp.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-
     public partial class bankuser
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public bankuser()
-        {
-            this.registers = new HashSet<register>();
-        }
         [DisplayName("ลำดับที่")]
         public int ID { get; set; }
         [DisplayName("ธนาคาร")]
-        public int bankID { get; set; }
+        public Nullable<int> bankID { get; set; }
         [DisplayName("ชื่อบัญชี")]
         public string bankName { get; set; }
         [DisplayName("เลขที่บัญชี")]
         public string bankNo { get; set; }
-
+        [DisplayName("ชื่อเกษตกร")]
+        public Nullable<int> regisName { get; set; }
+    
         public virtual bank bank { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<register> registers { get; set; }
+        public virtual register register { get; set; }
     }
 }

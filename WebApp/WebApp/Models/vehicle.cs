@@ -46,8 +46,11 @@ namespace WebApp.Models
 
         [DisplayName("ลำดับที่")]
         public int IDve { get; set; }
-
+        [DisplayName("ชื่อเกษตกร")]
+        public Nullable<int> regisName { get; set; }
+    
         public virtual energy energy1 { get; set; }
+        public virtual register register { get; set; }
         public virtual unit unit { get; set; }
         public virtual unit unit1 { get; set; }
         public virtual vehicletype vehicletype1 { get; set; }

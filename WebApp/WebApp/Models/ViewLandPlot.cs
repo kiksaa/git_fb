@@ -8,6 +8,7 @@ namespace WebApp.Models
 {
     public class ViewLandPlot
     {
+        [DisplayName("ลำดับที่")]
         public int ID { get; set; }
 
         [DisplayName("ชื่อแปลง")]

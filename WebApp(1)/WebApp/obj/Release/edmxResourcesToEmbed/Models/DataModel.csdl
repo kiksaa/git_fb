@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="farmdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="access">
+    <Key>
+      <PropertyRef Name="accessID" />
+    </Key>
+    <Property Name="accessID" Type="Int32" Nullable="false" />
+    <Property Name="accessName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="Int32" Nullable="false" />
+    <Property Name="activeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="activity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="stepNum" Type="Int32" />
+    <Property Name="stepName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="age" Type="Int32" Nullable="false" />
+    <Property Name="time" Type="Int32" Nullable="false" />
+    <Property Name="activity1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="notice" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="plan" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ampher">
+    <Key>
+      <PropertyRef Name="ampherID" />
+    </Key>
+    <Property Name="ampherID" Type="Int32" Nullable="false" />
+    <Property Name="ampherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="bankType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bankuser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="bankID" Type="Int32" Nullable="false" />
+    <Property Name="bankName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bankNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="buymethod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="nameBuy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="district">
+    <Key>
+      <PropertyRef Name="districtID" />
+    </Key>
+    <Property Name="districtID" Type="Int32" Nullable="false" />
+    <Property Name="districtName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proID" Type="Int32" Nullable="false" />
+    <Property Name="amID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="energy">
+    <Key>
+      <PropertyRef Name="energyID" />
+    </Key>
+    <Property Name="energyID" Type="Int32" Nullable="false" />
+    <Property Name="energyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipment">
+    <Key>
+      <PropertyRef Name="equipmentType" />
+      <PropertyRef Name="equipmentID" />
+      <PropertyRef Name="equipmentName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDequip" />
+    </Key>
+    <Property Name="equipmentType" Type="Int32" Nullable="false" />
+    <Property Name="equipmentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="equipmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="equipmentImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDequip" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipmenttype">
+    <Key>
+      <PropertyRef Name="equipmentID" />
+      <PropertyRef Name="equipmentT" />
+    </Key>
+    <Property Name="equipmentID" Type="Int32" Nullable="false" />
+    <Property Name="equipmentT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="subject" />
+      <PropertyRef Name="description" />
+      <PropertyRef Name="start" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="start" Type="DateTime" Nullable="false" />
+    <Property Name="end" Type="DateTime" />
+    <Property Name="themeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="isFullDay" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="family">
+    <Key>
+      <PropertyRef Name="familyID" />
+      <PropertyRef Name="familyName" />
+    </Key>
+    <Property Name="familyID" Type="Int32" Nullable="false" />
+    <Property Name="familyName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="filedetail">
+    <Key>
+      <PropertyRef Name="fileID" />
+    </Key>
+    <Property Name="fileID" Type="Int32" Nullable="false" />
+    <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="fileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="fuel">
+    <Key>
+      <PropertyRef Name="fuelType" />
+      <PropertyRef Name="fuelName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDfule" />
+    </Key>
+    <Property Name="fuelType" Type="Int32" Nullable="false" />
+    <Property Name="fuelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="fuleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDfule" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fueltype">
+    <Key>
+      <PropertyRef Name="fuelID" />
+      <PropertyRef Name="fuelType1" />
+    </Key>
+    <Property Name="fuelID" Type="Int32" Nullable="false" />
+    <Property Name="fuelType1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="gender">
+    <Key>
+      <PropertyRef Name="genderID" />
+      <PropertyRef Name="genderName" />
+    </Key>
+    <Property Name="genderID" Type="Int32" Nullable="false" />
+    <Property Name="genderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="labor">
+    <Key>
+      <PropertyRef Name="laborType" />
+      <PropertyRef Name="position" />
+      <PropertyRef Name="laborID" />
+      <PropertyRef Name="laborName" />
+      <PropertyRef Name="IDlab" />
+    </Key>
+    <Property Name="laborType" Type="Int32" Nullable="false" />
+    <Property Name="position" Type="Int32" Nullable="false" />
+    <Property Name="laborID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="laborName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salary" Type="Int32" />
+    <Property Name="workDate" Type="DateTime" />
+    <Property Name="laborImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDlab" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="labortype">
+    <Key>
+      <PropertyRef Name="laborID" />
+      <PropertyRef Name="laborT" />
+    </Key>
+    <Property Name="laborID" Type="Int32" Nullable="false" />
+    <Property Name="laborT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="landplot">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="plotName" />
+      <PropertyRef Name="typeOwnership" />
+      <PropertyRef Name="license" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="plotName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="areaCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="typeOwnership" Type="Int32" Nullable="false" />
+    <Property Name="license" Type="Int32" Nullable="false" />
+    <Property Name="titleDeed" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="landSlip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="landNumber" Type="Int32" />
+    <Property Name="license_img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="lease_img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="coordinatesStar" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="coordinatesEnd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="areaPlot" Type="Single" />
+    <Property Name="areaPlotS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="plotDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="farmerName" Type="Int32" />
+    <Property Name="projectName" Type="Int32" />
+    <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="buyMethod" Type="Int32" />
+    <Property Name="plotStatus" Type="Int32" />
+    <Property Name="theoryName" Type="Int32" />
+    <Property Name="administrator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="license">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="licenseName" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="licenseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="password" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="machine">
+    <Key>
+      <PropertyRef Name="machineType" />
+      <PropertyRef Name="machineID" />
+      <PropertyRef Name="machineName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDmac" />
+    </Key>
+    <Property Name="machineType" Type="Int32" Nullable="false" />
+    <Property Name="machineID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="machineName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="machineImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDmac" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="machinetype">
+    <Key>
+      <PropertyRef Name="machineID" />
+      <PropertyRef Name="machineT" />
+    </Key>
+    <Property Name="machineID" Type="Int32" Nullable="false" />
+    <Property Name="machineT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="positionID" />
+      <PropertyRef Name="positionName" />
+    </Key>
+    <Property Name="positionID" Type="Int32" Nullable="false" />
+    <Property Name="positionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="profile">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="cradID" />
+      <PropertyRef Name="gender" />
+      <PropertyRef Name="birthday" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="password" />
+      <PropertyRef Name="registerType" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cradID" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="Int32" Nullable="false" />
+    <Property Name="birthday" Type="DateTime" Nullable="false" />
+    <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="no" Type="Int32" />
+    <Property Name="moo" Type="Int32" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="registerType" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="dataNow" />
+      <PropertyRef Name="proName" />
+      <PropertyRef Name="buyMethod" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="dataNow" Type="DateTime" Nullable="false" />
+    <Property Name="proName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="buyMethod" Type="Int32" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="manuStandards" Type="Int32" />
+  </EntityType>
+  <EntityType Name="projectand">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="projectName" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="projectName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="province">
+    <Key>
+      <PropertyRef Name="provinceID" />
+      <PropertyRef Name="provinceName" />
+    </Key>
+    <Property Name="provinceID" Type="Int32" Nullable="false" />
+    <Property Name="provinceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="register">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="tel" />
+      <PropertyRef Name="dateUpdate" />
+      <PropertyRef Name="adminBy" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="registerID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cardID" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="Int32" />
+    <Property Name="birthday" Type="DateTime" />
+    <Property Name="tel" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="family" Type="Int32" />
+    <Property Name="no" Type="Int32" />
+    <Property Name="moo" Type="Int32" />
+    <Property Name="road" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="farmer_img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="card_img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="bank" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
+    <Property Name="adminBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="registertype">
+    <Key>
+      <PropertyRef Name="typeID" />
+      <PropertyRef Name="typeName" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" />
+    <Property Name="typeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="software">
+    <Key>
+      <PropertyRef Name="softwareType" />
+      <PropertyRef Name="softwareID" />
+      <PropertyRef Name="softwareName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="softwareType" Type="Int32" Nullable="false" />
+    <Property Name="softwareID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="softwareName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="Int32" />
+    <Property Name="softwareImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDsoft" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="softwaretype">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+      <PropertyRef Name="softType" />
+    </Key>
+    <Property Name="IDsoft" Type="Int32" Nullable="false" />
+    <Property Name="softType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="standard">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="standardName" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="standardName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="standardlist">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="IDpro" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="list" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="fillin" Type="Boolean" />
+    <Property Name="img" Type="Boolean" />
+    <Property Name="IDpro" Type="Int32" Nullable="false" />
+    <Property Name="IDlist" Type="Int32" />
+  </EntityType>
+  <EntityType Name="staple">
+    <Key>
+      <PropertyRef Name="stapleType" />
+      <PropertyRef Name="stapleID" />
+      <PropertyRef Name="stapleName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDstap" />
+    </Key>
+    <Property Name="stapleType" Type="Int32" Nullable="false" />
+    <Property Name="stapleID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="stapleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="stapleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDstap" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stapletype">
+    <Key>
+      <PropertyRef Name="stapleID" />
+      <PropertyRef Name="stapleT" />
+    </Key>
+    <Property Name="stapleID" Type="Int32" Nullable="false" />
+    <Property Name="stapleT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="statusID" />
+      <PropertyRef Name="statusName" />
+    </Key>
+    <Property Name="statusID" Type="Int32" Nullable="false" />
+    <Property Name="statusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="theory">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="workProcedure" />
+      <PropertyRef Name="farmingType" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="sepecies" />
+      <PropertyRef Name="product" />
+      <PropertyRef Name="productType" />
+      <PropertyRef Name="workName" />
+      <PropertyRef Name="access" />
+      <PropertyRef Name="reference" />
+      <PropertyRef Name="dateUpdate" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="workProcedure" Type="Int32" Nullable="false" />
+    <Property Name="farmingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sepecies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product" Type="Single" Nullable="false" />
+    <Property Name="productType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="project" Type="Int32" />
+    <Property Name="workName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="access" Type="Int32" Nullable="false" />
+    <Property Name="reference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="theorytype">
+    <Key>
+      <PropertyRef Name="theoryID" />
+      <PropertyRef Name="theoryName" />
+    </Key>
+    <Property Name="theoryID" Type="Int32" Nullable="false" />
+    <Property Name="theoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="typeownership">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ownership" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ownership" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+      <PropertyRef Name="unitName" />
+    </Key>
+    <Property Name="unitID" Type="Int32" Nullable="false" />
+    <Property Name="unitName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="vehicleType" />
+      <PropertyRef Name="vehicleID" />
+      <PropertyRef Name="vehicleName" />
+      <PropertyRef Name="unitBuy" />
+      <PropertyRef Name="unitUse" />
+      <PropertyRef Name="IDve" />
+    </Key>
+    <Property Name="vehicleType" Type="Int32" Nullable="false" />
+    <Property Name="vehicleID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vehicleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="vehicleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDve" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vehicletype">
+    <Key>
+      <PropertyRef Name="vehicleID" />
+      <PropertyRef Name="vehicleT" />
+    </Key>
+    <Property Name="vehicleID" Type="Int32" Nullable="false" />
+    <Property Name="vehicleT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="farmdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="accesses" EntityType="Self.access" />
+    <EntitySet Name="actives" EntityType="Self.active" />
+    <EntitySet Name="activities" EntityType="Self.activity" />
+    <EntitySet Name="amphers" EntityType="Self.ampher" />
+    <EntitySet Name="banks" EntityType="Self.bank" />
+    <EntitySet Name="bankusers" EntityType="Self.bankuser" />
+    <EntitySet Name="buymethods" EntityType="Self.buymethod" />
+    <EntitySet Name="districts" EntityType="Self.district" />
+    <EntitySet Name="energies" EntityType="Self.energy" />
+    <EntitySet Name="equipments" EntityType="Self.equipment" />
+    <EntitySet Name="equipmenttypes" EntityType="Self.equipmenttype" />
+    <EntitySet Name="events" EntityType="Self.event" />
+    <EntitySet Name="families" EntityType="Self.family" />
+    <EntitySet Name="filedetails" EntityType="Self.filedetail" />
+    <EntitySet Name="fuels" EntityType="Self.fuel" />
+    <EntitySet Name="fueltypes" EntityType="Self.fueltype" />
+    <EntitySet Name="genders" EntityType="Self.gender" />
+    <EntitySet Name="labors" EntityType="Self.labor" />
+    <EntitySet Name="labortypes" EntityType="Self.labortype" />
+    <EntitySet Name="landplots" EntityType="Self.landplot" />
+    <EntitySet Name="licenses" EntityType="Self.license" />
+    <EntitySet Name="logins" EntityType="Self.login" />
+    <EntitySet Name="machines" EntityType="Self.machine" />
+    <EntitySet Name="machinetypes" EntityType="Self.machinetype" />
+    <EntitySet Name="positions" EntityType="Self.position" />
+    <EntitySet Name="profiles" EntityType="Self.profile" />
+    <EntitySet Name="projects" EntityType="Self.project" />
+    <EntitySet Name="projectands" EntityType="Self.projectand" />
+    <EntitySet Name="provinces" EntityType="Self.province" />
+    <EntitySet Name="registers" EntityType="Self.register" />
+    <EntitySet Name="registertypes" EntityType="Self.registertype" />
+    <EntitySet Name="softwares" EntityType="Self.software" />
+    <EntitySet Name="softwaretypes" EntityType="Self.softwaretype" />
+    <EntitySet Name="standards" EntityType="Self.standard" />
+    <EntitySet Name="standardlists" EntityType="Self.standardlist" />
+    <EntitySet Name="staples" EntityType="Self.staple" />
+    <EntitySet Name="stapletypes" EntityType="Self.stapletype" />
+    <EntitySet Name="status" EntityType="Self.status" />
+    <EntitySet Name="theories" EntityType="Self.theory" />
+    <EntitySet Name="theorytypes" EntityType="Self.theorytype" />
+    <EntitySet Name="typeownerships" EntityType="Self.typeownership" />
+    <EntitySet Name="units" EntityType="Self.unit" />
+    <EntitySet Name="vehicles" EntityType="Self.vehicle" />
+    <EntitySet Name="vehicletypes" EntityType="Self.vehicletype" />
+  </EntityContainer>
+</Schema>

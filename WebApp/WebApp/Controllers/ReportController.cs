@@ -148,8 +148,8 @@ namespace WebApp.Controllers
                            from d in dlist.DefaultIfEmpty()
                                /*join s in farmdb.status on r.status equals s.statusID into slist
                                from s in slist.DefaultIfEmpty()*/
-                           join b in farmdb.bankusers on r.bank equals b.ID into blist
-                           from b in blist.DefaultIfEmpty()
+                           /*join b in farmdb.bankusers on r.bank equals b.ID into blist
+                           from b in blist.DefaultIfEmpty()*/
                            join l in farmdb.landplots on r.ID equals l.farmerName into llist
                            from l in llist.DefaultIfEmpty()
                            join g in farmdb.genders on r.gender equals g.genderID into glist
@@ -181,7 +181,7 @@ namespace WebApp.Controllers
                                r.email,
                                f.familyName,
                                r.comment,
-                               b.bankName,
+                               /*b.bankName,*/
                                TotalLandplot = llist.Where(a => a.active == null || a.active == 100).Count(),
                            };
                 foreach (var item in data.Distinct())
@@ -209,7 +209,7 @@ namespace WebApp.Controllers
                     objcvm.email = item.email;
                     objcvm.family = item.familyName;
                     objcvm.comment = item.comment;
-                    objcvm.bank = item.bankName;
+                    /*objcvm.bank = item.bankName;*/
                     objcvm.areaNumber = item.TotalLandplot;
                     ViewModeltList.Add(objcvm);
                     ViewBag.TotalRegister = ViewModeltList.Count();

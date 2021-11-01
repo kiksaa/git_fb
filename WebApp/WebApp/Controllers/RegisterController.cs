@@ -40,8 +40,8 @@ namespace WebApp.Controllers
                                from d in dlist.DefaultIfEmpty()
                                join s in farmdb.status on r.status equals s.statusID into slist
                                from s in slist.DefaultIfEmpty()
-                               join b in farmdb.bankusers on r.bank equals b.ID into blist
-                               from b in blist.DefaultIfEmpty()
+                              /* join b in farmdb.bankusers on r.bank equals b.ID into blist
+                               from b in blist.DefaultIfEmpty()*/
                                join l in farmdb.landplots on r.ID equals l.farmerName into llist
                                from l in llist.DefaultIfEmpty()
                                select new
@@ -154,6 +154,47 @@ namespace WebApp.Controllers
                     }
                 }
                 ViewBag.TotalLandplot = data.Count();
+                return View(ViewModeltList);
+            }
+        }
+        #endregion
+        #region IndexBank
+        public ActionResult IndexBank(int id)
+        {
+            register registerModel = new register();;
+            using (farmdbEntities farmdb = new farmdbEntities())
+            {
+                registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
+                List<bankuser> bankModel = farmdb.bankusers.Where(b => b.regisName == registerModel.ID).ToList();
+
+                profile profileModel = new profile();
+                profileModel = farmdb.profiles.Where(e => e.email == User.Identity.Name).FirstOrDefault();
+                ViewBag.status = profileModel.registerType.ToString();
+
+                List<ViewModel> ViewModeltList = new List<ViewModel>();
+                var data = from b in farmdb.bankusers
+                           join bt in farmdb.banks on b.bankID equals bt.ID into blist
+                           from bt in blist.DefaultIfEmpty()
+                           where b.regisName == id
+                           select new
+                           {
+                               b.ID,
+                               b.bankID,
+                               b.bankName,
+                               b.bankNo,
+                               bt.bankType
+                           };
+                foreach (var item in data)
+                {
+                    ViewModel objcvm = new ViewModel();
+                    objcvm.ID = item.ID;
+                    /*objcvm.bankID = item.bankID;*/
+                    objcvm.bankName = item.bankName;
+                    objcvm.bankNo = item.bankNo;
+                    objcvm.bankType = item.bankType;
+                    ViewModeltList.Add(objcvm);
+                }
+                ViewBag.TotalBank = data.Count();
                 return View(ViewModeltList);
             }
         }
@@ -286,8 +327,8 @@ namespace WebApp.Controllers
         }
         // POST: Register/Create
         [HttpPost]
-        public ActionResult Create(register registerModel, filedetail filesModel)
-        {
+        public ActionResult Create(register registerModel, filedetail filesModel, string one)
+          {
             try
             {
                 using (farmdbEntities farmdb = new farmdbEntities())
@@ -312,13 +353,14 @@ namespace WebApp.Controllers
                             }
                         }
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     if (registerModel.file_cardImg != null)
                     {
-                        String FileExt = Path.GetExtension(registerModel.file_cardImg.FileName).ToUpper();
-                        if (FileExt != null)
+                        String FileExt2 = Path.GetExtension(registerModel.file_cardImg.FileName).ToUpper();
+                        if (FileExt2 != null)
                         {
-                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            if (FileExt2 == ".PDF")
                             {
                                 Byte[] data = new byte[registerModel.file_cardImg.ContentLength];
                                 registerModel.file_cardImg.InputStream.Read(data, 0, registerModel.file_cardImg.ContentLength);
@@ -333,6 +375,7 @@ namespace WebApp.Controllers
                             }
                         }
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     /*bankuser bank = new bankuser();*/
                     /* bank.ID = (int)registerModel.bank;*/
@@ -343,7 +386,16 @@ namespace WebApp.Controllers
                     /*farmdb.bankusers.Add(bank);*/
                     farmdb.SaveChanges();
                 }
-                return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
+                if (one == "เพิ่มข้อมูลธนาคาร")
+                {
+                    return RedirectToAction("Create", "Bank", new { registerModel.ID });
+                }
+                if(one == "เพิ่มข้อมูลแปลง")
+                {
+                    return RedirectToAction("Create", "Plot", new { farmerName = registerModel.ID });
+                }
+                return RedirectToAction("Index");
+
             }
             catch (Exception ex)
             {
@@ -361,7 +413,7 @@ namespace WebApp.Controllers
             using (farmdbEntities farmdb = new farmdbEntities())
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
-                bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
+                /*bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
 
                 filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == registerModel.card_img).FirstOrDefault();
                 filedetail fileModel = farmdb.filedetails.Where(f => f.fileName == registerModel.farmer_img).FirstOrDefault();
@@ -475,13 +527,14 @@ namespace WebApp.Controllers
                         }
                         farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     if (registerModel.file_cardImg != null)
                     {
-                        String FileExt = Path.GetExtension(registerModel.file_cardImg.FileName).ToUpper();
-                        if (FileExt != null)
+                        String FileExt2 = Path.GetExtension(registerModel.file_cardImg.FileName).ToUpper();
+                        if (FileExt2 != null)
                         {
-                            if (FileExt == ".PNG" || FileExt == ".JPG" || FileExt == ".JPEG")
+                            if (FileExt2 == ".PDF")
                             {
                                 Byte[] data = new byte[registerModel.file_cardImg.ContentLength];
                                 registerModel.file_cardImg.InputStream.Read(data, 0, registerModel.file_cardImg.ContentLength);
@@ -497,9 +550,10 @@ namespace WebApp.Controllers
                         }
                         farmdb.Entry(filesModel).State = System.Data.Entity.EntityState.Modified;
                         farmdb.filedetails.Add(filesModel);
+                        farmdb.SaveChanges();
                     }
                     farmdb.Entry(registerModel).State = System.Data.Entity.EntityState.Modified;
-                    farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Modified;
+                   /* farmdb.Entry(registerModel.bankuser).State = System.Data.Entity.EntityState.Modified;*/
                     registerModel.adminBy = User.Identity.Name;
                     registerModel.dateUpdate = DateTime.Now;
                     registerModel.active = 100;
@@ -524,7 +578,7 @@ namespace WebApp.Controllers
             using (farmdbEntities farmdb = new farmdbEntities())
             {
                 registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
-                bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
+                /*bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
                 filedetail filedetailModel = farmdb.filedetails.Where(f => f.fileName == registerModel.card_img).FirstOrDefault();
                 filedetail fileModel = farmdb.filedetails.Where(f => f.fileName == registerModel.farmer_img).FirstOrDefault();
                 if (filedetailModel != null)
@@ -599,25 +653,31 @@ namespace WebApp.Controllers
                 using (farmdbEntities farmdb = new farmdbEntities())
                 {
                     register registerModel = farmdb.registers.Where(x => x.ID == id).FirstOrDefault();
-                    bankuser bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();
+                    /*bankuser bankuserModel = farmdb.bankusers.Where(b => b.ID == registerModel.bank).FirstOrDefault();*/
                     landplot landplotModel = farmdb.landplots.Where(p => p.farmerName == registerModel.ID).FirstOrDefault();
+                    bankuser bankModel = farmdb.bankusers.Where(b => b.regisName == registerModel.ID).FirstOrDefault();
                     filedetail filesModel = farmdb.filedetails.Where(f => f.fileName == registerModel.farmer_img || f.fileName == registerModel.card_img).FirstOrDefault();
-                    registerModel.bankuser = bankuserModel;
+                    /*registerModel.bankuser = bankuserModel;*/
                     registerModel.active = 200;
                     if (registerModel.active == 100)
                     {
                         farmdb.registers.Remove(registerModel);
-                        farmdb.bankusers.Remove(bankuserModel);
+                        /*farmdb.bankusers.Remove(bankuserModel);*/
                         farmdb.filedetails.Remove(filesModel);
-                        if (landplotModel != null)
+                        if (landplotModel != null || bankModel != null)
                         {
                             farmdb.landplots.Remove(landplotModel);
+                            farmdb.bankusers.Remove(bankModel);
                         }
                     }
                     registerModel.active = 200;
                     if (landplotModel != null)
                     {
                         landplotModel.active = 200;
+                    }
+                    if (bankModel != null)
+                    {
+                        farmdb.bankusers.Remove(bankModel);
                     }
                     farmdb.SaveChanges();
                 }

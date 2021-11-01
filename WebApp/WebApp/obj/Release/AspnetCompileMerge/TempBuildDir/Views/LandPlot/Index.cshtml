@@ -82,9 +82,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.ID)
                                 </th>
-                                <th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.plotStatus)
-                                </th>
+                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.plotName)
                                 </th>
@@ -135,19 +135,6 @@
                                     <td>
                                         @{i++;}
                                         @i
-
-                                    </td>
-                                    <td>
-                                        @if (item.plotStatus == "รออนุมัติ")
-                                        {
-                                            <p style="color:white;background-color:orange;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
-                                        }@if (item.plotStatus == "ผ่านอนุมัติ")
-                                        {
-                                            <p style="color:white;background-color:forestgreen;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
-                                        }@if (item.plotStatus == "ไม่ผ่านอนุมัติ")
-                                        {
-                                            <p style="color:white;background-color:red;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
-                                        }
                                         @if (item.lease_img != null || item.license_img != null)
                                         {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-binary" viewBox="0 0 16 16">
@@ -164,8 +151,21 @@
                                             </svg>
                                             //ถูก
                                         }
-
                                     </td>
+                                    <!--<td>-->
+                                      @*  @if (item.plotStatus == "รออนุมัติ")
+                                        {
+                                            <p style="color:white;background-color:orange;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
+                                        }@if (item.plotStatus == "ผ่านอนุมัติ")
+                                        {
+                                            <p style="color:white;background-color:forestgreen;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
+                                        }@if (item.plotStatus == "ไม่ผ่านอนุมัติ")
+                                        {
+                                            <p style="color:white;background-color:red;">@Html.DisplayFor(modelItem => item.plotStatus)</p>
+                                        }*@
+                                        
+
+                                    <!--</td>-->
                                     <td>
                                         @Html.DisplayFor(modelItem => item.plotName)
                                     </td>

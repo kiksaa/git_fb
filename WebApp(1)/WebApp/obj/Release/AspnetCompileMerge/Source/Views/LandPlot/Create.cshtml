@@ -1,0 +1,330 @@
+﻿@model WebApp.Models.landplot
+
+@{
+    Layout = "~/Views/Shared/_Layaccount.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - เพิ่มทะเบียนแปลง</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <br />
+        <div class="col">
+            <h4>แผนงาน</h4>
+            <hr />
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active alert-success" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">โครงการ</a>
+                    <a class="nav-item nav-link alert-success" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">แผนงาน</a>
+                </div>
+            </nav>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <br />
+                            <h5>ข้อมูลแปลง</h5>
+                            <br />
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.farmerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.farmerName, (IEnumerable<SelectListItem>)ViewBag.registers, "เลือกชื่อเกษตรกร", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.farmerName, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.plotName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.plotName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.plotName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.administrator, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.administrator, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.administrator, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.areaPlot, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.license, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.license, (IEnumerable<SelectListItem>)ViewBag.licenses, "เลือกประเภทเอกสารสิทธิ์", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.license, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.titleDeed, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.titleDeed, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.titleDeed, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.landNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.landNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.landNumber, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.typeOwnership, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.typeOwnership, (IEnumerable<SelectListItem>)ViewBag.typeownerships, "เลือกประเภทกรรมสิทธิ์", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typeOwnership, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @*@Html.Label("เอกสาร(สัญญาเช่า)")*@
+                                @Html.LabelFor(model => model.lease_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.lease_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.lease_img, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.license_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.license_img, new { htmlAttributes = new { @class = "form-control", type = "file" } })
+                                    @Html.ValidationMessageFor(model => model.license_img, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <h5>ข้อมูลโครงการ</h5>
+                            <br />
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.projectName, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.projectName, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.plotDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.plotDetails, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.plotDetails, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.buyMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("วิธีการรับซื้อ")*@
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.buyMethod, (IEnumerable<SelectListItem>)ViewBag.buymethods, "เลือกวิธีการรับซื้อ", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.buyMethod, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.plotStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.plotStatus, (IEnumerable<SelectListItem>)ViewBag.status, "เลือกสถานะ", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.plotStatus, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <h5>ตรวจคุณสมบัติแปลง</h5>
+                            <br />
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab2" role="tablist">
+                                    <a class="nav-item nav-link active alert-success" id="nav-project-tab" data-toggle="tab" href="#nav-project" role="tab" aria-controls="nav-project" aria-selected="true">ตรวจมาตราฐานโครงการ</a>
+                                    <a class="nav-item nav-link alert-success" id="nav-product-tab" data-toggle="tab" href="#nav-product" role="tab" aria-controls="nav-product" aria-selected="false">ตรวจมาตรฐานผลผลิต</a>
+                                </div>
+                            </nav>
+                            <br />
+                            <div class="tab-content" id="nav-tab2Content">
+                                <div class="tab-pane fade show active" id="nav-project" role="tabpanel" aria-labelledby="nav-project-tab">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            ตรวจสอบ
+                                                        </th>
+                                                        <th>
+                                                            #
+                                                        </th>
+                                                        <th>
+                                                            รายการ
+                                                        </th>
+                                                        <th>
+                                                            ต้องการข้อความ
+                                                        </th>
+                                                        <th>
+                                                            ต้องการเอกสาร / รูปภาพ
+                                                        </th>
+                                                        <th>
+                                                            ข้อความ
+                                                        </th>
+                                                        <th>
+                                                            เอกสาร / รูปภาพ
+                                                        </th>
+                                                        <th>
+                                                            สถานะ
+                                                        </th>
+                                                        <th>
+                                                            รายละเอียดการตรวจแปลง
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                            @* @Html.DisplayFor(model => Model.landplots)*@
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <br />
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.plotName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.plotName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.plotName, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.areaPlot, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("วันที่เริ่มแผนงาน")*@
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control", Type = "DateTime" } })
+                                    @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.projectName, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.projectName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("ขั้นตอนการทำงาน")*@
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.areaPlot, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.areaPlot, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("การเข้าถึง")*@
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.projectName, (IEnumerable<SelectListItem>)ViewBag.projects, "เลือกโครงการ", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.projectName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("แหล่งที่มา")*@
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.plotDetails, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.plotDetails, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.projectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @*@Html.Label("รายละเอียด")*@
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.plotDetails, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.plotDetails, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <h5>ข้อสังเกต (ใช้กับทุกขั้นตอน และเพิ่มได้ทั้งหมด 4 ข้อ)</h5>
+                            <br />
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    ข้อสังเกต
+                                                </th>
+                                                <th>
+                                                    ชนิดการรับค่า
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    @* @Html.DisplayFor(model => Model.landplots)*@
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <a class="btn btn-danger" href="@Url.Action("Index", "LandPlot")">
+                                    <span>
+                                        กลับ
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <input type="submit" value="บันทึก" class="btn btn-success" />
+                            </div>
+                           @* <div class="col-4">
+                                <a class="btn btn-warning" href="@Url.Action("Index", "Register")">
+                                    <span>
+                                        ข้าม
+                                    </span>
+                                </a>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</body>
+</html>

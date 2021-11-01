@@ -1,0 +1,71 @@
+﻿@model WebApp.Models.machine
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบทะเบียนเครื่องจักร</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("IndexSum", "Equipment")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.machineType) :
+                            @Html.DropDownListFor(model => model.machineType, (IEnumerable<SelectListItem>)ViewBag.machinetypes, "เลือกประเภทเครื่องจักร", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.machineID) :
+                            @Html.DisplayFor(model => model.machineID)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.machineName) :
+                            @Html.DisplayFor(model => model.machineName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.dateBuy) :
+                            @Html.DisplayFor(model => model.dateBuy)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.machineImg) :
+                            @Html.DisplayFor(model => model.machineImg)
+                            <img src="~/Content/img/upload/vehicle/@Model.machineImg" height="250" width="240">
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

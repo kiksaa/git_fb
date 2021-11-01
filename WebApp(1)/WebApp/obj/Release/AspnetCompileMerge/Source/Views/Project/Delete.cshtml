@@ -1,0 +1,76 @@
+﻿@model WebApp.Models.project
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบทะเบียนพาหนะ</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Project")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.dataNow) :
+                            @Html.DisplayFor(model => model.dataNow)
+                        </li>
+
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.proName) :
+                            @Html.DisplayFor(model => model.proName)
+                        </li>
+
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.buyMethod) :
+                            @Html.DropDownListFor(model => model.buyMethod, (IEnumerable<SelectListItem>)ViewBag.buymethods, "วิธ๊การรับซื้อ", htmlAttributes: new { @class = "form-control" })
+                        </li>
+
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.detail) :
+                            @Html.DisplayFor(model => model.detail)
+                        </li>
+
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.manuStandards) :
+                            @Html.DropDownListFor(model => model.manuStandards, (IEnumerable<SelectListItem>)ViewBag.standards, "เลือกมาตรฐานการผลิต", htmlAttributes: new { @class = "form-control" })
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

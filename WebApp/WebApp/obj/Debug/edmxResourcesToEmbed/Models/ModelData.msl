@@ -281,13 +281,13 @@
     <EntitySetMapping Name="profiles">
       <EntityTypeMapping TypeName="farmdbModel1.profile">
         <MappingFragment StoreEntitySet="profile">
+          <ScalarProperty Name="no" ColumnName="no" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="cradID" ColumnName="cradID" />
           <ScalarProperty Name="gender" ColumnName="gender" />
           <ScalarProperty Name="birthday" ColumnName="birthday" />
           <ScalarProperty Name="tel" ColumnName="tel" />
-          <ScalarProperty Name="no" ColumnName="no" />
           <ScalarProperty Name="moo" ColumnName="moo" />
           <ScalarProperty Name="province" ColumnName="province" />
           <ScalarProperty Name="ampher" ColumnName="ampher" />
@@ -329,6 +329,7 @@
     <EntitySetMapping Name="registers">
       <EntityTypeMapping TypeName="farmdbModel1.register">
         <MappingFragment StoreEntitySet="register">
+          <ScalarProperty Name="no" ColumnName="no" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="registerID" ColumnName="registerID" />
@@ -338,7 +339,6 @@
           <ScalarProperty Name="tel" ColumnName="tel" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="family" ColumnName="family" />
-          <ScalarProperty Name="no" ColumnName="no" />
           <ScalarProperty Name="moo" ColumnName="moo" />
           <ScalarProperty Name="road" ColumnName="road" />
           <ScalarProperty Name="province" ColumnName="province" />

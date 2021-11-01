@@ -25,7 +25,7 @@ namespace WebApp.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> birthday { get; set; }
         [DisplayName("เบอร์โทรศัพท์")]
-        public int tel { get; set; }
+        public string tel { get; set; }
         [DisplayName("อีเมล์")]
         [Required(ErrorMessage = "อีเมล์ของคุณควรประกอบไปด้วย")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
@@ -33,7 +33,7 @@ namespace WebApp.Models
         [DisplayName("สถานะครอบครัว")]
         public string family { get; set; }
         [DisplayName("บ้านเลขที่")]
-        public Nullable<int> no { get; set; }
+        public string no { get; set; }
         [DisplayName("หมู่ที่")]
         public Nullable<int> moo { get; set; }
         [DisplayName("ถนน/ซอย")]

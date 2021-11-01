@@ -1,0 +1,79 @@
+﻿@model WebApp.Models.activity
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FARMBOOK - ลบขั้นตอนการทำงาน</title>
+</head>
+<body style="color:black;background-color:whitesmoke;">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h3>คุณแน่ใจที่จะลบข้อมูลใช่หรือไม่</h3>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="form-actions no-color">
+                        <a type="button" class="btn btn-danger" href="@Url.Action("Index", "Theory")">
+                            <span>
+                                ยกเลิก
+                            </span>
+                        </a>
+                        <input type="submit" value="ลบ" class="btn btn-success me-md-2" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <hr />
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="card" style="width: 50rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.plan) :
+                            @Html.DisplayFor(model => model.plan)
+                            @Html.DropDownListFor(model => model.plan, (IEnumerable<SelectListItem>)ViewBag.theories, "ชื่อขั้นตอนการทำงาน", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.stepNum) :
+                            @Html.DisplayFor(model => model.stepNum)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.stepName) :
+                            @Html.DisplayFor(model => model.stepName)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.age) :
+                            @Html.DisplayFor(model => model.age)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.time) :
+                            @Html.DisplayFor(model => model.time)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.activity1) :
+                            @Html.DisplayFor(model => model.activity1)
+                        </li>
+                        <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.notice) :
+                            @Html.DisplayFor(model => model.notice)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

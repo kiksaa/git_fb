@@ -317,7 +317,7 @@
     <Property Name="gender" Type="Int32" Nullable="false" />
     <Property Name="birthday" Type="DateTime" Nullable="false" />
     <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="no" Type="Int32" />
+    <Property Name="no" Type="String" />
     <Property Name="moo" Type="Int32" />
     <Property Name="province" Type="Int32" />
     <Property Name="ampher" Type="Int32" />
@@ -376,10 +376,10 @@
     <Property Name="cardID" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
     <Property Name="gender" Type="Int32" />
     <Property Name="birthday" Type="DateTime" />
-    <Property Name="tel" Type="Int32" Nullable="false" />
+    <Property Name="tel" Type="String" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="family" Type="Int32" />
-    <Property Name="no" Type="Int32" />
+    <Property Name="no" Type="String" />
     <Property Name="moo" Type="Int32" />
     <Property Name="road" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="province" Type="Int32" />

@@ -15,13 +15,14 @@ namespace WebApp.Models
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using System.Web.Mvc;
-
     public partial class register
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public register()
         {
+            this.bankusers = new HashSet<bankuser>();
             this.landplots = new HashSet<landplot>();
+            this.vehicles = new HashSet<vehicle>();
         }
         [DisplayName("ลำดับที่")]
         public int ID { get; set; }
@@ -39,15 +40,15 @@ namespace WebApp.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> birthday { get; set; }
         [DisplayName("เบอร์โทรศัพท์")]
-        public int tel { get; set; }
+        public string tel { get; set; }
         [DisplayName("อีเมล์")]
         [Required(ErrorMessage = "อีเมล์ของคุณควรประกอบไปด้วย")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        /*[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]*/
         public string email { get; set; }
         [DisplayName("สถานะครอบครัว")]
         public Nullable<int> family { get; set; }
         [DisplayName("บ้านเลขที่")]
-        public Nullable<int> no { get; set; }
+        public string no { get; set; }
         [DisplayName("หมู่ที่")]
         public Nullable<int> moo { get; set; }
         [DisplayName("ถนน/ซอย")]
@@ -62,10 +63,8 @@ namespace WebApp.Models
         public string comment { get; set; }
         [DisplayName("รูปภาพเกษตรกร")]
         public string farmer_img { get; set; }
-        [DisplayName("รูปถ่ายบัตรประชาชน")]
+        [DisplayName("สำเนาบัตรประชาชน")]
         public string card_img { get; set; }
-        [DisplayName("ธนาคาร")]
-        public Nullable<int> bank { get; set; }
         [DisplayName("สถานะ")]
         public Nullable<int> status { get; set; }
         [DisplayName("วันที่ปรับปรุง/แก้ไข")]
@@ -83,7 +82,8 @@ namespace WebApp.Models
 
         public virtual active active1 { get; set; }
         public virtual ampher ampher1 { get; set; }
-        public virtual bankuser bankuser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bankuser> bankusers { get; set; }
         public virtual district district1 { get; set; }
         public virtual family family1 { get; set; }
         public virtual gender gender1 { get; set; }
@@ -91,6 +91,8 @@ namespace WebApp.Models
         public virtual ICollection<landplot> landplots { get; set; }
         public virtual province province1 { get; set; }
         public virtual status status1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vehicle> vehicles { get; set; }
         public IEnumerable<SelectListItem> ProvinceList { get; set; }
         public IEnumerable<SelectListItem> AmpherList { get; set; }
         public IEnumerable<SelectListItem> DistrictList { get; set; }

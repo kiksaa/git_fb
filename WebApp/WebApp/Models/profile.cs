@@ -32,7 +32,7 @@ namespace WebApp.Models
         [DisplayName("เบอร์โทรศัพท์")]
         public string tel { get; set; }
         [DisplayName("บ้านเลขที่")]
-        public Nullable<int> no { get; set; }
+        public string no { get; set; }
         [DisplayName("หมู่ที่")]
         public Nullable<int> moo { get; set; }
         [DisplayName("จังหวัด")]

@@ -28,6 +28,8 @@ namespace WebApp.Controllers
                 var data = from v in farmdb.vehicles
                            join t in farmdb.vehicletypes on v.vehicleType equals t.vehicleID into tlist
                            from t in tlist.DefaultIfEmpty()
+                           join r in farmdb.registers on v.regisName equals r.ID into rlist
+                           from r in rlist.DefaultIfEmpty()
                            select new
                            {
                                t.vehicleT,
@@ -36,6 +38,7 @@ namespace WebApp.Controllers
                                v.detail,
                                v.price,
                                v.IDve,
+                               r.name
 
                            };
                 foreach (var item in data)
@@ -47,7 +50,107 @@ namespace WebApp.Controllers
                     objcvm.detailV = item.detail;
                     objcvm.priceV = item.price;
                     objcvm.IDve = item.IDve;
+                    objcvm.name = item.name;
                     ViewModeltList.Add(objcvm);
+                }
+                return View(ViewModeltList);
+            }
+        }
+        #endregion
+        #region IndexEdit
+        public ActionResult IndexEdit(int id)
+        {
+            register Model = new register();
+            vehicle vehicleModel = new vehicle();
+            using (farmdbEntities farmdb = new farmdbEntities())
+            {
+                vehicleModel = farmdb.vehicles.Where(x => x.IDve == id).FirstOrDefault();
+                List<register> registersNodel = farmdb.registers.Where(r => r.ID == vehicleModel.regisName).ToList();
+
+                List<register> registers = farmdb.registers.ToList();
+                IEnumerable<SelectListItem> selregisters = from r in registers
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = r.name,
+                                                               Value = r.ID.ToString()
+                                                           };
+                ViewBag.registers = selregisters;
+                List<vehicletype> vehicletypes = farmdb.vehicletypes.ToList();
+                IEnumerable<SelectListItem> selvehicletypes = from v in vehicletypes
+                                                              select new SelectListItem
+                                                              {
+                                                                  Text = v.vehicleT,
+                                                                  Value = v.vehicleID.ToString()
+                                                              };
+                ViewBag.vehicletypes = selvehicletypes;
+
+                List<unit> units = farmdb.units.ToList();
+                IEnumerable<SelectListItem> selunits = from u in units
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = u.unitName,
+                                                           Value = u.unitID.ToString()
+                                                       };
+                ViewBag.units = selunits;
+
+                List<energy> energies = farmdb.energies.ToList();
+                IEnumerable<SelectListItem> selenergies = from e in energies
+                                                          select new SelectListItem
+                                                          {
+                                                              Text = e.energyName,
+                                                              Value = e.energyID.ToString()
+                                                          };
+                ViewBag.energies = selenergies;
+
+                List<ViewModel> ViewModeltList = new List<ViewModel>();
+                var data = from v in farmdb.vehicles
+                           join t in farmdb.vehicletypes on v.vehicleType equals t.vehicleID into tlist
+                           from t in tlist.DefaultIfEmpty()
+                           join r in farmdb.registers on v.regisName equals r.ID into rlist
+                           from r in rlist.DefaultIfEmpty()
+                           join u in farmdb.units on v.unitBuy equals u.unitID into ulist
+                           from u in ulist.DefaultIfEmpty()
+                           join uu in farmdb.units on v.unitUse equals uu.unitID into uulist
+                           from uu in uulist.DefaultIfEmpty()
+                           join e in farmdb.energies on v.energy equals e.energyID into elist
+                           from e in elist.DefaultIfEmpty()
+                           join f in farmdb.fueltypes on v.fuel equals f.fuelID into flist
+                           from f in flist.DefaultIfEmpty()
+                           where v.regisName == vehicleModel.regisName
+                           select new
+                           {
+                               t.vehicleT,
+                               v.vehicleName,
+                               v.vehicleID,
+                               v.detail,
+                               v.price,
+                               v.IDve,
+                               u.unitName,
+                               v.dateBuy,
+                               v.workTime,
+                               e.energyName,
+                               v.fuel,
+                               r.name
+
+                           };
+                foreach (var item in data)
+                {
+                    ViewModel objcvm = new ViewModel();
+                    objcvm.vehicleType = item.vehicleT;
+                    objcvm.vehicleName = item.vehicleName;
+                    objcvm.vehicleID = item.vehicleID;
+                    objcvm.detailV = item.detail;
+                    objcvm.priceV = item.price;
+                    objcvm.IDve = item.IDve;
+                    objcvm.unitBuy = item.unitName;
+                    objcvm.unitUse = item.unitName;
+                    objcvm.dateBuy = item.dateBuy;
+                    objcvm.workTime = item.workTime;
+                    objcvm.energyName = item.energyName;
+                    objcvm.fuel = item.fuel;
+                    objcvm.name = item.name;
+                    ViewModeltList.Add(objcvm);
+                    ViewBag.Vehicle = ViewModeltList.Count();
                 }
                 return View(ViewModeltList);
             }
@@ -133,6 +236,14 @@ namespace WebApp.Controllers
                                                               Value = e.energyID.ToString()
                                                           };
                 ViewBag.energies = selenergies;
+                List<register> registers = farmdb.registers.ToList();
+                IEnumerable<SelectListItem> selregisters = from r in registers
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = r.name,
+                                                               Value = r.ID.ToString()
+                                                           };
+                ViewBag.registers = selregisters;
             }
             return View(new vehicle());
         }
@@ -220,6 +331,14 @@ namespace WebApp.Controllers
                                                               Value = e.energyID.ToString()
                                                           };
                 ViewBag.energies = selenergies;
+                List<register> registers = farmdb.registers.ToList();
+                IEnumerable<SelectListItem> selregisters = from r in registers
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = r.name,
+                                                               Value = r.ID.ToString()
+                                                           };
+                ViewBag.registers = selregisters;
                 /*return View(filedetailModel.fileData);*/
             }
             return View(vehicleModel);
@@ -309,6 +428,14 @@ namespace WebApp.Controllers
                                                               Value = e.energyID.ToString()
                                                           };
                 ViewBag.energies = selenergies;
+                List<register> registers = farmdb.registers.ToList();
+                IEnumerable<SelectListItem> selregisters = from r in registers
+                                                           select new SelectListItem
+                                                           {
+                                                               Text = r.name,
+                                                               Value = r.ID.ToString()
+                                                           };
+                ViewBag.registers = selregisters;
             }
             return View(vehicleModel);
         }

@@ -33,6 +33,13 @@
                             @Html.HiddenFor(model => model.IDve)
                             <div class="col-sm-4">
                                 <div class="form-group row">
+                                    @Html.LabelFor(model => model.regisName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(model => model.regisName, (IEnumerable<SelectListItem>)ViewBag.registers, "เลือกชื่อเกษตรกร", htmlAttributes: new { @class = "form-control", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.regisName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     @Html.LabelFor(model => model.vehicleImg, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-8">
                                         @Html.TextBoxFor(model => model.file_vehicleImg, "", new { @type = "file", @multiple = "multiple" })
@@ -69,7 +76,7 @@
                                 <div class="form-group row">
                                     @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-3" })
                                     <div class="col-md-8">
-                                        @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.TextAreaFor(model => model.detail, new { @class = "form-control" } )
                                         @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

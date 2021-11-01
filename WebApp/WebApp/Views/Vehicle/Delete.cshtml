@@ -39,6 +39,10 @@
                 <div class="card" style="width: 50rem;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
+                            @Html.DisplayNameFor(model => model.regisName) :
+                            @Html.DropDownListFor(model => model.regisName, (IEnumerable<SelectListItem>)ViewBag.registers, "เลือกชื่อเกษตรกร", htmlAttributes: new { @class = "form-control" })
+                        </li>
+                        <li class="list-group-item">
                             @Html.DisplayNameFor(model => model.vehicleType) :
                             @Html.DropDownListFor(model => model.vehicleType, (IEnumerable<SelectListItem>)ViewBag.vehicletypes, "เลือกประเภทพาหนะ", htmlAttributes: new { @class = "form-control" })
                         </li>
@@ -59,7 +63,6 @@
                             @Html.DisplayFor(model => model.vehicleImg)
                             <img src="data:image;base64,@System.Convert.ToBase64String(ViewBag.img)" width="190" height="210" />
                         </li>
-
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,1557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="farmdbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="access">
+    <Key>
+      <PropertyRef Name="accessID" />
+    </Key>
+    <Property Name="accessID" Type="Int32" Nullable="false" />
+    <Property Name="accessName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_3" FromRole="access" ToRole="theory" />
+  </EntityType>
+  <EntityType Name="active">
+    <Key>
+      <PropertyRef Name="activeID" />
+    </Key>
+    <Property Name="activeID" Type="Int32" Nullable="false" />
+    <Property Name="activeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_11" FromRole="active" ToRole="landplot" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_11" FromRole="active" ToRole="register" />
+  </EntityType>
+  <EntityType Name="activity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stepNum" Type="Int32" />
+    <Property Name="stepName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="age" Type="Int32" Nullable="false" />
+    <Property Name="time" Type="Int32" Nullable="false" />
+    <Property Name="activity1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="notice" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="plan" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="theory" Relationship="Self.activity_ibfk_1" FromRole="activity" ToRole="theory" />
+  </EntityType>
+  <EntityType Name="ampher">
+    <Key>
+      <PropertyRef Name="ampherID" />
+    </Key>
+    <Property Name="ampherID" Type="Int32" Nullable="false" />
+    <Property Name="ampherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="province" Relationship="Self.ampher_ibfk_2" FromRole="ampher" ToRole="province" />
+    <NavigationProperty Name="districts" Relationship="Self.district_ibfk_1" FromRole="ampher" ToRole="district" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_5" FromRole="ampher" ToRole="landplot" />
+    <NavigationProperty Name="profiles" Relationship="Self.profile_ibfk_5" FromRole="ampher" ToRole="profile" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_7" FromRole="ampher" ToRole="register" />
+  </EntityType>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bankType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="bankusers" Relationship="Self.bankuser_ibfk_1" FromRole="bank" ToRole="bankuser" />
+  </EntityType>
+  <EntityType Name="bankuser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bankID" Type="Int32" Nullable="false" />
+    <Property Name="bankName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bankNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="bank" Relationship="Self.bankuser_ibfk_1" FromRole="bankuser" ToRole="bank" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_8" FromRole="bankuser" ToRole="register" />
+  </EntityType>
+  <EntityType Name="buymethod">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameBuy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_10" FromRole="buymethod" ToRole="landplot" />
+    <NavigationProperty Name="projects" Relationship="Self.project_ibfk_2" FromRole="buymethod" ToRole="project" />
+  </EntityType>
+  <EntityType Name="district">
+    <Key>
+      <PropertyRef Name="districtID" />
+    </Key>
+    <Property Name="districtID" Type="Int32" Nullable="false" />
+    <Property Name="districtName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="proID" Type="Int32" Nullable="false" />
+    <Property Name="amID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ampher" Relationship="Self.district_ibfk_1" FromRole="district" ToRole="ampher" />
+    <NavigationProperty Name="province" Relationship="Self.district_ibfk_2" FromRole="district" ToRole="province" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_6" FromRole="district" ToRole="landplot" />
+    <NavigationProperty Name="profiles" Relationship="Self.profile_ibfk_3" FromRole="district" ToRole="profile" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_5" FromRole="district" ToRole="register" />
+  </EntityType>
+  <EntityType Name="energy">
+    <Key>
+      <PropertyRef Name="energyID" />
+    </Key>
+    <Property Name="energyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="energyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="equipments" Relationship="Self.equipment_ibfk_2" FromRole="energy" ToRole="equipment" />
+    <NavigationProperty Name="machines" Relationship="Self.machine_ibfk_2" FromRole="energy" ToRole="machine" />
+    <NavigationProperty Name="vehicles" Relationship="Self.vehicle_ibfk_1" FromRole="energy" ToRole="vehicle" />
+  </EntityType>
+  <EntityType Name="equipment">
+    <Key>
+      <PropertyRef Name="IDequip" />
+    </Key>
+    <Property Name="equipmentType" Type="Int32" Nullable="false" />
+    <Property Name="equipmentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="equipmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="equipmentImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDequip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="energy1" Relationship="Self.equipment_ibfk_2" FromRole="equipment" ToRole="energy" />
+    <NavigationProperty Name="equipmenttype1" Relationship="Self.equipment_ibfk_1" FromRole="equipment" ToRole="equipmenttype" />
+    <NavigationProperty Name="unit" Relationship="Self.equipment_ibfk_3" FromRole="equipment" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.equipment_ibfk_4" FromRole="equipment" ToRole="unit" />
+  </EntityType>
+  <EntityType Name="equipmenttype">
+    <Key>
+      <PropertyRef Name="equipmentID" />
+    </Key>
+    <Property Name="equipmentID" Type="Int32" Nullable="false" />
+    <Property Name="equipmentT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="equipments" Relationship="Self.equipment_ibfk_1" FromRole="equipmenttype" ToRole="equipment" />
+  </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="start" Type="DateTime" Nullable="false" />
+    <Property Name="end" Type="DateTime" />
+    <Property Name="themeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="isFullDay" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="family">
+    <Key>
+      <PropertyRef Name="familyID" />
+    </Key>
+    <Property Name="familyID" Type="Int32" Nullable="false" />
+    <Property Name="familyName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_1" FromRole="family" ToRole="register" />
+  </EntityType>
+  <EntityType Name="filedetail">
+    <Key>
+      <PropertyRef Name="fileID" />
+    </Key>
+    <Property Name="fileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fileContentType" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="fileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="fuel">
+    <Key>
+      <PropertyRef Name="IDfule" />
+    </Key>
+    <Property Name="fuelType" Type="Int32" Nullable="false" />
+    <Property Name="fuelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="fuleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDfule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="fueltype1" Relationship="Self.fuel_ibfk_1" FromRole="fuel" ToRole="fueltype" />
+    <NavigationProperty Name="unit" Relationship="Self.fuel_ibfk_2" FromRole="fuel" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.fuel_ibfk_3" FromRole="fuel" ToRole="unit" />
+  </EntityType>
+  <EntityType Name="fueltype">
+    <Key>
+      <PropertyRef Name="fuelID" />
+    </Key>
+    <Property Name="fuelID" Type="Int32" Nullable="false" />
+    <Property Name="fuelType1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="fuels" Relationship="Self.fuel_ibfk_1" FromRole="fueltype" ToRole="fuel" />
+  </EntityType>
+  <EntityType Name="gender">
+    <Key>
+      <PropertyRef Name="genderID" />
+    </Key>
+    <Property Name="genderID" Type="Int32" Nullable="false" />
+    <Property Name="genderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="profiles" Relationship="Self.profile_ibfk_4" FromRole="gender" ToRole="profile" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_9" FromRole="gender" ToRole="register" />
+  </EntityType>
+  <EntityType Name="labor">
+    <Key>
+      <PropertyRef Name="IDlab" />
+    </Key>
+    <Property Name="laborType" Type="Int32" Nullable="false" />
+    <Property Name="position" Type="Int32" Nullable="false" />
+    <Property Name="laborID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="laborName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salary" Type="Int32" />
+    <Property Name="workDate" Type="DateTime" />
+    <Property Name="laborImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDlab" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="labortype1" Relationship="Self.labor_ibfk_1" FromRole="labor" ToRole="labortype" />
+    <NavigationProperty Name="position1" Relationship="Self.labor_ibfk_2" FromRole="labor" ToRole="position" />
+  </EntityType>
+  <EntityType Name="labortype">
+    <Key>
+      <PropertyRef Name="laborID" />
+    </Key>
+    <Property Name="laborID" Type="Int32" Nullable="false" />
+    <Property Name="laborT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="labors" Relationship="Self.labor_ibfk_1" FromRole="labortype" ToRole="labor" />
+  </EntityType>
+  <EntityType Name="landplot">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="plotName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="areaCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="typeOwnership" Type="Int32" Nullable="false" />
+    <Property Name="license" Type="Int32" Nullable="false" />
+    <Property Name="titleDeed" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="landSlip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="landNumber" Type="Int32" />
+    <Property Name="license_img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="lease_img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="coordinatesStar" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="coordinatesEnd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="areaPlot" Type="Single" />
+    <Property Name="areaPlotS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="plotDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="farmerName" Type="Int32" />
+    <Property Name="projectName" Type="Int32" />
+    <Property Name="note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="buyMethod" Type="Int32" />
+    <Property Name="plotStatus" Type="Int32" />
+    <Property Name="theoryName" Type="Int32" />
+    <Property Name="administrator" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Int32" />
+    <NavigationProperty Name="active1" Relationship="Self.landplot_ibfk_11" FromRole="landplot" ToRole="active" />
+    <NavigationProperty Name="ampher1" Relationship="Self.landplot_ibfk_5" FromRole="landplot" ToRole="ampher" />
+    <NavigationProperty Name="buymethod1" Relationship="Self.landplot_ibfk_10" FromRole="landplot" ToRole="buymethod" />
+    <NavigationProperty Name="district1" Relationship="Self.landplot_ibfk_6" FromRole="landplot" ToRole="district" />
+    <NavigationProperty Name="license1" Relationship="Self.landplot_ibfk_1" FromRole="landplot" ToRole="license" />
+    <NavigationProperty Name="theory" Relationship="Self.landplot_ibfk_13" FromRole="landplot" ToRole="theory" />
+    <NavigationProperty Name="project" Relationship="Self.landplot_ibfk_14" FromRole="landplot" ToRole="project" />
+    <NavigationProperty Name="typeownership1" Relationship="Self.landplot_ibfk_2" FromRole="landplot" ToRole="typeownership" />
+    <NavigationProperty Name="province1" Relationship="Self.landplot_ibfk_3" FromRole="landplot" ToRole="province" />
+    <NavigationProperty Name="status" Relationship="Self.landplot_ibfk_8" FromRole="landplot" ToRole="status" />
+    <NavigationProperty Name="register" Relationship="Self.landplot_ibfk_9" FromRole="landplot" ToRole="register" />
+  </EntityType>
+  <EntityType Name="license">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="licenseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_1" FromRole="license" ToRole="landplot" />
+  </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="machine">
+    <Key>
+      <PropertyRef Name="IDmac" />
+    </Key>
+    <Property Name="machineType" Type="Int32" Nullable="false" />
+    <Property Name="machineID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="machineName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="machineImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDmac" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="energy1" Relationship="Self.machine_ibfk_2" FromRole="machine" ToRole="energy" />
+    <NavigationProperty Name="machinetype1" Relationship="Self.machine_ibfk_1" FromRole="machine" ToRole="machinetype" />
+    <NavigationProperty Name="unit" Relationship="Self.machine_ibfk_3" FromRole="machine" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.machine_ibfk_4" FromRole="machine" ToRole="unit" />
+  </EntityType>
+  <EntityType Name="machinetype">
+    <Key>
+      <PropertyRef Name="machineID" />
+    </Key>
+    <Property Name="machineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="machineT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="machines" Relationship="Self.machine_ibfk_1" FromRole="machinetype" ToRole="machine" />
+  </EntityType>
+  <EntityType Name="position">
+    <Key>
+      <PropertyRef Name="positionID" />
+    </Key>
+    <Property Name="positionID" Type="Int32" Nullable="false" />
+    <Property Name="positionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="labors" Relationship="Self.labor_ibfk_2" FromRole="position" ToRole="labor" />
+  </EntityType>
+  <EntityType Name="profile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cradID" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="Int32" Nullable="false" />
+    <Property Name="birthday" Type="DateTime" Nullable="false" />
+    <Property Name="tel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="no" Type="Int32" />
+    <Property Name="moo" Type="Int32" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="registerType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ampher1" Relationship="Self.profile_ibfk_5" FromRole="profile" ToRole="ampher" />
+    <NavigationProperty Name="district1" Relationship="Self.profile_ibfk_3" FromRole="profile" ToRole="district" />
+    <NavigationProperty Name="gender1" Relationship="Self.profile_ibfk_4" FromRole="profile" ToRole="gender" />
+    <NavigationProperty Name="registertype1" Relationship="Self.profile_ibfk_1" FromRole="profile" ToRole="registertype" />
+    <NavigationProperty Name="province1" Relationship="Self.profile_ibfk_2" FromRole="profile" ToRole="province" />
+  </EntityType>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dataNow" Type="DateTime" Nullable="false" />
+    <Property Name="proName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="buyMethod" Type="Int32" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="manuStandards" Type="Int32" />
+    <NavigationProperty Name="buymethod1" Relationship="Self.project_ibfk_2" FromRole="project" ToRole="buymethod" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_14" FromRole="project" ToRole="landplot" />
+    <NavigationProperty Name="standard" Relationship="Self.project_ibfk_1" FromRole="project" ToRole="standard" />
+    <NavigationProperty Name="standardlists" Relationship="Self.standardlist_ibfk_1" FromRole="project" ToRole="standardlist" />
+    <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_4" FromRole="project" ToRole="theory" />
+  </EntityType>
+  <EntityType Name="projectand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="projectName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="province">
+    <Key>
+      <PropertyRef Name="provinceID" />
+    </Key>
+    <Property Name="provinceID" Type="Int32" Nullable="false" />
+    <Property Name="provinceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="amphers" Relationship="Self.ampher_ibfk_2" FromRole="province" ToRole="ampher" />
+    <NavigationProperty Name="districts" Relationship="Self.district_ibfk_2" FromRole="province" ToRole="district" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_3" FromRole="province" ToRole="landplot" />
+    <NavigationProperty Name="profiles" Relationship="Self.profile_ibfk_2" FromRole="province" ToRole="profile" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_2" FromRole="province" ToRole="register" />
+  </EntityType>
+  <EntityType Name="register">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="registerID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cardID" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="Int32" />
+    <Property Name="birthday" Type="DateTime" />
+    <Property Name="tel" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="family" Type="Int32" />
+    <Property Name="no" Type="Int32" />
+    <Property Name="moo" Type="Int32" />
+    <Property Name="road" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="province" Type="Int32" />
+    <Property Name="ampher" Type="Int32" />
+    <Property Name="district" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="farmer_img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="card_img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="bank" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="active" Type="Int32" />
+    <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
+    <Property Name="adminBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="active1" Relationship="Self.register_ibfk_11" FromRole="register" ToRole="active" />
+    <NavigationProperty Name="ampher1" Relationship="Self.register_ibfk_7" FromRole="register" ToRole="ampher" />
+    <NavigationProperty Name="bankuser" Relationship="Self.register_ibfk_8" FromRole="register" ToRole="bankuser" />
+    <NavigationProperty Name="district1" Relationship="Self.register_ibfk_5" FromRole="register" ToRole="district" />
+    <NavigationProperty Name="family1" Relationship="Self.register_ibfk_1" FromRole="register" ToRole="family" />
+    <NavigationProperty Name="gender1" Relationship="Self.register_ibfk_9" FromRole="register" ToRole="gender" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_9" FromRole="register" ToRole="landplot" />
+    <NavigationProperty Name="province1" Relationship="Self.register_ibfk_2" FromRole="register" ToRole="province" />
+    <NavigationProperty Name="status1" Relationship="Self.register_ibfk_10" FromRole="register" ToRole="status" />
+  </EntityType>
+  <EntityType Name="registertype">
+    <Key>
+      <PropertyRef Name="typeID" />
+    </Key>
+    <Property Name="typeID" Type="Int32" Nullable="false" />
+    <Property Name="typeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="profiles" Relationship="Self.profile_ibfk_1" FromRole="registertype" ToRole="profile" />
+  </EntityType>
+  <EntityType Name="software">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="softwareType" Type="Int32" Nullable="false" />
+    <Property Name="softwareID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="softwareName" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="Int32" />
+    <Property Name="softwareImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDsoft" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="unit" Relationship="Self.software_ibfk_1" FromRole="software" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.software_ibfk_2" FromRole="software" ToRole="unit" />
+    <NavigationProperty Name="softwaretype1" Relationship="Self.software_ibfk_3" FromRole="software" ToRole="softwaretype" />
+  </EntityType>
+  <EntityType Name="softwaretype">
+    <Key>
+      <PropertyRef Name="IDsoft" />
+    </Key>
+    <Property Name="IDsoft" Type="Int32" Nullable="false" />
+    <Property Name="softType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="softwares" Relationship="Self.software_ibfk_3" FromRole="softwaretype" ToRole="software" />
+  </EntityType>
+  <EntityType Name="standard">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="standardName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="projects" Relationship="Self.project_ibfk_1" FromRole="standard" ToRole="project" />
+  </EntityType>
+  <EntityType Name="standardlist">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="list" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="fillin" Type="Boolean" />
+    <Property Name="img" Type="Boolean" />
+    <Property Name="IDpro" Type="Int32" Nullable="false" />
+    <Property Name="IDlist" Type="Int32" />
+    <NavigationProperty Name="project" Relationship="Self.standardlist_ibfk_1" FromRole="standardlist" ToRole="project" />
+  </EntityType>
+  <EntityType Name="staple">
+    <Key>
+      <PropertyRef Name="IDstap" />
+    </Key>
+    <Property Name="stapleType" Type="Int32" Nullable="false" />
+    <Property Name="stapleID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="stapleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="stapleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDstap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="stapletype1" Relationship="Self.staple_ibfk_1" FromRole="staple" ToRole="stapletype" />
+    <NavigationProperty Name="unit" Relationship="Self.staple_ibfk_2" FromRole="staple" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.staple_ibfk_3" FromRole="staple" ToRole="unit" />
+  </EntityType>
+  <EntityType Name="stapletype">
+    <Key>
+      <PropertyRef Name="stapleID" />
+    </Key>
+    <Property Name="stapleID" Type="Int32" Nullable="false" />
+    <Property Name="stapleT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="staples" Relationship="Self.staple_ibfk_1" FromRole="stapletype" ToRole="staple" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="statusID" />
+    </Key>
+    <Property Name="statusID" Type="Int32" Nullable="false" />
+    <Property Name="statusName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_8" FromRole="status" ToRole="landplot" />
+    <NavigationProperty Name="registers" Relationship="Self.register_ibfk_10" FromRole="status" ToRole="register" />
+  </EntityType>
+  <EntityType Name="theory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="workProcedure" Type="Int32" Nullable="false" />
+    <Property Name="farmingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sepecies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product" Type="Single" Nullable="false" />
+    <Property Name="productType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="project" Type="Int32" />
+    <Property Name="workName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="access" Type="Int32" Nullable="false" />
+    <Property Name="reference" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="dateUpdate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="access1" Relationship="Self.theory_ibfk_3" FromRole="theory" ToRole="access" />
+    <NavigationProperty Name="activities" Relationship="Self.activity_ibfk_1" FromRole="theory" ToRole="activity" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_13" FromRole="theory" ToRole="landplot" />
+    <NavigationProperty Name="project1" Relationship="Self.theory_ibfk_4" FromRole="theory" ToRole="project" />
+    <NavigationProperty Name="theorytype" Relationship="Self.theory_ibfk_2" FromRole="theory" ToRole="theorytype" />
+  </EntityType>
+  <EntityType Name="theorytype">
+    <Key>
+      <PropertyRef Name="theoryID" />
+    </Key>
+    <Property Name="theoryID" Type="Int32" Nullable="false" />
+    <Property Name="theoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="theories" Relationship="Self.theory_ibfk_2" FromRole="theorytype" ToRole="theory" />
+  </EntityType>
+  <EntityType Name="typeownership">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ownership" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="landplots" Relationship="Self.landplot_ibfk_2" FromRole="typeownership" ToRole="landplot" />
+  </EntityType>
+  <EntityType Name="unit">
+    <Key>
+      <PropertyRef Name="unitID" />
+    </Key>
+    <Property Name="unitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unitName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="equipments" Relationship="Self.equipment_ibfk_3" FromRole="unit" ToRole="equipment" />
+    <NavigationProperty Name="equipments1" Relationship="Self.equipment_ibfk_4" FromRole="unit" ToRole="equipment" />
+    <NavigationProperty Name="fuels" Relationship="Self.fuel_ibfk_2" FromRole="unit" ToRole="fuel" />
+    <NavigationProperty Name="fuels1" Relationship="Self.fuel_ibfk_3" FromRole="unit" ToRole="fuel" />
+    <NavigationProperty Name="machines" Relationship="Self.machine_ibfk_3" FromRole="unit" ToRole="machine" />
+    <NavigationProperty Name="machines1" Relationship="Self.machine_ibfk_4" FromRole="unit" ToRole="machine" />
+    <NavigationProperty Name="softwares" Relationship="Self.software_ibfk_1" FromRole="unit" ToRole="software" />
+    <NavigationProperty Name="softwares1" Relationship="Self.software_ibfk_2" FromRole="unit" ToRole="software" />
+    <NavigationProperty Name="staples" Relationship="Self.staple_ibfk_2" FromRole="unit" ToRole="staple" />
+    <NavigationProperty Name="staples1" Relationship="Self.staple_ibfk_3" FromRole="unit" ToRole="staple" />
+    <NavigationProperty Name="vehicles" Relationship="Self.vehicle_ibfk_2" FromRole="unit" ToRole="vehicle" />
+    <NavigationProperty Name="vehicles1" Relationship="Self.vehicle_ibfk_3" FromRole="unit" ToRole="vehicle" />
+  </EntityType>
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="IDve" />
+    </Key>
+    <Property Name="vehicleType" Type="Int32" Nullable="false" />
+    <Property Name="vehicleID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vehicleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="unitBuy" Type="Int32" Nullable="false" />
+    <Property Name="unitUse" Type="Int32" Nullable="false" />
+    <Property Name="dateBuy" Type="DateTime" />
+    <Property Name="workTime" Type="Int32" />
+    <Property Name="fuel" Type="Int32" />
+    <Property Name="energy" Type="Int32" />
+    <Property Name="vehicleImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDve" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="energy1" Relationship="Self.vehicle_ibfk_1" FromRole="vehicle" ToRole="energy" />
+    <NavigationProperty Name="unit" Relationship="Self.vehicle_ibfk_2" FromRole="vehicle" ToRole="unit" />
+    <NavigationProperty Name="unit1" Relationship="Self.vehicle_ibfk_3" FromRole="vehicle" ToRole="unit" />
+    <NavigationProperty Name="vehicletype1" Relationship="Self.vehicle_ibfk_4" FromRole="vehicle" ToRole="vehicletype" />
+  </EntityType>
+  <EntityType Name="vehicletype">
+    <Key>
+      <PropertyRef Name="vehicleID" />
+    </Key>
+    <Property Name="vehicleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vehicleT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="vehicles" Relationship="Self.vehicle_ibfk_4" FromRole="vehicletype" ToRole="vehicle" />
+  </EntityType>
+  <Association Name="theory_ibfk_3">
+    <End Role="access" Type="Self.access" Multiplicity="1" />
+    <End Role="theory" Type="Self.theory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="access">
+        <PropertyRef Name="accessID" />
+      </Principal>
+      <Dependent Role="theory">
+        <PropertyRef Name="access" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="active" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_11">
+    <End Role="active" Type="Self.active" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="active">
+        <PropertyRef Name="activeID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="active" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="activity_ibfk_1">
+    <End Role="theory" Type="Self.theory" Multiplicity="1" />
+    <End Role="activity" Type="Self.activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="activity">
+        <PropertyRef Name="plan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ampher_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="1" />
+    <End Role="ampher" Type="Self.ampher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="ampher">
+        <PropertyRef Name="proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="district_ibfk_1">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="1" />
+    <End Role="district" Type="Self.district" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="district">
+        <PropertyRef Name="amID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_5">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_5">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_7">
+    <End Role="ampher" Type="Self.ampher" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ampher">
+        <PropertyRef Name="ampherID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="ampher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="bankuser_ibfk_1">
+    <End Role="bank" Type="Self.bank" Multiplicity="1" />
+    <End Role="bankuser" Type="Self.bankuser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="bankuser">
+        <PropertyRef Name="bankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_8">
+    <End Role="bankuser" Type="Self.bankuser" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bankuser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="bank" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_10">
+    <End Role="buymethod" Type="Self.buymethod" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="buymethod">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="buyMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="project_ibfk_2">
+    <End Role="buymethod" Type="Self.buymethod" Multiplicity="1" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="buymethod">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="project">
+        <PropertyRef Name="buyMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="district_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="1" />
+    <End Role="district" Type="Self.district" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="district">
+        <PropertyRef Name="proID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_6">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_3">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_5">
+    <End Role="district" Type="Self.district" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="district">
+        <PropertyRef Name="districtID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="district" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_2">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_2">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_1">
+    <End Role="energy" Type="Self.energy" Multiplicity="0..1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="energy">
+        <PropertyRef Name="energyID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="energy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_1">
+    <End Role="equipmenttype" Type="Self.equipmenttype" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipmenttype">
+        <PropertyRef Name="equipmentID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="equipmentType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipment_ibfk_4">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="equipment" Type="Self.equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="equipment">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_1">
+    <End Role="family" Type="Self.family" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="family">
+        <PropertyRef Name="familyID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="family" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_1">
+    <End Role="fueltype" Type="Self.fueltype" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fueltype">
+        <PropertyRef Name="fuelID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="fuelType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fuel_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="fuel" Type="Self.fuel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="fuel">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_4">
+    <End Role="gender" Type="Self.gender" Multiplicity="1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gender">
+        <PropertyRef Name="genderID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_9">
+    <End Role="gender" Type="Self.gender" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gender">
+        <PropertyRef Name="genderID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="labor_ibfk_1">
+    <End Role="labortype" Type="Self.labortype" Multiplicity="1" />
+    <End Role="labor" Type="Self.labor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="labortype">
+        <PropertyRef Name="laborID" />
+      </Principal>
+      <Dependent Role="labor">
+        <PropertyRef Name="laborType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="labor_ibfk_2">
+    <End Role="position" Type="Self.position" Multiplicity="1" />
+    <End Role="labor" Type="Self.labor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="position">
+        <PropertyRef Name="positionID" />
+      </Principal>
+      <Dependent Role="labor">
+        <PropertyRef Name="position" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_1">
+    <End Role="license" Type="Self.license" Multiplicity="1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="license">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="license" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_13">
+    <End Role="theory" Type="Self.theory" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="theoryName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_14">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="projectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_2">
+    <End Role="typeownership" Type="Self.typeownership" Multiplicity="1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="typeownership">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="typeOwnership" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_3">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_8">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="plotStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="landplot_ibfk_9">
+    <End Role="register" Type="Self.register" Multiplicity="0..1" />
+    <End Role="landplot" Type="Self.landplot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="register">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="landplot">
+        <PropertyRef Name="farmerName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_1">
+    <End Role="machinetype" Type="Self.machinetype" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="machinetype">
+        <PropertyRef Name="machineID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="machineType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="machine_ibfk_4">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="machine" Type="Self.machine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="machine">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_1">
+    <End Role="registertype" Type="Self.registertype" Multiplicity="1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registertype">
+        <PropertyRef Name="typeID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="registerType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="profile_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="profile" Type="Self.profile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="profile">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="project_ibfk_1">
+    <End Role="standard" Type="Self.standard" Multiplicity="0..1" />
+    <End Role="project" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="standard">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="project">
+        <PropertyRef Name="manuStandards" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="standardlist_ibfk_1">
+    <End Role="project" Type="Self.project" Multiplicity="1" />
+    <End Role="standardlist" Type="Self.standardlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="standardlist">
+        <PropertyRef Name="IDpro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="theory_ibfk_4">
+    <End Role="project" Type="Self.project" Multiplicity="0..1" />
+    <End Role="theory" Type="Self.theory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="theory">
+        <PropertyRef Name="project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_2">
+    <End Role="province" Type="Self.province" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="province">
+        <PropertyRef Name="provinceID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="province" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="register_ibfk_10">
+    <End Role="status" Type="Self.status" Multiplicity="0..1" />
+    <End Role="register" Type="Self.register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="status">
+        <PropertyRef Name="statusID" />
+      </Principal>
+      <Dependent Role="register">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="software_ibfk_1">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="software_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="software_ibfk_3">
+    <End Role="softwaretype" Type="Self.softwaretype" Multiplicity="1" />
+    <End Role="software" Type="Self.software" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="softwaretype">
+        <PropertyRef Name="IDsoft" />
+      </Principal>
+      <Dependent Role="software">
+        <PropertyRef Name="softwareType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_1">
+    <End Role="stapletype" Type="Self.stapletype" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="stapletype">
+        <PropertyRef Name="stapleID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="stapleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="staple_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="staple" Type="Self.staple" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="staple">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="theory_ibfk_2">
+    <End Role="theorytype" Type="Self.theorytype" Multiplicity="1" />
+    <End Role="theory" Type="Self.theory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="theorytype">
+        <PropertyRef Name="theoryID" />
+      </Principal>
+      <Dependent Role="theory">
+        <PropertyRef Name="workProcedure" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_2">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="unitBuy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_3">
+    <End Role="unit" Type="Self.unit" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unit">
+        <PropertyRef Name="unitID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="unitUse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vehicle_ibfk_4">
+    <End Role="vehicletype" Type="Self.vehicletype" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicletype">
+        <PropertyRef Name="vehicleID" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="vehicleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="farmdbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="accesses" EntityType="Self.access" />
+    <EntitySet Name="actives" EntityType="Self.active" />
+    <EntitySet Name="activities" EntityType="Self.activity" />
+    <EntitySet Name="amphers" EntityType="Self.ampher" />
+    <EntitySet Name="banks" EntityType="Self.bank" />
+    <EntitySet Name="bankusers" EntityType="Self.bankuser" />
+    <EntitySet Name="buymethods" EntityType="Self.buymethod" />
+    <EntitySet Name="districts" EntityType="Self.district" />
+    <EntitySet Name="energies" EntityType="Self.energy" />
+    <EntitySet Name="equipments" EntityType="Self.equipment" />
+    <EntitySet Name="equipmenttypes" EntityType="Self.equipmenttype" />
+    <EntitySet Name="events" EntityType="Self.event" />
+    <EntitySet Name="families" EntityType="Self.family" />
+    <EntitySet Name="filedetails" EntityType="Self.filedetail" />
+    <EntitySet Name="fuels" EntityType="Self.fuel" />
+    <EntitySet Name="fueltypes" EntityType="Self.fueltype" />
+    <EntitySet Name="genders" EntityType="Self.gender" />
+    <EntitySet Name="labors" EntityType="Self.labor" />
+    <EntitySet Name="labortypes" EntityType="Self.labortype" />
+    <EntitySet Name="landplots" EntityType="Self.landplot" />
+    <EntitySet Name="licenses" EntityType="Self.license" />
+    <EntitySet Name="logins" EntityType="Self.login" />
+    <EntitySet Name="machines" EntityType="Self.machine" />
+    <EntitySet Name="machinetypes" EntityType="Self.machinetype" />
+    <EntitySet Name="positions" EntityType="Self.position" />
+    <EntitySet Name="profiles" EntityType="Self.profile" />
+    <EntitySet Name="projects" EntityType="Self.project" />
+    <EntitySet Name="projectands" EntityType="Self.projectand" />
+    <EntitySet Name="provinces" EntityType="Self.province" />
+    <EntitySet Name="registers" EntityType="Self.register" />
+    <EntitySet Name="registertypes" EntityType="Self.registertype" />
+    <EntitySet Name="softwares" EntityType="Self.software" />
+    <EntitySet Name="softwaretypes" EntityType="Self.softwaretype" />
+    <EntitySet Name="standards" EntityType="Self.standard" />
+    <EntitySet Name="standardlists" EntityType="Self.standardlist" />
+    <EntitySet Name="staples" EntityType="Self.staple" />
+    <EntitySet Name="stapletypes" EntityType="Self.stapletype" />
+    <EntitySet Name="status" EntityType="Self.status" />
+    <EntitySet Name="theories" EntityType="Self.theory" />
+    <EntitySet Name="theorytypes" EntityType="Self.theorytype" />
+    <EntitySet Name="typeownerships" EntityType="Self.typeownership" />
+    <EntitySet Name="units" EntityType="Self.unit" />
+    <EntitySet Name="vehicles" EntityType="Self.vehicle" />
+    <EntitySet Name="vehicletypes" EntityType="Self.vehicletype" />
+    <AssociationSet Name="theory_ibfk_3" Association="Self.theory_ibfk_3">
+      <End Role="access" EntitySet="accesses" />
+      <End Role="theory" EntitySet="theories" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_11" Association="Self.landplot_ibfk_11">
+      <End Role="active" EntitySet="actives" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_11" Association="Self.register_ibfk_11">
+      <End Role="active" EntitySet="actives" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="activity_ibfk_1" Association="Self.activity_ibfk_1">
+      <End Role="theory" EntitySet="theories" />
+      <End Role="activity" EntitySet="activities" />
+    </AssociationSet>
+    <AssociationSet Name="ampher_ibfk_2" Association="Self.ampher_ibfk_2">
+      <End Role="province" EntitySet="provinces" />
+      <End Role="ampher" EntitySet="amphers" />
+    </AssociationSet>
+    <AssociationSet Name="district_ibfk_1" Association="Self.district_ibfk_1">
+      <End Role="ampher" EntitySet="amphers" />
+      <End Role="district" EntitySet="districts" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_5" Association="Self.landplot_ibfk_5">
+      <End Role="ampher" EntitySet="amphers" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_5" Association="Self.profile_ibfk_5">
+      <End Role="ampher" EntitySet="amphers" />
+      <End Role="profile" EntitySet="profiles" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_7" Association="Self.register_ibfk_7">
+      <End Role="ampher" EntitySet="amphers" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="bankuser_ibfk_1" Association="Self.bankuser_ibfk_1">
+      <End Role="bank" EntitySet="banks" />
+      <End Role="bankuser" EntitySet="bankusers" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_8" Association="Self.register_ibfk_8">
+      <End Role="bankuser" EntitySet="bankusers" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_10" Association="Self.landplot_ibfk_10">
+      <End Role="buymethod" EntitySet="buymethods" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="project_ibfk_2" Association="Self.project_ibfk_2">
+      <End Role="buymethod" EntitySet="buymethods" />
+      <End Role="project" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="district_ibfk_2" Association="Self.district_ibfk_2">
+      <End Role="province" EntitySet="provinces" />
+      <End Role="district" EntitySet="districts" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_6" Association="Self.landplot_ibfk_6">
+      <End Role="district" EntitySet="districts" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_3" Association="Self.profile_ibfk_3">
+      <End Role="district" EntitySet="districts" />
+      <End Role="profile" EntitySet="profiles" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_5" Association="Self.register_ibfk_5">
+      <End Role="district" EntitySet="districts" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_2" Association="Self.equipment_ibfk_2">
+      <End Role="energy" EntitySet="energies" />
+      <End Role="equipment" EntitySet="equipments" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_2" Association="Self.machine_ibfk_2">
+      <End Role="energy" EntitySet="energies" />
+      <End Role="machine" EntitySet="machines" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_1" Association="Self.vehicle_ibfk_1">
+      <End Role="energy" EntitySet="energies" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_1" Association="Self.equipment_ibfk_1">
+      <End Role="equipmenttype" EntitySet="equipmenttypes" />
+      <End Role="equipment" EntitySet="equipments" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_3" Association="Self.equipment_ibfk_3">
+      <End Role="unit" EntitySet="units" />
+      <End Role="equipment" EntitySet="equipments" />
+    </AssociationSet>
+    <AssociationSet Name="equipment_ibfk_4" Association="Self.equipment_ibfk_4">
+      <End Role="unit" EntitySet="units" />
+      <End Role="equipment" EntitySet="equipments" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_1" Association="Self.register_ibfk_1">
+      <End Role="family" EntitySet="families" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_1" Association="Self.fuel_ibfk_1">
+      <End Role="fueltype" EntitySet="fueltypes" />
+      <End Role="fuel" EntitySet="fuels" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_2" Association="Self.fuel_ibfk_2">
+      <End Role="unit" EntitySet="units" />
+      <End Role="fuel" EntitySet="fuels" />
+    </AssociationSet>
+    <AssociationSet Name="fuel_ibfk_3" Association="Self.fuel_ibfk_3">
+      <End Role="unit" EntitySet="units" />
+      <End Role="fuel" EntitySet="fuels" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_4" Association="Self.profile_ibfk_4">
+      <End Role="gender" EntitySet="genders" />
+      <End Role="profile" EntitySet="profiles" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_9" Association="Self.register_ibfk_9">
+      <End Role="gender" EntitySet="genders" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="labor_ibfk_1" Association="Self.labor_ibfk_1">
+      <End Role="labortype" EntitySet="labortypes" />
+      <End Role="labor" EntitySet="labors" />
+    </AssociationSet>
+    <AssociationSet Name="labor_ibfk_2" Association="Self.labor_ibfk_2">
+      <End Role="position" EntitySet="positions" />
+      <End Role="labor" EntitySet="labors" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_1" Association="Self.landplot_ibfk_1">
+      <End Role="license" EntitySet="licenses" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_13" Association="Self.landplot_ibfk_13">
+      <End Role="theory" EntitySet="theories" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_14" Association="Self.landplot_ibfk_14">
+      <End Role="project" EntitySet="projects" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_2" Association="Self.landplot_ibfk_2">
+      <End Role="typeownership" EntitySet="typeownerships" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_3" Association="Self.landplot_ibfk_3">
+      <End Role="province" EntitySet="provinces" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_8" Association="Self.landplot_ibfk_8">
+      <End Role="status" EntitySet="status" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="landplot_ibfk_9" Association="Self.landplot_ibfk_9">
+      <End Role="register" EntitySet="registers" />
+      <End Role="landplot" EntitySet="landplots" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_1" Association="Self.machine_ibfk_1">
+      <End Role="machinetype" EntitySet="machinetypes" />
+      <End Role="machine" EntitySet="machines" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_3" Association="Self.machine_ibfk_3">
+      <End Role="unit" EntitySet="units" />
+      <End Role="machine" EntitySet="machines" />
+    </AssociationSet>
+    <AssociationSet Name="machine_ibfk_4" Association="Self.machine_ibfk_4">
+      <End Role="unit" EntitySet="units" />
+      <End Role="machine" EntitySet="machines" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_1" Association="Self.profile_ibfk_1">
+      <End Role="registertype" EntitySet="registertypes" />
+      <End Role="profile" EntitySet="profiles" />
+    </AssociationSet>
+    <AssociationSet Name="profile_ibfk_2" Association="Self.profile_ibfk_2">
+      <End Role="province" EntitySet="provinces" />
+      <End Role="profile" EntitySet="profiles" />
+    </AssociationSet>
+    <AssociationSet Name="project_ibfk_1" Association="Self.project_ibfk_1">
+      <End Role="standard" EntitySet="standards" />
+      <End Role="project" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="standardlist_ibfk_1" Association="Self.standardlist_ibfk_1">
+      <End Role="project" EntitySet="projects" />
+      <End Role="standardlist" EntitySet="standardlists" />
+    </AssociationSet>
+    <AssociationSet Name="theory_ibfk_4" Association="Self.theory_ibfk_4">
+      <End Role="project" EntitySet="projects" />
+      <End Role="theory" EntitySet="theories" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_2" Association="Self.register_ibfk_2">
+      <End Role="province" EntitySet="provinces" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="register_ibfk_10" Association="Self.register_ibfk_10">
+      <End Role="status" EntitySet="status" />
+      <End Role="register" EntitySet="registers" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_1" Association="Self.software_ibfk_1">
+      <End Role="unit" EntitySet="units" />
+      <End Role="software" EntitySet="softwares" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_2" Association="Self.software_ibfk_2">
+      <End Role="unit" EntitySet="units" />
+      <End Role="software" EntitySet="softwares" />
+    </AssociationSet>
+    <AssociationSet Name="software_ibfk_3" Association="Self.software_ibfk_3">
+      <End Role="softwaretype" EntitySet="softwaretypes" />
+      <End Role="software" EntitySet="softwares" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_1" Association="Self.staple_ibfk_1">
+      <End Role="stapletype" EntitySet="stapletypes" />
+      <End Role="staple" EntitySet="staples" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_2" Association="Self.staple_ibfk_2">
+      <End Role="unit" EntitySet="units" />
+      <End Role="staple" EntitySet="staples" />
+    </AssociationSet>
+    <AssociationSet Name="staple_ibfk_3" Association="Self.staple_ibfk_3">
+      <End Role="unit" EntitySet="units" />
+      <End Role="staple" EntitySet="staples" />
+    </AssociationSet>
+    <AssociationSet Name="theory_ibfk_2" Association="Self.theory_ibfk_2">
+      <End Role="theorytype" EntitySet="theorytypes" />
+      <End Role="theory" EntitySet="theories" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_2" Association="Self.vehicle_ibfk_2">
+      <End Role="unit" EntitySet="units" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_3" Association="Self.vehicle_ibfk_3">
+      <End Role="unit" EntitySet="units" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="vehicle_ibfk_4" Association="Self.vehicle_ibfk_4">
+      <End Role="vehicletype" EntitySet="vehicletypes" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ลงทะเบียน</title>
+    <title>เพิ่มบัญชีผู้ใช้</title>
     <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
     <!-- Custom fonts for this template-->
     <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,7 +29,7 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">สร้างบัญชีผู้ใช้ใหม่</h1>
+                                <h1 class="h4 text-gray-900 mb-4">เพิ่มบัญชีผู้ใช้</h1>
                             </div>
                             @using (Html.BeginForm("SaveRegisterDetails", "Account"))
                             {
@@ -94,22 +94,22 @@
                                         @Html.Label("ผู้บริหาร")
                                         @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
                                         @*<br />*@&nbsp;&nbsp;&nbsp;
-                                        @Html.RadioButtonFor(a => a.registerType, "300")
+                                        @*@Html.RadioButtonFor(a => a.registerType, "300")
                                         @Html.Label("พนักงาน")
-                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(a => a.gender, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                                 <br />
                                 <input type="submit" value="สมัครสมาชิก" class="btn btn-success btn-user btn-block" />
-                                <hr>
+                                @*<hr>*@
                                 @*<a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
                                 </a>*@
 
                             }
-                            <div class="text-center">
+                            @*<div class="text-center">
                                 @Html.ActionLink("ลงชื่อเข้าใช้", "Login")
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

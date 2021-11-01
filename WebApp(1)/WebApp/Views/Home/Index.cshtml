@@ -1,0 +1,22 @@
+﻿@model WebApp.Models.login
+@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="~/Content/img/logo/logo-SWI.png" />
+    <title>Error</title>
+</head>
+<body>
+    <hgroup>
+        <center>
+            <b><h1> - Error. - </h1></b>
+            <h2>An error occurred while processing your request.</h2>
+            <h2 style="color:red;background-color:yellow">@ViewBag.Message</h2>
+        </center>
+    </hgroup>
+</body>
+</html>

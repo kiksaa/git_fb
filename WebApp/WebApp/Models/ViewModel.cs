@@ -19,7 +19,7 @@ namespace WebApp.Models
         [DisplayName("เลขบัตรประชาชน")]
         public string cardID { get; set; }
         [DisplayName("บ้านเลขที่")]
-        public Nullable<int> no { get; set; }
+        public string no { get; set; }
         [DisplayName("หมู่ที่")]
         public Nullable<int> moo { get; set; }
         [DisplayName("ถนน/ซอย")]
@@ -44,6 +44,7 @@ namespace WebApp.Models
             }
         }
         public int bank { get; set; }
+        public int bankID { get; set; }
         [DisplayName("ธนาคาร")]
         public string bankType { get; set; }
         [DisplayName("ชื่อบัญชี")]
@@ -106,6 +107,10 @@ namespace WebApp.Models
         public Nullable<int> price { get; set; }
         [DisplayName("หย่วยที่...")]
         public string unitName { get; set; }
+        [DisplayName("หย่วยที่ซื้อ")]
+        public string unitBuy { get; set; }
+        [DisplayName("หย่วยที่ใช้")]
+        public string unitUse { get; set; }
         [DisplayName("ประเภทพลังงาน")]
         public string energyName { get; set; }
 
@@ -120,7 +125,7 @@ namespace WebApp.Models
         public string equipmentID { get; set; }
         [DisplayName("รายละเอียด")]
         public string detailV { get; set; }
-        [DisplayName("ราคาทุน")]
+        [DisplayName("ราคาซื้อ")]
         public Nullable<int> priceV { get; set; }
 
         [DisplayName("ลำดับที่")]
@@ -259,5 +264,14 @@ namespace WebApp.Models
         [DataType(DataType.Upload)]
         [DisplayName("Select File")]
         public HttpPostedFileBase files { get; set; }
+        [DisplayName("เวลางาน(ชม./ไร่)")]
+        public Nullable<int> workTime { get; set; }
+        [DisplayName("ค่าพลังงานและเชื้อเพลิง/ชม.")]
+        public Nullable<int> fuel { get; set; }
+        [DisplayName("วันที่ซื้อ")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> dateBuy { get; set; }
+        
     }
 }

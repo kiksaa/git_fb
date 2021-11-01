@@ -220,7 +220,7 @@ namespace WebApp.Controllers
                 }
                 if (ViewBag.Count > 0)
                 {
-                    return View("Login");
+                    return RedirectToAction("Index", "Account");
                 }
                 return View("Register");
             }
